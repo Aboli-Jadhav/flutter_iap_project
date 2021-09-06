@@ -85,7 +85,7 @@ class _adminHome_ProfileState extends State<adminHome_Profile> {
                     onPressed: () {  },
 
                     label: Text(
-                      "View AdminList",
+                      "Log Out",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20.0,

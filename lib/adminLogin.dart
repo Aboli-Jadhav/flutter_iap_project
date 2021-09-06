@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_iap_project/adminHomeScreen.dart';
 
 class adminLogin extends StatefulWidget {
   const adminLogin({Key? key}) : super(key: key);
@@ -88,7 +89,10 @@ class _adminLoginState extends State<adminLogin> {
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(backred),
                       ),
-                      onPressed: () {  },
+                      onPressed: ()
+                      {
+                        Navigator.popAndPushNamed(context, '/adminHome');
+                      },
                       child: Text(
                         "Login",
                         style: TextStyle(

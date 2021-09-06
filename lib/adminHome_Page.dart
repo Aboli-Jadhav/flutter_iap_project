@@ -165,6 +165,37 @@ class _adminHome_PageState extends State<adminHome_Page> {
                 ),
                 SizedBox(height: 40,),
 
+
+                Container(
+                  width: 0.2 * MediaQuery.of(context).size.width,
+                  height:50.0,
+                  child: ElevatedButton.icon(
+                    style: ButtonStyle(
+
+                      backgroundColor: MaterialStateProperty.all<Color>(backred),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18.0),
+                            side: BorderSide(color: backred)
+                        ),),
+                    ),
+                    onPressed: () {  },
+                    icon: Icon(
+                      Icons.delete_forever,
+                      color: Colors.white,
+                      size: 24.0,
+                    ),
+                    label: Text(
+                      "Manage Scrap",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+
+                  ),
+                ),
               ]
           ),
         ),

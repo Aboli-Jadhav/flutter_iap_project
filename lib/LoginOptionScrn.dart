@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_iap_project/adminLogin.dart';
 
 class LoginOptionScrn extends StatefulWidget {
   const LoginOptionScrn({Key? key}) : super(key: key);
@@ -29,9 +30,8 @@ class _LoginOptionScrnState extends State<LoginOptionScrn> {
             Text("Windals Precision Ltd.",
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 50.0,
                 fontWeight: FontWeight.bold,
-
+                // fontSize: 30.0
               ),
             ),
 
@@ -58,7 +58,10 @@ class _LoginOptionScrnState extends State<LoginOptionScrn> {
                       side: BorderSide(color: backred)
                   ),),
               ),
-              onPressed: () {  },
+              onPressed: ()
+              {
+                Navigator.popAndPushNamed(context, '/adminLog');
+              },
               child: Text(
                 "Master Admin",
                 style: TextStyle(
@@ -70,7 +73,7 @@ class _LoginOptionScrnState extends State<LoginOptionScrn> {
 
             ),
     ),
-    SizedBox(height: 100,),
+          SizedBox(height: 100,),
                   Container(
                     width: 0.3 * MediaQuery.of(context).size.width,
                     height: 50.0,

@@ -6,7 +6,15 @@ import 'package:flutter_iap_project/adminLogin.dart';
 
 void main() {
   runApp(MaterialApp(
-    home:adminHomeScreen(),
+    initialRoute: '/opt',
+    routes: {
+      '/opt': (context) => LoginOptionScrn(),
+      '/adminLog': (context) => adminLogin(),
+      '/adminHome':(context) => adminHomeScreen(),
+
+    },
+
+    home:LoginOptionScrn(),
   ));
 }
 
