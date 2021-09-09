@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class adminHome_Page extends StatefulWidget {
-  const adminHome_Page({Key? key}) : super(key: key);
+class master_adminHome_Page extends StatefulWidget {
+  const master_adminHome_Page({Key? key}) : super(key: key);
 
   @override
-  _adminHome_PageState createState() => _adminHome_PageState();
+  _master_adminHome_PageState createState() => _master_adminHome_PageState();
 }
 
-class _adminHome_PageState extends State<adminHome_Page> {
+class _master_adminHome_PageState extends State<master_adminHome_Page> {
 
   Color backred=Color(0xffDF3F3F);
   Color lred=Color(0xffFBEBEB);

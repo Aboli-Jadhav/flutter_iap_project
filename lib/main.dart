@@ -13,10 +13,10 @@ void main() {
     initialRoute: '/opt',
     routes: {
       '/opt': (context) => LoginOptionScrn(),
-      '/adminLog': (context) => adminLogin(),
-      '/adminHome':(context) => adminHomeScreen(),
-      '/ADMINLOGIN' : (context) => AdminLogin(),
-      '/VIEWERLOGIN' : (context) => ViewerLogin()
+      '/master_adminLogin': (context) => master_adminLogin(),
+      '/master_adminHome':(context) => master_adminHomeScreen(),
+      '/admin_login' : (context) => AdminLogin(),
+      '/viewer_login' : (context) => ViewerLogin()
 
     },
 

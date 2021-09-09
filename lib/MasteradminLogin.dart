@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iap_project/MasteradminHomeScreen.dart';
 
-class adminLogin extends StatefulWidget {
-  const adminLogin({Key? key}) : super(key: key);
+class master_adminLogin extends StatefulWidget {
+  const master_adminLogin({Key? key}) : super(key: key);
 
   @override
-  _adminLoginState createState() => _adminLoginState();
+  _master_adminLoginState createState() => _master_adminLoginState();
 }
 
-class _adminLoginState extends State<adminLogin> {
+class _master_adminLoginState extends State<master_adminLogin> {
   Color backred=Color(0xffDF3F3F);
   Color lred=Color(0xffFBEBEB);
   @override
@@ -91,7 +91,7 @@ class _adminLoginState extends State<adminLogin> {
                       ),
                       onPressed: ()
                       {
-                        Navigator.popAndPushNamed(context, '/adminHome');
+                        Navigator.popAndPushNamed(context, '/master_adminHome');
                       },
                       child: Text(
                         "Login",

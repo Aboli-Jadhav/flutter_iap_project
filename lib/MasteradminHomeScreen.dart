@@ -2,22 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iap_project/MasteradminHome_Page.dart';
 import 'package:flutter_iap_project/MasteradminHome_Profile.dart';
 
-class adminHomeScreen extends StatefulWidget {
-  const adminHomeScreen({Key? key}) : super(key: key);
+class master_adminHomeScreen extends StatefulWidget {
+  const master_adminHomeScreen({Key? key}) : super(key: key);
 
   @override
-  _adminHomeScreenState createState() => _adminHomeScreenState();
+  _master_adminHomeScreenState createState() => _master_adminHomeScreenState();
 }
 
-class _adminHomeScreenState extends State<adminHomeScreen> {
+class _master_adminHomeScreenState extends State<master_adminHomeScreen> {
 
   Color backred=Color(0xffDF3F3F);
   Color lred=Color(0xffFBEBEB);
 
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
-    adminHome_Page(),
-    adminHome_Profile()
+    master_adminHome_Page(),
+    master_adminHome_Profile()
   ];
 
   @override
