@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_iap_project/adminLogin.dart';
+import 'package:flutter_iap_project/MasteradminLogin.dart';
 
 class LoginOptionScrn extends StatefulWidget {
   const LoginOptionScrn({Key? key}) : super(key: key);
@@ -86,7 +86,9 @@ class _LoginOptionScrnState extends State<LoginOptionScrn> {
                               side: BorderSide(color: backred)
                           ),),
                       ),
-                      onPressed: () {  },
+                      onPressed: () {
+                        Navigator.popAndPushNamed(context, '/ADMINLOGIN');
+                      },
                       child: Text(
                         " Admin ",
                         style: TextStyle(
@@ -111,7 +113,9 @@ class _LoginOptionScrnState extends State<LoginOptionScrn> {
                               side: BorderSide(color: backred)
                           ),),
                       ),
-                      onPressed: () {  },
+                      onPressed: () {
+                        Navigator.popAndPushNamed(context, '/VIEWERLOGIN');
+                      },
                       child: Text(
                         " Viewer ",
                         style: TextStyle(

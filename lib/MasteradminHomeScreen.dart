@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_iap_project/adminHome_Page.dart';
-import 'package:flutter_iap_project/adminHome_Profile.dart';
+import 'package:flutter_iap_project/MasteradminHome_Page.dart';
+import 'package:flutter_iap_project/MasteradminHome_Profile.dart';
 
 class adminHomeScreen extends StatefulWidget {
   const adminHomeScreen({Key? key}) : super(key: key);

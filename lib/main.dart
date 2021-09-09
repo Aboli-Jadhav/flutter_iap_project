@@ -1,8 +1,12 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_iap_project/AdminLogin.dart';
 import 'package:flutter_iap_project/LoginOptionScrn.dart';
-import 'package:flutter_iap_project/adminHomeScreen.dart';
-import 'package:flutter_iap_project/adminHome_Profile.dart';
-import 'package:flutter_iap_project/adminLogin.dart';
+import 'package:flutter_iap_project/MasteradminHomeScreen.dart';
+import 'package:flutter_iap_project/MasteradminHome_Profile.dart';
+import 'package:flutter_iap_project/MasteradminLogin.dart';
+import 'package:flutter_iap_project/ViewerLogin.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -11,6 +15,8 @@ void main() {
       '/opt': (context) => LoginOptionScrn(),
       '/adminLog': (context) => adminLogin(),
       '/adminHome':(context) => adminHomeScreen(),
+      '/ADMINLOGIN' : (context) => AdminLogin(),
+      '/VIEWERLOGIN' : (context) => ViewerLogin()
 
     },
 
