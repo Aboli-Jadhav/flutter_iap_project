@@ -1,6 +1,8 @@
 import 'dart:js';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_iap_project/AddGuage_Page.dart';
+import 'package:flutter_iap_project/AdminHomeScreen.dart';
 import 'package:flutter_iap_project/AdminLogin.dart';
 import 'package:flutter_iap_project/LoginOptionScrn.dart';
 import 'package:flutter_iap_project/MasteradminHomeScreen.dart';
@@ -16,7 +18,9 @@ void main() {
       '/master_adminLogin': (context) => master_adminLogin(),
       '/master_adminHome':(context) => master_adminHomeScreen(),
       '/admin_login' : (context) => AdminLogin(),
-      '/viewer_login' : (context) => ViewerLogin()
+      '/viewer_login' : (context) => ViewerLogin(),
+      '/adminpage' : (context) => Admin_Page(),
+      '/addgauge' : (context) => add_Gauge()
 
     },
 

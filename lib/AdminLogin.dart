@@ -80,7 +80,7 @@ class _AdminLogin extends State<AdminLogin>{
              ),
              onPressed: ()
              {
-             // Navigator.popAndPushNamed();
+               Navigator.popAndPushNamed(context, '/adminpage');
              },
              child: Text(
                "Login",
