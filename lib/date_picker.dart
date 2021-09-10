@@ -1,0 +1,67 @@
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+class TestPickerWidget extends StatefulWidget {
+  @override
+  _TestPickerWidgetState createState() => _TestPickerWidgetState();
+}
+
+class _TestPickerWidgetState extends State<TestPickerWidget> {
+  DateTime selectedDate = DateTime.now();
+  bool t = false;
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        t ? Container(
+          width: 300,
+          height: 47,
+          padding: EdgeInsets.fromLTRB(20,10,10,10),
+          decoration: BoxDecoration(
+              color: Colors.grey[100],
+              border: Border.all(color: Colors.black),
+              borderRadius: BorderRadius.all(Radius.circular(5))
+          ),
+          child: Text(
+            "${selectedDate.toLocal()}".split(' ')[0],
+            style: TextStyle(fontSize: 23, fontWeight: FontWeight.w500),
+            textAlign: TextAlign.center,
+          ),
+        ) : Container(
+          width: 300,
+          height: 47,
+          padding: EdgeInsets.fromLTRB(20,10,10,10),
+          decoration: BoxDecoration(
+              color: Colors.grey[100],
+              border: Border.all(color: Colors.black),
+              borderRadius: BorderRadius.all(Radius.circular(5))
+          ),
+          child: Text("Select Date",style: TextStyle(color: Colors.black26,fontSize: 23),textAlign: TextAlign.start,),
+        ),
+        SizedBox(
+          height: 2.0,
+        ),
+        IconButton(
+          onPressed: () => _selectDate(context), // Refer step 3
+          icon: Icon(Icons.calendar_today,size: 30,),
+          color: Colors.greenAccent,
+        ),
+      ],
+    );
+  }
+
+  _selectDate(BuildContext context) async {
+    final DateTime ?picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate, // Refer step 1
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2025),
+    );
+    if (picked != null && picked != selectedDate)
+      setState(() {
+        selectedDate = picked;
+        t = true;
+      });
+  }
+}
