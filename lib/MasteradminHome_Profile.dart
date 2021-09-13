@@ -19,7 +19,7 @@ class _master_adminHome_ProfileState extends State<master_adminHome_Profile> {
         appBar: AppBar(
           toolbarHeight: 60,
           backgroundColor: backred,
-          title: Text("Windals Precision Ltd.",
+          title: Text("Windals Precision Ltd",
             style: TextStyle(
               color: Colors.white,
               fontSize: 50.0,
@@ -41,6 +41,7 @@ class _master_adminHome_ProfileState extends State<master_adminHome_Profile> {
                 Container(
                   width: 0.2 * MediaQuery.of(context).size.width,
                   height:50.0,
+
                   child: ElevatedButton.icon(
                     style: ButtonStyle(
 

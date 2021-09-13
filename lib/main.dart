@@ -9,6 +9,7 @@ import 'package:flutter_iap_project/MasteradminHomeScreen.dart';
 import 'package:flutter_iap_project/MasteradminHome_Profile.dart';
 import 'package:flutter_iap_project/MasteradminLogin.dart';
 import 'package:flutter_iap_project/ViewerLogin.dart';
+import 'package:flutter_iap_project/Viewer_Home_Screen.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -20,8 +21,8 @@ void main() {
       '/admin_login' : (context) => AdminLogin(),
       '/viewer_login' : (context) => ViewerLogin(),
       '/adminpage' : (context) => Admin_Page(),
-      '/addgauge' : (context) => add_Gauge()
-
+      '/addgauge' : (context) => add_Gauge(),
+       '/viewerhome' :(context) =>VIEWERHOME()
     },
 
     home:LoginOptionScrn(),

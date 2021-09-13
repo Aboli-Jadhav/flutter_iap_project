@@ -90,7 +90,7 @@ class _Viewerlogin extends State<ViewerLogin>{
                   ),
                   onPressed: ()
                   {
-                    //Navigator.popAndPushNamed(context, '/adminHome');
+                    Navigator.popAndPushNamed(context, '/viewerhome');
                   },
                   child: Text(
                     "Login",
