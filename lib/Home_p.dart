@@ -31,6 +31,8 @@ class _home_pState extends State<home_p> {
         ),
 
         body:
+        ListView(
+            children: <Widget>[
         Center(
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -51,7 +53,9 @@ class _home_pState extends State<home_p> {
                             side: BorderSide(color: backred)
                         ),),
                     ),
-                    onPressed: () {  },
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/addViewer');
+                    },
                     icon: Icon(
                       Icons.person_add_alt_1_sharp,
                       color: Colors.white,
@@ -194,9 +198,43 @@ class _home_pState extends State<home_p> {
 
                   ),
                 ),
+
+                SizedBox(height: 40.0,),
+                Container(
+                  width: 0.2 * MediaQuery.of(context).size.width,
+                  height:50.0,
+                  child: ElevatedButton.icon(
+                    style: ButtonStyle(
+
+                      backgroundColor: MaterialStateProperty.all<Color>(backred),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18.0),
+                            side: BorderSide(color: backred)
+                        ),),
+                    ),
+                    onPressed: () {  Navigator.pushNamed(context, '/manageScrap');},
+                    icon: Icon(
+                      Icons.search_sharp,
+                      color: Colors.white,
+                      size: 24.0,
+                    ),
+                    label: Text(
+                      "Manage Guages",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+
+                  ),
+                ),
               ]
           ),
         ),
+      ],
+    ),
       ),
     );
   }

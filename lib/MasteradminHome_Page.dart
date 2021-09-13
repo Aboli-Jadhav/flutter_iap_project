@@ -51,7 +51,9 @@ class _master_adminHome_PageState extends State<master_adminHome_Page> {
                             side: BorderSide(color: backred)
                         ),),
                     ),
-                    onPressed: () {  },
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/master_add_admins');
+                    },
                     icon: Icon(
                       Icons.person_add_alt_1_sharp,
                       color: Colors.white,
@@ -179,7 +181,10 @@ class _master_adminHome_PageState extends State<master_adminHome_Page> {
                             side: BorderSide(color: backred)
                         ),),
                     ),
-                    onPressed: () {  },
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/manageScrap');
+
+                    },
                     icon: Icon(
                       Icons.delete_forever,
                       color: Colors.white,

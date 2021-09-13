@@ -52,7 +52,9 @@ class _master_adminHome_ProfileState extends State<master_adminHome_Profile> {
                             side: BorderSide(color: backred)
                         ),),
                     ),
-                    onPressed: () {  },
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/masterAdmin_EditProfile');
+                    },
 
                     label: Text(
                       "Edit Profile",

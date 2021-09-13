@@ -51,7 +51,9 @@ class _profile_adState extends State<profile_ad> {
                             side: BorderSide(color: backred)
                         ),),
                     ),
-                    onPressed: () {  },
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/adminEditProfile');
+                    },
 
                     label: Text(
                       "Edit Profile",
