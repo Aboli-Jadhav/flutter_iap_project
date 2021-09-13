@@ -18,7 +18,7 @@ class _master_adminLoginState extends State<master_adminLogin> {
             appBar: AppBar(
               toolbarHeight: 60,
                 backgroundColor: backred,
-                title: Text("Windals Precision Ltd.",
+                title: Text("Windals Precision Ltd",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 50.0,

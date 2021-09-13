@@ -1,5 +1,4 @@
 import 'dart:js';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_iap_project/AddGuage_Page.dart';
 import 'package:flutter_iap_project/AdminHomeScreen.dart';
@@ -10,6 +9,7 @@ import 'package:flutter_iap_project/MasteradminHome_Profile.dart';
 import 'package:flutter_iap_project/MasteradminLogin.dart';
 import 'package:flutter_iap_project/ViewerLogin.dart';
 import 'package:flutter_iap_project/Viewer_Home_Screen.dart';
+import 'package:flutter_iap_project/sreach_gauge.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -22,7 +22,8 @@ void main() {
       '/viewer_login' : (context) => ViewerLogin(),
       '/adminpage' : (context) => Admin_Page(),
       '/addgauge' : (context) => add_Gauge(),
-       '/viewerhome' :(context) =>VIEWERHOME()
+       '/viewerhome' :(context) =>VIEWERHOME(),
+      '/searchgauge' : (context) => sreach_gauge(),
     },
 
     home:LoginOptionScrn(),

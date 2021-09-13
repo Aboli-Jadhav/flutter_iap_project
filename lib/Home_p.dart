@@ -163,7 +163,37 @@ class _home_pState extends State<home_p> {
 
                   ),
                 ),
+                  SizedBox(height: 40.0,),
+                Container(
+                  width: 0.2 * MediaQuery.of(context).size.width,
+                  height:50.0,
+                  child: ElevatedButton.icon(
+                    style: ButtonStyle(
 
+                      backgroundColor: MaterialStateProperty.all<Color>(backred),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18.0),
+                            side: BorderSide(color: backred)
+                        ),),
+                    ),
+                    onPressed: () {  Navigator.pushNamed(context, '/searchgauge');},
+                    icon: Icon(
+                      Icons.search_sharp,
+                      color: Colors.white,
+                      size: 24.0,
+                    ),
+                    label: Text(
+                      "Search Guages",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+
+                  ),
+                ),
               ]
           ),
         ),
