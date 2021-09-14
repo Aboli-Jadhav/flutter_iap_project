@@ -150,7 +150,7 @@ class _home_pState extends State<home_p> {
                             side: BorderSide(color: backred)
                         ),),
                     ),
-                    onPressed: () {  },
+                    onPressed: () { Navigator.pushNamed(context, '/calibrate gauge'); },
                     icon: Icon(
                       Icons.edit,
                       color: Colors.white,

@@ -6,6 +6,7 @@ import 'package:flutter_iap_project/Add_Viewer.dart';
 import 'package:flutter_iap_project/AdminHomeScreen.dart';
 import 'package:flutter_iap_project/AdminLogin.dart';
 import 'package:flutter_iap_project/Admin_Edit_Profile.dart';
+import 'package:flutter_iap_project/Calibrate_Gauge.dart';
 import 'package:flutter_iap_project/LoginOptionScrn.dart';
 import 'package:flutter_iap_project/Manage_Scrap.dart';
 import 'package:flutter_iap_project/MasterAdmin_Edit_Profile.dart';
@@ -38,8 +39,7 @@ void main() {
       '/adminEditProfile': (context) => Admin_Edit_Profile(),
       '/master_add_admins': (context) => Master_AddAdmins(),
       '/masterAdmin_EditProfile': (context) => MasterAdmin_EditProfile(),
-
-
+      '/calibrate gauge' : (context) => Calibrate_Gauge(),
 
     },
 
