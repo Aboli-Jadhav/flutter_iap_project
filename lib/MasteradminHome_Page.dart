@@ -118,7 +118,9 @@ class _master_adminHome_PageState extends State<master_adminHome_Page> {
                             side: BorderSide(color: backred)
                         ),),
                     ),
-                    onPressed: () {  },
+                    onPressed: () {
+                      Navigator.pushNamed(context,  '/edit_attribute');
+                    },
                     icon: Icon(
                       Icons.edit,
                       color: Colors.white,
@@ -150,7 +152,9 @@ class _master_adminHome_PageState extends State<master_adminHome_Page> {
                             side: BorderSide(color: backred)
                         ),),
                     ),
-                    onPressed: () {  },
+                    onPressed: () {
+                      Navigator.pushNamed(context,  '/view_master_gau');
+                    },
                     icon: Icon(
                       Icons.remove_red_eye,
                       color: Colors.white,

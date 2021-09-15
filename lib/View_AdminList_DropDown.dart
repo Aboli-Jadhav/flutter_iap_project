@@ -45,12 +45,12 @@ class _View_AdminList_DropDownState extends State<View_AdminList_DropDown> {
     setState(() {
       _chosenValue=val;
       for(int i=0;i<adminlist.length;i++)
+      {
+        if(_chosenValue.toString()==adminlist[i].location.toString())
         {
-              if(_chosenValue.toString()==adminlist[i].location.toString())
-              {
-                locAdmins.add(adminlist[i]);
-              }
+          locAdmins.add(adminlist[i]);
         }
+      }
 
 
     });
@@ -131,91 +131,91 @@ class _View_AdminList_DropDownState extends State<View_AdminList_DropDown> {
   Widget build(BuildContext context) {
     return Container(
       child:Scaffold(
-      appBar: AppBar(
-      toolbarHeight: 50,
-      backgroundColor: backred,
-      title: Text("Edit Profile",
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 30.0,
-          fontWeight: FontWeight.bold,
-
-        ),
-      ),
-      centerTitle: true,
-    ),
-
-    body: ListView(
-    children: <Widget>[
-    Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-    children: <Widget>[
-      SizedBox(height: 50.0,),
-
-      Container(
-        width: 0.3*MediaQuery.of(context).size.width,
-        height: 50,
-        padding: EdgeInsets.fromLTRB(20,10,10,10),
-        decoration: BoxDecoration(
-            color: Colors.grey[100],
-            border: Border.all(color: Colors.black),
-            borderRadius: BorderRadius.all(Radius.circular(5))
-        ),
-
-        child: DropdownButtonHideUnderline(
-          child: DropdownButton<String>(
-            value: _chosenValue,
-            //elevation: 5,
-            style: TextStyle(color: Colors.black),
-
-            items: locations.map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
-            hint: Text(
-              "Select The Location",
-
-            ),
-
-            onChanged:handleDropChange,
-          ),
-        ),
-      ),
-
-      SizedBox(height: 50.0,),
-      Container(
-        width: 0.2 * MediaQuery.of(context).size.width,
-        height:50.0,
-        child: ElevatedButton(
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(backred),
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18.0),
-                  side: BorderSide(color: backred)
-              ),),
-          ),
-          onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (_) => View_Admin_List(adminList: locAdmins)));
-          },
-          child: Text("View Admins",
+        appBar: AppBar(
+          toolbarHeight: 50,
+          backgroundColor: backred,
+          title: Text("View AdminList",
             style: TextStyle(
               color: Colors.white,
-              fontSize: 20.0,
+              fontSize: 30.0,
               fontWeight: FontWeight.bold,
+
             ),
           ),
+          centerTitle: true,
+        ),
 
+        body: ListView(
+          children: <Widget>[
+            Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(height: 50.0,),
+
+                  Container(
+                    width: 0.3*MediaQuery.of(context).size.width,
+                    height: 50,
+                    padding: EdgeInsets.fromLTRB(20,10,10,10),
+                    decoration: BoxDecoration(
+                        color: Colors.grey[100],
+                        border: Border.all(color: Colors.black),
+                        borderRadius: BorderRadius.all(Radius.circular(5))
+                    ),
+
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton<String>(
+                        value: _chosenValue,
+                        //elevation: 5,
+                        style: TextStyle(color: Colors.black),
+
+                        items: locations.map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                        hint: Text(
+                          "Select The Location",
+
+                        ),
+
+                        onChanged:handleDropChange,
+                      ),
+                    ),
+                  ),
+
+                  SizedBox(height: 50.0,),
+                  Container(
+                    width: 0.2 * MediaQuery.of(context).size.width,
+                    height:50.0,
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(backred),
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18.0),
+                              side: BorderSide(color: backred)
+                          ),),
+                      ),
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (_) => View_Admin_List(adminList: locAdmins)));
+                      },
+                      child: Text("View Admins",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+
+                    ),
+                  ),
+
+                ]
+            ),
+          ],
         ),
       ),
-
-      ]
-    ),
-    ],
-    ),
-    ),
     );
   }
 }

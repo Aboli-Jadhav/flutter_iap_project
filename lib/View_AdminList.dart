@@ -83,38 +83,38 @@ class _View_Admin_ListState extends State<View_Admin_List> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        child:Scaffold(
+      child:Scaffold(
         appBar: AppBar(
-        toolbarHeight: 50,
-        backgroundColor: backred,
-        title: Text("Admin List",
-        style: TextStyle(
-        color: Colors.white,
-        fontSize: 30.0,
-        fontWeight: FontWeight.bold,
+          toolbarHeight: 50,
+          backgroundColor: backred,
+          title: Text("Admin List",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 30.0,
+              fontWeight: FontWeight.bold,
 
-    ),
-    ),
-    centerTitle: true,
-    ),
-
-    body:  Container(
-
-    child:  ListView.builder(
-          itemCount: widget.adminList.length,
-          itemBuilder: (_,index)
-          {
-            print(widget.adminList[index].location);
-            return setUI(widget.adminList[index].admin_nm, widget.adminList[index].location, widget.adminList[index].email, widget.adminList[index].phone);
-            setState(() {
-
-            });
-          },
+            ),
+          ),
+          centerTitle: true,
         ),
 
-    ),
+        body:  Container(
 
-    ),
+          child:  ListView.builder(
+            itemCount: widget.adminList.length,
+            itemBuilder: (_,index)
+            {
+              print(widget.adminList[index].location);
+              return setUI(widget.adminList[index].admin_nm, widget.adminList[index].location, widget.adminList[index].email, widget.adminList[index].phone);
+              setState(() {
+
+              });
+            },
+          ),
+
+        ),
+
+      ),
     );
   }
 }
