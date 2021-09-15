@@ -15,6 +15,7 @@ import 'package:flutter_iap_project/MasteradminHomeScreen.dart';
 import 'package:flutter_iap_project/MasteradminHome_Profile.dart';
 import 'package:flutter_iap_project/MasteradminLogin.dart';
 import 'package:flutter_iap_project/ViewScrap.dart';
+import 'package:flutter_iap_project/View_AdminList_DropDOwn.dart';
 import 'package:flutter_iap_project/ViewerLogin.dart';
 import 'package:flutter_iap_project/Viewer_Home_Screen.dart';
 import 'package:flutter_iap_project/sreach_gauge.dart';
@@ -40,6 +41,7 @@ void main() {
       '/master_add_admins': (context) => Master_AddAdmins(),
       '/masterAdmin_EditProfile': (context) => MasterAdmin_EditProfile(),
       '/calibrate gauge' : (context) => Calibrate_Gauge(),
+      '/viewAdminList' : (context) => View_AdminList_DropDown(),
 
     },
 

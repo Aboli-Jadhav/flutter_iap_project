@@ -84,7 +84,9 @@ class _master_adminHome_PageState extends State<master_adminHome_Page> {
                             side: BorderSide(color: backred)
                         ),),
                     ),
-                    onPressed: () {  },
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/viewAdminList');
+                    },
                     icon: Icon(
                       Icons.remove_red_eye_outlined,
                       color: Colors.white,
