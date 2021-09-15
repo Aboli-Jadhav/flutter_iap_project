@@ -18,6 +18,15 @@ import 'package:flutter_iap_project/ViewScrap.dart';
 import 'package:flutter_iap_project/ViewerLogin.dart';
 import 'package:flutter_iap_project/Viewer_Home_Screen.dart';
 import 'package:flutter_iap_project/sreach_gauge.dart';
+import 'edit_Atri.dart';
+import 'edit_freq.dart';
+import 'edit_description.dart';
+import 'edit_location.dart';
+import 'edit_owner.dart';
+import 'edit_range.dart';
+import 'edit_type.dart';
+import 'view_Master_guage.dart';
+
 
 void main() {
   runApp(MaterialApp(
@@ -40,6 +49,15 @@ void main() {
       '/master_add_admins': (context) => Master_AddAdmins(),
       '/masterAdmin_EditProfile': (context) => MasterAdmin_EditProfile(),
       '/calibrate gauge' : (context) => Calibrate_Gauge(),
+      '/edit_attribute' : (context) => edit_atri(),
+      '/edit_frequency' : (context) => edit_freq(),
+      '/edit_description' : (context) => edit_descr(),
+      '/edit_location' : (context) => edit_loc(),
+      '/edit_owner' : (context) => edit_owner(),
+      '/edit_range' : (context) => edit_range(),
+      '/edit_type' : (context) => edit_type(),
+      '/view_master_gau' : (context) => view_master_gau(),
+
 
     },
 
