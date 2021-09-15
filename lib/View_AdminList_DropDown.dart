@@ -51,6 +51,8 @@ class _View_AdminList_DropDownState extends State<View_AdminList_DropDown> {
           locAdmins.add(adminlist[i]);
         }
       }
+      Navigator.push(context, MaterialPageRoute(builder: (_) => View_Admin_List(adminList: locAdmins)));
+
 
 
     });
@@ -185,7 +187,7 @@ class _View_AdminList_DropDownState extends State<View_AdminList_DropDown> {
                   ),
 
                   SizedBox(height: 50.0,),
-                  Container(
+                 /*Container(
                     width: 0.2 * MediaQuery.of(context).size.width,
                     height:50.0,
                     child: ElevatedButton(
@@ -209,7 +211,7 @@ class _View_AdminList_DropDownState extends State<View_AdminList_DropDown> {
                       ),
 
                     ),
-                  ),
+                  ),*/
 
                 ]
             ),

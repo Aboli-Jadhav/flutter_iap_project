@@ -27,6 +27,14 @@ class _View_Admin_ListState extends State<View_Admin_List> {
       onLongPress: (){},
       child: Card(
         color: lred,
+  shape: RoundedRectangleBorder(
+  side: BorderSide(color: Colors.red, width: 0.5),
+  borderRadius: BorderRadius.circular(10),
+
+  ),
+  elevation: 8.0,
+  child: Padding(
+  padding: const EdgeInsets.all(8.0),
         child: Container(
           padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
           child: Column(
@@ -78,6 +86,7 @@ class _View_Admin_ListState extends State<View_Admin_List> {
           ),
         ),
       ),
+    ),
     );
   }
   @override
