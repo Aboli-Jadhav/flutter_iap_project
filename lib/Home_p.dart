@@ -38,14 +38,13 @@ class _home_pState extends State<home_p> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children:
-              [
-
-                Container(
+               [
+                 SizedBox(height: 50,),
+                 Container(
                   width: 0.2 * MediaQuery.of(context).size.width,
                   height:50.0,
                   child: ElevatedButton.icon(
                     style: ButtonStyle(
-
                       backgroundColor: MaterialStateProperty.all<Color>(backred),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
@@ -215,12 +214,12 @@ class _home_pState extends State<home_p> {
                     ),
                     onPressed: () {  Navigator.pushNamed(context, '/manageScrap');},
                     icon: Icon(
-                      Icons.search_sharp,
+                      Icons.delete_forever,
                       color: Colors.white,
                       size: 24.0,
                     ),
                     label: Text(
-                      "Manage Guages",
+                      "Manage scrap",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20.0,
