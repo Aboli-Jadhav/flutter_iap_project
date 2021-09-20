@@ -16,18 +16,18 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
   Widget build(BuildContext context){
     return Container(
       child: Scaffold(
-        appBar: AppBar(
-          toolbarHeight: 50,
-          backgroundColor: backred,
-          title: Text("Update Gauge",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 30.0,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          centerTitle: true,
-        ),
+        // appBar: AppBar(
+        //   toolbarHeight: 50,
+        //   backgroundColor: backred,
+        //   title: Text("Update Gauge",
+        //     style: TextStyle(
+        //       color: Colors.white,
+        //       fontSize: 30.0,
+        //       fontWeight: FontWeight.bold,
+        //     ),
+        //   ),
+        //   centerTitle: true,
+        // ),
         body: ListView(
           padding: const EdgeInsets.all(40),
           children: [

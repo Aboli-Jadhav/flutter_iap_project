@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'Drop_Down.dart';
+import '../../Drop_Down.dart';
 
-class sreach_gauge extends StatefulWidget{
-       const sreach_gauge({Key? key}) : super (key: key);
+class search_gauge extends StatefulWidget{
+       const search_gauge({Key? key}) : super (key: key);
 
 
        _SREACH_GAUGE createState() => _SREACH_GAUGE();
@@ -12,22 +12,22 @@ class sreach_gauge extends StatefulWidget{
 }
 
 
-class _SREACH_GAUGE extends State<sreach_gauge>{
+class _SREACH_GAUGE extends State<search_gauge>{
        Color backred=Color(0xffDF3F3F);
        Color lred=Color(0xffFBEBEB);
        Widget build(BuildContext context){
             return Container(
              child: Scaffold(
-                 appBar: AppBar(
-                    toolbarHeight: 60.0,
-                        backgroundColor: backred,
-                        title: Text("Windal Precision Ltd",
-                        style: TextStyle(
-                               color: Colors.white,
-                               fontSize: 50.0,
-                               fontWeight: FontWeight.bold,
-                        ),),
-                 ),
+                 // appBar: AppBar(
+                 //    toolbarHeight: 60.0,
+                 //        backgroundColor: backred,
+                 //        title: Text("Windal Precision Ltd",
+                 //        style: TextStyle(
+                 //               color: Colors.white,
+                 //               fontSize: 50.0,
+                 //               fontWeight: FontWeight.bold,
+                 //        ),),
+                 // ),
              body: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,

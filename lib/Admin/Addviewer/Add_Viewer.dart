@@ -16,19 +16,19 @@ class _AddViewerState extends State<AddViewer> {
   Widget build(BuildContext context) {
     return Container(
         child:Scaffold(
-          appBar: AppBar(
-            toolbarHeight: 50,
-            backgroundColor: backred,
-            title: Text("Add Viewer",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 30.0,
-                fontWeight: FontWeight.bold,
-
-              ),
-            ),
-            centerTitle: true,
-          ),
+          // appBar: AppBar(
+          //   toolbarHeight: 50,
+          //   backgroundColor: backred,
+          //   title: Text("Add Viewer",
+          //     style: TextStyle(
+          //       color: Colors.white,
+          //       fontSize: 30.0,
+          //       fontWeight: FontWeight.bold,
+          //
+          //     ),
+          //   ),
+          //   centerTitle: true,
+          // ),
 
             body: ListView(
               children: <Widget>[

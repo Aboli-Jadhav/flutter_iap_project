@@ -1,13 +1,13 @@
 import 'dart:js';
 import 'package:flutter/material.dart';
-import 'package:flutter_iap_project/AddGuage_Page.dart';
+import 'package:flutter_iap_project/Admin/Add%20gauges/AddGuage_Page.dart';
 import 'package:flutter_iap_project/master_admin/MasteradminHome_Page.dart';
 import 'master_admin/Manage_scrap/Add_To_Scrap.dart';
-import 'package:flutter_iap_project/Add_Viewer.dart';
+import 'package:flutter_iap_project/Admin/Addviewer/Add_Viewer.dart';
 import 'package:flutter_iap_project/AdminHomeScreen.dart';
-import 'package:flutter_iap_project/AdminLogin.dart';
+import 'package:flutter_iap_project/Admin/AdminLogin.dart';
 import 'package:flutter_iap_project/Admin_Edit_Profile.dart';
-import 'package:flutter_iap_project/Calibrate_Gauge.dart';
+import 'package:flutter_iap_project/Admin/Calibrate%20Guages/Calibrate_Gauge.dart';
 import 'package:flutter_iap_project/LoginOptionScrn.dart';
 import 'master_admin/Manage_scrap/Manage_Scrap.dart';
 import 'master_admin/Search/MasterAdmin_Edit_Profile.dart';
@@ -18,7 +18,7 @@ import 'master_admin/Manage_scrap/ViewScrap.dart';
 import 'master_admin/View_admin/View_AdminList_DropDown.dart';
 import 'package:flutter_iap_project/ViewerLogin.dart';
 import 'package:flutter_iap_project/Viewer_Home_Screen.dart';
-import 'package:flutter_iap_project/sreach_gauge.dart';
+import 'package:flutter_iap_project/Admin/Search%20Guages/search_gauge.dart';
 import 'master_admin/Edit_Attribute/edit_Atri.dart';
 import 'master_admin/Edit_Attribute/edit_freq.dart';
 import 'master_admin/Edit_Attribute/edit_description.dart';
@@ -40,7 +40,7 @@ void main() {
       '/adminpage' : (context) => Admin_Page(),
       '/addgauge' : (context) => add_Gauge(),
        '/viewerhome' :(context) =>VIEWERHOME(),
-      '/searchgauge' : (context) => sreach_gauge(),
+      '/searchgauge' : (context) => search_gauge(),
       '/manageScrap':(context) => Manage_Scrap(),
       '/addtoScrap':(context) => AddToScrap(),
       '/viewScrap':(context) => ViewScrapOfGuageType(),
