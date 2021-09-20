@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_iap_project/MasteradminLogin.dart';
+import 'master_admin/MasteradminLogin.dart';
 
 class LoginOptionScrn extends StatefulWidget {
   const LoginOptionScrn({Key? key}) : super(key: key);

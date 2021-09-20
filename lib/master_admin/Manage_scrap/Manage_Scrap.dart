@@ -15,19 +15,7 @@ class _Manage_ScrapState extends State<Manage_Scrap> {
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
-        appBar: AppBar(
-          toolbarHeight: 50,
-          backgroundColor: backred,
-          title: Text("Manage Scrap",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 30.0,
-              fontWeight: FontWeight.bold,
 
-            ),
-          ),
-          centerTitle: true,
-        ),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

@@ -16,19 +16,7 @@ class _master_adminHome_ProfileState extends State<master_adminHome_Profile> {
     return Container(
 
       child: Scaffold(
-        appBar: AppBar(
-          toolbarHeight: 60,
-          backgroundColor: backred,
-          title: Text("Windals Precision Ltd",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 50.0,
-              fontWeight: FontWeight.bold,
 
-            ),
-          ),
-          centerTitle: true,
-        ),
 
         body:
         Center(

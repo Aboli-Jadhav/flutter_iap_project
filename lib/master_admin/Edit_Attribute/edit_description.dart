@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_iap_project/gauge_desc.dart';
+import '../../update_item.dart';
 
-class view_master_gau extends StatefulWidget {
-  const view_master_gau({Key? key}) : super(key: key);
+class edit_descr extends StatefulWidget {
+  const edit_descr({Key? key}) : super(key: key);
 
   @override
-  _view_master_gauState createState() => _view_master_gauState();
+  _edit_descrState createState() => _edit_descrState();
 }
 
-class _view_master_gauState extends State<view_master_gau> {
+class _edit_descrState extends State<edit_descr> {
 
 
   Color backred=Color(0xffDF3F3F);
@@ -18,12 +18,13 @@ class _view_master_gauState extends State<view_master_gau> {
   @override
   Widget build(BuildContext context) {
 
+    String? _chosenValue;
     return Container(
       child: Scaffold(
           appBar: AppBar(
             toolbarHeight: 50,
             backgroundColor: backred,
-            title: Text("View Gauge",
+            title: Text("Edit Gauge Description",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 30.0,
@@ -39,19 +40,7 @@ class _view_master_gauState extends State<view_master_gau> {
             children: <Widget>[
               Column(
                 children: [
-                  gauge_desc(),
-                  SizedBox(height: 25,),
-                  gauge_desc(),
-                  SizedBox(height: 25,),
-                  gauge_desc(),
-                  SizedBox(height: 25,),
-                  gauge_desc(),
-                  SizedBox(height: 25,),
-                  gauge_desc(),
-                  SizedBox(height: 25,),
-                  gauge_desc(),
-                  SizedBox(height: 25,),
-                  gauge_desc(),
+                  update_item()
                 ],
               )
             ],

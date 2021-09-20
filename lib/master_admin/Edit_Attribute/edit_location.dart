@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'update_item.dart';
+import '../../update_item.dart';
 
-class edit_owner extends StatefulWidget {
-  const edit_owner({Key? key}) : super(key: key);
+class edit_loc extends StatefulWidget {
+  const edit_loc({Key? key}) : super(key: key);
 
   @override
-  _edit_ownerState createState() => _edit_ownerState();
+  _edit_locState createState() => _edit_locState();
 }
 
-class _edit_ownerState extends State<edit_owner> {
+class _edit_locState extends State<edit_loc> {
 
 
   Color backred=Color(0xffDF3F3F);
@@ -24,7 +24,7 @@ class _edit_ownerState extends State<edit_owner> {
           appBar: AppBar(
             toolbarHeight: 50,
             backgroundColor: backred,
-            title: Text("Edit Owner",
+            title: Text("Edit Location",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 30.0,

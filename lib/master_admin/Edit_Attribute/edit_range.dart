@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'update_item.dart';
+import '../../update_item.dart';
 
-class edit_type extends StatefulWidget {
-  const edit_type({Key? key}) : super(key: key);
+class edit_range extends StatefulWidget {
+  const edit_range({Key? key}) : super(key: key);
 
   @override
-  _edit_typeState createState() => _edit_typeState();
+  _edit_rangeState createState() => _edit_rangeState();
 }
 
-class _edit_typeState extends State<edit_type> {
+class _edit_rangeState extends State<edit_range> {
 
 
   Color backred=Color(0xffDF3F3F);
@@ -24,7 +24,7 @@ class _edit_typeState extends State<edit_type> {
           appBar: AppBar(
             toolbarHeight: 50,
             backgroundColor: backred,
-            title: Text("Edit Gauge Type",
+            title: Text("Edit Range",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 30.0,

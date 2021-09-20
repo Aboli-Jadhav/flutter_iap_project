@@ -15,19 +15,6 @@ class _Master_AddAdminsState extends State<Master_AddAdmins> {
   Widget build(BuildContext context) {
     return Container(
       child:Scaffold(
-        appBar: AppBar(
-          toolbarHeight: 50,
-          backgroundColor: backred,
-          title: Text("Add Admin",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 30.0,
-              fontWeight: FontWeight.bold,
-
-            ),
-          ),
-          centerTitle: true,
-        ),
 
         body: ListView(
           children: <Widget>[

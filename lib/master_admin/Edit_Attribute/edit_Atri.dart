@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'Drop_Down.dart';
+import '../../Drop_Down.dart';
 import 'package:flutter_iap_project/Text_editor.dart';
-import 'date_picker.dart';
+import '../../date_picker.dart';
 
 class edit_atri extends StatefulWidget {
   const edit_atri({Key? key}) : super(key: key);
@@ -23,19 +23,7 @@ class _edit_atriState extends State<edit_atri> {
     String? _chosenValue;
     return Container(
       child: Scaffold(
-          appBar: AppBar(
-            toolbarHeight: 50,
-            backgroundColor: backred,
-            title: Text("Edit Attributes",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 30.0,
-                fontWeight: FontWeight.bold,
 
-              ),
-            ),
-            centerTitle: true,
-          ),
 
           body:ListView(
             padding: const EdgeInsets.all(40),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_iap_project/MasteradminHome_Page.dart';
-import 'package:flutter_iap_project/MasteradminHome_Profile.dart';
+import 'master_admin/MasteradminHome_Page.dart';
+import 'master_admin/Search/MasteradminHome_Profile.dart';
 import 'package:flutter_iap_project/Home_p.dart';
 import 'package:flutter_iap_project/Profile_ad.dart';
 

@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'update_item.dart';
+import '../../update_item.dart';
 
-class edit_descr extends StatefulWidget {
-  const edit_descr({Key? key}) : super(key: key);
+class edit_freq extends StatefulWidget {
+  const edit_freq({Key? key}) : super(key: key);
 
   @override
-  _edit_descrState createState() => _edit_descrState();
+  _edit_freqState createState() => _edit_freqState();
 }
 
-class _edit_descrState extends State<edit_descr> {
+class _edit_freqState extends State<edit_freq> {
 
 
   Color backred=Color(0xffDF3F3F);
@@ -24,7 +24,7 @@ class _edit_descrState extends State<edit_descr> {
           appBar: AppBar(
             toolbarHeight: 50,
             backgroundColor: backred,
-            title: Text("Edit Gauge Description",
+            title: Text("Edit Frequency",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 30.0,

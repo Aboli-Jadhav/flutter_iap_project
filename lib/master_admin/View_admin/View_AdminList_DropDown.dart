@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_iap_project/View_AdminList.dart';
+import 'View_AdminList.dart';
 
-import 'AdminDataModel.dart';
+import '../../AdminDataModel.dart';
 
 class View_AdminList_DropDown extends StatefulWidget {
   const View_AdminList_DropDown({Key? key}) : super(key: key);
@@ -133,19 +133,7 @@ class _View_AdminList_DropDownState extends State<View_AdminList_DropDown> {
   Widget build(BuildContext context) {
     return Container(
       child:Scaffold(
-        appBar: AppBar(
-          toolbarHeight: 50,
-          backgroundColor: backred,
-          title: Text("View AdminList",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 30.0,
-              fontWeight: FontWeight.bold,
 
-            ),
-          ),
-          centerTitle: true,
-        ),
 
         body: ListView(
           children: <Widget>[

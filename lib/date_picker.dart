@@ -15,9 +15,9 @@ class _TestPickerWidgetState extends State<TestPickerWidget> {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         t ? Container(
-          width: 300,
-          height: 47,
-          padding: EdgeInsets.fromLTRB(20,10,10,10),
+          width: 270,
+          height: 40,
+          padding: EdgeInsets.fromLTRB(20,6,3,10),
           decoration: BoxDecoration(
               color: Colors.grey[100],
               border: Border.all(color: Colors.black),
@@ -25,19 +25,19 @@ class _TestPickerWidgetState extends State<TestPickerWidget> {
           ),
           child: Text(
             "${selectedDate.toLocal()}".split(' ')[0],
-            style: TextStyle(fontSize: 23, fontWeight: FontWeight.w500),
+            style: TextStyle(fontSize: 19, fontWeight: FontWeight.w500),
             textAlign: TextAlign.center,
           ),
         ) : Container(
-          width: 300,
-          height: 47,
-          padding: EdgeInsets.fromLTRB(20,10,10,10),
+          width: 270,
+          height: 40,
+          padding: EdgeInsets.fromLTRB(20,6,3,10),
           decoration: BoxDecoration(
               color: Colors.grey[100],
               border: Border.all(color: Colors.black),
               borderRadius: BorderRadius.all(Radius.circular(5))
           ),
-          child: Text("Select Date",style: TextStyle(color: Colors.black26,fontSize: 23),textAlign: TextAlign.start,),
+          child: Text("Select Date",style: TextStyle(color: Colors.black26,fontSize: 19),textAlign: TextAlign.start,),
         ),
         SizedBox(
           height: 2.0,

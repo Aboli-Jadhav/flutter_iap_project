@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'update_item.dart';
+import '../../update_item.dart';
 
-class edit_loc extends StatefulWidget {
-  const edit_loc({Key? key}) : super(key: key);
+class edit_type extends StatefulWidget {
+  const edit_type({Key? key}) : super(key: key);
 
   @override
-  _edit_locState createState() => _edit_locState();
+  _edit_typeState createState() => _edit_typeState();
 }
 
-class _edit_locState extends State<edit_loc> {
+class _edit_typeState extends State<edit_type> {
 
 
   Color backred=Color(0xffDF3F3F);
@@ -24,7 +24,7 @@ class _edit_locState extends State<edit_loc> {
           appBar: AppBar(
             toolbarHeight: 50,
             backgroundColor: backred,
-            title: Text("Edit Location",
+            title: Text("Edit Gauge Type",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 30.0,

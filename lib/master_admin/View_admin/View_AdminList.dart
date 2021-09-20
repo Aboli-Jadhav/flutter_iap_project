@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iap_project/AdminDataModel.dart';
-import 'package:flutter_iap_project/View_AdminList_DropDOwn.dart';
+import 'package:flutter_iap_project/master_admin/View_admin/View_AdminList_DropDown.dart';
 
 class View_Admin_List extends StatefulWidget {
   final List<AdminDataModel> adminList;

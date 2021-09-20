@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'update_item.dart';
+import '../../update_item.dart';
 
-class edit_freq extends StatefulWidget {
-  const edit_freq({Key? key}) : super(key: key);
+class edit_owner extends StatefulWidget {
+  const edit_owner({Key? key}) : super(key: key);
 
   @override
-  _edit_freqState createState() => _edit_freqState();
+  _edit_ownerState createState() => _edit_ownerState();
 }
 
-class _edit_freqState extends State<edit_freq> {
+class _edit_ownerState extends State<edit_owner> {
 
 
   Color backred=Color(0xffDF3F3F);
@@ -24,7 +24,7 @@ class _edit_freqState extends State<edit_freq> {
           appBar: AppBar(
             toolbarHeight: 50,
             backgroundColor: backred,
-            title: Text("Edit Frequency",
+            title: Text("Edit Owner",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 30.0,

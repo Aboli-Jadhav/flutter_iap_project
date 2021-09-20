@@ -50,27 +50,27 @@ class _AddToScrapState extends State<AddToScrap> {
 
         body: Center(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(200.0,30.0,200.0,30.0),
+            padding: const EdgeInsets.fromLTRB(20.0,60.0,20.0,10.0),
             child: ListView(
               children: <Widget>[
                 Column(
+                  children:[
+                Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
 
-                    SizedBox(height: 20,),
-                    Row(
+                    Column(
                       children:<Widget> [
                         Container(
                           width: 0.3 * MediaQuery.of(context).size.width,
-                          height:50.0,
+                          height:40.0,
                           child: Text("Manufacture Serial number ", style: TextStyle(color: Colors.black,fontSize: 23),
                             textAlign: TextAlign.center,  ),
                         ),
-                        SizedBox(width:10.0,),
                         Container(
                           width: 0.3 * MediaQuery.of(context).size.width,
-                          height:50.0,
+                          height:40.0,
                           child: TextField(decoration: InputDecoration(
                             hintText: "Enter Manufacture Serial number",
                             labelText: " Manufacture Serial number",
@@ -80,67 +80,63 @@ class _AddToScrapState extends State<AddToScrap> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 30.0,),
-                    Row(
+                    Column(
                       children: [
                         Container(
                           width: 0.3 * MediaQuery.of(context).size.width,
-                          height:50.0,
-                          child: Text("GAUGE TYPE", style: TextStyle(color: Colors.black,fontSize: 23),
+                          height:40.0,
+                          child: Text("Gauge Type", style: TextStyle(color: Colors.black,fontSize: 23),
                             textAlign: TextAlign.center,  ),
                         ),
-                        SizedBox(width: 10.0,),
 
-              Container(
-                width: 300,
-                height: 47,
-                padding: EdgeInsets.fromLTRB(20,10,10,10),
-                decoration: BoxDecoration(
-                    color: Colors.grey[100],
-                    border: Border.all(color: Colors.black),
-                    borderRadius: BorderRadius.all(Radius.circular(5))
-                ),
-                
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButton<String>(
-                    value: _chosenValue,
-                    //elevation: 5,
-                    style: TextStyle(color: Colors.black),
+                    Container(
+                      width: 300,
+                      height: 40,
+                      padding: EdgeInsets.fromLTRB(20,10,10,10),
+                      decoration: BoxDecoration(
+                          color: Colors.grey[100],
+                          border: Border.all(color: Colors.black),
+                          borderRadius: BorderRadius.all(Radius.circular(5))
+                      ),
 
-                    items: guageTypes.map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                    }).toList(),
-                    hint: Text(
-                          "Select The Gauge Type",
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton<String>(
+                          value: _chosenValue,
+                          //elevation: 5,
+                          style: TextStyle(color: Colors.black),
 
+                          items: guageTypes.map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                          }).toList(),
+                          hint: Text(
+                                "Select The Gauge Type",
+
+                          ),
+
+                          onChanged:handleDropChange,
+                        ),
+                      ),
                     ),
-
-                    onChanged:handleDropChange,
-                  ),
-                ),
-              ),
                       ],
                     ),
 
-                    SizedBox(height: 30,),
-                    Row(
+                    Column(
                       children: [
                         Container(
                           width: 0.3 * MediaQuery.of(context).size.width,
-                          height:50.0,
+                          height:40.0,
 
 
                           child : Text("Instrument Identification NUMBER",
                             style: TextStyle(color: Colors.black,fontSize: 23),
                             textAlign: TextAlign.center,
                           ),),
-                        SizedBox(width: 10,),
                         Container(
                           width: 0.3 * MediaQuery.of(context).size.width,
-                          height:50.0,
+                          height:40.0,
                           child: TextField(
                             decoration: InputDecoration(
                               labelText: ("Instrument Identification NUMBER"),
@@ -151,23 +147,27 @@ class _AddToScrapState extends State<AddToScrap> {
                         ),
                       ],
                     ),
-
-                    SizedBox(height: 30,),
+                      ]
+                ),
+                    SizedBox(height: 40,),
                     Row(
+
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                    Column(
                       children: [
                         Container(
                           width: 0.3 * MediaQuery.of(context).size.width,
-                          height:50.0,
+                          height:40.0,
 
 
                           child : Text("Nominal Size",
                             style: TextStyle(color: Colors.black,fontSize: 23),
                             textAlign: TextAlign.center,
                           ),),
-                        SizedBox(width: 10,),
                         Container(
                           width: 0.3 * MediaQuery.of(context).size.width,
-                          height:50.0,
+                          height:40.0,
                           child: TextField(
                             decoration: InputDecoration(
                               labelText: ("Nominal Size "),
@@ -179,23 +179,21 @@ class _AddToScrapState extends State<AddToScrap> {
                       ],
                     ),
 
-                    SizedBox(height: 30,),
-                    Row(
+                    Column(
                       children: [
                         Container(
                           width: 0.3 * MediaQuery.of(context).size.width,
-                          height:50.0,
+                          height:40.0,
 
 
                           child : Text("Reason",
                             style: TextStyle(color: Colors.black,fontSize: 23),
                             textAlign: TextAlign.center,
                           ),),
-                        SizedBox(width: 10,),
 
                         Container(
                           width: 0.3 * MediaQuery.of(context).size.width,
-                          height:50.0,
+                          height:40.0,
                           child: TextField(
                             decoration: InputDecoration(
                               labelText: ("Reason"),
@@ -207,23 +205,21 @@ class _AddToScrapState extends State<AddToScrap> {
                       ],
                     ),
 
-                    SizedBox(height: 30,),
-                    Row(
+                    Column(
                       children: [
                         Container(
                           width: 0.3 * MediaQuery.of(context).size.width,
-                          height:50.0,
+                          height:40.0,
 
 
                           child : Text("Responsible Person For Scrap",
                             style: TextStyle(color: Colors.black,fontSize: 23),
                             textAlign: TextAlign.center,
                           ),),
-                        SizedBox(width: 10,),
 
                         Container(
                           width: 0.3 * MediaQuery.of(context).size.width,
-                          height:50.0,
+                          height:40.0,
                           child: TextField(
                             decoration: InputDecoration(
                               labelText: ("Resposible Person"),
@@ -234,24 +230,28 @@ class _AddToScrapState extends State<AddToScrap> {
                         ),
                       ],
                     ),
-
-                    SizedBox(height: 30,),
+                  ]
+                ),
+                    SizedBox(height: 40,),
                     Row(
+
+                        mainAxisAlignment: MainAxisAlignment.start,
+                      children:[
+                    Column(
                       children: [
                         Container(
                           width: 0.3 * MediaQuery.of(context).size.width,
-                          height:50.0,
+                          height:40.0,
 
 
                           child : Text("Scrap Note ID No",
                             style: TextStyle(color: Colors.black,fontSize: 23),
                             textAlign: TextAlign.center,
                           ),),
-                        SizedBox(width: 10,),
 
                         Container(
                           width: 0.3 * MediaQuery.of(context).size.width,
-                          height:50.0,
+                          height:40.0,
                           child: TextField(
                             decoration: InputDecoration(
                               labelText: ("Scrap Note ID No"),
@@ -263,14 +263,13 @@ class _AddToScrapState extends State<AddToScrap> {
                       ],
                     ),
 
-                    SizedBox(height: 30,),
 
-                    Row(
+                    Column(
 
                       children:<Widget> [
                         Container(
                           width: 0.3 * MediaQuery.of(context).size.width,
-                          height:50.0,
+                          height:40.0,
 
 
                           child : Text("Scrap Date",
@@ -281,16 +280,20 @@ class _AddToScrapState extends State<AddToScrap> {
                         TestPickerWidget(),
                       ],
                     ),
-                    SizedBox(height: 30.0,),
+                    ]
+                    ),
+                    SizedBox(height: 90,),
 
                     Padding(
                       padding: const EdgeInsets.fromLTRB(200.0,30.0,100.0,30.0),
                       child: Center(
                         child: Row(
+
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
                               width: 0.2 * MediaQuery.of(context).size.width,
-                              height:50.0,
+                              height:40.0,
                               child: ElevatedButton.icon(
                                 style: ButtonStyle(
                                   backgroundColor: MaterialStateProperty.all<Color>(backred),
@@ -320,7 +323,7 @@ class _AddToScrapState extends State<AddToScrap> {
 
                             Container(
                               width: 0.2 * MediaQuery.of(context).size.width,
-                              height:50.0,
+                              height:40.0,
                               child: ElevatedButton(
                                 style: ButtonStyle(
                                   backgroundColor: MaterialStateProperty.all<Color>(backred),
