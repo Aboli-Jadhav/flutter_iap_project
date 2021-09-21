@@ -29,72 +29,103 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
         //   centerTitle: true,
         // ),
         body: ListView(
-          padding: const EdgeInsets.all(40),
+          padding: const EdgeInsets.fromLTRB(20, 40, 20, 40),
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-               children: [
-                 Column(
-                   mainAxisAlignment: MainAxisAlignment.start,
-                   children: [
-                     Text("Gauge Type",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
-                     SizedBox(height: 30,),
-                     DropDown(),
-                     SizedBox(height: 50,),
-                     Text("WPPL Identification Number",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
-                     SizedBox(height: 30,),
-                     text_ed(),
-                     SizedBox(height: 50,),
-                     Text("Manufacturers Serial No",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
-                     SizedBox(height: 30,),
-                     text_ed(),
-                     SizedBox(height: 50,),
-                     Text("Gauge Size",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
-                     SizedBox(height: 30,),
-                     text_ed(),
-                     SizedBox(height: 50,),
-                     Text("Calibration Agency Name",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
-                     SizedBox(height: 30,),
-                     text_ed(),
-                     SizedBox(height: 50,),
-                     Text("Caliberated DATE",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
-                     SizedBox(height: 30,),
-                     TestPickerWidget(),
-                     SizedBox(height: 50,),
-                     Text("frequency",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
-                     SizedBox(height: 30,),
-                     text_ed(),
-                     SizedBox(height: 50,),
-                     Text("Caliberation Due Date",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
-                     SizedBox(height: 30,),
-                     TestPickerWidget(),
-                     SizedBox(height: 50,),
-                     Text("Certificate Number",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
-                     SizedBox(height: 30,),
-                     text_ed(),
-                     SizedBox(height: 50,),
-                     Text("Calibration cost",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
-                     SizedBox(height: 30,),
-                     text_ed(),
-                     SizedBox(height: 50,),
-                     Text("Remark",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
-                     SizedBox(height: 30,),
-                     text_ed(),
-                     Text("Instrument Location",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
-                     SizedBox(height: 30,),
-                     DropDown(),
-                     SizedBox(height: 50,),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text("Gauge Type",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
+                    SizedBox(width: 200,),
+                    Text("WPPL Identification Number",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
+                    SizedBox(width: 50,),
+                    Text("Manufacturers Serial No",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
+                    SizedBox(width: 80,),
+                    Text("Gauge Size",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
+
+                  ],
+                ),
+                SizedBox(height: 10,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    DropDown(),
+                    SizedBox(width: 20,),
+                    text_ed(),
+                    SizedBox(width: 20,),
+                    text_ed(),
+                    SizedBox(width: 20,),
+                    text_ed(),
+
+                  ],
+                ),
+                SizedBox(height: 20,),
+
+                Row(
+                  children: [
+                    Text("Calibration Agency Name",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
+                    SizedBox(width: 100,),
+                    Text("Caliberated DATE",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
+                    SizedBox(width: 130,),
+                    Text("frequency",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
+                    SizedBox(width: 200,),
+                    Text("Caliberation Due Date",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
+
+                  ],
+                ),
+                SizedBox(height: 10,),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    text_ed(),
+                    SizedBox(width: 20,),
+                    TestPickerWidget(),
+                    SizedBox(width: 20,),
+                    text_ed(),
+                    SizedBox(width: 20,),
+                    TestPickerWidget(),
+
+                  ],
+                ),
+                SizedBox(height: 20,),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text("Certificate Number",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
+                    SizedBox(width: 150,),
+                    Text("Calibration cost",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
+                    SizedBox(width: 150,),
+                    Text("Remark",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
+                    SizedBox(width: 250,),
+                    Text("Instrument Location",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
+
+                  ],
+                ),
+                SizedBox(height: 10,),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    text_ed(),
+                    SizedBox(width: 20,),
+                    text_ed(),
+                    SizedBox(width: 20,),
+                    text_ed(),
+                    SizedBox(width: 20,),
+                    DropDown(),
+
+                  ],
+                ),
 
 
-                   ],
-                 ),
 
 
 
-
-
-
-               ],
+              ],
             )
 
           ],

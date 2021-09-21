@@ -16,19 +16,19 @@ class _profile_adState extends State<profile_ad> {
     return Container(
 
       child: Scaffold(
-        appBar: AppBar(
-          toolbarHeight: 60,
-          backgroundColor: backred,
-          title: Text("Profile",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 50.0,
-              fontWeight: FontWeight.bold,
-
-            ),
-          ),
-          centerTitle: true,
-        ),
+        // appBar: AppBar(
+        //   toolbarHeight: 60,
+        //   backgroundColor: backred,
+        //   title: Text("Profile",
+        //     style: TextStyle(
+        //       color: Colors.white,
+        //       fontSize: 50.0,
+        //       fontWeight: FontWeight.bold,
+        //
+        //     ),
+        //   ),
+        //   centerTitle: true,
+        // ),
 
         body:
         Center(

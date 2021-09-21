@@ -14,8 +14,8 @@ class _text_edState extends State<text_ed> {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        width: 450,
-        height: 50,
+        width: 300,
+        height: 47,
         child: TextFormField(
           onChanged: (value){
             name = value;
