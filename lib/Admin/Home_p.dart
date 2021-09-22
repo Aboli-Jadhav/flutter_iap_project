@@ -23,7 +23,7 @@ class _home_pState extends State<home_p> {
           title: Text("Windals Precision Ltd.",
             style: TextStyle(
               color: Colors.white,
-              fontSize: 50.0,
+              fontSize: 20,
               fontWeight: FontWeight.bold,
 
             ),

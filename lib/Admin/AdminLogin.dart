@@ -14,11 +14,11 @@ class _AdminLogin extends State<AdminLogin>{
     return Container(
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: 60,
+          toolbarHeight: 40,
           backgroundColor: backred,
           title: Text('Windals Precision Ltd.',
           style: TextStyle(
-
+             fontSize: 20
           ),
           ),
           centerTitle: true,
