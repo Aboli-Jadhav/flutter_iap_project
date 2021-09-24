@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../../Drop_Down.dart';
 import 'package:flutter_iap_project/Text_editor.dart';
 import '../../date_picker.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class add_Gauge extends StatefulWidget {
   const add_Gauge({Key? key}) : super(key: key);
@@ -12,6 +14,25 @@ class add_Gauge extends StatefulWidget {
 }
 
 class _add_GaugeState extends State<add_Gauge> {
+
+  var go_size = TextEditingController();
+  var no_go_size = TextEditingController();
+  var frequency = TextEditingController();
+  var certificate_number = TextEditingController();
+  var gauge_number = TextEditingController();
+  var identification_number = TextEditingController();
+  var remark = TextEditingController();
+  List<dynamic> _gauges = [];
+  var _selected_gauges;
+  List<dynamic> _frequency = [];
+  var _selected_frequency;
+  List<dynamic> _location = [];
+  var _selected_location;
+  List<dynamic> _location_owner = [];
+  var _selected_location_owner;
+
+
+
 
   List<String> guageSizes=[
     'GO',
@@ -67,6 +88,162 @@ class _add_GaugeState extends State<add_Gauge> {
     });
   }
 
+  void addData()async{
+    var gauge_name="snap gauge";
+    var collection_name="all "+gauge_name;
+    var wpp_number = gauge_number.text.toString();
+    var manufacturer_number = identification_number.text.toString();
+    var final_number = wpp_number+"_"+manufacturer_number;
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    firestore.collection("Chakan")
+        .doc("Gauge Types")
+        .collection("All Gauges")
+        .doc(gauge_name)
+        .collection(collection_name)
+        .doc(final_number)
+        .set({
+      'gauge_number': gauge_number.text.toString(), // John Doe
+      'identification_number': identification_number.text.toString(), // Stokes and Sons
+      'certificate_number': certificate_number.text.toString(), // 42
+      'frequency': frequency.text.toString(),
+      'go_size':go_size.text.toString(),
+      'no_go_size':no_go_size.text.toString(),
+      'remark':remark.text.toString()
+    })
+    //.update({'GAUGE COST':'900'})
+        .then((value) => Fluttertoast.showToast(
+        msg:  "User Added",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0
+    )) //we can use toast msg here
+        .catchError((error) => print("Failed to add user: $error"));
+
+
+
+    // Fluttertoast.showToast(
+    //     msg:  gauge_number.text.toString(),
+    //     toastLength: Toast.LENGTH_SHORT,
+    //     gravity: ToastGravity.CENTER,
+    //     timeInSecForIosWeb: 1,
+    //     backgroundColor: Colors.red,
+    //     textColor: Colors.white,
+    //     fontSize: 16.0
+    // );
+  }
+
+  void getGaugetype()async{
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    firestore.collection("Chakan")
+        .doc("Attributes")
+        .collection("gauge types")
+        .doc("1W6qHZfSxKcRAy7ycg52").get().then((DocumentSnapshot documentSnapshot) {
+      if (documentSnapshot.exists) {
+        Map<String, dynamic> data = documentSnapshot.data() as Map<String, dynamic>;
+        var list = [];
+        data.forEach((key, value) {
+          list.add(value);
+        });
+        print(list);
+        setState(() {
+          _gauges = list;// we can use this list for dropdown
+        });
+
+      }else{
+        print('Document does not exist on the database');
+      }
+    });
+
+  }
+
+  void getGaugefrequency()async{
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    firestore.collection("Chakan")
+        .doc("Attributes")
+        .collection("gauge frequency")
+        .doc("all gauge frequency").get().then((DocumentSnapshot documentSnapshot) {
+      if (documentSnapshot.exists) {
+        Map<String, dynamic> data = documentSnapshot.data() as Map<String, dynamic>;
+        var list = [];
+        data.forEach((key, value) {
+          list.add(value);
+        });
+        print(list);
+        setState(() {
+          _frequency = list;// we can use this list for dropdown
+        });
+
+      }else{
+        print('Document does not exist on the database');
+      }
+    });
+
+  }
+
+  void getGaugeLocation()async{
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    firestore.collection("Chakan")
+        .doc("Attributes")
+        .collection("gauge location")
+        .doc("YL40nPK2KqMB7HDCQi7k").get().then((DocumentSnapshot documentSnapshot) {
+      if (documentSnapshot.exists) {
+        Map<String, dynamic> data = documentSnapshot.data() as Map<String, dynamic>;
+        var list = [];
+        data.forEach((key, value) {
+          list.add(value);
+        });
+        print(list);
+        setState(() {
+          _location = list;// we can use this list for dropdown
+        });
+
+      }else{
+        print('Document does not exist on the database');
+      }
+    });
+
+  }
+
+  void getGaugeLocationOwner()async{
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    firestore.collection("Chakan")
+        .doc("Attributes")
+        .collection("gauge location owner")
+        .doc("mGD9P9XtshOJcscT1EJ5").get().then((DocumentSnapshot documentSnapshot) {
+      if (documentSnapshot.exists) {
+        Map<String, dynamic> data = documentSnapshot.data() as Map<String, dynamic>;
+        var list = [];
+        data.forEach((key, value) {
+          list.add(value);
+        });
+        print(list);
+        setState(() {
+          _location_owner = list;// we can use this list for dropdown
+        });
+
+      }else{
+        print('Document does not exist on the database');
+      }
+    });
+
+  }
+
+
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getGaugetype();
+    getGaugefrequency();
+    getGaugeLocation();
+    getGaugeLocationOwner();
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -119,11 +296,64 @@ class _add_GaugeState extends State<add_Gauge> {
                             children: [
                               DropDown(),
                               SizedBox(width: 30,),
-                              text_ed(),
+                              Container(
+                                width: 300,
+                                height:50.0,
+                                child: TextField(
+                                  controller: gauge_number,
+                                  decoration: InputDecoration(
+                                    labelText: "Gauge Number",
+                                    border: OutlineInputBorder(),
+
+                                  ),),
+                              ),
+
                               SizedBox(width: 30,),
-                              DropDown(),
+                              Container(
+                                width: 300,
+                                padding: EdgeInsets.symmetric(vertical: 5.0,horizontal: 10.0),
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.grey),
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                                child: DropdownButton(
+                                  hint: Text('Please choose a gauge type'), // Not necessary for Option 1
+                                  value: _selected_gauges,
+                                  onChanged: (newValue) {
+                                    setState(() {
+                                      _selected_gauges = newValue;
+                                    });
+
+                                    Fluttertoast.showToast(
+                                        msg: _selected_gauges,
+                                        toastLength: Toast.LENGTH_SHORT,
+                                        gravity: ToastGravity.CENTER,
+                                        timeInSecForIosWeb: 1,
+                                        backgroundColor: Colors.red,
+                                        textColor: Colors.white,
+                                        fontSize: 16.0
+                                    );
+                                  },
+                                  items: _gauges.map((location) {
+                                    return DropdownMenuItem(
+                                      child: new Text(location),
+                                      value: location,
+                                    );
+                                  }).toList(),
+                                ),
+                              ),
                               SizedBox(width: 30,),
-                              text_ed(),
+                              Container(
+                                width: 300,
+                                height:50.0,
+                                child: TextField(
+                                  controller: identification_number,
+                                  decoration: InputDecoration(
+                                    labelText: "Identification Number",
+                                    border: OutlineInputBorder(),
+
+                                  ),),
+                              ),
                             ]
                           ),
                           SizedBox(height: 20,),
@@ -150,9 +380,52 @@ class _add_GaugeState extends State<add_Gauge> {
                               SizedBox(width: 20,),
                               TestPickerWidget(),
                               SizedBox(width: 20,),
-                              text_ed(),
+                              Container(
+                                width: 300,
+                                height:50.0,
+                                child: TextField(
+                                  controller: certificate_number,
+                                  decoration: InputDecoration(
+                                    labelText: "Certificate Number",
+                                    border: OutlineInputBorder(),
+
+                                  ),),
+                              ),
+
                               SizedBox(width: 20,),
-                              DropDown(),
+                              Container(
+                                width: 300,
+                                padding: EdgeInsets.symmetric(vertical: 5.0,horizontal: 10.0),
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.grey),
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                                child: DropdownButton(
+                                  hint: Text('Please choose a Location owner'), // Not necessary for Option 1
+                                  value: _selected_location_owner,
+                                  onChanged: (newValue) {
+                                    setState(() {
+                                      _selected_location_owner = newValue;
+                                    });
+
+                                    Fluttertoast.showToast(
+                                        msg: _selected_location_owner,
+                                        toastLength: Toast.LENGTH_SHORT,
+                                        gravity: ToastGravity.CENTER,
+                                        timeInSecForIosWeb: 1,
+                                        backgroundColor: Colors.red,
+                                        textColor: Colors.white,
+                                        fontSize: 16.0
+                                    );
+                                  },
+                                  items: _location_owner.map((location) {
+                                    return DropdownMenuItem(
+                                      child: new Text(location),
+                                      value: location,
+                                    );
+                                  }).toList(),
+                                ),
+                              ),
                             ],
                           ),
 
@@ -161,10 +434,10 @@ class _add_GaugeState extends State<add_Gauge> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Text("Gauge Size",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
-                              SizedBox(width: 220,),
-                              Text('$_chosenValue',style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
-                              SizedBox(width: 290,),
+                              Text("Go",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
+                              SizedBox(width: 310,),
+                              Text("No Go",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
+                              SizedBox(width: 270,),
                               Text("Frequency",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
                               SizedBox(width: 230,),
                               Text("Caliberated On",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
@@ -177,11 +450,66 @@ class _add_GaugeState extends State<add_Gauge> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              createSizes(),
+                              //createSizes(),
+                          Container(
+                          width: 300,
+                            height:50.0,
+                            child: TextField(
+                              controller: go_size,
+                              decoration: InputDecoration(
+                                labelText: " Go size",
+                                border: OutlineInputBorder(),
+
+                              ),),
+                          ),
                               SizedBox(width: 30,),
-                              text_ed(),
+                              Container(
+                                width: 300,
+                                height:50.0,
+                                child: TextField(
+                                  controller: no_go_size,
+                                  decoration: InputDecoration(
+                                    labelText: "No Go size",
+                                    border: OutlineInputBorder(),
+
+                                  ),),
+                              ),
+
                               SizedBox(width: 30,),
-                              text_ed(),
+                              Container(
+                                width: 300,
+                                padding: EdgeInsets.symmetric(vertical: 5.0,horizontal: 10.0),
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.grey),
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                                child: DropdownButton(
+                                  hint: Text('Please choose Frequency'), // Not necessary for Option 1
+                                  value: _selected_frequency,
+                                  onChanged: (newValue) {
+                                    setState(() {
+                                      _selected_frequency = newValue;
+                                    });
+
+                                    Fluttertoast.showToast(
+                                        msg: _selected_frequency,
+                                        toastLength: Toast.LENGTH_SHORT,
+                                        gravity: ToastGravity.CENTER,
+                                        timeInSecForIosWeb: 1,
+                                        backgroundColor: Colors.red,
+                                        textColor: Colors.white,
+                                        fontSize: 16.0
+                                    );
+                                  },
+                                  items: _frequency.map((location) {
+                                    return DropdownMenuItem(
+                                      child: new Text(location),
+                                      value: location,
+                                    );
+                                  }).toList(),
+                                ),
+                              ),
+
                               SizedBox(width: 30,),
                               TestPickerWidget(),
 
@@ -207,9 +535,53 @@ class _add_GaugeState extends State<add_Gauge> {
                             children: [
                               DropDown(),
                               SizedBox(width: 30,),
-                              DropDown(),
+                              Container(
+                                width: 300,
+                                padding: EdgeInsets.symmetric(vertical: 5.0,horizontal: 10.0),
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.grey),
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                                child: DropdownButton(
+                                  hint: Text('Please choose Location'), // Not necessary for Option 1
+                                  value: _selected_location,
+                                  onChanged: (newValue) {
+                                    setState(() {
+                                      _selected_location = newValue;
+                                    });
+
+                                    Fluttertoast.showToast(
+                                        msg: _selected_location,
+                                        toastLength: Toast.LENGTH_SHORT,
+                                        gravity: ToastGravity.CENTER,
+                                        timeInSecForIosWeb: 1,
+                                        backgroundColor: Colors.red,
+                                        textColor: Colors.white,
+                                        fontSize: 16.0
+                                    );
+                                  },
+                                  items: _location.map((location) {
+                                    return DropdownMenuItem(
+                                      child: new Text(location),
+                                      value: location,
+                                    );
+                                  }).toList(),
+                                ),
+                              ),
+
                               SizedBox(width: 30,),
-                              text_ed(),
+                              Container(
+                                width: 300,
+                                height:50.0,
+                                child: TextField(
+                                  controller: remark,
+                                  decoration: InputDecoration(
+                                    labelText: "Remark",
+                                    border: OutlineInputBorder(),
+
+                                  ),),
+                              ),
+
                             ],
                           ),
 
@@ -223,7 +595,7 @@ class _add_GaugeState extends State<add_Gauge> {
                   ElevatedButton(
                     child: Text("ADD DATA"),
                     onPressed: () {
-
+                      addData();
                     },
                     style: ElevatedButton.styleFrom(
                         primary: Colors.red,

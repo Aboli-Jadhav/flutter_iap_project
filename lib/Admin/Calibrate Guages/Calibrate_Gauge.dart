@@ -35,10 +35,10 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text("Gauge Type",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
-                    SizedBox(width: 200,),
+                    SizedBox(width: 100,),
                     Text("WPPL Identification Number",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
                     SizedBox(width: 50,),
                     Text("Manufacturers Serial No",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
@@ -49,7 +49,7 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                 ),
                 SizedBox(height: 10,),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     DropDown(),
                     SizedBox(width: 20,),
@@ -64,6 +64,7 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                 SizedBox(height: 20,),
 
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text("Calibration Agency Name",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
                     SizedBox(width: 100,),
@@ -78,7 +79,7 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                 SizedBox(height: 10,),
 
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     text_ed(),
                     SizedBox(width: 20,),
@@ -93,7 +94,7 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                 SizedBox(height: 20,),
 
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text("Certificate Number",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
                     SizedBox(width: 150,),
@@ -108,7 +109,7 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                 SizedBox(height: 10,),
 
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     text_ed(),
                     SizedBox(width: 20,),
