@@ -1,6 +1,7 @@
 import 'dart:js';
 import 'package:flutter/material.dart';
 import 'package:flutter_iap_project/Admin/Add%20gauges/AddGuage_Page.dart';
+import 'package:flutter_iap_project/Admin/showGauge.dart';
 import 'package:flutter_iap_project/master_admin/MasteradminHome_Page.dart';
 import 'Admin/Show Gauges.dart';
 import 'master_admin/Manage_scrap/Add_To_Scrap.dart';
@@ -40,7 +41,7 @@ void main() {
       '/viewer_login' : (context) => ViewerLogin(),
       '/adminpage' : (context) => Admin_Page(),
       '/addgauge' : (context) => add_Gauge(),
-      '/showgauge' : (context) => show_gauge(),
+      '/showgauge' : (context) => ShowGauge(wppl_number: "",manufacturer_number: "",gauge_type: ""),
        '/viewerhome' :(context) =>VIEWERHOME(),
       '/searchgauge' : (context) => search_gauge(),
       '/manageScrap':(context) => Manage_Scrap(),

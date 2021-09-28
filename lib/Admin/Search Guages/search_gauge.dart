@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_iap_project/Admin/Show%20Gauges.dart';
+import 'package:flutter_iap_project/Admin/showGauge.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -164,7 +165,6 @@ class _SREACH_GAUGE extends State<search_gauge>{
     prefs.setString('wppl_gauge_id_number', wppl_gauge_id_number);
 
 
-
     Fluttertoast.showToast(
         msg:  prefs.getString('unit').toString(),
         toastLength: Toast.LENGTH_SHORT,
@@ -308,7 +308,7 @@ class _SREACH_GAUGE extends State<search_gauge>{
                         ),
                         onPressed: () {
                           submittoFirestore();
-                          Navigator.push(context,MaterialPageRoute(builder: (context) => show_gauge()),);
+                          Navigator.push(context,MaterialPageRoute(builder: (context) => ShowGauge(manufacturer_number: a.text,wppl_number: b.text,gauge_type: _selectedLocation,)),);
                           //Navigator.push(context,'/showgauge');
                         },
                       )
