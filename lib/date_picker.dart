@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class TestPickerWidget extends StatefulWidget {
+
+  DateTime selectedDate = DateTime.now();
+  TestPickerWidget(this.selectedDate);
+
   @override
   _TestPickerWidgetState createState() => _TestPickerWidgetState();
 }
 
 class _TestPickerWidgetState extends State<TestPickerWidget> {
-  DateTime selectedDate = DateTime.now();
+ // DateTime selectedDate = DateTime.now();
   bool t = false;
   @override
   Widget build(BuildContext context) {
@@ -24,7 +28,7 @@ class _TestPickerWidgetState extends State<TestPickerWidget> {
               borderRadius: BorderRadius.all(Radius.circular(5))
           ),
           child: Text(
-            "${selectedDate.toLocal()}".split(' ')[0],
+            "${widget.selectedDate.toLocal()}".split(' ')[0],
             style: TextStyle(fontSize: 19, fontWeight: FontWeight.w500),
             textAlign: TextAlign.center,
           ),
@@ -54,13 +58,13 @@ class _TestPickerWidgetState extends State<TestPickerWidget> {
   _selectDate(BuildContext context) async {
     final DateTime ?picked = await showDatePicker(
       context: context,
-      initialDate: selectedDate, // Refer step 1
+      initialDate: widget.selectedDate, // Refer step 1
       firstDate: DateTime(2000),
       lastDate: DateTime(2025),
     );
-    if (picked != null && picked != selectedDate)
+    if (picked != null && picked != widget.selectedDate)
       setState(() {
-        selectedDate = picked;
+        widget.selectedDate = picked;
         t = true;
       });
   }

@@ -9,6 +9,7 @@ class AddToScrap extends StatefulWidget {
 }
 
 class _AddToScrapState extends State<AddToScrap> {
+  DateTime selectedDate = DateTime.now();
   Color backred=Color(0xffDF3F3F);
   Color lred=Color(0xffFBEBEB);
   var _chosenValue;
@@ -277,7 +278,7 @@ class _AddToScrapState extends State<AddToScrap> {
                             textAlign: TextAlign.center,
                           ),
                         ),
-                        TestPickerWidget(),
+                        TestPickerWidget(selectedDate),
                       ],
                     ),
                     ]

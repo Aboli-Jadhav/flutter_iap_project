@@ -73,6 +73,7 @@ class _show_gaugeState extends State<show_gauge> {
     // TODO: implement initState
     super.initState();
     getSharedPrefrenceData();
+
   }
 
   @override

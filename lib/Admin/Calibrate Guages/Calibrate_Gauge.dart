@@ -11,6 +11,7 @@ class Calibrate_Gauge extends StatefulWidget{
 }
 
 class _calibrate_gauge extends State<Calibrate_Gauge>{
+  DateTime selectedDate = DateTime.now();
   Color backred=Color(0xffDF3F3F);
   Color lred=Color(0xffFBEBEB);
   Widget build(BuildContext context){
@@ -83,11 +84,11 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                   children: [
                     text_ed(),
                     SizedBox(width: 20,),
-                    TestPickerWidget(),
+                    TestPickerWidget(selectedDate),
                     SizedBox(width: 20,),
                     text_ed(),
                     SizedBox(width: 20,),
-                    TestPickerWidget(),
+                    TestPickerWidget(selectedDate),
 
                   ],
                 ),

@@ -14,6 +14,11 @@ class add_Gauge extends StatefulWidget {
 }
 
 class _add_GaugeState extends State<add_Gauge> {
+  DateTime selectedDate1 = DateTime.now();
+  DateTime selectedDate2 = DateTime.now();
+  DateTime selectedDate3 = DateTime.now();
+
+
 
   var go_size = TextEditingController();
   var no_go_size = TextEditingController();
@@ -108,7 +113,10 @@ class _add_GaugeState extends State<add_Gauge> {
       'frequency': frequency.text.toString(),
       'go_size':go_size.text.toString(),
       'no_go_size':no_go_size.text.toString(),
-      'remark':remark.text.toString()
+      'remark':remark.text.toString(),
+      'caliberated_on_date':"${selectedDate3.toLocal()}".split(' ')[0],
+      'caliberation_due_date':"${selectedDate2.toLocal()}".split(' ')[0],
+      'issued_date':"${selectedDate1.toLocal()}".split(' ')[0],
     })
     //.update({'GAUGE COST':'900'})
         .then((value) => Fluttertoast.showToast(
@@ -376,9 +384,9 @@ class _add_GaugeState extends State<add_Gauge> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              TestPickerWidget(),
+                              TestPickerWidget(selectedDate1),
                               SizedBox(width: 20,),
-                              TestPickerWidget(),
+                              TestPickerWidget(selectedDate2),
                               SizedBox(width: 20,),
                               Container(
                                 width: 300,
@@ -511,7 +519,7 @@ class _add_GaugeState extends State<add_Gauge> {
                               ),
 
                               SizedBox(width: 30,),
-                              TestPickerWidget(),
+                              TestPickerWidget(selectedDate3),
 
                             ],
                           ),
