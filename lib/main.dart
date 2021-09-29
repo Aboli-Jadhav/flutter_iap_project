@@ -51,7 +51,7 @@ void main() {
       '/adminEditProfile': (context) => Admin_Edit_Profile(),
       '/master_add_admins': (context) => Master_AddAdmins(),
       '/masterAdmin_EditProfile': (context) => MasterAdmin_EditProfile(),
-      '/calibrate gauge' : (context) => Calibrate_Gauge(),
+      // '/calibrate gauge' : (context) => Calibrate_Gauge(),
       '/edit_attribute' : (context) => edit_atri(),
       '/edit_frequency' : (context) => edit_freq(),
       '/edit_description' : (context) => edit_descr(),
