@@ -23,28 +23,7 @@ class _gauge_search_calibrate extends State<gauge_calibrate_search>{
   // List<String> _locations = ['A', 'B', 'C', 'D']; // Option 2
   var _selectedLocation;
   List<dynamic> _locations = [];// Option 2
-  String calibration_agency_name ="";
-  String calibration_cost       ="" ;
-  String calibration_date        ="";
-  String calibration_due_date   ="" ;
-  String calibration_frequency   ="";
-  String certificate_number      ="";
-  String gauge_cost             ="";
-  String gauge_life              ="";
-  String gauge_make  ="";
-  String gauge_manufacturer_id_number ="";
-  String item_code ="";
-  String maximum ="";
-  String minimum ="";
-  String nabl_accrediation_status ="";
-  String nominal_size ="";
-  String physical_location ="";
-  String plant ="";
-  String process_owner ="";
-  String process_owner_mail_id ="";
-  String remark ="";
-  String unit ="";
-  String wppl_gauge_id_number = "";
+
 
   @override
   void initState() {
@@ -55,6 +34,15 @@ class _gauge_search_calibrate extends State<gauge_calibrate_search>{
 
     getGaugetype();
   }
+
+  Future<void> shareperferences() async {
+
+    SharedPreferences claibratedata = await SharedPreferences.getInstance();
+    claibratedata .setString('gauge_type', _selectedLocation);
+    claibratedata .setString('gauge_manufacturer_id_number', a.text);
+    claibratedata .setString('wppl_gauge_id_number', b.text);
+  }
+
   void getGaugetype()async{
 
     FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -81,40 +69,6 @@ class _gauge_search_calibrate extends State<gauge_calibrate_search>{
   }
 
 
-  void submittoFirestore() async{
-    var gauge_name=_selectedLocation;
-    var collection_name="all "+gauge_name;
-    var wpp_number = b.text;
-    var manufacturer_number = a.text;
-    var final_number = wpp_number+"_"+manufacturer_number;
-
-
-
-    SharedPreferences datacalibrate = await SharedPreferences.getInstance();
-    datacalibrate.setString('calibration_frequency', calibration_frequency);
-    datacalibrate.setString('gauge_make', gauge_make);
-    datacalibrate.setString('gauge_manufacturer_id_number', gauge_manufacturer_id_number);
-    datacalibrate.setString('maximum',maximum);
-    datacalibrate.setString('minimum', minimum);
-    datacalibrate.setString('nabl_accrediation_status', nabl_accrediation_status);
-    datacalibrate.setString('nominal_size ', nominal_size );
-    datacalibrate.setString('physical_location', physical_location);
-    datacalibrate.setString('process_owner', process_owner);
-    datacalibrate.setString('process_owner_mail_id', process_owner_mail_id);
-    datacalibrate.setString('wppl_gauge_id_number', wppl_gauge_id_number);
-
-    Fluttertoast.showToast(
-        msg:  datacalibrate.getString('wppl_gauge_id').toString(),
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0
-    );
-
-
-  }
 
 
   Widget build(BuildContext context){
@@ -237,8 +191,9 @@ class _gauge_search_calibrate extends State<gauge_calibrate_search>{
                 primary: Colors.red,
               ),
               onPressed: () {
-                submittoFirestore();
+
                 Navigator.push(context,MaterialPageRoute(builder: (context) => Calibrate_Gauge(manufacturer_number: a.text,wppl_number: b.text,gauge_type: _selectedLocation,)),);
+                shareperferences();
                 //Navigator.push(context,'/showgauge');
               },
             )

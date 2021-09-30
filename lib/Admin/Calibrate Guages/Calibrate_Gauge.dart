@@ -5,6 +5,7 @@ import 'package:flutter_iap_project/Text_editor.dart';
 import 'package:flutter_iap_project/date_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Calibrate_Gauge extends StatefulWidget{
   final String wppl_number;
@@ -22,6 +23,13 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
   DateTime selectedDate1 = DateTime.now();
   DateTime selectedDate2 = DateTime.now();
   DateTime selectedDate3 = DateTime.now();
+
+     getdata_sharedperefrence() async {
+       SharedPreferences claibratedata = await SharedPreferences.getInstance();
+       claibratedata .getString('gauge_type');
+       claibratedata .getString('gauge_manufacturer_id_number');
+       claibratedata .getString('wppl_gauge_id_number');
+     }
 
 
   var go_size = TextEditingController();
@@ -259,19 +267,19 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
 
     return Container(
       child: Scaffold(
-        // appBar: AppBar(
-        //   toolbarHeight: 50,
-        //   backgroundColor: backred,
-        //   title: Text("Update Gauge",
-        //     style: TextStyle(
-        //       color: Colors.white,
-        //       fontSize: 30.0,
-        //       fontWeight: FontWeight.bold,
-        //
-        //     ),
-        //   ),
-        //   centerTitle: true,
-        // ),
+        appBar: AppBar(
+          toolbarHeight: 50,
+          backgroundColor: backred,
+          title: Text("Calibrate Gauge",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 30.0,
+              fontWeight: FontWeight.bold,
+
+            ),
+          ),
+          centerTitle: true,
+        ),
 
           body:ListView(
             padding: const EdgeInsets.all(20),
