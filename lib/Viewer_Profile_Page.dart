@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_iap_project/Authentication/services/navigator_service.dart';
+import 'package:flutter_iap_project/Authentication/locator.dart';
 
 class VIEWERPROFILE extends StatefulWidget{
   const VIEWERPROFILE({Key?key}) :super(key: key);
@@ -8,8 +11,20 @@ class VIEWERPROFILE extends StatefulWidget{
 class _VIEWERPROFILE extends State<VIEWERPROFILE>{
   Color backred=Color(0xffDF3F3F);
   Color lred=Color(0xffFBEBEB);
+  final NavigationService navigationService3 = locator<NavigationService>();
+
+
 
   Widget build(BuildContext context){
+
+    FirebaseAuth auth = FirebaseAuth.instance;
+
+    Future<void> _signOut() async {
+      await FirebaseAuth.instance.signOut();
+      navigationService3.pop();
+      // print("Logout");
+    }
+
     return Container(
       child: Scaffold(
          appBar: AppBar(
@@ -68,7 +83,7 @@ class _VIEWERPROFILE extends State<VIEWERPROFILE>{
                           side: BorderSide(color: backred)
                         ),
                       ),),
-                      onPressed: () {},
+                      onPressed: () {_signOut();},
                        label: Text("Logout",
                          style: TextStyle(
                            fontSize: 20.0,

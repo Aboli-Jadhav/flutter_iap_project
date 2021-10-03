@@ -60,7 +60,7 @@ class _LoginOptionScrnState extends State<LoginOptionScrn> {
               ),
               onPressed: ()
               {
-                Navigator.popAndPushNamed(context, '/master_adminLogin');
+                Navigator.pushNamed(context, '/master_adminLogin');
               },
               child: Text(
                 "Master Admin",
@@ -87,7 +87,7 @@ class _LoginOptionScrnState extends State<LoginOptionScrn> {
                           ),),
                       ),
                       onPressed: () {
-                        Navigator.popAndPushNamed(context, '/admin_login');
+                        Navigator.pushNamed(context, '/admin_login');
                       },
                       child: Text(
                         " Admin ",
@@ -114,7 +114,7 @@ class _LoginOptionScrnState extends State<LoginOptionScrn> {
                           ),),
                       ),
                       onPressed: () {
-                        Navigator.popAndPushNamed(context, '/viewer_login');
+                        Navigator.pushNamed(context, '/viewer_login');
                       },
                       child: Text(
                         " Viewer ",

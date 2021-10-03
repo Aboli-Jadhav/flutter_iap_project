@@ -4,6 +4,7 @@ import 'package:flutter_iap_project/Admin/Add%20gauges/AddGuage_Page.dart';
 import 'package:flutter_iap_project/Admin/showGauge.dart';
 import 'package:flutter_iap_project/master_admin/MasteradminHome_Page.dart';
 import 'Admin/Show Gauges.dart';
+import 'Authentication/services/navigator_service.dart';
 import 'master_admin/Manage_scrap/Add_To_Scrap.dart';
 import 'package:flutter_iap_project/Admin/Addviewer/Add_Viewer.dart';
 import 'package:flutter_iap_project/AdminHomeScreen.dart';
@@ -29,11 +30,16 @@ import 'master_admin/Edit_Attribute/edit_owner.dart';
 import 'master_admin/Edit_Attribute/edit_range.dart';
 import 'master_admin/Edit_Attribute/edit_type.dart';
 import 'master_admin/view_gauge/view_Master_guage.dart';
+import 'package:flutter_iap_project/Authentication/locator.dart';
 
 
 void main() {
+  setupLocator();
+
   runApp(MaterialApp(
-    initialRoute: '/opt',
+    debugShowCheckedModeBanner: false,
+    //initialRoute: '/opt',
+    navigatorKey: locator<NavigationService>().navigationKey,
     routes: {
       '/opt': (context) => LoginOptionScrn(),
       '/master_adminLogin': (context) => master_adminLogin(),

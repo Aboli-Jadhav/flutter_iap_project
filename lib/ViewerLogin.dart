@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_iap_project/Authentication/ui/bussy_button.dart';
+import 'package:flutter_iap_project/Authentication/ui/input_field.dart';
+import 'package:flutter_iap_project/Authentication/view_model/login_view_model.dart';
+import 'package:stacked/stacked.dart';
 
 class ViewerLogin extends StatefulWidget{
   const ViewerLogin({Key? key}) : super(key: key);
@@ -9,10 +13,17 @@ class ViewerLogin extends StatefulWidget{
 }
 
 class _Viewerlogin extends State<ViewerLogin>{
+
+  final emailController2 = TextEditingController();
+  final passwordController2 = TextEditingController();
+
   Color backred=Color(0xffDF3F3F);
   Color lred=Color(0xffFBEBEB);
   Widget build(BuildContext context){
-    return Container(
+    return ViewModelBuilder<LoginViewModel>.reactive(
+    viewModelBuilder: () => LoginViewModel(),
+    builder: (context, model, child) =>
+      Container(
       child: Scaffold(
         appBar: AppBar(
           toolbarHeight: 60,
@@ -47,66 +58,35 @@ class _Viewerlogin extends State<ViewerLogin>{
                 ),
               ),
               SizedBox(height: 30,),
-              Container(
-                width:0.3 * MediaQuery.of(context).size.width,
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'User Name',
-                    hintText: 'Enter Your UserName',
-                  ),
-                ),
+              InputField(
+                placeholder: 'Email',
+                controller: emailController2,
               ),
-              SizedBox(height: 30,),
-              Container(
-                width:0.3 * MediaQuery.of(context).size.width,
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Password',
-                    hintText: 'Enter Password',
-                  ),
-                ),
+              SizedBox(height: 10.0),
+              InputField(
+                placeholder: 'Password',
+                password: true,
+                controller: passwordController2,
               ),
-              Container(
-                //margin: EdgeInsets.fromLTRB(300, 0, 0, 0),
-                child:FlatButton(
-                  child: Text('Forgot Password',),
-                  onPressed: () {
-                    setState(() {
+              SizedBox(height: 5.0),
 
-                    });
-                  },
-                ),
-              ),
-              SizedBox(height: 30,),
-
-              Container(
-                height: 40,
-                width:0.3 * MediaQuery.of(context).size.width,
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(backred),
+                  BusyButton(
+                    title: 'Login',
+                    busy: model.busy,
+                    onPressed: () {
+                      model.login(
+                        r: 3,
+                        email: emailController2.text,
+                        password: passwordController2.text,
+                      );
+                      emailController2.clear();
+                      passwordController2.clear();
+                    },
                   ),
-                  onPressed: ()
-                  {
-                    Navigator.popAndPushNamed(context, '/viewerhome');
-                  },
-                  child: Text(
-                    "Login",
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-
-                ),
-              ),
-
-
             ]
         ),
       ),
+    ),
     );
   }
 }

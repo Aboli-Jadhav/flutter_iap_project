@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_iap_project/Authentication/services/navigator_service.dart';
+import 'package:flutter_iap_project/Authentication/locator.dart';
 class profile_ad extends StatefulWidget {
   const profile_ad({Key? key}) : super(key: key);
 
@@ -10,9 +12,18 @@ class profile_ad extends StatefulWidget {
 class _profile_adState extends State<profile_ad> {
   Color backred=Color(0xffDF3F3F);
   Color lred=Color(0xffFBEBEB);
-
+  final NavigationService navigationService = locator<NavigationService>();
   @override
   Widget build(BuildContext context) {
+
+    FirebaseAuth auth = FirebaseAuth.instance;
+
+    Future<void> _signOut() async {
+      await FirebaseAuth.instance.signOut();
+      navigationService.pop();
+     // print("Logout");
+    }
+
     return Container(
 
       child: Scaffold(
@@ -115,7 +126,7 @@ class _profile_adState extends State<profile_ad> {
                             side: BorderSide(color: backred)
                         ),),
                     ),
-                    onPressed: () {  },
+                    onPressed: () { _signOut(); },
 
                     label: Text(
                       "Log Out",

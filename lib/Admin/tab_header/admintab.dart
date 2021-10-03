@@ -17,7 +17,7 @@ class _admin_tab_headState extends State<admin_tab_head>{
   Widget build(BuildContext){
     return DefaultTabController(length: 7, child: Scaffold(
       appBar: AppBar(
-        toolbarHeight:74,
+        toolbarHeight:50,
         backgroundColor: Colors.redAccent,
         elevation: 0,
         bottom: TabBar(
@@ -34,14 +34,12 @@ class _admin_tab_headState extends State<admin_tab_head>{
           ),
           tabs: [
             Tab(
-              icon: Icon(Icons.person_add),
               child: Align(
                 alignment: Alignment.center,
                 child: Text("Add Viewer"),
               ),
             ),
             Tab(
-              icon: Icon(Icons.preview_outlined),
               child: Align(
 
                 alignment: Alignment.center,
@@ -49,28 +47,24 @@ class _admin_tab_headState extends State<admin_tab_head>{
               ),
             ),
             Tab(
-              icon: Icon(Icons.note_add),
               child: Align(
                 alignment: Alignment.center,
                 child: Text("Add Gauges"),
               ),
             ),
             Tab(
-              icon: Icon(Icons.edit),
               child: Align(
                 alignment: Alignment.center,
                 child: Text("Calibrate Gauges"),
               ),
             ),
             Tab(
-              icon: Icon(Icons.search_sharp),
               child: Align(
                 alignment: Alignment.center,
                 child: Text("Search Gauges"),
               ),
             ),
             Tab(
-              icon: Icon(Icons.delete_forever),
               child: Align(
                 alignment: Alignment.center,
                 child: Text("Manage Scrap"),
@@ -78,7 +72,6 @@ class _admin_tab_headState extends State<admin_tab_head>{
               ),
             ),
             Tab(
-              icon: Icon(Icons.logout),
               child: Align(
 
                 alignment: Alignment.center,
