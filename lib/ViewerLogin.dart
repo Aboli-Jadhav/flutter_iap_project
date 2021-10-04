@@ -3,6 +3,9 @@ import 'package:flutter_iap_project/Authentication/ui/bussy_button.dart';
 import 'package:flutter_iap_project/Authentication/ui/input_field.dart';
 import 'package:flutter_iap_project/Authentication/view_model/login_view_model.dart';
 import 'package:stacked/stacked.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
 
 class ViewerLogin extends StatefulWidget{
   const ViewerLogin({Key? key}) : super(key: key);
@@ -19,6 +22,9 @@ class _Viewerlogin extends State<ViewerLogin>{
 
   Color backred=Color(0xffDF3F3F);
   Color lred=Color(0xffFBEBEB);
+
+
+
   Widget build(BuildContext context){
     return ViewModelBuilder<LoginViewModel>.reactive(
     viewModelBuilder: () => LoginViewModel(),
@@ -73,14 +79,33 @@ class _Viewerlogin extends State<ViewerLogin>{
                   BusyButton(
                     title: 'Login',
                     busy: model.busy,
-                    onPressed: () {
-                      model.login(
-                        r: 3,
-                        email: emailController2.text,
-                        password: passwordController2.text,
-                      );
-                      emailController2.clear();
-                      passwordController2.clear();
+                    onPressed: () async {
+                      FirebaseFirestore.instance
+                          .collection('Chakan')
+                          .doc("Viewer_User")
+                          .collection("Add_ViewUser")
+                          .where('Email',isEqualTo: emailController2.text)
+                          .get()
+                          .then((value) {
+
+                        if(value.docs.isNotEmpty){
+                          model.login(
+                            r: 3,
+                            email: emailController2.text,
+                            password: passwordController2.text,
+                          );
+                        }else{
+                          Fluttertoast.showToast(
+                              msg: "Wrong Credentials Please Try Again",
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.CENTER,
+                              timeInSecForIosWeb: 1
+                          );
+                        }
+                      })
+                          .catchError((error) => print("Firebase Error"));
+
+
                     },
                   ),
             ]

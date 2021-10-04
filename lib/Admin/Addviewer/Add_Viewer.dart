@@ -58,6 +58,7 @@ class _AddViewerState extends State<AddViewer> {
                       width: 0.3 * MediaQuery.of(context).size.width,
                       height:50.0,
                       child: TextField(
+                        controller: name6,
                         decoration: InputDecoration(
                           labelText: ("Name"),
                           hintText:  ("Enter Name of the Viewer"),
@@ -72,6 +73,7 @@ class _AddViewerState extends State<AddViewer> {
                       width: 0.3 * MediaQuery.of(context).size.width,
                       height:50.0,
                       child: TextField(
+                        controller: contact6,
                         decoration: InputDecoration(
                           labelText: ("Contact No"),
                           hintText:  ("Enter Contact No of the Viewer"),
@@ -85,6 +87,7 @@ class _AddViewerState extends State<AddViewer> {
                       width: 0.3 * MediaQuery.of(context).size.width,
                       height:50.0,
                       child: TextField(
+                        controller: location6,
                         decoration: InputDecoration(
                           labelText: ("Location"),
                           hintText:  ("Enter the Location of the Viewer"),
