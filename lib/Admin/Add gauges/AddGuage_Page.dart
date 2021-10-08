@@ -287,13 +287,13 @@ class _add_GaugeState extends State<add_Gauge> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                Text("Gauge Description",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
-                                SizedBox(width: 140,),
-                                Text("Gauge Number",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
-                                SizedBox(width: 180,),
-                                Text("Gauge Type",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
-                                SizedBox(width: 210,),
-                                Text("Identification Number",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
+                                // Text("Gauge Description",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
+                                // SizedBox(width: 140,),
+                                 Text("Item Code",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
+                                SizedBox(width: 320,),
+                                Text("Type Of Gauge/Instrument",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
+                                SizedBox(width: 190,),
+                                Text("WPPL Gauge/Instrument Identification Number",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
 
                               ]
 
@@ -302,24 +302,25 @@ class _add_GaugeState extends State<add_Gauge> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              DropDown(),
-                              SizedBox(width: 30,),
+                              //DropDown(),
+                              //SizedBox(width: 30,),
                               Container(
                                 width: 300,
                                 height:50.0,
                                 child: TextField(
                                   controller: gauge_number,
                                   decoration: InputDecoration(
-                                    labelText: "Gauge Number",
+                                    labelText: "Item Code",
                                     border: OutlineInputBorder(),
 
                                   ),),
                               ),
 
-                              SizedBox(width: 30,),
+                              SizedBox(width: 100,),
                               Container(
+                                height:50.0,
                                 width: 300,
-                                padding: EdgeInsets.symmetric(vertical: 5.0,horizontal: 10.0),
+                                padding: EdgeInsets.symmetric(vertical: 0.0,horizontal: 10.0),
                                 decoration: BoxDecoration(
                                   border: Border.all(color: Colors.grey),
                                   borderRadius: BorderRadius.circular(5.0),
@@ -350,7 +351,7 @@ class _add_GaugeState extends State<add_Gauge> {
                                   }).toList(),
                                 ),
                               ),
-                              SizedBox(width: 30,),
+                              SizedBox(width: 100,),
                               Container(
                                 width: 300,
                                 height:50.0,
@@ -365,17 +366,15 @@ class _add_GaugeState extends State<add_Gauge> {
                             ]
                           ),
                           SizedBox(height: 20,),
-
                           Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                Text("Issued Date",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
-                                SizedBox(width: 210,),
-                                Text("Calibration Due Date",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
-                                SizedBox(width: 120,),
-                                Text("Certificate Number",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
-                                SizedBox(width: 140,),
-                                Text("Location Owner",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
+                                Text("Manufacturers Serial No.",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
+                                SizedBox(width: 205,),
+                                Text("Nominal Size",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
+                                SizedBox(width: 290,),
+                                Text("Minimum",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
+
                               ]
 
                           ),
@@ -384,56 +383,42 @@ class _add_GaugeState extends State<add_Gauge> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              TestPickerWidget(selectedDate1),
-                              SizedBox(width: 20,),
-                              TestPickerWidget(selectedDate2),
-                              SizedBox(width: 20,),
+                              Container(
+                                width: 300,
+                                height:50.0,
+                                child: TextField(
+                                  //controller: certificate_number,
+                                  decoration: InputDecoration(
+                                    labelText: "Serial Number",
+                                    border: OutlineInputBorder(),
+
+                                  ),),
+                              ),
+                              SizedBox(width: 100,),
+                              Container(
+                                width: 300,
+                                height:50.0,
+                                child: TextField(
+                                  //controller: certificate_number,
+                                  decoration: InputDecoration(
+                                    labelText: "Nominal Size",
+                                    border: OutlineInputBorder(),
+
+                                  ),),
+                              ),
+                              SizedBox(width: 100,),
                               Container(
                                 width: 300,
                                 height:50.0,
                                 child: TextField(
                                   controller: certificate_number,
                                   decoration: InputDecoration(
-                                    labelText: "Certificate Number",
+                                    labelText: "Minimum",
                                     border: OutlineInputBorder(),
 
                                   ),),
                               ),
 
-                              SizedBox(width: 20,),
-                              Container(
-                                width: 300,
-                                padding: EdgeInsets.symmetric(vertical: 5.0,horizontal: 10.0),
-                                decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.grey),
-                                  borderRadius: BorderRadius.circular(5.0),
-                                ),
-                                child: DropdownButton(
-                                  hint: Text('Please choose a Location owner'), // Not necessary for Option 1
-                                  value: _selected_location_owner,
-                                  onChanged: (newValue) {
-                                    setState(() {
-                                      _selected_location_owner = newValue;
-                                    });
-
-                                    Fluttertoast.showToast(
-                                        msg: _selected_location_owner,
-                                        toastLength: Toast.LENGTH_SHORT,
-                                        gravity: ToastGravity.CENTER,
-                                        timeInSecForIosWeb: 1,
-                                        backgroundColor: Colors.red,
-                                        textColor: Colors.white,
-                                        fontSize: 16.0
-                                    );
-                                  },
-                                  items: _location_owner.map((location) {
-                                    return DropdownMenuItem(
-                                      child: new Text(location),
-                                      value: location,
-                                    );
-                                  }).toList(),
-                                ),
-                              ),
                             ],
                           ),
 
@@ -442,13 +427,11 @@ class _add_GaugeState extends State<add_Gauge> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Text("Go",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
-                              SizedBox(width: 310,),
-                              Text("No Go",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
-                              SizedBox(width: 270,),
-                              Text("Frequency",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
-                              SizedBox(width: 230,),
-                              Text("Caliberated On",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
+                              Text("Maximum",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
+                              SizedBox(width: 320,),
+                              Text("Gauge/Instrument Make",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
+                              SizedBox(width: 210,),
+                              Text("Gauge/Instrument Cost (INR)",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
 
                             ],
 
@@ -459,67 +442,44 @@ class _add_GaugeState extends State<add_Gauge> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               //createSizes(),
+
+                              Container(
+                                width: 300,
+                                height:50.0,
+                                child: TextField(
+                                  controller: certificate_number,
+                                  decoration: InputDecoration(
+                                    labelText: "Maximum",
+                                    border: OutlineInputBorder(),
+
+                                  ),),
+                              ),
+                              SizedBox(width: 100,),
                           Container(
                           width: 300,
                             height:50.0,
                             child: TextField(
                               controller: go_size,
                               decoration: InputDecoration(
-                                labelText: " Go size",
+                                labelText: "Instrument Make",
                                 border: OutlineInputBorder(),
 
                               ),),
                           ),
-                              SizedBox(width: 30,),
+                              SizedBox(width: 100,),
                               Container(
                                 width: 300,
                                 height:50.0,
                                 child: TextField(
                                   controller: no_go_size,
                                   decoration: InputDecoration(
-                                    labelText: "No Go size",
+                                    labelText: "Instrument Cost",
                                     border: OutlineInputBorder(),
 
                                   ),),
                               ),
 
-                              SizedBox(width: 30,),
-                              Container(
-                                width: 300,
-                                padding: EdgeInsets.symmetric(vertical: 5.0,horizontal: 10.0),
-                                decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.grey),
-                                  borderRadius: BorderRadius.circular(5.0),
-                                ),
-                                child: DropdownButton(
-                                  hint: Text('Please choose Frequency'), // Not necessary for Option 1
-                                  value: _selected_frequency,
-                                  onChanged: (newValue) {
-                                    setState(() {
-                                      _selected_frequency = newValue;
-                                    });
 
-                                    Fluttertoast.showToast(
-                                        msg: _selected_frequency,
-                                        toastLength: Toast.LENGTH_SHORT,
-                                        gravity: ToastGravity.CENTER,
-                                        timeInSecForIosWeb: 1,
-                                        backgroundColor: Colors.red,
-                                        textColor: Colors.white,
-                                        fontSize: 16.0
-                                    );
-                                  },
-                                  items: _frequency.map((location) {
-                                    return DropdownMenuItem(
-                                      child: new Text(location),
-                                      value: location,
-                                    );
-                                  }).toList(),
-                                ),
-                              ),
-
-                              SizedBox(width: 30,),
-                              TestPickerWidget(selectedDate3),
 
                             ],
                           ),
@@ -528,11 +488,11 @@ class _add_GaugeState extends State<add_Gauge> {
                           Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Text("Caliberation Done By",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
+                                Text("Gauge/Instrument Life (In Months)",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
                                 SizedBox(width: 130,),
-                                Text("Location",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
-                                SizedBox(width: 230,),
-                                Text("Remark",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
+                                Text("Invoice Number",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
+                                SizedBox(width: 270,),
+                                Text("Invoice Date (dd-mm-yy)",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
 
                               ]
                           ),
@@ -541,11 +501,55 @@ class _add_GaugeState extends State<add_Gauge> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              DropDown(),
-                              SizedBox(width: 30,),
                               Container(
                                 width: 300,
-                                padding: EdgeInsets.symmetric(vertical: 5.0,horizontal: 10.0),
+                                height:50.0,
+                                child: TextField(
+                                  controller: no_go_size,
+                                  decoration: InputDecoration(
+                                    labelText: "Instrument Life",
+                                    border: OutlineInputBorder(),
+
+                                  ),),
+                              ),
+
+                              SizedBox(width: 100,),
+                              Container(
+                                width: 300,
+                                height:50.0,
+                                child: TextField(
+                                  controller: no_go_size,
+                                  decoration: InputDecoration(
+                                    labelText: "Invoice Number",
+                                    border: OutlineInputBorder(),
+
+                                  ),),
+                              ),
+                              SizedBox(width: 100,),
+                              TestPickerWidget(selectedDate1),
+
+
+
+                            ],
+                          ),
+                          SizedBox(height: 20,),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text("Physical Gauge/Instrument Location",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
+                                SizedBox(width: 230,),
+
+                              ]
+                          ),
+                          SizedBox(height: 10,),
+
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                height:50.0,
+                                width: 300,
+                                padding: EdgeInsets.symmetric(vertical: 0.0,horizontal: 10.0),
                                 decoration: BoxDecoration(
                                   border: Border.all(color: Colors.grey),
                                   borderRadius: BorderRadius.circular(5.0),
@@ -577,28 +581,17 @@ class _add_GaugeState extends State<add_Gauge> {
                                 ),
                               ),
 
-                              SizedBox(width: 30,),
-                              Container(
-                                width: 300,
-                                height:50.0,
-                                child: TextField(
-                                  controller: remark,
-                                  decoration: InputDecoration(
-                                    labelText: "Remark",
-                                    border: OutlineInputBorder(),
 
-                                  ),),
-                              ),
 
                             ],
-                          ),
-
+                          )
 
                         ],
                       ),
 
                     ],
                   ),
+
                   SizedBox(height: 20,),
                   ElevatedButton(
                     child: Text("ADD DATA"),
