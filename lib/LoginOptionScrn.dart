@@ -100,33 +100,33 @@ class _LoginOptionScrnState extends State<LoginOptionScrn> {
 
                     ),
                   ),
-                  SizedBox(height: 100,),
-                  Container(
-                    width: 0.3 * MediaQuery.of(context).size.width,
-                    height:50.0,
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(backred),
-                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18.0),
-                              side: BorderSide(color: backred)
-                          ),),
-                      ),
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/viewer_login');
-                      },
-                      child: Text(
-                        " Viewer ",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-
-                    ),
-                  ),
+                  //SizedBox(height: 100,),
+                  // Container(
+                  //   width: 0.3 * MediaQuery.of(context).size.width,
+                  //   height:50.0,
+                  //   child: ElevatedButton(
+                  //     style: ButtonStyle(
+                  //       backgroundColor: MaterialStateProperty.all<Color>(backred),
+                  //       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  //         RoundedRectangleBorder(
+                  //             borderRadius: BorderRadius.circular(18.0),
+                  //             side: BorderSide(color: backred)
+                  //         ),),
+                  //     ),
+                  //     onPressed: () {
+                  //       Navigator.pushNamed(context, '/viewer_login');
+                  //     },
+                  //     child: Text(
+                  //       " Viewer ",
+                  //       style: TextStyle(
+                  //         color: Colors.white,
+                  //         fontSize: 20.0,
+                  //         fontWeight: FontWeight.bold,
+                  //       ),
+                  //     ),
+                  //
+                  //   ),
+                  // ),
                   SizedBox(height: 100,),
     ],
             ),

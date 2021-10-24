@@ -59,7 +59,7 @@ class _ShowGaugeState extends State<ShowGauge> {
     var final_number = wpp_number+"_"+manufacturer_number;
 
     FirebaseFirestore firestore = FirebaseFirestore.instance;
-    firestore.collection("Chakan")
+    await firestore.collection("Chakan")
         .doc("Gauge Types")
         .collection("All Gauges")
         .doc(gauge_name)

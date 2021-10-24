@@ -27,6 +27,17 @@ class _add_GaugeState extends State<add_Gauge> {
   var gauge_number = TextEditingController();
   var identification_number = TextEditingController();
   var remark = TextEditingController();
+  var nominal_size = TextEditingController();
+  var manufacturer_serial_number = TextEditingController();
+  var minimum = TextEditingController();
+  var maximum = TextEditingController();
+  var gauge_make = TextEditingController();
+  var gauge_cost = TextEditingController();
+  var gauge_life = TextEditingController();
+  var invoice_number = TextEditingController();
+  var item_code = TextEditingController();
+
+
   List<dynamic> _gauges = [];
   var _selected_gauges;
   List<dynamic> _frequency = [];
@@ -84,6 +95,8 @@ class _add_GaugeState extends State<add_Gauge> {
 
   }
 
+
+
   void handle_SizeChange(String? val)
   {
     setState(() {
@@ -96,8 +109,8 @@ class _add_GaugeState extends State<add_Gauge> {
   void addData()async{
     var gauge_name="snap gauge";
     var collection_name="all "+gauge_name;
-    var wpp_number = gauge_number.text.toString();
-    var manufacturer_number = identification_number.text.toString();
+    var wpp_number = identification_number.text.toString();
+    var manufacturer_number = manufacturer_serial_number.text.toString();
     var final_number = wpp_number+"_"+manufacturer_number;
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     firestore.collection("Chakan")
@@ -107,42 +120,66 @@ class _add_GaugeState extends State<add_Gauge> {
         .collection(collection_name)
         .doc(final_number)
         .set({
-      'gauge_number': gauge_number.text.toString(), // John Doe
-      'identification_number': identification_number.text.toString(), // Stokes and Sons
-      'certificate_number': certificate_number.text.toString(), // 42
-      'frequency': frequency.text.toString(),
-      'go_size':go_size.text.toString(),
-      'no_go_size':no_go_size.text.toString(),
-      'remark':remark.text.toString(),
-      'caliberated_on_date':"${selectedDate3.toLocal()}".split(' ')[0],
-      'caliberation_due_date':"${selectedDate2.toLocal()}".split(' ')[0],
-      'issued_date':"${selectedDate1.toLocal()}".split(' ')[0],
+      // 'gauge_number': gauge_number.text.toString(), // John Doe
+      // 'identification_number': identification_number.text.toString(), // Stokes and Sons
+      // 'certificate_number': certificate_number.text.toString(), // 42
+      // 'frequency': frequency.text.toString(),
+      // 'go_size':go_size.text.toString(),
+      // 'no_go_size':no_go_size.text.toString(),
+      // 'remark':remark.text.toString(),
+      // 'caliberated_on_date':"${selectedDate3.toLocal()}".split(' ')[0],
+      // 'caliberation_due_date':"${selectedDate2.toLocal()}".split(' ')[0],
+      // 'issued_date':"${selectedDate1.toLocal()}".split(' ')[0],
+
+      'item_code': item_code.text.toString(),
+      'gauge_type': _selected_gauges.toString(),
+      'identification_number': identification_number.text.toString(),
+      'manufacturer_serial_number': manufacturer_serial_number.text.toString(),
+      'nominal_size':nominal_size.text.toString(),
+      'minimum':minimum.text.toString(),
+      'maximum':maximum.text.toString(),
+      'gauge_make':gauge_make.text.toString(),
+      'gauge_cost':gauge_cost.text.toString(),
+      'gauge_life':gauge_life.text.toString(),
+      'invoice_number':invoice_number.text.toString(),
+      'invoice_date':"${selectedDate1.toLocal()}".split(' ')[0],
+      'gauge_location':_selected_location.toString()
+
     })
     //.update({'GAUGE COST':'900'})
-        .then((value) => Fluttertoast.showToast(
-        msg:  "User Added",
+        .then((value) => data_add_success()) //we can use toast msg here
+        .catchError((error) => print("Failed to add user: $error"));
+
+  }
+
+  void data_add_success(){
+    Fluttertoast.showToast(
+        msg:  "Data Added",
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.CENTER,
         timeInSecForIosWeb: 1,
         backgroundColor: Colors.red,
         textColor: Colors.white,
         fontSize: 16.0
-    )) //we can use toast msg here
-        .catchError((error) => print("Failed to add user: $error"));
+    );
+    item_code.clear();
+    //_selected_gauges = "";
+    identification_number.clear();
+    manufacturer_serial_number.clear();
+    nominal_size.clear();
+    minimum.clear();
+    maximum.clear();
+    gauge_make.clear();
+    gauge_cost.clear();
+    gauge_life.clear();
+    invoice_number.clear();
+    //selectedDate1 = DateTime
+    //_selected_location ="";
 
 
 
-    // Fluttertoast.showToast(
-    //     msg:  gauge_number.text.toString(),
-    //     toastLength: Toast.LENGTH_SHORT,
-    //     gravity: ToastGravity.CENTER,
-    //     timeInSecForIosWeb: 1,
-    //     backgroundColor: Colors.red,
-    //     textColor: Colors.white,
-    //     fontSize: 16.0
-    // );
+
   }
-
   void getGaugetype()async{
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     firestore.collection("Chakan")
@@ -308,7 +345,7 @@ class _add_GaugeState extends State<add_Gauge> {
                                 width: 300,
                                 height:50.0,
                                 child: TextField(
-                                  controller: gauge_number,
+                                  controller: item_code,
                                   decoration: InputDecoration(
                                     labelText: "Item Code",
                                     border: OutlineInputBorder(),
@@ -365,6 +402,8 @@ class _add_GaugeState extends State<add_Gauge> {
                               ),
                             ]
                           ),
+
+
                           SizedBox(height: 20,),
                           Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -387,7 +426,7 @@ class _add_GaugeState extends State<add_Gauge> {
                                 width: 300,
                                 height:50.0,
                                 child: TextField(
-                                  //controller: certificate_number,
+                                  controller: manufacturer_serial_number,
                                   decoration: InputDecoration(
                                     labelText: "Serial Number",
                                     border: OutlineInputBorder(),
@@ -399,7 +438,7 @@ class _add_GaugeState extends State<add_Gauge> {
                                 width: 300,
                                 height:50.0,
                                 child: TextField(
-                                  //controller: certificate_number,
+                                  controller: nominal_size,
                                   decoration: InputDecoration(
                                     labelText: "Nominal Size",
                                     border: OutlineInputBorder(),
@@ -411,7 +450,7 @@ class _add_GaugeState extends State<add_Gauge> {
                                 width: 300,
                                 height:50.0,
                                 child: TextField(
-                                  controller: certificate_number,
+                                  controller: minimum,
                                   decoration: InputDecoration(
                                     labelText: "Minimum",
                                     border: OutlineInputBorder(),
@@ -447,7 +486,7 @@ class _add_GaugeState extends State<add_Gauge> {
                                 width: 300,
                                 height:50.0,
                                 child: TextField(
-                                  controller: certificate_number,
+                                  controller: maximum,
                                   decoration: InputDecoration(
                                     labelText: "Maximum",
                                     border: OutlineInputBorder(),
@@ -459,7 +498,7 @@ class _add_GaugeState extends State<add_Gauge> {
                           width: 300,
                             height:50.0,
                             child: TextField(
-                              controller: go_size,
+                              controller: gauge_make,
                               decoration: InputDecoration(
                                 labelText: "Instrument Make",
                                 border: OutlineInputBorder(),
@@ -471,7 +510,7 @@ class _add_GaugeState extends State<add_Gauge> {
                                 width: 300,
                                 height:50.0,
                                 child: TextField(
-                                  controller: no_go_size,
+                                  controller: gauge_cost,
                                   decoration: InputDecoration(
                                     labelText: "Instrument Cost",
                                     border: OutlineInputBorder(),
@@ -505,7 +544,7 @@ class _add_GaugeState extends State<add_Gauge> {
                                 width: 300,
                                 height:50.0,
                                 child: TextField(
-                                  controller: no_go_size,
+                                  controller: gauge_life,
                                   decoration: InputDecoration(
                                     labelText: "Instrument Life",
                                     border: OutlineInputBorder(),
@@ -518,7 +557,7 @@ class _add_GaugeState extends State<add_Gauge> {
                                 width: 300,
                                 height:50.0,
                                 child: TextField(
-                                  controller: no_go_size,
+                                  controller: invoice_number,
                                   decoration: InputDecoration(
                                     labelText: "Invoice Number",
                                     border: OutlineInputBorder(),

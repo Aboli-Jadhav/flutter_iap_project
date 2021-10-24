@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_iap_project/Admin/Add%20gauges/AddGuage_Page.dart';
+import 'package:flutter_iap_project/Admin/Add%20gauges/addguage_page.dart';
 import 'package:flutter_iap_project/Admin/Addviewer/Add_Viewer.dart';
 import 'package:flutter_iap_project/Admin/Calibrate%20Guages/Calibrate_Gauge.dart';
-import 'package:flutter_iap_project/Admin/Calibrate%20Guages/gauge_calibrate_Details.dart';
+import 'package:flutter_iap_project/Admin/Calibrate%20Guages/gauge_calibrate_details.dart';
 import 'package:flutter_iap_project/Admin/Search%20Guages/search_gauge.dart';
 import 'package:flutter_iap_project/Profile_ad.dart';
 import 'package:flutter_iap_project/master_admin/Manage_scrap/Manage_Scrap.dart';
