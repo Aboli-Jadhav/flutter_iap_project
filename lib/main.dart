@@ -70,7 +70,6 @@ void main() {
       '/master_adminHome': (context) => master_adminHome_Page(),
 
     },
-
     home:LoginOptionScrn(),
   ));
 }
