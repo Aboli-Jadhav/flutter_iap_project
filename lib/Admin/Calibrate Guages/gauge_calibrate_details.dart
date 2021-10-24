@@ -237,7 +237,7 @@ class _gauge_search_calibrate extends State<gauge_calibrate_search>{
             ),
             onPressed: () {
 
-              Navigator.push(context,MaterialPageRoute(builder: (context) => Calibrate_Gauge(manufacturer_number: a.text,wppl_number: b.text,gauge_type: _selectedLocation,)),);
+              Navigator.push(context,MaterialPageRoute(builder: (context) => Calibrate_Gauge(manufacturer_number: a.text,wppl_number: b.text,gauge_type: _suggestion.text,)),);
               shareperferences();
               //Navigator.push(context,'/showgauge');
             },
