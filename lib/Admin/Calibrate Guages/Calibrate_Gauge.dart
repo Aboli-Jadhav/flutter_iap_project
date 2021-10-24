@@ -8,10 +8,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Calibrate_Gauge extends StatefulWidget{
-  final String wppl_number;
-  final String manufacturer_number;
-  final String gauge_type;
-  const Calibrate_Gauge({Key? key, required this.wppl_number,required this.manufacturer_number,required this.gauge_type}) : super(key: key);
+  const Calibrate_Gauge({Key? key}) : super(key: key);
 
   _calibrate_gauge createState()=> _calibrate_gauge();
 }
@@ -24,6 +21,9 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
   DateTime selectedDate2 = DateTime.now();
   DateTime selectedDate3 = DateTime.now();
 
+  late final String wppl_number;
+  late final String manufacturer_number;
+  late final String gauge_type;
      getdata_sharedperefrence() async {
        SharedPreferences claibratedata = await SharedPreferences.getInstance();
        claibratedata .getString('gauge_type');
