@@ -104,10 +104,10 @@ class _gauge_search_calibrate extends State<gauge_calibrate_search>{
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: 500.0),
+            margin: const EdgeInsets.symmetric(horizontal: 550.0),
             width: 500,
-            height:50.0,
-            child:const Text("WPPL Gauge Number  ", style: TextStyle(color: Colors.black,fontSize: 23),
+            height:50,
+            child:Text( " WPPL Gauge Number  " , style: TextStyle(color: Colors.black,fontSize: 23),
               textAlign: TextAlign.center,  ),
           ),
 
@@ -128,71 +128,71 @@ class _gauge_search_calibrate extends State<gauge_calibrate_search>{
 
           SizedBox(height: 30.0,),
 
-          Container(
-            width: 0.3 * MediaQuery.of(context).size.width,
-            height:50.0,
-            child:const  Text("GAUGE TYPE", style: TextStyle(color: Colors.black,fontSize: 23),
-              textAlign: TextAlign.center,  ),
-          ),
-
-          SizedBox(height: 1.0,),
-
-          //DropDown(),
           // Container(
           //   width: 0.3 * MediaQuery.of(context).size.width,
-          //   padding: EdgeInsets.symmetric(vertical: 5.0,horizontal: 10.0),
-          //   decoration: BoxDecoration(
-          //     border: Border.all(color: Colors.grey),
-          //     borderRadius: BorderRadius.circular(5.0),
-          //   ),
-          //   child: DropdownButton(
+          //   height:50.0,
+          //   child:const  Text("GAUGE TYPE", style: TextStyle(color: Colors.black,fontSize: 23),
+          //     textAlign: TextAlign.center,  ),
+          // ),
           //
-          //     hint: Text('Please choose a gauge type'), // Not necessary for Option 1
-          //     value: _selectedLocation,
-          //     onChanged: (newValue) {
-          //       setState(() {
-          //         _selectedLocation = newValue;
-          //       });
+          // SizedBox(height: 1.0,),
           //
-          //       Fluttertoast.showToast(
-          //           msg: _selectedLocation,
-          //           toastLength: Toast.LENGTH_SHORT,
-          //           gravity: ToastGravity.CENTER,
-          //           timeInSecForIosWeb: 1,
-          //           backgroundColor: Colors.red,
-          //           textColor: Colors.white,
-          //           fontSize: 16.0
-          //       );
-          //     },
-          //     items: _locations.map((location) {
-          //       return DropdownMenuItem(
-          //         child: new Text(location),
-          //         value: location,
-          //       );
-          //     }).toList(),
+          // //DropDown(),
+          // // Container(
+          // //   width: 0.3 * MediaQuery.of(context).size.width,
+          // //   padding: EdgeInsets.symmetric(vertical: 5.0,horizontal: 10.0),
+          // //   decoration: BoxDecoration(
+          // //     border: Border.all(color: Colors.grey),
+          // //     borderRadius: BorderRadius.circular(5.0),
+          // //   ),
+          // //   child: DropdownButton(
+          // //
+          // //     hint: Text('Please choose a gauge type'), // Not necessary for Option 1
+          // //     value: _selectedLocation,
+          // //     onChanged: (newValue) {
+          // //       setState(() {
+          // //         _selectedLocation = newValue;
+          // //       });
+          // //
+          // //       Fluttertoast.showToast(
+          // //           msg: _selectedLocation,
+          // //           toastLength: Toast.LENGTH_SHORT,
+          // //           gravity: ToastGravity.CENTER,
+          // //           timeInSecForIosWeb: 1,
+          // //           backgroundColor: Colors.red,
+          // //           textColor: Colors.white,
+          // //           fontSize: 16.0
+          // //       );
+          // //     },
+          // //     items: _locations.map((location) {
+          // //       return DropdownMenuItem(
+          // //         child: new Text(location),
+          // //         value: location,
+          // //       );
+          // //     }).toList(),
+          // //   ),
+          // // ),
+          // Container(
+          //   width: 0.3 * MediaQuery.of(context).size.width,
+          //   child: SimpleAutoCompleteTextField(
+          //     key: key,
+          //     controller: _suggestion,
+          //     clearOnSubmit: false,
+          //     suggestions: gauge_type,
+          //     style: const TextStyle(color: Colors.black, fontSize: 16.0),
+          //     decoration: InputDecoration(
+          //         border: OutlineInputBorder(
+          //           borderRadius: BorderRadius.circular(10.0),
+          //         )
+          //     ),
+          //     textChanged: (text)=> currentText=text,
+          //     textSubmitted: (text) => setState(() {
+          //       if (text != "") {
+          //         added.add(text);
+          //       }
+          //     }),
           //   ),
           // ),
-          Container(
-            width: 0.3 * MediaQuery.of(context).size.width,
-            child: SimpleAutoCompleteTextField(
-              key: key,
-              controller: _suggestion,
-              clearOnSubmit: false,
-              suggestions: gauge_type,
-              style: const TextStyle(color: Colors.black, fontSize: 16.0),
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  )
-              ),
-              textChanged: (text)=> currentText=text,
-              textSubmitted: (text) => setState(() {
-                if (text != "") {
-                  added.add(text);
-                }
-              }),
-            ),
-          ),
 
           // SizedBox(height: 30,),
 
