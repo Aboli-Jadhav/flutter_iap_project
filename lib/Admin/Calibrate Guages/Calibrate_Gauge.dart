@@ -22,9 +22,9 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
   DateTime selectedDate3 = DateTime.now();
 
   late final String wppl_number;
-  late final String manufacturer_number;
   late final String gauge_type;
-     getdata_sharedperefrence() async {
+
+  getdata_sharedperefrence() async {
        SharedPreferences claibratedata = await SharedPreferences.getInstance();
        claibratedata .getString('gauge_type');
        claibratedata .getString('gauge_manufacturer_id_number');
@@ -104,55 +104,55 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
     });
   }
 
-  void addData()async{
-    var gauge_name="snap gauge";
-    var collection_name="all "+gauge_name;
-    var wpp_number = gauge_number.text.toString();
-    var manufacturer_number = identification_number.text.toString();
-    var final_number = wpp_number+"_"+manufacturer_number;
-    FirebaseFirestore firestore = FirebaseFirestore.instance;
-    firestore.collection("Chakan")
-        .doc("Gauge Types")
-        .collection("All Gauges")
-        .doc(gauge_name)
-        .collection(collection_name)
-        .doc(final_number)
-        .set({
-      'gauge_number': gauge_number.text.toString(), // John Doe
-      'identification_number': identification_number.text.toString(), // Stokes and Sons
-      'certificate_number': certificate_number.text.toString(), // 42
-      'frequency': frequency.text.toString(),
-      'go_size':go_size.text.toString(),
-      'no_go_size':no_go_size.text.toString(),
-      'remark':remark.text.toString(),
-      'caliberated_on_date':"${selectedDate3.toLocal()}".split(' ')[0],
-      'caliberation_due_date':"${selectedDate2.toLocal()}".split(' ')[0],
-      'issued_date':"${selectedDate1.toLocal()}".split(' ')[0],
-    })
-    //.update({'GAUGE COST':'900'})
-        .then((value) => Fluttertoast.showToast(
-        msg:  "User Added",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0
-    )) //we can use toast msg here
-        .catchError((error) => print("Failed to add user: $error"));
-
-
-
-    // Fluttertoast.showToast(
-    //     msg:  gauge_number.text.toString(),
-    //     toastLength: Toast.LENGTH_SHORT,
-    //     gravity: ToastGravity.CENTER,
-    //     timeInSecForIosWeb: 1,
-    //     backgroundColor: Colors.red,
-    //     textColor: Colors.white,
-    //     fontSize: 16.0
-    // );
-  }
+  // void addData()async{
+  //   var gauge_name="snap gauge";
+  //   var collection_name="all "+gauge_name;
+  //   var wpp_number = gauge_number.text.toString();
+  //   var manufacturer_number = identification_number.text.toString();
+  //   var final_number = wpp_number+"_"+manufacturer_number;
+  //   FirebaseFirestore firestore = FirebaseFirestore.instance;
+  //   firestore.collection("Chakan")
+  //       .doc("Gauge Types")
+  //       .collection("All Gauges")
+  //       .doc(gauge_name)
+  //       .collection(collection_name)
+  //       .doc(final_number)
+  //       .set({
+  //     'gauge_number': gauge_number.text.toString(), // John Doe
+  //     'identification_number': identification_number.text.toString(), // Stokes and Sons
+  //     'certificate_number': certificate_number.text.toString(), // 42
+  //     'frequency': frequency.text.toString(),
+  //     'go_size':go_size.text.toString(),
+  //     'no_go_size':no_go_size.text.toString(),
+  //     'remark':remark.text.toString(),
+  //     'caliberated_on_date':"${selectedDate3.toLocal()}".split(' ')[0],
+  //     'caliberation_due_date':"${selectedDate2.toLocal()}".split(' ')[0],
+  //     'issued_date':"${selectedDate1.toLocal()}".split(' ')[0],
+  //   })
+  //   //.update({'GAUGE COST':'900'})
+  //       .then((value) => Fluttertoast.showToast(
+  //       msg:  "User Added",
+  //       toastLength: Toast.LENGTH_SHORT,
+  //       gravity: ToastGravity.CENTER,
+  //       timeInSecForIosWeb: 1,
+  //       backgroundColor: Colors.red,
+  //       textColor: Colors.white,
+  //       fontSize: 16.0
+  //   )) //we can use toast msg here
+  //       .catchError((error) => print("Failed to add user: $error"));
+  //
+  //
+  //
+  //   // Fluttertoast.showToast(
+  //   //     msg:  gauge_number.text.toString(),
+  //   //     toastLength: Toast.LENGTH_SHORT,
+  //   //     gravity: ToastGravity.CENTER,
+  //   //     timeInSecForIosWeb: 1,
+  //   //     backgroundColor: Colors.red,
+  //   //     textColor: Colors.white,
+  //   //     fontSize: 16.0
+  //   // );
+  // }
 
   void getGaugetype()async{
     FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -250,6 +250,14 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
 
   }
 
+
+  void calibrate_gauge_data(){
+
+
+
+
+
+  }
 
 
 
@@ -604,9 +612,9 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                   ),
                   SizedBox(height: 20,),
                   ElevatedButton(
-                    child: Text("ADD DATA"),
+                    child: Text("CALIBRATE DATA"),
                     onPressed: () {
-                      addData();
+                      // addData();
                     },
                     style: ElevatedButton.styleFrom(
                         primary: Colors.red,

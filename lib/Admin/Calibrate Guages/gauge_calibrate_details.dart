@@ -38,7 +38,7 @@ class _gauge_search_calibrate extends State<gauge_calibrate_search>{
   ];
 
   var a = TextEditingController();
-  var b = TextEditingController();
+  // var b = TextEditingController();
 
   // List<String> _locations = ['A', 'B', 'C', 'D']; // Option 2
   var _selectedLocation;
@@ -46,23 +46,13 @@ class _gauge_search_calibrate extends State<gauge_calibrate_search>{
 
   List<String> _locations=[];// Option 2
 
-  @override
-  void initState(){
-    // TODO: implement initState
-    super.initState();
-    a.text = "1201-35-1";
-    b.text = "WPP-SG-15";
 
-    //getGaugetype();
-    //print("initlist: $_locations ");
-  }
 
   Future<void> shareperferences() async {
 
     SharedPreferences claibratedata = await SharedPreferences.getInstance();
-    claibratedata .setString('gauge_type', _selectedLocation);
-    claibratedata .setString('gauge_manufacturer_id_number', a.text);
-    claibratedata .setString('wppl_gauge_id_number', b.text);
+    claibratedata .setString('Gauge Type', _suggestion.text);
+    claibratedata .setString('Item Code', a.text);
   }
 
   void getGaugetype() {
@@ -117,7 +107,7 @@ class _gauge_search_calibrate extends State<gauge_calibrate_search>{
             margin: const EdgeInsets.symmetric(horizontal: 500.0),
             width: 500,
             height:50.0,
-            child:const Text("Manufacture Identification number ", style: TextStyle(color: Colors.black,fontSize: 23),
+            child:const Text("WPPL Gauge Number  ", style: TextStyle(color: Colors.black,fontSize: 23),
               textAlign: TextAlign.center,  ),
           ),
 
@@ -129,8 +119,8 @@ class _gauge_search_calibrate extends State<gauge_calibrate_search>{
             child: TextField(
               controller: a,
               decoration:  InputDecoration(
-                hintText: "Enter Manufacture Identification number",
-                labelText: " Manufacture Identification number",
+                hintText: "Enter WPPL GAUGE NUMBER",
+                labelText: "WPPL GAUGE NUMBER",
                 border: OutlineInputBorder(),
 
               ),),
@@ -204,34 +194,16 @@ class _gauge_search_calibrate extends State<gauge_calibrate_search>{
             ),
           ),
 
-          SizedBox(height: 30,),
+          // SizedBox(height: 30,),
 
-          Container(
-            width: 0.3 * MediaQuery.of(context).size.width,
-            height:50.0,
 
-            child : Text("GAUGE NUMBER",
-              style: TextStyle(color: Colors.black,fontSize: 23),
-              textAlign: TextAlign.center,
-            ),),
 
-          Container(
-            width: 0.3 * MediaQuery.of(context).size.width,
-            height:50.0,
-            child: TextField(
-              controller: b,
-              decoration: InputDecoration(
-                labelText: ("GAUGE NUMBER"),
-                hintText:  ("ENTER GAUGE NUMBER"),
-                border: OutlineInputBorder(),
-              ),
-            ),
-          ),
+
 
           SizedBox(height: 30,),
 
           ElevatedButton(
-            child: Text("Search gauge"),
+            child: Text("Calibrate Gauge"),
             style: ElevatedButton.styleFrom(
               primary: Colors.red,
             ),
