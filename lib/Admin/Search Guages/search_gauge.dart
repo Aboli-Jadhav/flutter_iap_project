@@ -189,7 +189,7 @@ class _SREACH_GAUGE extends State<search_gauge>{
        Color lred=Color(0xffFBEBEB);
        Widget build(BuildContext context){
             return Container(
-             child: Scaffold(
+              child: Scaffold(
                  // appBar: AppBar(
                  //    toolbarHeight: 60.0,
                  //        backgroundColor: backred,
@@ -200,121 +200,126 @@ class _SREACH_GAUGE extends State<search_gauge>{
                  //               fontWeight: FontWeight.bold,
                  //        ),),
                  // ),
-             body: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 500.0),
-                        width: 500,
-                        height:50.0,
-                        child: Text("Manufacture Identification number ", style: TextStyle(color: Colors.black,fontSize: 23),
-                          textAlign: TextAlign.center,  ),
-                      ),
+             body: Row(
+               children: [
+                 SizedBox(width: 0.35 * MediaQuery.of(context).size.width,),
+                 Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          // Container(
+                          //   margin: EdgeInsets.symmetric(horizontal: 500.0),
+                          //   width: 500,
+                          //   height:50.0,
+                          //   child: Text("Manufacture Identification number ", style: TextStyle(color: Colors.black,fontSize: 23),
+                          //     textAlign: TextAlign.center,  ),
+                          // ),
+                          //
+                          // SizedBox(height:1.0,),
+                          //
+                          // Container(
+                          //   width: 0.3 * MediaQuery.of(context).size.width,
+                          //   height:50.0,
+                          //   child: TextField(
+                          //     controller: a,
+                          //     decoration: InputDecoration(
+                          //       hintText: "Enter Manufacture Identification number",
+                          //       labelText: " Manufacture Identification number",
+                          //       border: OutlineInputBorder(),
+                          //
+                          //     ),),
+                          // ),
+                          //
+                          // SizedBox(height: 30.0,),
+                          //
+                          // Container(
+                          //   width: 0.3 * MediaQuery.of(context).size.width,
+                          //   height:50.0,
+                          //   child: Text("GAUGE TYPE", style: TextStyle(color: Colors.black,fontSize: 23),
+                          //     textAlign: TextAlign.center,  ),
+                          // ),
+                          //
+                          // SizedBox(height: 1.0,),
+                          //
+                          // //DropDown(),
+                          // Container(
+                          //   width: 0.3 * MediaQuery.of(context).size.width,
+                          //   padding: EdgeInsets.symmetric(vertical: 5.0,horizontal: 10.0),
+                          //   decoration: BoxDecoration(
+                          //     border: Border.all(color: Colors.grey),
+                          //     borderRadius: BorderRadius.circular(5.0),
+                          //   ),
+                          //   child: DropdownButton(
+                          //
+                          //     hint: Text('Please choose a gauge type'), // Not necessary for Option 1
+                          //     value: _selectedLocation,
+                          //     onChanged: (newValue) {
+                          //       setState(() {
+                          //         _selectedLocation = newValue;
+                          //       });
+                          //
+                          //       Fluttertoast.showToast(
+                          //           msg: _selectedLocation,
+                          //           toastLength: Toast.LENGTH_SHORT,
+                          //           gravity: ToastGravity.CENTER,
+                          //           timeInSecForIosWeb: 1,
+                          //           backgroundColor: Colors.red,
+                          //           textColor: Colors.white,
+                          //           fontSize: 16.0
+                          //       );
+                          //     },
+                          //     items: _locations.map((location) {
+                          //       return DropdownMenuItem(
+                          //         child: new Text(location),
+                          //         value: location,
+                          //       );
+                          //     }).toList(),
+                          //   ),
+                          // ),
+                          //
+                          SizedBox(height: 30,),
 
-                      SizedBox(height:1.0,),
-
-                      Container(
-                        width: 0.3 * MediaQuery.of(context).size.width,
-                        height:50.0,
-                        child: TextField(
-                          controller: a,
-                          decoration: InputDecoration(
-                            hintText: "Enter Manufacture Identification number",
-                            labelText: " Manufacture Identification number",
-                            border: OutlineInputBorder(),
-
-                          ),),
-                      ),
-
-                      SizedBox(height: 30.0,),
-
-                      Container(
-                        width: 0.3 * MediaQuery.of(context).size.width,
-                        height:50.0,
-                        child: Text("GAUGE TYPE", style: TextStyle(color: Colors.black,fontSize: 23),
-                          textAlign: TextAlign.center,  ),
-                      ),
-
-                      SizedBox(height: 1.0,),
-
-                      //DropDown(),
-                      Container(
-                        width: 0.3 * MediaQuery.of(context).size.width,
-                        padding: EdgeInsets.symmetric(vertical: 5.0,horizontal: 10.0),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey),
-                          borderRadius: BorderRadius.circular(5.0),
-                        ),
-                        child: DropdownButton(
-
-                          hint: Text('Please choose a gauge type'), // Not necessary for Option 1
-                          value: _selectedLocation,
-                          onChanged: (newValue) {
-                            setState(() {
-                              _selectedLocation = newValue;
-                            });
-
-                            Fluttertoast.showToast(
-                                msg: _selectedLocation,
-                                toastLength: Toast.LENGTH_SHORT,
-                                gravity: ToastGravity.CENTER,
-                                timeInSecForIosWeb: 1,
-                                backgroundColor: Colors.red,
-                                textColor: Colors.white,
-                                fontSize: 16.0
-                            );
-                          },
-                          items: _locations.map((location) {
-                            return DropdownMenuItem(
-                              child: new Text(location),
-                              value: location,
-                            );
-                          }).toList(),
-                        ),
-                      ),
-
-                      SizedBox(height: 30,),
-
-                      Container(
-                        width: 0.3 * MediaQuery.of(context).size.width,
-                        height:50.0,
+                          Container(
+                            width: 0.3 * MediaQuery.of(context).size.width,
+                            height:50.0,
 
 
-                        child : Text("GAUGE NUMBER",
-                          style: TextStyle(color: Colors.black,fontSize: 23),
-                          textAlign: TextAlign.center,
-                        ),),
+                            child : Text("WPPL GAUGE NUMBER",
+                              style: TextStyle(color: Colors.black,fontSize: 23),
+                              textAlign: TextAlign.center,
+                            ),),
 
-                      Container(
-                        width: 0.3 * MediaQuery.of(context).size.width,
-                        height:50.0,
-                        child: TextField(
-                          controller: b,
-                          decoration: InputDecoration(
-                            labelText: ("GAUGE NUMBER"),
-                            hintText:  ("ENTER GAUGE NUMBER"),
-                            border: OutlineInputBorder(),
+                          Container(
+                            width: 0.3 * MediaQuery.of(context).size.width,
+                            height:50.0,
+                            child: TextField(
+                              controller: b,
+                              decoration: InputDecoration(
+                                labelText: ("GAUGE NUMBER"),
+                                hintText:  ("ENTER GAUGE NUMBER"),
+                                border: OutlineInputBorder(),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
 
-                      SizedBox(height: 30,),
+                          SizedBox(height: 30,),
 
-                      ElevatedButton(
-                        child: Text("Search gauge"),
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.red,
-                        ),
-                        onPressed: () {
-                          submittoFirestore();
-                          Navigator.push(context,MaterialPageRoute(builder: (context) => ShowGauge(manufacturer_number: a.text,wppl_number: b.text,gauge_type: _selectedLocation,)),);
-                          //Navigator.push(context,'/showgauge');
-                        },
-                      )
+                          ElevatedButton(
+                            child: Text("Search gauge"),
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.red,
+                            ),
+                            onPressed: () {
+                              submittoFirestore();
+                              Navigator.push(context,MaterialPageRoute(builder: (context) => ShowGauge(manufacturer_number: a.text,wppl_number: b.text,gauge_type: _selectedLocation,)),);
+                              //Navigator.push(context,'/showgauge');
+                            },
+                          )
 
-                    ],
+                        ],
 
+                 ),
+               ],
              ),
              ),
 
