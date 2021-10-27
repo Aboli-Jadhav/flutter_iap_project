@@ -104,10 +104,10 @@ class _gauge_search_calibrate extends State<gauge_calibrate_search>{
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: 550.0),
+            margin: const EdgeInsets.symmetric(horizontal: 500.0),
             width: 500,
             height:50,
-            child:Text( " WPPL Gauge Number  " , style: TextStyle(color: Colors.black,fontSize: 23),
+            child:Text( " WPPL Identification Gauge Number  " , style: TextStyle(color: Colors.black,fontSize: 22),
               textAlign: TextAlign.center,  ),
           ),
 
@@ -120,7 +120,7 @@ class _gauge_search_calibrate extends State<gauge_calibrate_search>{
               controller: a,
               decoration:  InputDecoration(
                 hintText: "Enter WPPL GAUGE NUMBER",
-                labelText: "WPPL GAUGE NUMBER",
+                labelText: "WPPL Identification Gauge Number",
                 border: OutlineInputBorder(),
 
               ),),

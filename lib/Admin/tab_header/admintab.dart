@@ -17,9 +17,10 @@ class _admin_tab_headState extends State<admin_tab_head>{
   Widget build(BuildContext){
     return DefaultTabController(length: 7, child: Scaffold(
       appBar: AppBar(
-        toolbarHeight:50,
+        toolbarHeight:0,
         backgroundColor: Colors.redAccent,
         elevation: 0,
+        automaticallyImplyLeading: false,
         bottom: TabBar(
           isScrollable: false,
           labelColor: Colors.redAccent,

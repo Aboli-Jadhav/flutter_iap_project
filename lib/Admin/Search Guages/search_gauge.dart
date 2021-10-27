@@ -200,7 +200,7 @@ class _SREACH_GAUGE extends State<search_gauge>{
                  //               fontWeight: FontWeight.bold,
                  //        ),),
                  // ),
-             body: Row(
+              body: Row(
                children: [
                  SizedBox(width: 0.35 * MediaQuery.of(context).size.width,),
                  Column(
@@ -284,7 +284,7 @@ class _SREACH_GAUGE extends State<search_gauge>{
                             height:50.0,
 
 
-                            child : Text("WPPL GAUGE NUMBER",
+                            child : Text("WPPL Gauge Identification Number",
                               style: TextStyle(color: Colors.black,fontSize: 23),
                               textAlign: TextAlign.center,
                             ),),
@@ -296,7 +296,7 @@ class _SREACH_GAUGE extends State<search_gauge>{
                               controller: b,
                               decoration: InputDecoration(
                                 labelText: ("GAUGE NUMBER"),
-                                hintText:  ("ENTER GAUGE NUMBER"),
+                                hintText:  ("Enter Gauge Number"),
                                 border: OutlineInputBorder(),
                               ),
                             ),

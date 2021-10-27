@@ -470,7 +470,7 @@ class _add_GaugeState extends State<add_Gauge> {
                               SizedBox(width: 320,),
                               Text("Gauge/Instrument Make",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
                               SizedBox(width: 210,),
-                              Text("Gauge/Instrument Cost (INR)",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
+                              Text("Gauge Manufacturing Cost (INR)",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
 
                             ],
 

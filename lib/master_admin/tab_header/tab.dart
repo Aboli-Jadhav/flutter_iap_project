@@ -19,9 +19,10 @@ class _tab_headState extends State<tab_head> {
         length: 6,
         child: Scaffold(
           appBar: AppBar(
-            toolbarHeight: 50,
+            toolbarHeight: 0,
             backgroundColor: Colors.redAccent,
             elevation: 0,
+            automaticallyImplyLeading: false,
             bottom: TabBar(
                 isScrollable: false,
                 labelColor: Colors.redAccent,

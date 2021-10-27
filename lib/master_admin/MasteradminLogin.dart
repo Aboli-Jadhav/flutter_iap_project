@@ -26,13 +26,12 @@ class _master_adminLoginState extends State<master_adminLogin> {
       Container(
       child: Scaffold(
             appBar: AppBar(
-              toolbarHeight: 60,
+              toolbarHeight: 50,
                 backgroundColor: backred,
                 title: Text("Windals Precision Ltd",
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 50.0,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 35.0,
 
                   ),
                 ),

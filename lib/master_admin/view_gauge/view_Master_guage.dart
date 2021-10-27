@@ -30,9 +30,11 @@ class _view_master_gauState extends State<view_master_gau> {
                   Row(
                     children:[
                       gauge_desc(),
-                      SizedBox(width: 30,),
+                      SizedBox(width: 15,),
                       gauge_desc(),
-                      SizedBox(width: 30,),
+                      SizedBox(width: 15,),
+                      gauge_desc(),
+                      SizedBox(width: 15,),
                       gauge_desc(),
                     ]
                   ),
@@ -40,9 +42,11 @@ class _view_master_gauState extends State<view_master_gau> {
                   Row(
                     children:[
                       gauge_desc(),
-                      SizedBox(width: 30,),
+                      SizedBox(width: 15,),
                       gauge_desc(),
-                      SizedBox(width: 30,),
+                      SizedBox(width: 15,),
+                      gauge_desc(),
+                      SizedBox(width: 15,),
                       gauge_desc(),
                     ]
                   )

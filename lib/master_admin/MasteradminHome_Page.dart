@@ -18,7 +18,7 @@ class _master_adminHome_PageState extends State<master_adminHome_Page> {
     return Container(
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: 60,
+          toolbarHeight: 45,
           backgroundColor: backred,
           title: Text("Windals Precision Ltd.",
             style: TextStyle(

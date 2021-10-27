@@ -440,11 +440,11 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Text("Caliberation Agency Name",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
-                              SizedBox(width: 190,),
-                              Text("Caliberation Date",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
-                              SizedBox(width: 270,),
-                              Text("Frequency (In Months)",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
+                              Text("Calibration Agency Name",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
+                              SizedBox(width: 200,),
+                              Text("Calibration Date (dd/mm/yy)",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
+                              SizedBox(width: 180,),
+                              Text("Calibration Frequency (In Days)",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
 
                             ],
 

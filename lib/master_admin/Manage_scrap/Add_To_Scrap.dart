@@ -131,7 +131,7 @@ class _AddToScrapState extends State<AddToScrap> {
                           height:40.0,
 
 
-                          child : Text("Instrument Identification NUMBER",
+                          child : Text("Instrument Identification Number",
                             style: TextStyle(color: Colors.black,fontSize: 23),
                             textAlign: TextAlign.center,
                           ),),
@@ -140,8 +140,8 @@ class _AddToScrapState extends State<AddToScrap> {
                           height:40.0,
                           child: TextField(
                             decoration: InputDecoration(
-                              labelText: ("Instrument Identification NUMBER"),
-                              hintText:  ("ENTER Instrument Identification NUMBER"),
+                              labelText: ("Instrument Identification Number"),
+                              hintText:  ("Enter Instrument Identification Number"),
                               border: OutlineInputBorder(),
                             ),
                           ),

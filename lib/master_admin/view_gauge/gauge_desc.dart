@@ -12,26 +12,30 @@ class _gauge_descState extends State<gauge_desc> {
     return Card(
         shape: RoundedRectangleBorder(
           side: BorderSide(color: Colors.red, width: 0.5),
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(8),
 
         ),
         color: Colors.grey[300],
         elevation: 8.0,
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(4.0),
           child: Container(
 
-              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
               height: 170,
-              width: 350,
+              width: 280,
               child:  Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Gauge Number : WP36473647364",style: TextStyle(fontSize: 20),),
-                SizedBox(height: 30,),
-                Text("Due Date : 18/02/2021",style: TextStyle(fontSize: 20),),
-                SizedBox(height: 30,),
-                Text("Location : Workshop 2",style: TextStyle(fontSize: 20),),
+                Text("Gauge ID No. : WP36473647364",style: TextStyle(fontSize: 15),),
+                SizedBox(height: 12,),
+                Text("Gauge Type : Type A",style: TextStyle(fontSize: 15),),
+                SizedBox(height: 12,),
+                Text("Gauge Size : 3",style: TextStyle(fontSize: 15),),
+                SizedBox(height: 12,),
+                Text("Due Date : 01/01/2021",style: TextStyle(fontSize: 15),),
+                SizedBox(height: 12,),
+                Text("Location : Pune",style: TextStyle(fontSize: 15),),
               ],
               ),
           ),

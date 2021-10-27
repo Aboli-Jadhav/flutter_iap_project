@@ -28,7 +28,7 @@ class _Admin_PageState extends State<Admin_Page> {
     return Container(
       child:Scaffold(
         appBar: AppBar(
-          toolbarHeight: 30,
+          toolbarHeight: 45,
           backgroundColor: backred,
           title: Text("Windals Precision Ltd.",
             style: TextStyle(
