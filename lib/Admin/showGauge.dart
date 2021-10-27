@@ -6,10 +6,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 
 class ShowGauge extends StatefulWidget {
-  final String wppl_number;
-  final String manufacturer_number;
-  final String gauge_type;
-  const ShowGauge({Key? key, required this.wppl_number,required this.manufacturer_number,required this.gauge_type}) : super(key: key);
+  // final String wppl_number;
+  // final String manufacturer_number;
+  // final String gauge_type;
+  //const ShowGauge({Key? key, required this.wppl_number,required this.manufacturer_number,required this.gauge_type}) : super(key: key);
+  const ShowGauge({Key? key}) : super(key: key);
+
+
 
   @override
   _ShowGaugeState createState() => _ShowGaugeState();
@@ -48,64 +51,61 @@ class _ShowGaugeState extends State<ShowGauge> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    submittoFirestore();
+    //submittoFirestore();
   }
 
-  void submittoFirestore() async{
-    var gauge_name=widget.gauge_type;
-    var collection_name="all "+gauge_name;
-    var wpp_number = widget.wppl_number;
-    var manufacturer_number = widget.manufacturer_number;
-    var final_number = wpp_number+"_"+manufacturer_number;
-
-    FirebaseFirestore firestore = FirebaseFirestore.instance;
-    await firestore.collection("Chakan")
-        .doc("Gauge Types")
-        .collection("All Gauges")
-        .doc(gauge_name)
-        .collection(collection_name)
-        .doc(final_number)
-        .get().then((DocumentSnapshot documentSnapshot) {
-      if (documentSnapshot.exists) {
-        print('Document exists on the database');
-        Map<String, dynamic> data = documentSnapshot.data() as Map<String, dynamic>;
-
-        calibration_agency_name.text = data['CALIBRATION AGENCY NAME'];
-        calibration_cost.text        = data['CALIBRATION COST'];
-        calibration_date.text        = data['CALIBRATION DATE'];
-        calibration_due_date.text    = data['CALIBRATION DUE DATE'];
-        calibration_frequency.text   = data['CALIBRATION FREQUENCY'];
-        certificate_number.text      = data['CERTIFICATE NUMBER'];
-        gauge_cost.text              = data['GAUGE COST'];
-        gauge_life.text              = data['GAUGE LIFE'];
-        gauge_make.text              = data['GAUGE MAKE'];
-        gauge_manufacturer_id_number.text= data['GAUGE MANUFACTURER ID NUMBER'];
-        item_code.text               = data['ITEM CODE'];
-        maximum.text                 = data['MAXIMUM'];
-        minimum.text                 = data['MINIMUM'];
-        nabl_accrediation_status.text     = data['NABL ACCREDIATION STATUS'];
-        nominal_size.text            = data['NOMINAL SIZE'];
-        physical_location.text       = data['PHYSICAL LOCATION'];
-        plant.text                   = data['PLANT'];
-        process_owner.text           = data['PROCESS OWNER'];
-        process_owner_mail_id.text   = data['PROCESS OWNER MAIL ID'];
-        remark.text                  = data['REMARK'];
-        unit.text                    = data['UNIT'];
-        wppl_gauge_id_number.text   = data['WPPL GAUGE ID NUMBER'];
-        empty.text = "null";
-
-
-
-      }else {
-        print('Document does not exist on the database');
-      }
-    });
-
-
-
-
-
-  }
+  // void submittoFirestore() async{
+  //   var gauge_name=widget.gauge_type;
+  //   var collection_name="all "+gauge_name;
+  //   var wpp_number = widget.wppl_number;
+  //   var manufacturer_number = widget.manufacturer_number;
+  //   var final_number = wpp_number+"_"+manufacturer_number;
+  //
+  //   FirebaseFirestore firestore = FirebaseFirestore.instance;
+  //   await firestore.collection("Chakan")
+  //       .doc("Gauge Types")
+  //       .collection("All Gauges")
+  //       .doc(gauge_name)
+  //       .collection(collection_name)
+  //       .doc(final_number)
+  //       .get().then((DocumentSnapshot documentSnapshot) {
+  //     if (documentSnapshot.exists) {
+  //       print('Document exists on the database');
+  //       Map<String, dynamic> data = documentSnapshot.data() as Map<String, dynamic>;
+  //
+  //       calibration_agency_name.text = data['CALIBRATION AGENCY NAME'];
+  //       calibration_cost.text        = data['CALIBRATION COST'];
+  //       calibration_date.text        = data['CALIBRATION DATE'];
+  //       calibration_due_date.text    = data['CALIBRATION DUE DATE'];
+  //       calibration_frequency.text   = data['CALIBRATION FREQUENCY'];
+  //       certificate_number.text      = data['CERTIFICATE NUMBER'];
+  //       gauge_cost.text              = data['GAUGE COST'];
+  //       gauge_life.text              = data['GAUGE LIFE'];
+  //       gauge_make.text              = data['GAUGE MAKE'];
+  //       gauge_manufacturer_id_number.text= data['GAUGE MANUFACTURER ID NUMBER'];
+  //       item_code.text               = data['ITEM CODE'];
+  //       maximum.text                 = data['MAXIMUM'];
+  //       minimum.text                 = data['MINIMUM'];
+  //       nabl_accrediation_status.text     = data['NABL ACCREDIATION STATUS'];
+  //       nominal_size.text            = data['NOMINAL SIZE'];
+  //       physical_location.text       = data['PHYSICAL LOCATION'];
+  //       plant.text                   = data['PLANT'];
+  //       process_owner.text           = data['PROCESS OWNER'];
+  //       process_owner_mail_id.text   = data['PROCESS OWNER MAIL ID'];
+  //       remark.text                  = data['REMARK'];
+  //       unit.text                    = data['UNIT'];
+  //       wppl_gauge_id_number.text   = data['WPPL GAUGE ID NUMBER'];
+  //       empty.text = "null";
+  //
+  //
+  //
+  //     }else {
+  //       print('Document does not exist on the database');
+  //     }
+  //   });
+  //
+  //
+  // }
 
 
   @override

@@ -311,7 +311,9 @@ class _SREACH_GAUGE extends State<search_gauge>{
                             ),
                             onPressed: () {
                               submittoFirestore();
-                              Navigator.push(context,MaterialPageRoute(builder: (context) => ShowGauge(manufacturer_number: a.text,wppl_number: b.text,gauge_type: _selectedLocation,)),);
+                              //Navigator.push(context,MaterialPageRoute(builder: (context) => ShowGauge(manufacturer_number: a.text,wppl_number: b.text,gauge_type: _selectedLocation,)),);
+                              Navigator.push(context,MaterialPageRoute(builder: (context) => ShowGauge()),);
+
                               //Navigator.push(context,'/showgauge');
                             },
                           )
