@@ -531,7 +531,7 @@ class _add_GaugeState extends State<add_Gauge> {
                                 SizedBox(width: 130,),
                                 Text("Invoice Number",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
                                 SizedBox(width: 270,),
-                                Text("Invoice Date (dd-mm-yy)",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
+                                Text("Invoice Date (DD.MM.YYYY)",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
 
                               ]
                           ),

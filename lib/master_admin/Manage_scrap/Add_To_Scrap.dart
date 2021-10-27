@@ -131,7 +131,7 @@ class _AddToScrapState extends State<AddToScrap> {
                           height:40.0,
 
 
-                          child : Text("Instrument Identification Number",
+                          child : Text("Gauge/Instrument Identification No.",
                             style: TextStyle(color: Colors.black,fontSize: 23),
                             textAlign: TextAlign.center,
                           ),),
@@ -273,7 +273,7 @@ class _AddToScrapState extends State<AddToScrap> {
                           height:40.0,
 
 
-                          child : Text("Scrap Date",
+                          child : Text("Scrap Date (DD.MM.YYYY)",
                             style: TextStyle(color: Colors.black,fontSize: 23),
                             textAlign: TextAlign.center,
                           ),

@@ -442,8 +442,8 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                             children: [
                               Text("Calibration Agency Name",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
                               SizedBox(width: 200,),
-                              Text("Calibration Date (dd/mm/yy)",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
-                              SizedBox(width: 180,),
+                              Text("Calibration Date (DD.MM.YYYY)",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
+                              SizedBox(width: 150,),
                               Text("Calibration Frequency (In Days)",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
 
                             ],
@@ -512,8 +512,8 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                           Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Text("Calibration Due Date",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
-                                SizedBox(width: 250,),
+                                Text("Calibration Due Date (DD.MM.YYYY)",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
+                                SizedBox(width: 120,),
                                 Text("Calibration Cost (INR)",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
                                 SizedBox(width: 230,),
                                 Text("Remark",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),

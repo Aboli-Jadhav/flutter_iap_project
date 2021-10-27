@@ -117,7 +117,7 @@ class _ShowGaugeState extends State<ShowGauge> {
       backgroundColor: lred,
       appBar: AppBar(
         backgroundColor: backred,
-        title: Text("Gauge details"),
+        title: Text("Gauge Details"),
         centerTitle: true,
       ),
       body: Padding(
@@ -128,33 +128,16 @@ class _ShowGaugeState extends State<ShowGauge> {
             Row(
               children: [
                 Expanded(
-                    child: ShowGauge_Widget(heading: 'WPPL gauge id number',data: wppl_gauge_id_number)
+                    child: ShowGauge_Widget(heading: 'WPPL Gauge Id Number',data: wppl_gauge_id_number)
                 ),
                 Expanded(
-                    child: ShowGauge_Widget(heading: 'Calibration Agency name',data: calibration_agency_name)
+                    child: ShowGauge_Widget(heading: 'Calibration Agency Name',data: calibration_agency_name)
                 ),
                 Expanded(
-                    child: ShowGauge_Widget(heading: 'Calibration cost',data: calibration_cost)
+                    child: ShowGauge_Widget(heading: 'Calibration Cost (INR)',data: calibration_cost)
                 ),
                 Expanded(
-                    child: ShowGauge_Widget(heading: 'Calibration date',data: calibration_date)
-                ),
-              ],
-            ),
-            SizedBox(height: 20,),
-            Row(
-              children: [
-                Expanded(
-                    child: ShowGauge_Widget(heading: 'Calibration Due Date',data: calibration_due_date)
-                ),
-                Expanded(
-                    child: ShowGauge_Widget(heading: 'Calibration Frequency',data: calibration_frequency)
-                ),
-                Expanded(
-                    child: ShowGauge_Widget(heading: 'Certificate number',data: certificate_number)
-                ),
-                Expanded(
-                    child: ShowGauge_Widget(heading: 'Gauge cost',data: gauge_cost)
+                    child: ShowGauge_Widget(heading: 'Calibration Date (DD.MM.YYYY)',data: calibration_date)
                 ),
               ],
             ),
@@ -162,16 +145,33 @@ class _ShowGaugeState extends State<ShowGauge> {
             Row(
               children: [
                 Expanded(
-                    child: ShowGauge_Widget(heading: 'Gauge life',data: gauge_life)
+                    child: ShowGauge_Widget(heading: 'Calibration Due Date (DD.MM.YYYY)',data: calibration_due_date)
                 ),
                 Expanded(
-                    child: ShowGauge_Widget(heading: 'Gauge make',data: gauge_make)
+                    child: ShowGauge_Widget(heading: 'Calibration Frequency (In Days)',data: calibration_frequency)
                 ),
                 Expanded(
-                    child: ShowGauge_Widget(heading: 'Gauge manufacturer id',data: gauge_manufacturer_id_number)
+                    child: ShowGauge_Widget(heading: 'Certificate Number',data: certificate_number)
                 ),
                 Expanded(
-                    child: ShowGauge_Widget(heading: 'Item code',data: item_code)
+                    child: ShowGauge_Widget(heading: 'Gauge Manufacturing Cost (INR)',data: gauge_cost)
+                ),
+              ],
+            ),
+            SizedBox(height: 20,),
+            Row(
+              children: [
+                Expanded(
+                    child: ShowGauge_Widget(heading: 'Gauge Life (In Months)',data: gauge_life)
+                ),
+                Expanded(
+                    child: ShowGauge_Widget(heading: 'Gauge Make',data: gauge_make)
+                ),
+                Expanded(
+                    child: ShowGauge_Widget(heading: 'Gauge Manufacturer Id',data: gauge_manufacturer_id_number)
+                ),
+                Expanded(
+                    child: ShowGauge_Widget(heading: 'Unit',data: item_code)
                 ),
               ],
             ),
@@ -185,7 +185,7 @@ class _ShowGaugeState extends State<ShowGauge> {
                     child: ShowGauge_Widget(heading: 'Minimum',data: minimum)
                 ),
                 Expanded(
-                    child: ShowGauge_Widget(heading: 'NABL Accrediation status',data: nabl_accrediation_status)
+                    child: ShowGauge_Widget(heading: 'NABL Accrediation Status',data: nabl_accrediation_status)
                 ),
                 Expanded(
                     child: ShowGauge_Widget(heading: 'Nominal Size',data: nominal_size)
@@ -199,13 +199,13 @@ class _ShowGaugeState extends State<ShowGauge> {
                     child: ShowGauge_Widget(heading: 'Location',data: physical_location)
                 ),
                 Expanded(
-                    child: ShowGauge_Widget(heading: 'Plant',data: plant)
+                    child: ShowGauge_Widget(heading: 'Remark',data: plant)
                 ),
                 Expanded(
                     child: ShowGauge_Widget(heading: 'Process Owner',data: process_owner)
                 ),
                 Expanded(
-                    child: ShowGauge_Widget(heading: 'Process Owner mail id',data: process_owner_mail_id)
+                    child: ShowGauge_Widget(heading: 'Process Owner Mail Id',data: process_owner_mail_id)
                 ),
               ],
             ),
@@ -213,10 +213,10 @@ class _ShowGaugeState extends State<ShowGauge> {
             Row(
               children: [
                 Expanded(
-                    child: ShowGauge_Widget(heading: 'Remark',data: remark)
+                    child: ShowGauge_Widget(heading: 'Plant',data: remark)
                 ),
                 Expanded(
-                    child: ShowGauge_Widget(heading: 'Unit',data: unit)
+                    child: ShowGauge_Widget(heading: 'Item Code',data: unit)
                 ),
                 Expanded(
                     child: ShowGauge_WidgetEmpty()
