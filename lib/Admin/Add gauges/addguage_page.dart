@@ -114,12 +114,9 @@ class _add_GaugeState extends State<add_Gauge> {
     var final_number = wpp_number+"_"+manufacturer_number;
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     firestore.collection("Chakan")
-        .doc("Gauge Types")
-        .collection("All Gauges")
-        .doc(gauge_name)
-        .collection(collection_name)
-        .doc(final_number)
-        .set({
+        .doc("Gauges")
+        .collection("All gauges")
+        .add({
       // 'gauge_number': gauge_number.text.toString(), // John Doe
       // 'identification_number': identification_number.text.toString(), // Stokes and Sons
       // 'certificate_number': certificate_number.text.toString(), // 42
