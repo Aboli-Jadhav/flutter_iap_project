@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class TestPickerWidget extends StatefulWidget {
+class TestPickerWidget2 extends StatefulWidget {
 
   DateTime selectedDate = DateTime.now();
-
-  TestPickerWidget(this.selectedDate, );
+  String fetched_date;
+  TestPickerWidget2(this.selectedDate, this.fetched_date);
 
   @override
-  _TestPickerWidgetState createState() => _TestPickerWidgetState();
+  _TestPickerWidget2State createState() => _TestPickerWidget2State();
 }
 
-class _TestPickerWidgetState extends State<TestPickerWidget> {
- // DateTime selectedDate = DateTime.now();
-  bool t = false;
+class _TestPickerWidget2State extends State<TestPickerWidget2> {
+  // DateTime selectedDate = DateTime.now();
+  bool t = true;
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -29,8 +30,8 @@ class _TestPickerWidgetState extends State<TestPickerWidget> {
               borderRadius: BorderRadius.all(Radius.circular(5))
           ),
           child: Text(
-            "${widget.selectedDate.toLocal()}".split(' ')[0],
-            //widget.fetched_date,
+            // "${widget.selectedDate.toLocal()}".split(' ')[0],
+            widget.fetched_date,
             style: TextStyle(fontSize: 19, fontWeight: FontWeight.w500),
             textAlign: TextAlign.center,
           ),
@@ -44,6 +45,7 @@ class _TestPickerWidgetState extends State<TestPickerWidget> {
               borderRadius: BorderRadius.all(Radius.circular(5))
           ),
           child: Text("Select Date",style: TextStyle(color: Colors.black26,fontSize: 19),textAlign: TextAlign.start,),
+          //child: Text(widget.fetched_date),
         ),
         SizedBox(
           height: 2.0,

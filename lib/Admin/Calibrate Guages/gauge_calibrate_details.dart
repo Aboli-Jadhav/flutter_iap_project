@@ -3,10 +3,12 @@
 1. fetching list of gauge types in initstate not working instead pass the list as parameter to this class
  */
 
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_iap_project/Admin/Calibrate%20Guages/Calibrate_Gauge.dart';
+import 'package:flutter_iap_project/Admin/Calibrate%20Guages/calibrate_gauge.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:autocomplete_textfield_ns/autocomplete_textfield_ns.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -120,7 +122,7 @@ class _gauge_search_calibrate extends State<gauge_calibrate_search>{
               controller: a,
               decoration:  InputDecoration(
                 hintText: "Enter WPPL GAUGE NUMBER",
-                labelText: "WPPL Identification Gauge Number",
+                //labelText: "WPPL Identification Gauge Number",
                 border: OutlineInputBorder(),
 
               ),),
@@ -208,9 +210,27 @@ class _gauge_search_calibrate extends State<gauge_calibrate_search>{
               primary: Colors.red,
             ),
             onPressed: () {
+              if(a.text.isEmpty){
+                Fluttertoast.showToast(
+                    msg: "Please Enter Wppl Gauge Number",
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.CENTER,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: Colors.red,
+                    textColor: Colors.white,
+                    fontSize: 16.0);
+                // Timer(
+                //   const Duration(milliseconds: 2000),
+                //     (){
+                //     }
+                // );
+                return;
+              }else{
+                Navigator.push(context,MaterialPageRoute(builder: (context) => Calibrate_Gauge(wppl_number: a.text,)),);
+                //shareperferences();
+              }
 
-              Navigator.push(context,MaterialPageRoute(builder: (context) => Calibrate_Gauge()),);
-              shareperferences();
+
               //Navigator.push(context,'/showgauge');
             },
           )

@@ -140,7 +140,13 @@ class _add_GaugeState extends State<add_Gauge> {
       'gauge_life':gauge_life.text.toString(),
       'invoice_number':invoice_number.text.toString(),
       'invoice_date':"${selectedDate1.toLocal()}".split(' ')[0],
-      'gauge_location':_selected_location.toString()
+      'gauge_location':_selected_location.toString(),
+      'calibration_agency_name':"",
+      'calibration_frequency':"",
+      'calibration_cost':"",
+      'remark':"",
+      'calibration_date':"",
+      'calibration_due_date':""
 
     })
     //.update({'GAUGE COST':'900'})

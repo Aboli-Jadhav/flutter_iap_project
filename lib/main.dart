@@ -1,7 +1,7 @@
 import 'dart:js';
 import 'package:flutter/material.dart';
 import 'package:flutter_iap_project/Admin/Add%20gauges/addguage_page.dart';
-import 'package:flutter_iap_project/Admin/showGauge.dart';
+import 'package:flutter_iap_project/Admin/showgauge.dart';
 import 'package:flutter_iap_project/master_admin/MasteradminHome_Page.dart';
 import 'Admin/Show Gauges.dart';
 import 'Authentication/services/navigator_service.dart';
@@ -10,7 +10,7 @@ import 'package:flutter_iap_project/Admin/Addviewer/Add_Viewer.dart';
 import 'package:flutter_iap_project/AdminHomeScreen.dart';
 import 'package:flutter_iap_project/Admin/AdminLogin.dart';
 import 'package:flutter_iap_project/Admin_Edit_Profile.dart';
-import 'package:flutter_iap_project/Admin/Calibrate%20Guages/Calibrate_Gauge.dart';
+import 'package:flutter_iap_project/Admin/Calibrate%20Guages/calibrate_gauge.dart';
 import 'package:flutter_iap_project/LoginOptionScrn.dart';
 import 'master_admin/Manage_scrap/Manage_Scrap.dart';
 import 'master_admin/Search/MasterAdmin_Edit_Profile.dart';
