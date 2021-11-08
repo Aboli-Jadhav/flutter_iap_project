@@ -31,7 +31,7 @@ class _home_pState extends State<home_p> {
           centerTitle: true,
         ),
 
-        body: admin_tab_head(),
+       // body: admin_tab_head(),
 
       ),
     );

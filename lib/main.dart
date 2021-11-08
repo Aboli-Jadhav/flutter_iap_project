@@ -46,7 +46,7 @@ void main() {
       '/admin_login' : (context) => AdminLogin(),
       '/viewer_login' : (context) => ViewerLogin(),
       '/adminpage' : (context) => Admin_Page(),
-      '/addgauge' : (context) => add_Gauge(),
+      '/addgauge' : (context) => add_Gauge(gauge_location: [],),
      // '/showgauge' : (context) => ShowGauge(wppl_number: "",manufacturer_number: "",gauge_type: ""),
       '/showgauge' : (context) => ShowGauge(),
       '/viewerhome' :(context) =>VIEWERHOME(),

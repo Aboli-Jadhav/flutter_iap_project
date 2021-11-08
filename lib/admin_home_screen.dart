@@ -51,7 +51,9 @@ class _Admin_PageState extends State<Admin_Page> {
       }else{
         print('The Result is Empty');
       }
+      setState(() {
 
+      });
       print("Gauge Name list: $gauge_locations");
 
     });
@@ -71,7 +73,9 @@ class _Admin_PageState extends State<Admin_Page> {
       }else{
         print('The Result is Empty');
       }
+      setState(() {
 
+      });
       print("Gauge Name list: $gauge_names");
       //SuggestionData().gauge_name = gauge_names;
 
@@ -96,7 +100,7 @@ class _Admin_PageState extends State<Admin_Page> {
           centerTitle: true,
         ),
 
-        body: admin_tab_head(),
+        body: admin_tab_head(gauge_name: gauge_names,gauge_location: gauge_locations,),
         //_widgetOptions[_selectedIndex],
         // bottomNavigationBar: BottomNavigationBar(
         //   backgroundColor: backred,

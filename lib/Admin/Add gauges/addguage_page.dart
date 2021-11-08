@@ -1,3 +1,4 @@
+import 'package:autocomplete_textfield_ns/autocomplete_textfield_ns.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../Drop_Down.dart';
@@ -7,7 +8,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class add_Gauge extends StatefulWidget {
-  const add_Gauge({Key? key}) : super(key: key);
+
+  List<String> gauge_location=[];
+  add_Gauge({Key? key,required this.gauge_location}) : super(key: key);
 
   @override
   _add_GaugeState createState() => _add_GaugeState();
@@ -36,6 +39,11 @@ class _add_GaugeState extends State<add_Gauge> {
   var gauge_life = TextEditingController();
   var invoice_number = TextEditingController();
   var item_code = TextEditingController();
+  var gauge_type = TextEditingController();
+  var _suggestion = TextEditingController();
+  GlobalKey<AutoCompleteTextFieldState<String>> key = GlobalKey();
+  List<String> added = [];
+  String currentText = "";
 
 
   List<dynamic> _gauges = [];
@@ -176,6 +184,7 @@ class _add_GaugeState extends State<add_Gauge> {
     gauge_cost.clear();
     gauge_life.clear();
     invoice_number.clear();
+    gauge_type.clear();
     //selectedDate1 = DateTime
     //_selected_location ="";
 
@@ -290,6 +299,7 @@ class _add_GaugeState extends State<add_Gauge> {
     getGaugefrequency();
     getGaugeLocation();
     getGaugeLocationOwner();
+    print("Gauge Location: ${widget.gauge_location} ");
   }
 
   @override
@@ -357,39 +367,50 @@ class _add_GaugeState extends State<add_Gauge> {
                               ),
 
                               SizedBox(width: 100,),
+                              // Container(
+                              //   height:50.0,
+                              //   width: 300,
+                              //   padding: EdgeInsets.symmetric(vertical: 0.0,horizontal: 10.0),
+                              //   decoration: BoxDecoration(
+                              //     border: Border.all(color: Colors.grey),
+                              //     borderRadius: BorderRadius.circular(5.0),
+                              //   ),
+                              //   child: DropdownButton(
+                              //     hint: Text('Please choose a gauge type'), // Not necessary for Option 1
+                              //     value: _selected_gauges,
+                              //     onChanged: (newValue) {
+                              //       setState(() {
+                              //         _selected_gauges = newValue;
+                              //       });
+                              //
+                              //       Fluttertoast.showToast(
+                              //           msg: _selected_gauges,
+                              //           toastLength: Toast.LENGTH_SHORT,
+                              //           gravity: ToastGravity.CENTER,
+                              //           timeInSecForIosWeb: 1,
+                              //           backgroundColor: Colors.red,
+                              //           textColor: Colors.white,
+                              //           fontSize: 16.0
+                              //       );
+                              //     },
+                              //     items: _gauges.map((location) {
+                              //       return DropdownMenuItem(
+                              //         child: new Text(location),
+                              //         value: location,
+                              //       );
+                              //     }).toList(),
+                              //   ),
+                              // ),
                               Container(
-                                height:50.0,
                                 width: 300,
-                                padding: EdgeInsets.symmetric(vertical: 0.0,horizontal: 10.0),
-                                decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.grey),
-                                  borderRadius: BorderRadius.circular(5.0),
-                                ),
-                                child: DropdownButton(
-                                  hint: Text('Please choose a gauge type'), // Not necessary for Option 1
-                                  value: _selected_gauges,
-                                  onChanged: (newValue) {
-                                    setState(() {
-                                      _selected_gauges = newValue;
-                                    });
+                                height:50.0,
+                                child: TextField(
+                                  controller: gauge_type,
+                                  decoration: InputDecoration(
+                                    labelText: "Gauge Type",
+                                    border: OutlineInputBorder(),
 
-                                    Fluttertoast.showToast(
-                                        msg: _selected_gauges,
-                                        toastLength: Toast.LENGTH_SHORT,
-                                        gravity: ToastGravity.CENTER,
-                                        timeInSecForIosWeb: 1,
-                                        backgroundColor: Colors.red,
-                                        textColor: Colors.white,
-                                        fontSize: 16.0
-                                    );
-                                  },
-                                  items: _gauges.map((location) {
-                                    return DropdownMenuItem(
-                                      child: new Text(location),
-                                      value: location,
-                                    );
-                                  }).toList(),
-                                ),
+                                  ),),
                               ),
                               SizedBox(width: 100,),
                               Container(
@@ -588,38 +609,60 @@ class _add_GaugeState extends State<add_Gauge> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
+                              // Container(
+                              //   height:50.0,
+                              //   width: 300,
+                              //   padding: EdgeInsets.symmetric(vertical: 0.0,horizontal: 10.0),
+                              //   decoration: BoxDecoration(
+                              //     border: Border.all(color: Colors.grey),
+                              //     borderRadius: BorderRadius.circular(5.0),
+                              //   ),
+                              //   child: DropdownButton(
+                              //     hint: Text('Please choose Location'), // Not necessary for Option 1
+                              //     value: _selected_location,
+                              //     onChanged: (newValue) {
+                              //       setState(() {
+                              //         _selected_location = newValue;
+                              //       });
+                              //
+                              //       Fluttertoast.showToast(
+                              //           msg: _selected_location,
+                              //           toastLength: Toast.LENGTH_SHORT,
+                              //           gravity: ToastGravity.CENTER,
+                              //           timeInSecForIosWeb: 1,
+                              //           backgroundColor: Colors.red,
+                              //           textColor: Colors.white,
+                              //           fontSize: 16.0
+                              //       );
+                              //     },
+                              //     items: _location.map((location) {
+                              //       return DropdownMenuItem(
+                              //         child: new Text(location),
+                              //         value: location,
+                              //       );
+                              //     }).toList(),
+                              //   ),
+                              // ),
                               Container(
-                                height:50.0,
                                 width: 300,
-                                padding: EdgeInsets.symmetric(vertical: 0.0,horizontal: 10.0),
-                                decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.grey),
-                                  borderRadius: BorderRadius.circular(5.0),
-                                ),
-                                child: DropdownButton(
-                                  hint: Text('Please choose Location'), // Not necessary for Option 1
-                                  value: _selected_location,
-                                  onChanged: (newValue) {
-                                    setState(() {
-                                      _selected_location = newValue;
-                                    });
-
-                                    Fluttertoast.showToast(
-                                        msg: _selected_location,
-                                        toastLength: Toast.LENGTH_SHORT,
-                                        gravity: ToastGravity.CENTER,
-                                        timeInSecForIosWeb: 1,
-                                        backgroundColor: Colors.red,
-                                        textColor: Colors.white,
-                                        fontSize: 16.0
-                                    );
-                                  },
-                                  items: _location.map((location) {
-                                    return DropdownMenuItem(
-                                      child: new Text(location),
-                                      value: location,
-                                    );
-                                  }).toList(),
+                                child: SimpleAutoCompleteTextField(
+                                  key: key,
+                                  controller: _suggestion,
+                                  clearOnSubmit: false,
+                                  //suggestions: gauge_type,
+                                  suggestions: widget.gauge_location,
+                                  style: const TextStyle(color: Colors.black, fontSize: 16.0),
+                                  decoration: InputDecoration(
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10.0),
+                                      )
+                                  ),
+                                  textChanged: (text)=> currentText=text,
+                                  textSubmitted: (text) => setState(() {
+                                    if (text != "") {
+                                      added.add(text);
+                                    }
+                                  }),
                                 ),
                               ),
 

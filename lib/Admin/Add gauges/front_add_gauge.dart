@@ -9,6 +9,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 
 class front_add_gauge extends StatefulWidget {
+
+  List<String> gauge_name=[];
+  List<String> gauge_location=[];
+
+
+  front_add_gauge({required this.gauge_name, required this.gauge_location});
+
   @override
   _front_add_gaugeState createState() => _front_add_gaugeState();
 }
@@ -42,17 +49,40 @@ class _front_add_gaugeState extends State<front_add_gauge> {
 
           const SizedBox(height:1.0,),
 
+          // Container(
+          //   width: 0.3 * MediaQuery.of(context).size.width,
+          //   height:50.0,
+          //   child: TextField(
+          //     controller: a,
+          //     decoration: const InputDecoration(
+          //       hintText: "Enter Gauge Name",
+          //       //labelText: "WPPL Identification Gauge Number",
+          //       border: OutlineInputBorder(),
+          //
+          //     ),),
+          // ),
+
           Container(
             width: 0.3 * MediaQuery.of(context).size.width,
-            height:50.0,
-            child: TextField(
-              controller: a,
-              decoration: const InputDecoration(
-                hintText: "Enter Gauge Name",
-                //labelText: "WPPL Identification Gauge Number",
-                border: OutlineInputBorder(),
-
-              ),),
+            child: SimpleAutoCompleteTextField(
+              key: key,
+              controller: _suggestion,
+              clearOnSubmit: false,
+              //suggestions: gauge_type,
+              suggestions: widget.gauge_name,
+              style: const TextStyle(color: Colors.black, fontSize: 16.0),
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  )
+              ),
+              textChanged: (text)=> currentText=text,
+              textSubmitted: (text) => setState(() {
+                if (text != "") {
+                  added.add(text);
+                }
+              }),
+            ),
           ),
 
           SizedBox(height: 30.0,),
@@ -65,7 +95,7 @@ class _front_add_gaugeState extends State<front_add_gauge> {
               primary: Colors.red,
             ),
             onPressed: () {
-              if(a.text.isEmpty){
+              if(_suggestion.text.isEmpty){
                 Fluttertoast.showToast(
                     msg: "Please Enter Gauge Name",
                     toastLength: Toast.LENGTH_SHORT,
@@ -77,7 +107,7 @@ class _front_add_gaugeState extends State<front_add_gauge> {
 
                   return;
               }else{
-                Navigator.push(context,MaterialPageRoute(builder: (context) => add_Gauge()),);
+                Navigator.push(context,MaterialPageRoute(builder: (context) => add_Gauge(gauge_location:widget.gauge_location)),);
               }
             },
           )

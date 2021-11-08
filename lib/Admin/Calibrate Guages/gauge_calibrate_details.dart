@@ -16,7 +16,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class gauge_calibrate_search extends StatefulWidget{
 
-  const gauge_calibrate_search({Key? key}):super(key: key);
+  List<String> gauge_name;
+  gauge_calibrate_search({Key? key,required this.gauge_name}):super(key: key);
   _gauge_search_calibrate createState()=> _gauge_search_calibrate();
 
 }
@@ -190,8 +191,8 @@ class _gauge_search_calibrate extends State<gauge_calibrate_search>{
           //     key: key,
           //     controller: _suggestion,
           //     clearOnSubmit: false,
-          //     suggestions: gauge_type,
-          //     //suggestions: SuggestionData().returnList(),
+          //     //suggestions: gauge_type,
+          //     suggestions: widget.gauge_name,
           //     style: const TextStyle(color: Colors.black, fontSize: 16.0),
           //     decoration: InputDecoration(
           //         border: OutlineInputBorder(
