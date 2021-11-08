@@ -325,7 +325,7 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
 
                           Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
+                              children: const <Widget>[
                                 Text("Nominal Size",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
                                 SizedBox(width: 290,),
                                 Text("Minimum",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
@@ -345,7 +345,7 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                                 child: TextField(
                                   enabled: false,
                                   controller: Nominal_Size,
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                    // labelText: "Nominal Size",
                                     border: OutlineInputBorder(),
 
@@ -359,7 +359,7 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                                 child: TextField(
                                   enabled: false,
                                   controller: Minimum,
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                    // labelText: "Minimum",
                                     border: OutlineInputBorder(),
 
@@ -372,7 +372,7 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                                 child: TextField(
                                   enabled: false,
                                   controller: Maximum,
-                                  decoration: InputDecoration(
+                                  decoration:const  InputDecoration(
                                    // labelText: "Maximum",
                                     border: OutlineInputBorder(),
 
@@ -385,7 +385,7 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
 
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
+                            children: const [
                               Text("Calibration Agency Name",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
                               SizedBox(width: 200,),
                               Text("Calibration Date (DD.MM.YYYY)",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
@@ -406,17 +406,17 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                                 height:50.0,
                                 child: TextField(
                                   controller: Calibration_Agency_Name,
-                                  decoration: InputDecoration(
+                                  decoration:const  InputDecoration(
                                    // labelText: "Caliberation Agency Name",
                                     border: OutlineInputBorder(),
 
                                   ),),
                               ),
-                              SizedBox(width: 100,),
+                              const SizedBox(width: 100,),
 
-                              TestPickerWidget2(selectedDate3,calibration_date),
+                              TestPickerWidget2(selectedDate3,calibration_date), //Calibration Date
 
-                              SizedBox(width: 100,),
+                              const SizedBox(width: 100,),
                               // Container(
                               //   height:50.0,
                               //   width: 300,
@@ -456,7 +456,7 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                                 height:50.0,
                                 child: TextField(
                                   controller: Calibration_Frequency,
-                                  decoration: InputDecoration(
+                                  decoration:const  InputDecoration(
                                    // labelText: "Caliberation Frequncy",
                                     border: OutlineInputBorder(),
 
@@ -468,7 +468,7 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                           SizedBox(height: 20,),
                           Row(
                               mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
+                              children:const [
                                 Text("Calibration Due Date (DD.MM.YYYY)",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
                                 SizedBox(width: 120,),
                                 Text("Calibration Cost (INR)",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
@@ -482,27 +482,29 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              TestPickerWidget2(selectedDate1,calibration_due_date),
+
+                              TestPickerWidget2(selectedDate1,calibration_due_date), //Callibration Due Date
+
                               SizedBox(width: 100,),
                               Container(
                                 width: 300,
                                 height:50.0,
                                 child: TextField(
                                   controller: Calibration_Cost,
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                     //labelText: "Calibration Cost",
                                     border: OutlineInputBorder(),
 
                                   ),),
                               ),
 
-                              SizedBox(width: 100,),
+                             const  SizedBox(width: 100,),
                               Container(
                                 width: 300,
                                 height:50.0,
                                 child: TextField(
                                   controller: Remark,
-                                  decoration: InputDecoration(
+                                  decoration:const  InputDecoration(
                                     //labelText: "Remark",
                                     border: OutlineInputBorder(),
 
@@ -511,15 +513,15 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
 
                             ],
                           ),
-                          SizedBox(height: 20,),
+                          const SizedBox(height: 20,),
                           Row(
                               mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
+                              children:const  [
                                 Text("Physical Gauge/Instrument Location",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
 
                               ]
                           ),
-                          SizedBox(height: 10,),
+                         const  SizedBox(height: 10,),
 
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -563,7 +565,7 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                                 height:50.0,
                                 child: TextField(
                                   controller: Gauge_location,
-                                  decoration: InputDecoration(
+                                  decoration:const  InputDecoration(
                                    // labelText: "Gauge Location",
                                     border: OutlineInputBorder(),
 
@@ -578,9 +580,9 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
 
                     ],
                   ),
-                  SizedBox(height: 20,),
+                  const SizedBox(height: 20,),
                   ElevatedButton(
-                    child: Text("CALIBRATE DATA"),
+                    child: const  Text("CALIBRATE DATA"),
                     onPressed: () {
                       // addData();
                       addCalibratedDataToHistory();
@@ -588,8 +590,8 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                     },
                     style: ElevatedButton.styleFrom(
                         primary: Colors.red,
-                        padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                        textStyle: TextStyle(
+                        padding:const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                        textStyle:const TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.bold)),
 
