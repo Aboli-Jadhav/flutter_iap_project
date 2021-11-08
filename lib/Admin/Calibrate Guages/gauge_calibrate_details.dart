@@ -9,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_iap_project/Admin/Calibrate%20Guages/calibrate_gauge.dart';
+import 'package:flutter_iap_project/suggestion_data.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:autocomplete_textfield_ns/autocomplete_textfield_ns.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -38,6 +39,15 @@ class _gauge_search_calibrate extends State<gauge_calibrate_search>{
     'Screw Pitch Gauges',
     'Radius or Fillet Gauge',
   ];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    // gauge_type = SuggestionData().gauge_name;
+    // print(gauge_type);
+    super.initState();
+  }
+
 
   var a = TextEditingController();
   // var b = TextEditingController();
@@ -181,6 +191,7 @@ class _gauge_search_calibrate extends State<gauge_calibrate_search>{
           //     controller: _suggestion,
           //     clearOnSubmit: false,
           //     suggestions: gauge_type,
+          //     //suggestions: SuggestionData().returnList(),
           //     style: const TextStyle(color: Colors.black, fontSize: 16.0),
           //     decoration: InputDecoration(
           //         border: OutlineInputBorder(

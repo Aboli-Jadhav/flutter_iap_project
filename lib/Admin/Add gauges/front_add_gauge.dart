@@ -36,7 +36,7 @@ class _front_add_gaugeState extends State<front_add_gauge> {
             margin: const EdgeInsets.symmetric(horizontal: 500.0),
             width: 500,
             height:50,
-            child:const Text( "Gauge Name  " , style: TextStyle(color: Colors.black,fontSize: 22),
+            child:const Text( "Gauge Type  " , style: TextStyle(color: Colors.black,fontSize: 22),
               textAlign: TextAlign.center,  ),
           ),
 

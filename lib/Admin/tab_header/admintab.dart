@@ -22,7 +22,7 @@ class _admin_tab_headState extends State<admin_tab_head>{
         backgroundColor: Colors.redAccent,
         elevation: 0,
         automaticallyImplyLeading: false,
-        bottom: TabBar(
+        bottom: const TabBar(
           isScrollable: false,
           labelColor: Colors.redAccent,
           unselectedLabelColor: Colors.white,
@@ -84,6 +84,7 @@ class _admin_tab_headState extends State<admin_tab_head>{
         ),
       ) ,
       body: TabBarView(
+        physics: NeverScrollableScrollPhysics(),
         children: [
           AddViewer(),
           view_master_gau(),

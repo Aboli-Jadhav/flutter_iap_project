@@ -7,7 +7,7 @@ import 'Admin/Show Gauges.dart';
 import 'Authentication/services/navigator_service.dart';
 import 'master_admin/Manage_scrap/Add_To_Scrap.dart';
 import 'package:flutter_iap_project/Admin/Addviewer/Add_Viewer.dart';
-import 'package:flutter_iap_project/AdminHomeScreen.dart';
+import 'package:flutter_iap_project/admin_home_screen.dart';
 import 'package:flutter_iap_project/Admin/AdminLogin.dart';
 import 'package:flutter_iap_project/Admin_Edit_Profile.dart';
 import 'package:flutter_iap_project/Admin/Calibrate%20Guages/calibrate_gauge.dart';
