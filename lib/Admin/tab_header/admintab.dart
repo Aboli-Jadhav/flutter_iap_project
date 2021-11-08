@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iap_project/Admin/Add%20gauges/addguage_page.dart';
 import 'package:flutter_iap_project/Admin/Addviewer/Add_Viewer.dart';
 import 'package:flutter_iap_project/Admin/Calibrate%20Guages/calibrate_gauge.dart';
+import 'package:flutter_iap_project/Admin/Add gauges/front_add_gauge.dart';
 import 'package:flutter_iap_project/Admin/Calibrate%20Guages/gauge_calibrate_details.dart';
 import 'package:flutter_iap_project/Admin/Search%20Guages/search_gauge.dart';
 import 'package:flutter_iap_project/Profile_ad.dart';
@@ -86,7 +87,7 @@ class _admin_tab_headState extends State<admin_tab_head>{
         children: [
           AddViewer(),
           view_master_gau(),
-          add_Gauge(),
+          front_add_gauge(),
           gauge_calibrate_search(),
           search_gauge(),
           Manage_Scrap(),

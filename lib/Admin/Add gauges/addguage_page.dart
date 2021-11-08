@@ -297,19 +297,19 @@ class _add_GaugeState extends State<add_Gauge> {
 
     return Container(
       child: Scaffold(
-          // appBar: AppBar(
-          //   toolbarHeight: 50,
-          //   backgroundColor: backred,
-          //   title: Text("Update Gauge",
-          //     style: TextStyle(
-          //       color: Colors.white,
-          //       fontSize: 30.0,
-          //       fontWeight: FontWeight.bold,
-          //
-          //     ),
-          //   ),
-          //   centerTitle: true,
-          // ),
+          appBar: AppBar(
+            toolbarHeight: 50,
+            backgroundColor: backred,
+            title: Text("Add Gauge",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 30.0,
+                fontWeight: FontWeight.bold,
+
+              ),
+            ),
+            centerTitle: true,
+          ),
 
           body:ListView(
             padding: const EdgeInsets.all(20),

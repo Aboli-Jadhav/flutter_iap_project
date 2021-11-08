@@ -414,7 +414,7 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                               ),
                               const SizedBox(width: 100,),
 
-                              TestPickerWidget2(selectedDate3,calibration_date), //Calibration Date
+                              TestPickerWidget2(calibration_date), //Calibration Date
 
                               const SizedBox(width: 100,),
                               // Container(
@@ -483,7 +483,7 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
 
-                              TestPickerWidget2(selectedDate1,calibration_due_date), //Callibration Due Date
+                              TestPickerWidget2(calibration_due_date), //Callibration Due Date
 
                               SizedBox(width: 100,),
                               Container(
