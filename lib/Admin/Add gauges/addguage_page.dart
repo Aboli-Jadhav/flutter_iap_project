@@ -6,6 +6,7 @@ import 'package:flutter_iap_project/Text_editor.dart';
 import '../../date_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'custom_dialog_box.dart';
 
 class add_Gauge extends StatefulWidget {
 
@@ -682,6 +683,16 @@ class _add_GaugeState extends State<add_Gauge> {
                     child: Text("ADD DATA"),
                     onPressed: () {
                       addData();
+                      Navigator.of(context).pop();
+                      showDialog(context: context,
+                          builder: (BuildContext context){
+                            return CustomDialogBox(
+                              title: "Success",
+                              descriptions: "Data Successfully Added",
+                              text: "OK",
+                            );
+                          }
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                         primary: Colors.red,
