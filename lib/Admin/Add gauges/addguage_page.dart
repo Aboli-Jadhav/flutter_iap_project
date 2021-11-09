@@ -190,8 +190,6 @@ class _add_GaugeState extends State<add_Gauge> {
     //_selected_location ="";
 
 
-
-
   }
   void getGaugetype()async{
     FirebaseFirestore firestore = FirebaseFirestore.instance;

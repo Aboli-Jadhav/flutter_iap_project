@@ -45,6 +45,7 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
   TextEditingController Calibration_Cost = TextEditingController();
   TextEditingController Remark = TextEditingController();
   TextEditingController Gauge_location = TextEditingController();
+  TextEditingController Acceptance_Criteria = TextEditingController();
 
   String calibration_date="";
   String calibration_due_date="";
@@ -518,6 +519,9 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                               mainAxisAlignment: MainAxisAlignment.start,
                               children:const  [
                                 Text("Physical Gauge/Instrument Location",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
+                                SizedBox(width: 120,),
+                                Text("Acceptance Criteria",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
+
 
                               ]
                           ),
@@ -567,6 +571,18 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                                   controller: Gauge_location,
                                   decoration:const  InputDecoration(
                                    // labelText: "Gauge Location",
+                                    border: OutlineInputBorder(),
+
+                                  ),),
+                              ),
+                              SizedBox(width: 100,),
+                              Container(
+                                width: 300,
+                                height:50.0,
+                                child: TextField(
+                                  controller: Acceptance_Criteria,
+                                  decoration:const  InputDecoration(
+                                    // labelText: "Gauge Location",
                                     border: OutlineInputBorder(),
 
                                   ),),
