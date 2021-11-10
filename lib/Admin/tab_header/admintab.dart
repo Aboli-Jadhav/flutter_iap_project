@@ -8,7 +8,8 @@ import 'package:flutter_iap_project/Admin/Calibrate%20Guages/gauge_calibrate_det
 import 'package:flutter_iap_project/Admin/Search%20Guages/search_gauge.dart';
 import 'package:flutter_iap_project/Profile_ad.dart';
 import 'package:flutter_iap_project/master_admin/Manage_scrap/Manage_Scrap.dart';
-import 'package:flutter_iap_project/master_admin/view_gauge/view_Master_guage.dart';
+import 'package:flutter_iap_project/master_admin/view_gauge/front_page.dart';
+
 
 class admin_tab_head extends StatefulWidget{
 
@@ -94,7 +95,7 @@ class _admin_tab_headState extends State<admin_tab_head>{
         physics: NeverScrollableScrollPhysics(),
         children: [
           AddViewer(),
-          view_master_gau(),
+          front_view_gauge(),
           front_add_gauge(gauge_name:widget.gauge_name,gauge_location:widget.gauge_location),
           gauge_calibrate_search(gauge_name:widget.gauge_name),
           search_gauge(),

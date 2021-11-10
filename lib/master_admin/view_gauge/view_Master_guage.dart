@@ -45,8 +45,21 @@ class _view_master_gauState extends State<view_master_gau> {
   Widget build(BuildContext context) {
 
     return Container(
-      child: Scaffold(
 
+      child: Scaffold(
+        appBar: AppBar(
+          toolbarHeight: 50,
+          backgroundColor: backred,
+          title: Text("View Gauge",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 30.0,
+              fontWeight: FontWeight.bold,
+
+            ),
+          ),
+          centerTitle: true,
+        ),
 
           body:Editable(
             columns: headers,

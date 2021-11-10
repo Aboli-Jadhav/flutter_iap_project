@@ -5,6 +5,7 @@ import 'package:flutter_iap_project/master_admin/Edit_Attribute/edit_Atri.dart';
 import '../view_gauge/view_Master_guage.dart';
 import '../Manage_scrap/Manage_Scrap.dart';
 import '../Search/MasteradminHome_Profile.dart';
+import 'package:flutter_iap_project/master_admin/view_gauge/front_page.dart';
 
 
 class tab_head extends StatefulWidget {
@@ -77,7 +78,7 @@ class _tab_headState extends State<tab_head> {
             Master_AddAdmins(),
             View_AdminList_DropDown(),
             edit_atri(),
-            view_master_gau(),
+            front_view_gauge(),
             Manage_Scrap(),
             master_adminHome_Profile()
           ]),
