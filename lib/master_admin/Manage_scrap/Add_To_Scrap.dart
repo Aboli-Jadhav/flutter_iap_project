@@ -1,5 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iap_project/date_picker.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_iap_project/date_picker2.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class AddToScrap extends StatefulWidget {
   const AddToScrap({Key? key}) : super(key: key);
@@ -12,23 +17,160 @@ class _AddToScrapState extends State<AddToScrap> {
   DateTime selectedDate = DateTime.now();
   Color backred=Color(0xffDF3F3F);
   Color lred=Color(0xffFBEBEB);
+
+  var manufacturer_serial_number=TextEditingController();
+  var identification_number = TextEditingController();
+  var gauge_type = TextEditingController();
+  var nominal_size = TextEditingController();
+  var reason = TextEditingController();
+  var responsible_person = TextEditingController();
+  var scrap_note_id_no = TextEditingController();
+  DateTime scrap_date = DateTime.now();
+
+  void add_toScrap()
+  {
+    var serial_no=manufacturer_serial_number.text.toString();
+    var wppl_id_no=identification_number.text.toString();
+    var guage_typ=_chosenValue;
+    var nom_size=nominal_size.text.toString();
+    var res=reason.text.toString();
+    var resp_person=responsible_person.text.toString();
+    var not_id_no=scrap_note_id_no.text.toString();
+    var scrp_date="${selectedDate.toLocal()}".split(' ')[0];
+
+    print(serial_no+"\n"+wppl_id_no+"\n"+guage_typ+"\n"+nom_size+"\n"+res+"\n"+resp_person+"\n"+not_id_no+"\n"+scrp_date);
+  }
+
   var _chosenValue;
-  List<String> guageTypes=[
-    ' DEPTH VERNIER CALLIPER',
-    'ADJUSTABLE SNAP GAUGE ',
-    'BEVEL  PROTRACTOR',
-    'INSIDE DIAL CALLIPER ',
-    'OD MASTER GAUGE',
-    'THREAD RING GAUGE',
-    'WIDTH GAUGE',
+  List<String> guageTypes=[];
+  
+  void get_All_GuageTypes()
+  async {
+          await FirebaseFirestore.instance.collection("Chakan").doc("Attributes").collection("gauge types")
+              .get().then((value)
+          {
+            value.docs.forEach((element)
+            {
+              element.data().entries.forEach((ele)
+              {
+                guageTypes.add(ele.value);
+              });
+            });
 
-  ];
+            print(guageTypes);
 
-  void handleDropChange(String ?val)
+          });
+
+  }
+
+
+    Future<void> _showMyDialog() async {
+      return showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(
+              'Success',
+              style: TextStyle
+                (color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30),
+              textAlign: TextAlign.start,
+            ),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: const <Widget>[
+                  Text(
+                      'Gauge added successfully to Scrap !!!! ',
+                      style: TextStyle
+                        (color: Colors.red,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25),
+                      textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+
+
+  void handleDelete() async {
+
+    var guageID=identification_number.text.toString();
+
+    await FirebaseFirestore.instance
+        .collection("Chakan").doc("Gauges").collection("All gauges").where(
+        "identification_number", isEqualTo: guageID).get().then((value)
+        {
+            value.docs.forEach((element)
+            async
+            {
+              await FirebaseFirestore.instance.collection("Chakan").doc("Scrap")
+                  .collection("all_scrap").doc(element.id).set(
+                  {
+                          'reason': reason.text.toString(),
+                          'responsible_person': responsible_person.text.toString(),
+                          'scrap_date': "${selectedDate.toLocal()}".split(' ')[0],
+                          'scrap_note_id_no': scrap_note_id_no.text.toString()
+                  });
+              await FirebaseFirestore.instance.collection("Chakan").doc("Scrap")
+                  .collection("all_scrap").doc(element.id).update(Map.fromEntries(element.data().entries));
+
+              await FirebaseFirestore.instance.collection("Chakan").doc("Gauges")
+                  .collection("All gauges").doc(element.id).collection("History").get()
+                  .then((val)
+                  {
+                      val.docs.forEach((ele)
+                      async {
+                        await FirebaseFirestore.instance.collection("Chakan").doc("History_Scrap")
+                            .collection("Calibration_History").add(Map.fromEntries(ele.data().entries));
+
+                        await FirebaseFirestore.instance.collection("Chakan").doc("Gauges")
+                            .collection("All gauges").doc(element.id).collection("History").doc(ele.id).delete().then((value) => print("Collection Delete"));
+                      });
+                  });
+
+              await FirebaseFirestore.instance.collection("Chakan").doc("Gauges")
+                  .collection("All gauges").doc(element.id).delete()
+                  .then((value)
+                  {
+                    print(element.id + " Success!");
+                    _showMyDialog();
+
+                  });
+        //print("ABOLI");
+      });
+
+      });
+
+
+  }
+
+
+
+void handleDropChange(String ?val)
   {
     setState(() {
       _chosenValue=val;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    get_All_GuageTypes();
   }
 
   @override
@@ -77,7 +219,9 @@ class _AddToScrapState extends State<AddToScrap> {
                             labelText: " Manufacture Serial number",
                             border: OutlineInputBorder(),
 
-                          ),),
+                          ),
+                          controller: manufacturer_serial_number,
+                          ),
                         ),
                       ],
                     ),
@@ -144,6 +288,7 @@ class _AddToScrapState extends State<AddToScrap> {
                               hintText:  ("Enter Instrument Identification Number"),
                               border: OutlineInputBorder(),
                             ),
+                            controller: identification_number,
                           ),
                         ),
                       ],
@@ -175,6 +320,7 @@ class _AddToScrapState extends State<AddToScrap> {
                               hintText:  ("ENTER Nominal Size "),
                               border: OutlineInputBorder(),
                             ),
+                            controller: nominal_size,
                           ),
                         ),
                       ],
@@ -201,6 +347,7 @@ class _AddToScrapState extends State<AddToScrap> {
                               hintText:  ("Enter Reason For adding the guage to Scrap."),
                               border: OutlineInputBorder(),
                             ),
+                            controller: reason,
                           ),
                         ),
                       ],
@@ -227,6 +374,7 @@ class _AddToScrapState extends State<AddToScrap> {
                               hintText:  ("ENTER Responsible Person For Scrap"),
                               border: OutlineInputBorder(),
                             ),
+                            controller: responsible_person,
                           ),
                         ),
                       ],
@@ -259,6 +407,7 @@ class _AddToScrapState extends State<AddToScrap> {
                               hintText:  ("ENTER Scrap Note ID No"),
                               border: OutlineInputBorder(),
                             ),
+                            controller: scrap_note_id_no,
                           ),
                         ),
                       ],
@@ -304,7 +453,11 @@ class _AddToScrapState extends State<AddToScrap> {
                                         side: BorderSide(color: backred)
                                     ),),
                                 ),
-                                onPressed: () {  },
+                                onPressed: ()
+                                {
+                                    handleDelete();
+                                    add_toScrap();
+                                },
                                 label: Text("Add To Scrap",
                                   style: TextStyle(
                                     color: Colors.white,
@@ -334,7 +487,7 @@ class _AddToScrapState extends State<AddToScrap> {
                                         side: BorderSide(color: backred)
                                     ),),
                                 ),
-                                onPressed: () {  },
+                                onPressed: (){},
                                 child: Text("Reset",
                                   style: TextStyle(
                                     color: Colors.white,
