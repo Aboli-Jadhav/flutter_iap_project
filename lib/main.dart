@@ -29,7 +29,7 @@ import 'master_admin/Edit_Attribute/edit_location.dart';
 import 'master_admin/Edit_Attribute/edit_owner.dart';
 import 'master_admin/Edit_Attribute/edit_range.dart';
 import 'master_admin/Edit_Attribute/edit_type.dart';
-import 'master_admin/view_gauge/view_Master_guage.dart';
+import 'master_admin/view_gauge/view_master_guage.dart';
 import 'package:flutter_iap_project/Authentication/locator.dart';
 
 

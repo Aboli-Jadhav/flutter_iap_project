@@ -226,6 +226,33 @@ class _ShowGaugeState extends State<ShowGauge> {
                 ),
               ],
             ),
+            SizedBox(height: 50,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  child: Text("Calibrate Gauge"),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.red,
+                  ),
+                  onPressed: () {
+                    //Navigator.push(context,MaterialPageRoute(builder: (context) => view_master_gau()),);
+
+                  },
+                ),
+                const SizedBox(width: 50,),
+                ElevatedButton(
+                  child: Text("Scrap Gauge"),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.red,
+                  ),
+                  onPressed: () {
+                    //Navigator.push(context,MaterialPageRoute(builder: (context) => view_master_gau()),);
+
+                  },
+                )
+              ],
+            )
           ],
         ),
       ),

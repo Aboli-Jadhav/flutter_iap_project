@@ -6,7 +6,7 @@ import 'package:flutter_iap_project/Admin/Add gauges/addguage_page.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:autocomplete_textfield_ns/autocomplete_textfield_ns.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'view_Master_guage.dart';
+import 'view_master_guage.dart';
 import 'package:flutter_iap_project/date_picker2.dart';
 
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../add_admin/Master_Add_Admins.dart';
 import '../View_admin/View_AdminList_DropDown.dart';
 import 'package:flutter_iap_project/master_admin/Edit_Attribute/edit_Atri.dart';
-import '../view_gauge/view_Master_guage.dart';
+import '../view_gauge/view_master_guage.dart';
 import '../Manage_scrap/Manage_Scrap.dart';
 import '../Search/MasteradminHome_Profile.dart';
 import 'package:flutter_iap_project/master_admin/view_gauge/front_page.dart';
