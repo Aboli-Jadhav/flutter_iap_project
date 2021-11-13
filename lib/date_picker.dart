@@ -21,7 +21,7 @@ class _TestPickerWidgetState extends State<TestPickerWidget> {
       children: <Widget>[
         t ? Container(
           width: 270,
-          height: 40,
+          height: 37,
           padding: EdgeInsets.fromLTRB(20,6,3,10),
           decoration: BoxDecoration(
               color: Colors.grey[100],

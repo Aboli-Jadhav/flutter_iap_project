@@ -303,6 +303,7 @@ class _add_GaugeState extends State<add_Gauge> {
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
+        backgroundColor: lred,
           appBar: AppBar(
             toolbarHeight: 50,
             backgroundColor: backred,
@@ -316,218 +317,24 @@ class _add_GaugeState extends State<add_Gauge> {
             ),
             centerTitle: true,
           ),
-          body: ListView(
-            padding: const EdgeInsets.all(20),
-            children: <Widget>[
-              Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                // Text("Gauge Description",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
-                                // SizedBox(width: 140,),
-                                 Text(
-                                  "Item Code",
-                                  style:  TextStyle(
-                                      color: Colors.black, fontSize: 18),
-                                  textAlign: TextAlign.start,
-                                ),
-                                 SizedBox(
-                                  width: 320,
-                                ),
-                                 Text(
-                                  "Type Of Gauge/Instrument",
-                                  style:  TextStyle(
-                                      color: Colors.black, fontSize: 18),
-                                  textAlign: TextAlign.start,
-                                ),
-                                 SizedBox(
-                                  width: 190,
-                                ),
-                                 Text(
-                                  "WPPL Gauge/Instrument Identification Number",
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 18),
-                                  textAlign: TextAlign.start,
-                                ),
-                              ]),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                //DropDown(),
-                                //SizedBox(width: 30,),
-                                Container(
-                                  width: 300,
-                                  height: 50.0,
-                                  child: TextField(
-                                    controller: item_code,
-                                    decoration: const InputDecoration(
-                                      labelText: "Item Code",
-                                      border: OutlineInputBorder(),
-                                    ),
-                                  ),
-                                ),
-
-                                const SizedBox(
-                                  width: 100,
-                                ),
-                                // Container(
-                                //   height:50.0,
-                                //   width: 300,
-                                //   padding: EdgeInsets.symmetric(vertical: 0.0,horizontal: 10.0),
-                                //   decoration: BoxDecoration(
-                                //     border: Border.all(color: Colors.grey),
-                                //     borderRadius: BorderRadius.circular(5.0),
-                                //   ),
-                                //   child: DropdownButton(
-                                //     hint: Text('Please choose a gauge type'), // Not necessary for Option 1
-                                //     value: _selected_gauges,
-                                //     onChanged: (newValue) {
-                                //       setState(() {
-                                //         _selected_gauges = newValue;
-                                //       });
-                                //
-                                //       Fluttertoast.showToast(
-                                //           msg: _selected_gauges,
-                                //           toastLength: Toast.LENGTH_SHORT,
-                                //           gravity: ToastGravity.CENTER,
-                                //           timeInSecForIosWeb: 1,
-                                //           backgroundColor: Colors.red,
-                                //           textColor: Colors.white,
-                                //           fontSize: 16.0
-                                //       );
-                                //     },
-                                //     items: _gauges.map((location) {
-                                //       return DropdownMenuItem(
-                                //         child: new Text(location),
-                                //         value: location,
-                                //       );
-                                //     }).toList(),
-                                //   ),
-                                // ),
-                                Container(
-                                  width: 300,
-                                  height: 50.0,
-                                  child: TextField(
-                                    controller: gauge_type,
-                                    enabled: false,
-                                    decoration: const InputDecoration(
-                                      //labelText: "Gauge Type",
-                                      border: OutlineInputBorder(),
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 100,
-                                ),
-                                Container(
-                                  width: 300,
-                                  height: 50.0,
-                                  child: TextField(
-                                    enabled: false,
-                                    controller: identification_number,
-                                    decoration: const InputDecoration(
-                                      //labelText: "Identification Number",
-                                      border: OutlineInputBorder(),
-                                    ),
-                                  ),
-                                ),
-                              ]),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const[
-                                 Text(
-                                  "Manufacturers Serial No.",
-                                  style:  TextStyle(
-                                      color: Colors.black, fontSize: 18),
-                                  textAlign: TextAlign.start,
-                                ),
-                                 SizedBox(
-                                  width: 205,
-                                ),
-                                 Text(
-                                  "Nominal Size",
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 18),
-                                  textAlign: TextAlign.start,
-                                ),
-                                 SizedBox(
-                                  width: 290,
-                                ),
-                                 Text(
-                                  "Minimum",
-                                  style:  TextStyle(
-                                      color: Colors.black, fontSize: 18),
-                                  textAlign: TextAlign.start,
-                                ),
-                              ]),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Container(
-                                width: 300,
-                                height: 50.0,
-                                child: TextField(
-                                  controller: manufacturer_serial_number,
-                                  decoration: const InputDecoration(
-                                    labelText: "Serial Number",
-                                    border: OutlineInputBorder(),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 100,
-                              ),
-                              Container(
-                                width: 300,
-                                height: 50.0,
-                                child: TextField(
-                                  controller: nominal_size,
-                                  decoration: const InputDecoration(
-                                    labelText: "Nominal Size",
-                                    border: const OutlineInputBorder(),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 100,
-                              ),
-                              Container(
-                                width: 300,
-                                height: 50.0,
-                                child: TextField(
-                                  controller: minimum,
-                                  decoration: const InputDecoration(
-                                    labelText: "Minimum",
-                                    border: const OutlineInputBorder(),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
+          body: Padding(
+            padding: const EdgeInsets.all(40.0),
+            child: Column(
+              //mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: const [
+                              // Text("Gauge Description",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
+                              // SizedBox(width: 140,),
                                Text(
-                                "Maximum",
+                                "Item Code",
                                 style:  TextStyle(
                                     color: Colors.black, fontSize: 18),
                                 textAlign: TextAlign.start,
@@ -536,161 +343,46 @@ class _add_GaugeState extends State<add_Gauge> {
                                 width: 320,
                               ),
                                Text(
-                                "Gauge/Instrument Make",
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 18),
-                                textAlign: TextAlign.start,
-                              ),
-                               SizedBox(
-                                width: 210,
-                              ),
-                               Text(
-                                "Gauge Manufacturing Cost (INR)",
+                                "Type Of Gauge/Instrument",
                                 style:  TextStyle(
                                     color: Colors.black, fontSize: 18),
                                 textAlign: TextAlign.start,
                               ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Row(
+                               SizedBox(
+                                width: 190,
+                              ),
+                               Text(
+                                "WPPL Gauge/Instrument Identification Number",
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 18),
+                                textAlign: TextAlign.start,
+                              ),
+                            ]),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              //createSizes(),
+                              //DropDown(),
+                              //SizedBox(width: 30,),
+                              Container(
+                                width: 300,
+                                height: 37.0,
+                                child: TextField(
+                                  controller: item_code,
+                                  decoration: const InputDecoration(
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    //labelText: "Item Code",
+                                    border: OutlineInputBorder(),
+                                  ),
+                                ),
+                              ),
 
-                              Container(
-                                width: 300,
-                                height: 50.0,
-                                child: TextField(
-                                  controller: maximum,
-                                  decoration: const InputDecoration(
-                                    labelText: "Maximum",
-                                    border: const OutlineInputBorder(),
-                                  ),
-                                ),
-                              ),
                               const SizedBox(
                                 width: 100,
                               ),
-                              Container(
-                                width: 300,
-                                height: 50.0,
-                                child: TextField(
-                                  controller: gauge_make,
-                                  decoration: const InputDecoration(
-                                    labelText: "Instrument Make",
-                                    border: OutlineInputBorder(),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 100,
-                              ),
-                              Container(
-                                width: 300,
-                                height: 50.0,
-                                child: TextField(
-                                  controller: gauge_cost,
-                                  decoration: const InputDecoration(
-                                    labelText: "Instrument Cost",
-                                    border: const OutlineInputBorder(),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: const [
-                                 Text(
-                                  "Gauge/Instrument Life (In Months)",
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 18),
-                                  textAlign: TextAlign.start,
-                                ),
-                                 SizedBox(
-                                  width: 130,
-                                ),
-                                 Text(
-                                  "Invoice Number",
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 18),
-                                  textAlign: TextAlign.start,
-                                ),
-                                 SizedBox(
-                                  width: 270,
-                                ),
-                                 Text(
-                                  "Invoice Date (DD.MM.YYYY)",
-                                  style: const TextStyle(
-                                      color: Colors.black, fontSize: 18),
-                                  textAlign: TextAlign.start,
-                                ),
-                              ]),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Container(
-                                width: 300,
-                                height: 50.0,
-                                child: TextField(
-                                  controller: gauge_life,
-                                  decoration: const InputDecoration(
-                                    labelText: "Instrument Life",
-                                    border: OutlineInputBorder(),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 100,
-                              ),
-                              Container(
-                                width: 300,
-                                height: 50.0,
-                                child: TextField(
-                                  controller: invoice_number,
-                                  decoration: const InputDecoration(
-                                    labelText: "Invoice Number",
-                                    border: OutlineInputBorder(),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 100,
-                              ),
-                              TestPickerWidget(selectedDate1),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: const[
-                                 Text(
-                                  "Physical Gauge/Instrument Location",
-                                  style:  TextStyle(
-                                      color: Colors.black, fontSize: 18),
-                                  textAlign: TextAlign.start,
-                                ),
-                                 SizedBox(
-                                  width: 230,
-                                ),
-                              ]),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
                               // Container(
                               //   height:50.0,
                               //   width: 300,
@@ -700,15 +392,15 @@ class _add_GaugeState extends State<add_Gauge> {
                               //     borderRadius: BorderRadius.circular(5.0),
                               //   ),
                               //   child: DropdownButton(
-                              //     hint: Text('Please choose Location'), // Not necessary for Option 1
-                              //     value: _selected_location,
+                              //     hint: Text('Please choose a gauge type'), // Not necessary for Option 1
+                              //     value: _selected_gauges,
                               //     onChanged: (newValue) {
                               //       setState(() {
-                              //         _selected_location = newValue;
+                              //         _selected_gauges = newValue;
                               //       });
                               //
                               //       Fluttertoast.showToast(
-                              //           msg: _selected_location,
+                              //           msg: _selected_gauges,
                               //           toastLength: Toast.LENGTH_SHORT,
                               //           gravity: ToastGravity.CENTER,
                               //           timeInSecForIosWeb: 1,
@@ -717,7 +409,7 @@ class _add_GaugeState extends State<add_Gauge> {
                               //           fontSize: 16.0
                               //       );
                               //     },
-                              //     items: _location.map((location) {
+                              //     items: _gauges.map((location) {
                               //       return DropdownMenuItem(
                               //         child: new Text(location),
                               //         value: location,
@@ -727,63 +419,396 @@ class _add_GaugeState extends State<add_Gauge> {
                               // ),
                               Container(
                                 width: 300,
-                                child: SimpleAutoCompleteTextField(
-                                  key: key,
-                                  controller: _suggestion,
-                                  clearOnSubmit: false,
-                                  //suggestions: gauge_type,
-                                  suggestions: widget.gauge_location,
-                                  style: const TextStyle(
-                                      color: Colors.black, fontSize: 16.0),
-                                  decoration: InputDecoration(
-                                      border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  )),
-                                  textChanged: (text) => currentText = text,
-                                  textSubmitted: (text) => setState(() {
-                                    if (text != "") {
-                                      added.add(text);
-                                    }
-                                  }),
+                                height: 37.0,
+                                child: TextField(
+                                  controller: gauge_type,
+                                  enabled: false,
+                                  decoration: const InputDecoration(
+                                    //labelText: "Gauge Type",
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    border: OutlineInputBorder(),
+                                  ),
                                 ),
                               ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  ElevatedButton(
-                    child: const Text("ADD DATA"),
-                    onPressed: () {
-                      //print("uploaded latest number = $upload_final_number");
-                      updateLastNumber();
-                      addData();
-                      Navigator.of(context).pop();
-                      showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return const CustomDialogBox(
-                              title: "Success",
-                              descriptions: "Data Successfully Added",
-                              text: "OK",
-                            );
-                          });
+                              const SizedBox(
+                                width: 100,
+                              ),
+                              Container(
+                                width: 300,
+                                height: 37.0,
+                                child: TextField(
+                                  enabled: false,
+                                  controller: identification_number,
+                                  decoration: const InputDecoration(
+                                    //labelText: "Identification Number",
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    border: OutlineInputBorder(),
+                                  ),
+                                ),
+                              ),
+                            ]),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const[
+                               Text(
+                                "Manufacturers Serial No.",
+                                style:  TextStyle(
+                                    color: Colors.black, fontSize: 18),
+                                textAlign: TextAlign.start,
+                              ),
+                               SizedBox(
+                                width: 205,
+                              ),
+                               Text(
+                                "Nominal Size",
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 18),
+                                textAlign: TextAlign.start,
+                              ),
+                               SizedBox(
+                                width: 290,
+                              ),
+                               Text(
+                                "Minimum",
+                                style:  TextStyle(
+                                    color: Colors.black, fontSize: 18),
+                                textAlign: TextAlign.start,
+                              ),
+                            ]),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: 300,
+                              height: 37.0,
+                              child: TextField(
+                                controller: manufacturer_serial_number,
+                                decoration: const InputDecoration(
+                                  //labelText: "Serial Number",
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  border: OutlineInputBorder(),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 100,
+                            ),
+                            Container(
+                              width: 300,
+                              height: 37.0,
+                              child: TextField(
+                                controller: nominal_size,
+                                decoration: const InputDecoration(
+                                  //labelText: "Nominal Size",
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  border: const OutlineInputBorder(),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 100,
+                            ),
+                            Container(
+                              width: 300,
+                              height: 37.0,
+                              child: TextField(
+                                controller: minimum,
+                                decoration: const InputDecoration(
+                                  //labelText: "Minimum",
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  border: const OutlineInputBorder(),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: const [
+                             Text(
+                              "Maximum",
+                              style:  TextStyle(
+                                  color: Colors.black, fontSize: 18),
+                              textAlign: TextAlign.start,
+                            ),
+                             SizedBox(
+                              width: 320,
+                            ),
+                             Text(
+                              "Gauge/Instrument Make",
+                              style: TextStyle(
+                                  color: Colors.black, fontSize: 18),
+                              textAlign: TextAlign.start,
+                            ),
+                             SizedBox(
+                              width: 210,
+                            ),
+                             Text(
+                              "Gauge Manufacturing Cost (INR)",
+                              style:  TextStyle(
+                                  color: Colors.black, fontSize: 18),
+                              textAlign: TextAlign.start,
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            //createSizes(),
 
-                    },
-                    style: ElevatedButton.styleFrom(
-                        primary: Colors.red,
-                        padding:
-                            const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                        textStyle: const TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.bold)),
-                  ),
-                ],
-              )
-            ],
+                            Container(
+                              width: 300,
+                              height: 37.0,
+                              child: TextField(
+                                controller: maximum,
+                                decoration: const InputDecoration(
+                                  //labelText: "Maximum",
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  border: const OutlineInputBorder(),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 100,
+                            ),
+                            Container(
+                              width: 300,
+                              height: 37.0,
+                              child: TextField(
+                                controller: gauge_make,
+                                decoration: const InputDecoration(
+                                  //labelText: "Instrument Make",
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  border: OutlineInputBorder(),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 100,
+                            ),
+                            Container(
+                              width: 300,
+                              height: 37.0,
+                              child: TextField(
+                                controller: gauge_cost,
+                                decoration: const InputDecoration(
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  //labelText: "Instrument Cost",
+                                  border: const OutlineInputBorder(),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: const [
+                               Text(
+                                "Gauge/Instrument Life (In Months)",
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 18),
+                                textAlign: TextAlign.start,
+                              ),
+                               SizedBox(
+                                width: 130,
+                              ),
+                               Text(
+                                "Invoice Number",
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 18),
+                                textAlign: TextAlign.start,
+                              ),
+                               SizedBox(
+                                width: 270,
+                              ),
+                               Text(
+                                "Invoice Date (DD.MM.YYYY)",
+                                style: const TextStyle(
+                                    color: Colors.black, fontSize: 18),
+                                textAlign: TextAlign.start,
+                              ),
+                            ]),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: 300,
+                              height: 37.0,
+                              child: TextField(
+                                controller: gauge_life,
+                                decoration: const InputDecoration(
+                                  //labelText: "Instrument Life",
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  border: OutlineInputBorder(),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 100,
+                            ),
+                            Container(
+                              width: 300,
+                              height: 37.0,
+                              child: TextField(
+                                controller: invoice_number,
+                                decoration: const InputDecoration(
+                                  //labelText: "Invoice Number",
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  border: OutlineInputBorder(),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 100,
+                            ),
+                            TestPickerWidget(selectedDate1),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: const[
+                               Text(
+                                "Physical Gauge/Instrument Location",
+                                style:  TextStyle(
+                                    color: Colors.black, fontSize: 18),
+                                textAlign: TextAlign.start,
+                              ),
+                               SizedBox(
+                                width: 230,
+                              ),
+                            ]),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            // Container(
+                            //   height:50.0,
+                            //   width: 300,
+                            //   padding: EdgeInsets.symmetric(vertical: 0.0,horizontal: 10.0),
+                            //   decoration: BoxDecoration(
+                            //     border: Border.all(color: Colors.grey),
+                            //     borderRadius: BorderRadius.circular(5.0),
+                            //   ),
+                            //   child: DropdownButton(
+                            //     hint: Text('Please choose Location'), // Not necessary for Option 1
+                            //     value: _selected_location,
+                            //     onChanged: (newValue) {
+                            //       setState(() {
+                            //         _selected_location = newValue;
+                            //       });
+                            //
+                            //       Fluttertoast.showToast(
+                            //           msg: _selected_location,
+                            //           toastLength: Toast.LENGTH_SHORT,
+                            //           gravity: ToastGravity.CENTER,
+                            //           timeInSecForIosWeb: 1,
+                            //           backgroundColor: Colors.red,
+                            //           textColor: Colors.white,
+                            //           fontSize: 16.0
+                            //       );
+                            //     },
+                            //     items: _location.map((location) {
+                            //       return DropdownMenuItem(
+                            //         child: new Text(location),
+                            //         value: location,
+                            //       );
+                            //     }).toList(),
+                            //   ),
+                            // ),
+                            Container(
+                              width: 300,
+                              height: 37,
+                              child: SimpleAutoCompleteTextField(
+                                key: key,
+                                controller: _suggestion,
+                                clearOnSubmit: false,
+                                //suggestions: gauge_type,
+                                suggestions: widget.gauge_location,
+                                style: const TextStyle(
+                                    color: Colors.black, fontSize: 16.0),
+                                decoration: InputDecoration(
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(5.0),
+                                )),
+                                textChanged: (text) => currentText = text,
+                                textSubmitted: (text) => setState(() {
+                                  if (text != "") {
+                                    added.add(text);
+                                  }
+                                }),
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                ElevatedButton(
+                  child: const Text("ADD DATA"),
+                  onPressed: () {
+                    //print("uploaded latest number = $upload_final_number");
+                    updateLastNumber();
+                    addData();
+                    Navigator.of(context).pop();
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return const CustomDialogBox(
+                            title: "Success",
+                            descriptions: "Data Successfully Added",
+                            text: "OK",
+                          );
+                        });
+
+                  },
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.red,
+                      padding:
+                          const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                      textStyle: const TextStyle(
+                          fontSize: 15, fontWeight: FontWeight.bold)),
+                ),
+              ],
+            ),
           )),
     );
   }

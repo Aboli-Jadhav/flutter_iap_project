@@ -24,7 +24,7 @@ class admin_tab_head extends StatefulWidget{
 
 class _admin_tab_headState extends State<admin_tab_head>{
   Widget build(BuildContext){
-    return DefaultTabController(length: 7, child: Scaffold(
+    return DefaultTabController(length: 6, child: Scaffold(
       appBar: AppBar(
         toolbarHeight:0,
         backgroundColor: Colors.redAccent,
@@ -68,12 +68,12 @@ class _admin_tab_headState extends State<admin_tab_head>{
                 child: Text("Calibrate Gauges"),
               ),
             ),
-            Tab(
-              child: Align(
-                alignment: Alignment.center,
-                child: Text("Search Gauges"),
-              ),
-            ),
+            // Tab(
+            //   child: Align(
+            //     alignment: Alignment.center,
+            //     child: Text("Search Gauges"),
+            //   ),
+            // ),
             Tab(
               child: Align(
                 alignment: Alignment.center,
@@ -98,7 +98,7 @@ class _admin_tab_headState extends State<admin_tab_head>{
           front_view_gauge(),
           front_add_gauge(gauge_name:widget.gauge_name,gauge_location:widget.gauge_location),
           gauge_calibrate_search(gauge_name:widget.gauge_name),
-          search_gauge(),
+          //search_gauge(),
           Manage_Scrap(),
           profile_ad(),
         ],

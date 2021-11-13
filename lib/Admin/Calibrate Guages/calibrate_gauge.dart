@@ -205,6 +205,7 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
 
     return Container(
       child: Scaffold(
+        backgroundColor: lred,
         appBar: AppBar(
           toolbarHeight: 50,
           backgroundColor: backred,
@@ -284,11 +285,13 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                                 // ),
                                 Container(
                                   width: 300,
-                                  height:50.0,
+                                  height:37.0,
                                   child: TextField(
                                     enabled: false,
                                     controller: Gauge_Type,
                                     decoration: InputDecoration(
+                                      fillColor: Colors.white,
+                                      filled: true,
                                     //  labelText: "Gauge Type",
                                       border: OutlineInputBorder(),
 
@@ -297,11 +300,13 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                                 SizedBox(width: 100,),
                                 Container(
                                   width: 300,
-                                  height:50.0,
+                                  height:37.0,
                                   child: TextField(
                                     enabled: false,
                                     controller: Identification_Number,
                                     decoration: InputDecoration(
+                                      fillColor: Colors.white,
+                                      filled: true,
                                      // labelText: "Identification Number",
                                       border: OutlineInputBorder(),
 
@@ -310,11 +315,13 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                                 SizedBox(width: 100,),
                                 Container(
                                   width: 300,
-                                  height:50.0,
+                                  height:37.0,
                                   child: TextField(
                                     enabled: false,
                                     controller: Manufacturer_Number,
                                     decoration: InputDecoration(
+                                      fillColor: Colors.white,
+                                      filled: true,
                                      // labelText: "Manufacturer Number",
                                       border: OutlineInputBorder(),
 
@@ -342,11 +349,13 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                             children: [
                               Container(
                                 width: 300,
-                                height:50.0,
+                                height:37.0,
                                 child: TextField(
                                   enabled: false,
                                   controller: Nominal_Size,
                                   decoration: const InputDecoration(
+                                    fillColor: Colors.white,
+                                    filled: true,
                                    // labelText: "Nominal Size",
                                     border: OutlineInputBorder(),
 
@@ -356,11 +365,13 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                               SizedBox(width: 100,),
                               Container(
                                 width: 300,
-                                height:50.0,
+                                height:37.0,
                                 child: TextField(
                                   enabled: false,
                                   controller: Minimum,
                                   decoration: const InputDecoration(
+                                    fillColor: Colors.white,
+                                    filled: true,
                                    // labelText: "Minimum",
                                     border: OutlineInputBorder(),
 
@@ -369,11 +380,13 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                               SizedBox(width: 100,),
                               Container(
                                 width: 300,
-                                height:50.0,
+                                height:37.0,
                                 child: TextField(
                                   enabled: false,
                                   controller: Maximum,
                                   decoration:const  InputDecoration(
+                                    fillColor: Colors.white,
+                                    filled: true,
                                    // labelText: "Maximum",
                                     border: OutlineInputBorder(),
 
@@ -404,10 +417,12 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                               //createSizes(),
                               Container(
                                 width: 300,
-                                height:50.0,
+                                height:37.0,
                                 child: TextField(
                                   controller: Calibration_Agency_Name,
                                   decoration:const  InputDecoration(
+                                    fillColor: Colors.white,
+                                    filled: true,
                                    // labelText: "Caliberation Agency Name",
                                     border: OutlineInputBorder(),
 
@@ -454,10 +469,12 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                               // ),
                               Container(
                                 width: 300,
-                                height:50.0,
+                                height:37.0,
                                 child: TextField(
                                   controller: Calibration_Frequency,
                                   decoration:const  InputDecoration(
+                                    fillColor: Colors.white,
+                                    filled: true,
                                    // labelText: "Caliberation Frequncy",
                                     border: OutlineInputBorder(),
 
@@ -486,13 +503,15 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
 
                               TestPickerWidget2(calibration_due_date), //Callibration Due Date
 
-                              SizedBox(width: 100,),
+                              SizedBox(width: 90,),
                               Container(
                                 width: 300,
-                                height:50.0,
+                                height:37.0,
                                 child: TextField(
                                   controller: Calibration_Cost,
                                   decoration: const InputDecoration(
+                                    fillColor: Colors.white,
+                                    filled: true,
                                     //labelText: "Calibration Cost",
                                     border: OutlineInputBorder(),
 
@@ -502,10 +521,12 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                              const  SizedBox(width: 100,),
                               Container(
                                 width: 300,
-                                height:50.0,
+                                height:37.0,
                                 child: TextField(
                                   controller: Remark,
                                   decoration:const  InputDecoration(
+                                    fillColor: Colors.white,
+                                    filled: true,
                                     //labelText: "Remark",
                                     border: OutlineInputBorder(),
 
@@ -566,10 +587,12 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                               // ),
                               Container(
                                 width: 300,
-                                height:50.0,
+                                height:37.0,
                                 child: TextField(
                                   controller: Gauge_location,
                                   decoration:const  InputDecoration(
+                                    fillColor: Colors.white,
+                                    filled: true,
                                    // labelText: "Gauge Location",
                                     border: OutlineInputBorder(),
 
@@ -578,10 +601,12 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                               SizedBox(width: 100,),
                               Container(
                                 width: 300,
-                                height:50.0,
+                                height:37.0,
                                 child: TextField(
                                   controller: Acceptance_Criteria,
                                   decoration:const  InputDecoration(
+                                    fillColor: Colors.white,
+                                    filled: true,
                                     // labelText: "Gauge Location",
                                     border: OutlineInputBorder(),
 
@@ -596,7 +621,7 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
 
                     ],
                   ),
-                  const SizedBox(height: 20,),
+                  const SizedBox(height: 40,),
                   ElevatedButton(
                     child: const  Text("CALIBRATE DATA"),
                     onPressed: () {

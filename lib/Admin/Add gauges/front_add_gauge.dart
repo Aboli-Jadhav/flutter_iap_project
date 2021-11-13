@@ -78,7 +78,7 @@ class _front_add_gaugeState extends State<front_add_gauge> {
                 style: const TextStyle(color: Colors.black, fontSize: 16.0),
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.0),
+                  borderRadius: BorderRadius.circular(5.0),
                 )),
                 textChanged: (text) {
                   currentText = text;
@@ -86,6 +86,7 @@ class _front_add_gaugeState extends State<front_add_gauge> {
                   },
                 textSubmitted: (text) => setState(() {
                   if (text != "") {
+                    _gauges.clear();
                     Fluttertoast.showToast(
                         msg: text.toString(),
                         toastLength: Toast.LENGTH_SHORT,
@@ -164,30 +165,38 @@ class _front_add_gaugeState extends State<front_add_gauge> {
                   style: ElevatedButton.styleFrom(
                     primary: Colors.red,
                   ),
-                  onPressed: () {
+                  onPressed: () async{
+                    //_gauges.clear();
 
-                    if(_visible){
-                      if(_selected_gauges==null){
-                        return;
-                      }
-                      print("gauename: ${_suggestion.text}, modelname: ${_selected_gauges.toString()}");
+                    //await () {
+                      if (_visible) {
+                        if (_selected_gauges == null) {
+                          return;
+                        }
+                        print("gauename: ${_suggestion
+                            .text}, modelname: ${_selected_gauges.toString()}");
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  add_Gauge(gauge_location: widget.gauge_location,gauge_name: _suggestion.text,model_name: _selected_gauges.toString(),)),
+                                  add_Gauge(
+                                    gauge_location: widget.gauge_location,
+                                    gauge_name: _suggestion.text,
+                                    model_name: _selected_gauges.toString(),)),
                         );
-                    }else{
-                      print("gauename: ${_suggestion.text}");
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                add_Gauge(gauge_location: widget.gauge_location,gauge_name: _suggestion.text)),
-                      );
-                    }
+                      } else {
+                        print("gauename: ${_suggestion.text}");
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  add_Gauge(
+                                      gauge_location: widget.gauge_location,
+                                      gauge_name: _suggestion.text)),
+                        );
+                      }
+                   // };
 
-                    _gauges.clear();
                     // setState(() {
                     //   _visible = !_visible;
                     // });

@@ -125,11 +125,13 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
                                 //SizedBox(width: 30,),
                                 Container(
                                   width: 300,
-                                  height: 50.0,
+                                  height: 37.0,
                                   child: TextField(
                                     controller: item_code,
                                     decoration: const InputDecoration(
-                                      labelText: "Item Code",
+                                      fillColor: Colors.white,
+                                      filled: true,
+                                      //labelText: "Item Code",
                                       border: OutlineInputBorder(),
                                     ),
                                   ),
@@ -186,6 +188,7 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
                                 // ),
                                 Container(
                                   width: 300,
+                                  height: 37,
                                   child: SimpleAutoCompleteTextField(
                                     key: key2,
                                     controller: _suggestion2,
@@ -195,8 +198,10 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
                                     style: const TextStyle(
                                         color: Colors.black, fontSize: 16.0),
                                     decoration: InputDecoration(
+                                        fillColor: Colors.white,
+                                        filled: true,
                                         border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10.0),
+                                      borderRadius: BorderRadius.circular(5.0),
                                     )),
                                     textChanged: (text) => currentText2 = text,
                                     textSubmitted: (text) => setState(() {
@@ -211,10 +216,12 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
                                 ),
                                 Container(
                                   width: 300,
-                                  height: 50.0,
+                                  height: 37.0,
                                   child: TextField(
                                     controller: identification_number,
                                     decoration: const InputDecoration(
+                                      fillColor: Colors.white,
+                                      filled: true,
                                       //labelText: "Identification Number",
                                       border: OutlineInputBorder(),
                                     ),
@@ -260,11 +267,13 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
                             children: [
                               Container(
                                 width: 300,
-                                height: 50.0,
+                                height: 37.0,
                                 child: TextField(
                                   controller: manufacturer_serial_number,
                                   decoration: const InputDecoration(
-                                    labelText: "Serial Number",
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    //labelText: "Serial Number",
                                     border: OutlineInputBorder(),
                                   ),
                                 ),
@@ -274,11 +283,13 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
                               ),
                               Container(
                                 width: 300,
-                                height: 50.0,
+                                height: 37.0,
                                 child: TextField(
                                   controller: nominal_size,
                                   decoration: const InputDecoration(
-                                    labelText: "Nominal Size",
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    //labelText: "Nominal Size",
                                     border: const OutlineInputBorder(),
                                   ),
                                 ),
@@ -288,11 +299,13 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
                               ),
                               Container(
                                 width: 300,
-                                height: 50.0,
+                                height: 37.0,
                                 child: TextField(
                                   controller: minimum,
                                   decoration: const InputDecoration(
-                                    labelText: "Minimum",
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    //labelText: "Minimum",
                                     border: const OutlineInputBorder(),
                                   ),
                                 ),
@@ -341,11 +354,13 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
 
                               Container(
                                 width: 300,
-                                height: 50.0,
+                                height: 37.0,
                                 child: TextField(
                                   controller: maximum,
                                   decoration: const InputDecoration(
-                                    labelText: "Maximum",
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    //labelText: "Maximum",
                                     border: const OutlineInputBorder(),
                                   ),
                                 ),
@@ -355,11 +370,13 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
                               ),
                               Container(
                                 width: 300,
-                                height: 50.0,
+                                height: 37.0,
                                 child: TextField(
                                   controller: gauge_make,
                                   decoration: const InputDecoration(
-                                    labelText: "Instrument Make",
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    //labelText: "Instrument Make",
                                     border: OutlineInputBorder(),
                                   ),
                                 ),
@@ -369,11 +386,13 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
                               ),
                               Container(
                                 width: 300,
-                                height: 50.0,
+                                height: 37.0,
                                 child: TextField(
                                   controller: gauge_cost,
                                   decoration: const InputDecoration(
-                                    labelText: "Instrument Cost",
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    //labelText: "Instrument Cost",
                                     border: const OutlineInputBorder(),
                                   ),
                                 ),
@@ -419,11 +438,13 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
                             children: [
                               Container(
                                 width: 300,
-                                height: 50.0,
+                                height: 37.0,
                                 child: TextField(
                                   controller: gauge_life,
                                   decoration: const InputDecoration(
-                                    labelText: "Instrument Life",
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    //labelText: "Instrument Life",
                                     border: OutlineInputBorder(),
                                   ),
                                 ),
@@ -433,11 +454,13 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
                               ),
                               Container(
                                 width: 300,
-                                height: 50.0,
+                                height: 37.0,
                                 child: TextField(
                                   controller: invoice_number,
                                   decoration: const InputDecoration(
-                                    labelText: "Invoice Number",
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    //labelText: "Invoice Number",
                                     border: OutlineInputBorder(),
                                   ),
                                 ),
@@ -487,6 +510,7 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
                             children: [
                               Container(
                                 width: 300,
+                                height: 37,
                                 child: SimpleAutoCompleteTextField(
                                   key: key,
                                   controller: _suggestion,
@@ -496,8 +520,10 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
                                   style: const TextStyle(
                                       color: Colors.black, fontSize: 16.0),
                                   decoration: InputDecoration(
+                                      fillColor: Colors.white,
+                                      filled: true,
                                       border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
+                                    borderRadius: BorderRadius.circular(5.0),
                                   )),
                                   textChanged: (text) => currentText = text,
                                   textSubmitted: (text) => setState(() {
@@ -512,11 +538,13 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
                               ),
                               Container(
                                 width: 300,
-                                height: 50.0,
+                                height: 37.0,
                                 child: TextField(
                                   controller: gauge_short_form,
                                   decoration: const InputDecoration(
-                                    labelText: "Gauge Short form",
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    //labelText: "Gauge Short form",
                                     border: OutlineInputBorder(),
                                   ),
                                 ),
@@ -526,11 +554,13 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
                               ),
                               Container(
                                 width: 300,
-                                height: 50.0,
+                                height: 37.0,
                                 child: TextField(
                                   controller: last_number,
                                   decoration: const InputDecoration(
-                                    labelText: "Last number",
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    //labelText: "Last number",
                                     border: OutlineInputBorder(),
                                   ),
                                 ),
@@ -567,11 +597,13 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
                             children: [
                               Container(
                                 width: 300,
-                                height: 50.0,
+                                height: 37.0,
                                 child: TextField(
                                   controller: model_short_form,
                                   decoration: const InputDecoration(
-                                    labelText: "Model Short form",
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    //labelText: "Model Short form",
                                     border: OutlineInputBorder(),
                                   ),
                                 ),
@@ -581,11 +613,13 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
                               ),
                               Container(
                                 width: 300,
-                                height: 50.0,
+                                height: 37.0,
                                 child: TextField(
                                   controller: windal_short_form,
                                   decoration: const InputDecoration(
-                                    labelText: "Windal Short form",
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    //labelText: "Windal Short form",
                                     border: OutlineInputBorder(),
                                   ),
                                 ),
@@ -597,7 +631,7 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
                     ],
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 40,
                   ),
                   ElevatedButton(
                     child: const Text("ADD DATA"),
