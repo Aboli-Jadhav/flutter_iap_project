@@ -1,30 +1,24 @@
 import 'package:autocomplete_textfield_ns/autocomplete_textfield_ns.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../Drop_Down.dart';
-import 'package:flutter_iap_project/Text_editor.dart';
-import '../../date_picker.dart';
+import 'package:flutter_iap_project/master_admin/tab_header/tab.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+
+import '../../date_picker.dart';
 import 'custom_dialog_box.dart';
 
-class add_Gauge extends StatefulWidget {
+class AddNewGaugeToSystem extends StatefulWidget {
   final List<String> gauge_location;
-  final String gauge_name;
-  final String model_name;
+  final List<String> gauge_name;
 
-  const add_Gauge(
-      {Key? key,
-      required this.gauge_location,
-      this.gauge_name = "",
-      this.model_name = ""})
+  const AddNewGaugeToSystem(
+      {Key? key, required this.gauge_location, required this.gauge_name})
       : super(key: key);
 
   @override
-  _add_GaugeState createState() => _add_GaugeState();
+  _AddNewGaugeToSystemState createState() => _AddNewGaugeToSystemState();
 }
 
-class _add_GaugeState extends State<add_Gauge> {
+class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
   DateTime selectedDate1 = DateTime.now();
   DateTime selectedDate2 = DateTime.now();
   DateTime selectedDate3 = DateTime.now();
@@ -46,269 +40,33 @@ class _add_GaugeState extends State<add_Gauge> {
   var invoice_number = TextEditingController();
   var item_code = TextEditingController();
   var gauge_type = TextEditingController();
+  var gauge_short_form = TextEditingController();
+  var model_short_form = TextEditingController();
+  var windal_short_form = TextEditingController();
+  var last_number = TextEditingController();
   var _suggestion = TextEditingController();
   GlobalKey<AutoCompleteTextFieldState<String>> key = GlobalKey();
   List<String> added = [];
   String currentText = "";
-  int upload_final_number=0;
-
-  List<dynamic> _gauges = [];
-  var _selected_gauges;
-  List<dynamic> _frequency = [];
-  var _selected_frequency;
-  List<dynamic> _location = [];
-  var _selected_location;
-  List<dynamic> _location_owner = [];
-  var _selected_location_owner;
-
-  List<String> guageSizes = ['GO', 'No GO'];
-  var _chosenValue;
+  var _suggestion2 = TextEditingController();
+  GlobalKey<AutoCompleteTextFieldState<String>> key2 = GlobalKey();
+  List<String> added2 = [];
+  String currentText2 = "";
 
   Color backred = const Color(0xffDF3F3F);
   Color lred = const Color(0xffFBEBEB);
-
-  Widget createSizes() {
-    return Container(
-      width: 300,
-      height: 47,
-      padding: const EdgeInsets.fromLTRB(20, 10, 10, 10),
-      decoration: BoxDecoration(
-          color: Colors.grey[100],
-          border: Border.all(color: Colors.black),
-          borderRadius: const BorderRadius.all(const Radius.circular(5))),
-      child: DropdownButtonHideUnderline(
-        child: DropdownButton<String>(
-          value: _chosenValue,
-          //elevation: 5,
-          style: const TextStyle(color: Colors.black),
-
-          items: guageSizes.map<DropdownMenuItem<String>>((String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Text(value),
-            );
-          }).toList(),
-          hint: const Text(
-            "Select The Guage Size",
-          ),
-
-          onChanged: handle_SizeChange,
-        ),
-      ),
-    );
-  }
-
-  void handle_SizeChange(String? val) {
-    setState(() {
-      _chosenValue = val.toString();
-
-      print("Size change" + _chosenValue);
-    });
-  }
-
-  void addData() async {
-    var gauge_name = "snap gauge";
-    var collection_name = "all " + gauge_name;
-    var wpp_number = identification_number.text.toString();
-    var manufacturer_number = manufacturer_serial_number.text.toString();
-    var final_number = wpp_number + "_" + manufacturer_number;
-    FirebaseFirestore firestore = FirebaseFirestore.instance;
-    firestore
-        .collection("Chakan")
-        .doc("Gauges")
-        .collection("All gauges")
-        .add({
-          // 'gauge_number': gauge_number.text.toString(), // John Doe
-          // 'identification_number': identification_number.text.toString(), // Stokes and Sons
-          // 'certificate_number': certificate_number.text.toString(), // 42
-          // 'frequency': frequency.text.toString(),
-          // 'go_size':go_size.text.toString(),
-          // 'no_go_size':no_go_size.text.toString(),
-          // 'remark':remark.text.toString(),
-          // 'caliberated_on_date':"${selectedDate3.toLocal()}".split(' ')[0],
-          // 'caliberation_due_date':"${selectedDate2.toLocal()}".split(' ')[0],
-          // 'issued_date':"${selectedDate1.toLocal()}".split(' ')[0],
-
-          'item_code': item_code.text.toString(),
-          'gauge_type': widget.gauge_name,
-          'identification_number': identification_number.text.toString(),
-          'manufacturer_serial_number':
-              manufacturer_serial_number.text.toString(),
-          'nominal_size': nominal_size.text.toString(),
-          'minimum': minimum.text.toString(),
-          'maximum': maximum.text.toString(),
-          'gauge_make': gauge_make.text.toString(),
-          'gauge_cost': gauge_cost.text.toString(),
-          'gauge_life': gauge_life.text.toString(),
-          'invoice_number': invoice_number.text.toString(),
-          'invoice_date': "${selectedDate1.toLocal()}".split(' ')[0],
-          'gauge_location': _suggestion.text.toString(),
-          'calibration_agency_name': "",
-          'calibration_frequency': "",
-          'calibration_cost': "",
-          'remark': "",
-          'calibration_date': "",
-          'calibration_due_date': ""
-        })
-        //.update({'GAUGE COST':'900'})
-        .then((value) => data_add_success()) //we can use toast msg here
-        .catchError((error) => print("Failed to add user: $error"));
-  }
-
-  void data_add_success() {
-    Fluttertoast.showToast(
-        msg: "Data Added",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0);
-    item_code.clear();
-    //_selected_gauges = "";
-    identification_number.clear();
-    manufacturer_serial_number.clear();
-    nominal_size.clear();
-    minimum.clear();
-    maximum.clear();
-    gauge_make.clear();
-    gauge_cost.clear();
-    gauge_life.clear();
-    invoice_number.clear();
-    gauge_type.clear();
-    //selectedDate1 = DateTime
-    //_selected_location ="";
-  }
-
-  // void getGaugetype() async {
-  //   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  //   firestore
-  //       .collection("Chakan")
-  //       .doc("Attributes")
-  //       .collection("gauge types")
-  //       .doc("1W6qHZfSxKcRAy7ycg52")
-  //       .get()
-  //       .then((DocumentSnapshot documentSnapshot) {
-  //     if (documentSnapshot.exists) {
-  //       Map<String, dynamic> data =
-  //           documentSnapshot.data() as Map<String, dynamic>;
-  //       var list = [];
-  //       data.forEach((key, value) {
-  //         list.add(value);
-  //       });
-  //       print(list);
-  //       setState(() {
-  //         _gauges = list; // we can use this list for dropdown
-  //       });
-  //     } else {
-  //       print('Document does not exist on the database');
-  //     }
-  //   });
-  // }
-  //
-  // void getGaugefrequency() async {
-  //   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  //   firestore
-  //       .collection("Chakan")
-  //       .doc("Attributes")
-  //       .collection("gauge frequency")
-  //       .doc("all gauge frequency")
-  //       .get()
-  //       .then((DocumentSnapshot documentSnapshot) {
-  //     if (documentSnapshot.exists) {
-  //       Map<String, dynamic> data =
-  //           documentSnapshot.data() as Map<String, dynamic>;
-  //       var list = [];
-  //       data.forEach((key, value) {
-  //         list.add(value);
-  //       });
-  //       print(list);
-  //       setState(() {
-  //         _frequency = list; // we can use this list for dropdown
-  //       });
-  //     } else {
-  //       print('Document does not exist on the database');
-  //     }
-  //   });
-  // }
-  //
-  // void getGaugeLocation() async {
-  //   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  //   firestore
-  //       .collection("Chakan")
-  //       .doc("Attributes")
-  //       .collection("gauge location")
-  //       .doc("YL40nPK2KqMB7HDCQi7k")
-  //       .get()
-  //       .then((DocumentSnapshot documentSnapshot) {
-  //     if (documentSnapshot.exists) {
-  //       Map<String, dynamic> data =
-  //           documentSnapshot.data() as Map<String, dynamic>;
-  //       var list = [];
-  //       data.forEach((key, value) {
-  //         list.add(value);
-  //       });
-  //       print(list);
-  //       setState(() {
-  //         _location = list; // we can use this list for dropdown
-  //       });
-  //     } else {
-  //       print('Document does not exist on the database');
-  //     }
-  //   });
-  // }
-  //
-  // void getGaugeLocationOwner() async {
-  //   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  //   firestore
-  //       .collection("Chakan")
-  //       .doc("Attributes")
-  //       .collection("gauge location owner")
-  //       .doc("mGD9P9XtshOJcscT1EJ5")
-  //       .get()
-  //       .then((DocumentSnapshot documentSnapshot) {
-  //     if (documentSnapshot.exists) {
-  //       Map<String, dynamic> data =
-  //           documentSnapshot.data() as Map<String, dynamic>;
-  //       var list = [];
-  //       data.forEach((key, value) {
-  //         list.add(value);
-  //       });
-  //       print(list);
-  //       setState(() {
-  //         _location_owner = list; // we can use this list for dropdown
-  //       });
-  //     } else {
-  //       print('Document does not exist on the database');
-  //     }
-  //   });
-  // }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    gauge_type.text = widget.gauge_name;
-    if(widget.model_name!=""){
-      getFinalWpplModelNumber();
-    }else{
-      getFinalWpplGaugeNumber();
-    }
-
-
-    print("Gauge Location: ${widget.gauge_location} ");
-  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
+        backgroundColor: lred,
           appBar: AppBar(
             toolbarHeight: 50,
             backgroundColor: backred,
             title: const Text(
               "Add Gauge",
-              style:  TextStyle(
+              style: TextStyle(
                 color: Colors.white,
                 fontSize: 30.0,
                 fontWeight: FontWeight.bold,
@@ -332,25 +90,25 @@ class _add_GaugeState extends State<add_Gauge> {
                               children: const [
                                 // Text("Gauge Description",style: TextStyle(color: Colors.black,fontSize: 23),textAlign: TextAlign.start,),
                                 // SizedBox(width: 140,),
-                                 Text(
+                                Text(
                                   "Item Code",
-                                  style:  TextStyle(
+                                  style: TextStyle(
                                       color: Colors.black, fontSize: 18),
                                   textAlign: TextAlign.start,
                                 ),
-                                 SizedBox(
+                                SizedBox(
                                   width: 320,
                                 ),
-                                 Text(
+                                Text(
                                   "Type Of Gauge/Instrument",
-                                  style:  TextStyle(
+                                  style: TextStyle(
                                       color: Colors.black, fontSize: 18),
                                   textAlign: TextAlign.start,
                                 ),
-                                 SizedBox(
+                                SizedBox(
                                   width: 190,
                                 ),
-                                 Text(
+                                Text(
                                   "WPPL Gauge/Instrument Identification Number",
                                   style: TextStyle(
                                       color: Colors.black, fontSize: 18),
@@ -414,16 +172,38 @@ class _add_GaugeState extends State<add_Gauge> {
                                 //     }).toList(),
                                 //   ),
                                 // ),
+                                // Container(
+                                //   width: 300,
+                                //   height: 50.0,
+                                //   child: TextField(
+                                //     controller: gauge_type,
+                                //     enabled: false,
+                                //     decoration: const InputDecoration(
+                                //       //labelText: "Gauge Type",
+                                //       border: OutlineInputBorder(),
+                                //     ),
+                                //   ),
+                                // ),
                                 Container(
                                   width: 300,
-                                  height: 50.0,
-                                  child: TextField(
-                                    controller: gauge_type,
-                                    enabled: false,
-                                    decoration: const InputDecoration(
-                                      //labelText: "Gauge Type",
-                                      border: OutlineInputBorder(),
-                                    ),
+                                  child: SimpleAutoCompleteTextField(
+                                    key: key2,
+                                    controller: _suggestion2,
+                                    clearOnSubmit: false,
+                                    //suggestions: gauge_type,
+                                    suggestions: widget.gauge_name,
+                                    style: const TextStyle(
+                                        color: Colors.black, fontSize: 16.0),
+                                    decoration: InputDecoration(
+                                        border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    )),
+                                    textChanged: (text) => currentText2 = text,
+                                    textSubmitted: (text) => setState(() {
+                                      if (text != "") {
+                                        added2.add(text);
+                                      }
+                                    }),
                                   ),
                                 ),
                                 const SizedBox(
@@ -433,7 +213,6 @@ class _add_GaugeState extends State<add_Gauge> {
                                   width: 300,
                                   height: 50.0,
                                   child: TextField(
-                                    enabled: false,
                                     controller: identification_number,
                                     decoration: const InputDecoration(
                                       //labelText: "Identification Number",
@@ -447,28 +226,28 @@ class _add_GaugeState extends State<add_Gauge> {
                           ),
                           Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: const[
-                                 Text(
+                              children: const [
+                                Text(
                                   "Manufacturers Serial No.",
-                                  style:  TextStyle(
+                                  style: TextStyle(
                                       color: Colors.black, fontSize: 18),
                                   textAlign: TextAlign.start,
                                 ),
-                                 SizedBox(
+                                SizedBox(
                                   width: 205,
                                 ),
-                                 Text(
+                                Text(
                                   "Nominal Size",
                                   style: TextStyle(
                                       color: Colors.black, fontSize: 18),
                                   textAlign: TextAlign.start,
                                 ),
-                                 SizedBox(
+                                SizedBox(
                                   width: 290,
                                 ),
-                                 Text(
+                                Text(
                                   "Minimum",
-                                  style:  TextStyle(
+                                  style: TextStyle(
                                       color: Colors.black, fontSize: 18),
                                   textAlign: TextAlign.start,
                                 ),
@@ -526,27 +305,27 @@ class _add_GaugeState extends State<add_Gauge> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: const [
-                               Text(
+                              Text(
                                 "Maximum",
-                                style:  TextStyle(
+                                style: TextStyle(
                                     color: Colors.black, fontSize: 18),
                                 textAlign: TextAlign.start,
                               ),
-                               SizedBox(
+                              SizedBox(
                                 width: 320,
                               ),
-                               Text(
+                              Text(
                                 "Gauge/Instrument Make",
                                 style: TextStyle(
                                     color: Colors.black, fontSize: 18),
                                 textAlign: TextAlign.start,
                               ),
-                               SizedBox(
+                              SizedBox(
                                 width: 210,
                               ),
-                               Text(
+                              Text(
                                 "Gauge Manufacturing Cost (INR)",
-                                style:  TextStyle(
+                                style: TextStyle(
                                     color: Colors.black, fontSize: 18),
                                 textAlign: TextAlign.start,
                               ),
@@ -607,25 +386,25 @@ class _add_GaugeState extends State<add_Gauge> {
                           Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: const [
-                                 Text(
+                                Text(
                                   "Gauge/Instrument Life (In Months)",
                                   style: TextStyle(
                                       color: Colors.black, fontSize: 18),
                                   textAlign: TextAlign.start,
                                 ),
-                                 SizedBox(
+                                SizedBox(
                                   width: 130,
                                 ),
-                                 Text(
+                                Text(
                                   "Invoice Number",
                                   style: TextStyle(
                                       color: Colors.black, fontSize: 18),
                                   textAlign: TextAlign.start,
                                 ),
-                                 SizedBox(
+                                SizedBox(
                                   width: 270,
                                 ),
-                                 Text(
+                                Text(
                                   "Invoice Date (DD.MM.YYYY)",
                                   style: const TextStyle(
                                       color: Colors.black, fontSize: 18),
@@ -674,15 +453,30 @@ class _add_GaugeState extends State<add_Gauge> {
                           ),
                           Row(
                               mainAxisAlignment: MainAxisAlignment.start,
-                              children: const[
-                                 Text(
+                              children: const [
+                                Text(
                                   "Physical Gauge/Instrument Location",
-                                  style:  TextStyle(
+                                  style: TextStyle(
                                       color: Colors.black, fontSize: 18),
                                   textAlign: TextAlign.start,
                                 ),
-                                 SizedBox(
-                                  width: 230,
+                                SizedBox(
+                                  width: 120,
+                                ),
+                                Text(
+                                  "Gauge Short form",
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 18),
+                                  textAlign: TextAlign.start,
+                                ),
+                                SizedBox(
+                                  width: 270,
+                                ),
+                                Text(
+                                  "Last number",
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 18),
+                                  textAlign: TextAlign.start,
                                 ),
                               ]),
                           const SizedBox(
@@ -691,40 +485,6 @@ class _add_GaugeState extends State<add_Gauge> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              // Container(
-                              //   height:50.0,
-                              //   width: 300,
-                              //   padding: EdgeInsets.symmetric(vertical: 0.0,horizontal: 10.0),
-                              //   decoration: BoxDecoration(
-                              //     border: Border.all(color: Colors.grey),
-                              //     borderRadius: BorderRadius.circular(5.0),
-                              //   ),
-                              //   child: DropdownButton(
-                              //     hint: Text('Please choose Location'), // Not necessary for Option 1
-                              //     value: _selected_location,
-                              //     onChanged: (newValue) {
-                              //       setState(() {
-                              //         _selected_location = newValue;
-                              //       });
-                              //
-                              //       Fluttertoast.showToast(
-                              //           msg: _selected_location,
-                              //           toastLength: Toast.LENGTH_SHORT,
-                              //           gravity: ToastGravity.CENTER,
-                              //           timeInSecForIosWeb: 1,
-                              //           backgroundColor: Colors.red,
-                              //           textColor: Colors.white,
-                              //           fontSize: 16.0
-                              //       );
-                              //     },
-                              //     items: _location.map((location) {
-                              //       return DropdownMenuItem(
-                              //         child: new Text(location),
-                              //         value: location,
-                              //       );
-                              //     }).toList(),
-                              //   ),
-                              // ),
                               Container(
                                 width: 300,
                                 child: SimpleAutoCompleteTextField(
@@ -747,8 +507,91 @@ class _add_GaugeState extends State<add_Gauge> {
                                   }),
                                 ),
                               ),
+                              const SizedBox(
+                                width: 100,
+                              ),
+                              Container(
+                                width: 300,
+                                height: 50.0,
+                                child: TextField(
+                                  controller: gauge_short_form,
+                                  decoration: const InputDecoration(
+                                    labelText: "Gauge Short form",
+                                    border: OutlineInputBorder(),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 100,
+                              ),
+                              Container(
+                                width: 300,
+                                height: 50.0,
+                                child: TextField(
+                                  controller: last_number,
+                                  decoration: const InputDecoration(
+                                    labelText: "Last number",
+                                    border: OutlineInputBorder(),
+                                  ),
+                                ),
+                              ),
                             ],
-                          )
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: const [
+                                Text(
+                                  "Model Short Form",
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 18),
+                                  textAlign: TextAlign.start,
+                                ),
+                                SizedBox(
+                                  width: 250,
+                                ),
+                                Text(
+                                  "Windal Short form",
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 18),
+                                  textAlign: TextAlign.start,
+                                ),
+                              ]),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                width: 300,
+                                height: 50.0,
+                                child: TextField(
+                                  controller: model_short_form,
+                                  decoration: const InputDecoration(
+                                    labelText: "Model Short form",
+                                    border: OutlineInputBorder(),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 100,
+                              ),
+                              Container(
+                                width: 300,
+                                height: 50.0,
+                                child: TextField(
+                                  controller: windal_short_form,
+                                  decoration: const InputDecoration(
+                                    labelText: "Windal Short form",
+                                    border: OutlineInputBorder(),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ],
                       ),
                     ],
@@ -758,10 +601,8 @@ class _add_GaugeState extends State<add_Gauge> {
                   ),
                   ElevatedButton(
                     child: const Text("ADD DATA"),
-                    onPressed: () {
-                      //print("uploaded latest number = $upload_final_number");
-                      updateLastNumber();
-                      addData();
+                    onPressed: () async {
+                      await addData();
                       Navigator.of(context).pop();
                       showDialog(
                           context: context,
@@ -772,12 +613,11 @@ class _add_GaugeState extends State<add_Gauge> {
                               text: "OK",
                             );
                           });
-
                     },
                     style: ElevatedButton.styleFrom(
                         primary: Colors.red,
-                        padding:
-                            const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 50, vertical: 15),
                         textStyle: const TextStyle(
                             fontSize: 15, fontWeight: FontWeight.bold)),
                   ),
@@ -788,144 +628,55 @@ class _add_GaugeState extends State<add_Gauge> {
     );
   }
 
-  void getFinalWpplModelNumber() {
+  Future<void> addData() async {
+    await addDataInLastNumber();
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     firestore
         .collection("Chakan")
-        .doc("Gauge wppl next no")
-        .collection("all numbers")
-        .where("model_sf", isEqualTo: widget.model_name)
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-           String value='';
-          if(querySnapshot.docs.isNotEmpty){
-            querySnapshot.docs.forEach((doc) {
-              int a = int.parse(doc["last_number"]);
-              upload_final_number = a+1;
-              if(a < 9) {
-                value = "WPP/${doc["gauge_sf"]}/${doc["model_sf"]}/0${a + 1}";
-              }else{
-                value = "WPP/${doc["gauge_sf"]}/${doc["model_sf"]}/${a + 1}";
-              }
-            });
-            identification_number.text=value;
-          }else{
-            identification_number.text="no such model";
-            print("no such model");
-          }
-
-    });
-
-
+        .doc("Gauges")
+        .collection("All gauges")
+        .add({
+      'item_code': item_code.text.toString(),
+      'gauge_type': widget.gauge_name,
+      'identification_number': identification_number.text.toString(),
+      'manufacturer_serial_number':
+      manufacturer_serial_number.text.toString(),
+      'nominal_size': nominal_size.text.toString(),
+      'minimum': minimum.text.toString(),
+      'maximum': maximum.text.toString(),
+      'gauge_make': gauge_make.text.toString(),
+      'gauge_cost': gauge_cost.text.toString(),
+      'gauge_life': gauge_life.text.toString(),
+      'invoice_number': invoice_number.text.toString(),
+      'invoice_date': "${selectedDate1.toLocal()}".split(' ')[0],
+      'gauge_location': _suggestion.text.toString(),
+      'calibration_agency_name': "",
+      'calibration_frequency': "",
+      'calibration_cost': "",
+      'remark': "",
+      'calibration_date': "",
+      'calibration_due_date': ""
+    })
+    //.update({'GAUGE COST':'900'})
+        .then((value) => print("671: data added successfully in gauges")) //we can use toast msg here
+        .catchError((error) => print("672: error while adding data to last number"));
   }
 
-  void getFinalWpplGaugeNumber() {
-    FirebaseFirestore firestore = FirebaseFirestore.instance;
-    firestore
-        .collection("Chakan")
-        .doc("Gauge wppl next no")
-        .collection("all numbers")
-        .where("gauge_name", isEqualTo: widget.gauge_name)
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      String value='';
-      if(querySnapshot.docs.isNotEmpty){
-        querySnapshot.docs.forEach((doc) {
-          if(doc["model_sf"]==""){
-            int a = int.parse(doc["last_number"]);
-            upload_final_number = a+1;
-            if(a < 9){
-              value = "WPP/${doc["gauge_sf"]}/0${a+1}";
-            }else{
-              value = "WPP/${doc["gauge_sf"]}/${a+1}";
-            }
-
-          }
-
-        });
-        identification_number.text=value;
-      }else{
-        identification_number.text="no such model";
-        print("no such model");
-      }
-
-    });
-    identification_number.text="";
-  }
-
-  void updateLastNumber() async {
+  addDataInLastNumber() async {
     FirebaseFirestore firestore = await FirebaseFirestore.instance;
-    if(widget.model_name==""){
 
-      firestore
-          .collection("Chakan")
-          .doc("Gauge wppl next no")
-          .collection("all numbers")
-          .where("gauge_name", isEqualTo: widget.gauge_name)
-          .get()
-          .then((QuerySnapshot querySnapshot) {
-        String id='';
-        if(querySnapshot.docs.isNotEmpty){
-          querySnapshot.docs.forEach((doc) {
-            if(doc["model_sf"]==""){
-              id=doc.id.toString();
-              firestore
-                  .collection("Chakan")
-                  .doc("Gauge wppl next no")
-                  .collection("all numbers")
-              .doc(id)
-              .update({"last_number":upload_final_number.toString()})
-              .then((value) => print("878: Last number of gauge updated successfully"))
-              .catchError((onError)=> print("879: error while updating last number") );
-            }else{
-              print("881: No such gauge found");
-            }
-
-          });
-
-        }else{
-          //identification_number.text="no such model";
-          print("888: no such model");
-        }
-
-      });
-    }else{
-
-      firestore
-          .collection("Chakan")
-          .doc("Gauge wppl next no")
-          .collection("all numbers")
-          .where("gauge_name", isEqualTo: widget.gauge_name)
-          .get()
-          .then((QuerySnapshot querySnapshot) {
-        String id='';
-        if(querySnapshot.docs.isNotEmpty){
-          querySnapshot.docs.forEach((doc) {
-            if(doc["model_sf"]==widget.model_name){
-              id=doc.id.toString();
-              firestore
-                  .collection("Chakan")
-                  .doc("Gauge wppl next no")
-                  .collection("all numbers")
-                  .doc(id)
-                  .update({"last_number":upload_final_number.toString()})
-                  .then((value) => print("912: Last number of model updated successfully"))
-                  .catchError((onError)=> print("913: error while updating last number") );
-            }else{
-              print("915: No such gauge found with this model number ");
-            }
-
-          });
-
-        }else{
-          //identification_number.text="no such model";
-          print("922: no such model");
-        }
-
-      });
-
-
-    }
-
+    firestore
+        .collection("Chakan")
+        .doc("Gauge wppl next no")
+        .collection("all numbers")
+        .add({
+      'gauge_name': _suggestion2.text.toString(),
+      'gauge_sf': gauge_short_form.text.toString(),
+      'model_sf': model_short_form.text.toString(),
+      'last_number': last_number.text.toString(),
+      'windal_sf': windal_short_form.text.toString()
+    }).then((value) =>
+            print("689:data added successfully in last number document"))
+    .catchError((onError)=>print("690: error while adding data to last number"));
   }
 }

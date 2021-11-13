@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_iap_project/Admin/Add%20gauges/add_new_gauge_to_system.dart';
 import 'addguage_page.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:autocomplete_textfield_ns/autocomplete_textfield_ns.dart';
@@ -155,61 +156,81 @@ class _front_add_gaugeState extends State<front_add_gauge> {
               height: 30,
             ),
 
-            ElevatedButton(
-              child: Text("Add Gauge"),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.red,
-              ),
-              onPressed: () {
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  child: Text("Add Gauge"),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.red,
+                  ),
+                  onPressed: () {
 
-                if(_visible){
-                  if(_selected_gauges==null){
-                    return;
-                  }
-                  print("gauename: ${_suggestion.text}, modelname: ${_selected_gauges.toString()}");
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              add_Gauge(gauge_location: widget.gauge_location,gauge_name: _suggestion.text,model_name: _selected_gauges.toString(),)),
-                    );
-                }else{
-                  print("gauename: ${_suggestion.text}");
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            add_Gauge(gauge_location: widget.gauge_location,gauge_name: _suggestion.text)),
-                  );
-                }
+                    if(_visible){
+                      if(_selected_gauges==null){
+                        return;
+                      }
+                      print("gauename: ${_suggestion.text}, modelname: ${_selected_gauges.toString()}");
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  add_Gauge(gauge_location: widget.gauge_location,gauge_name: _suggestion.text,model_name: _selected_gauges.toString(),)),
+                        );
+                    }else{
+                      print("gauename: ${_suggestion.text}");
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                add_Gauge(gauge_location: widget.gauge_location,gauge_name: _suggestion.text)),
+                      );
+                    }
 
-                _gauges.clear();
-                // setState(() {
-                //   _visible = !_visible;
-                // });
+                    _gauges.clear();
+                    // setState(() {
+                    //   _visible = !_visible;
+                    // });
 
 
-                // if (_suggestion.text.isEmpty) {
-                //   Fluttertoast.showToast(
-                //       msg: "Please Enter Gauge Name",
-                //       toastLength: Toast.LENGTH_SHORT,
-                //       gravity: ToastGravity.CENTER,
-                //       timeInSecForIosWeb: 1,
-                //       backgroundColor: Colors.red,
-                //       textColor: Colors.white,
-                //       fontSize: 16.0);
-                //
-                //   return;
-                // } else {
-                //   Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //         builder: (context) =>
-                //             add_Gauge(gauge_location: widget.gauge_location)),
-                //   );
-                // }
-              },
-            )
+                    // if (_suggestion.text.isEmpty) {
+                    //   Fluttertoast.showToast(
+                    //       msg: "Please Enter Gauge Name",
+                    //       toastLength: Toast.LENGTH_SHORT,
+                    //       gravity: ToastGravity.CENTER,
+                    //       timeInSecForIosWeb: 1,
+                    //       backgroundColor: Colors.red,
+                    //       textColor: Colors.white,
+                    //       fontSize: 16.0);
+                    //
+                    //   return;
+                    // } else {
+                    //   Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) =>
+                    //             add_Gauge(gauge_location: widget.gauge_location)),
+                    //   );
+                    // }
+                  },
+                ),
+                const SizedBox(width: 50,),
+                ElevatedButton(
+                    onPressed: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AddNewGaugeToSystem(gauge_location: widget.gauge_location,gauge_name:widget.gauge_name)),
+                      );
+                    },
+                    child: const Text("Add new gauge to System"),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.red,
+                  ),
+                )
+              ],
+            ),
+
           ],
         ),
       ),
