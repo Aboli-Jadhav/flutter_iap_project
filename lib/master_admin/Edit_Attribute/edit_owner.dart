@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../update_item.dart';
+import 'package:flutter_iap_project/master_admin/Edit_Attribute/update_owner.dart';
+import 'update_frequency.dart';
 
 class edit_owner extends StatefulWidget {
   const edit_owner({Key? key}) : super(key: key);
@@ -40,7 +41,7 @@ class _edit_ownerState extends State<edit_owner> {
             children: <Widget>[
               Column(
                 children: [
-                  update_item()
+                  update_owner()
                 ],
               )
             ],

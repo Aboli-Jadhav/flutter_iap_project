@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../update_item.dart';
+import 'package:flutter_iap_project/master_admin/Edit_Attribute/update_description.dart';
+import 'update_frequency.dart';
 
 class edit_descr extends StatefulWidget {
   const edit_descr({Key? key}) : super(key: key);
@@ -40,7 +41,7 @@ class _edit_descrState extends State<edit_descr> {
             children: <Widget>[
               Column(
                 children: [
-                  update_item()
+                  update_description()
                 ],
               )
             ],

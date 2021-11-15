@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../update_item.dart';
+import 'package:flutter_iap_project/master_admin/Edit_Attribute/update_location.dart';
+import 'update_frequency.dart';
 
 class edit_loc extends StatefulWidget {
   const edit_loc({Key? key}) : super(key: key);
@@ -40,7 +41,7 @@ class _edit_locState extends State<edit_loc> {
             children: <Widget>[
               Column(
                 children: [
-                  update_item()
+                  update_location()
                 ],
               )
             ],

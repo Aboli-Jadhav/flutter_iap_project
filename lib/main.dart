@@ -22,7 +22,7 @@ import 'master_admin/View_admin/View_AdminList_DropDown.dart';
 import 'package:flutter_iap_project/ViewerLogin.dart';
 import 'package:flutter_iap_project/Viewer_Home_Screen.dart';
 import 'package:flutter_iap_project/Admin/Search%20Guages/search_gauge.dart';
-import 'master_admin/Edit_Attribute/edit_Atri.dart';
+import 'master_admin/Edit_Attribute/edit_atri.dart';
 import 'master_admin/Edit_Attribute/edit_freq.dart';
 import 'master_admin/Edit_Attribute/edit_description.dart';
 import 'master_admin/Edit_Attribute/edit_location.dart';

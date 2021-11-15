@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../update_item.dart';
+import 'update_frequency.dart';
 
 class edit_freq extends StatefulWidget {
   const edit_freq({Key? key}) : super(key: key);

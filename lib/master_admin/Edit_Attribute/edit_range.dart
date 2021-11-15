@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../update_item.dart';
+import 'update_frequency.dart';
 
 class edit_range extends StatefulWidget {
   const edit_range({Key? key}) : super(key: key);

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../update_item.dart';
+import 'package:flutter_iap_project/master_admin/Edit_Attribute/update_gauge_type.dart';
+import 'update_frequency.dart';
 
 class edit_type extends StatefulWidget {
   const edit_type({Key? key}) : super(key: key);
@@ -40,7 +41,7 @@ class _edit_typeState extends State<edit_type> {
             children: <Widget>[
               Column(
                 children: [
-                  update_item()
+                  update_gauge_type()
                 ],
               )
             ],
