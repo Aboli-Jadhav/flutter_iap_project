@@ -1,6 +1,7 @@
 
 import "package:flutter/material.dart";
 import 'package:flutter_iap_project/Admin/ShowGauge_WidgetEmpty.dart';
+import 'package:flutter_iap_project/Admin/view_gauge_model.dart';
 import 'showgauge_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -10,7 +11,8 @@ class ShowGauge extends StatefulWidget {
   // final String manufacturer_number;
   // final String gauge_type;
   //const ShowGauge({Key? key, required this.wppl_number,required this.manufacturer_number,required this.gauge_type}) : super(key: key);
-  const ShowGauge({Key? key}) : super(key: key);
+  final ViewGaugeModel model;
+  const ShowGauge({Key? key,required this.model}) : super(key: key);
 
 
 
@@ -42,7 +44,10 @@ class _ShowGaugeState extends State<ShowGauge> {
   TextEditingController remark =TextEditingController();
   TextEditingController unit =TextEditingController();
   TextEditingController wppl_gauge_id_number = TextEditingController();
-  TextEditingController empty = TextEditingController();
+  TextEditingController invoice_date = TextEditingController();
+  TextEditingController invoice_number = TextEditingController();
+  TextEditingController gauge_type = TextEditingController();
+  TextEditingController acceptance_criteria = TextEditingController();
 
   Color lred=Color(0xffFBEBEB);
   Color backred=Color(0xffDF3F3F);
@@ -51,7 +56,41 @@ class _ShowGaugeState extends State<ShowGauge> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    showdata();
     //submittoFirestore();
+  }
+
+  void showdata(){
+     calibration_agency_name.text =  widget.model.calibration_agency_name;
+     calibration_cost.text        =widget.model.calibration_cost;
+     calibration_date.text        =widget.model.calibration_date;
+     calibration_due_date.text    =widget.model.calibration_due_date;
+     calibration_frequency.text   =widget.model.calibration_frequency;
+     certificate_number.text      =widget.model.certificate_number;
+     gauge_cost.text              =widget.model.gauge_cost;
+     gauge_life.text              =widget.model.gauge_life;
+     gauge_make.text              =widget.model.gauge_make;
+     gauge_manufacturer_id_number.text =widget.model.manufacturer_serial_number;
+     item_code.text                     =widget.model.item_code;
+     maximum.text                        =widget.model.maximum;
+     minimum.text                        =widget.model.minimum;
+     nabl_accrediation_status.text = widget.model.nabl_accrediation_status;
+     nominal_size.text            =widget.model.nominal_size;
+     physical_location.text       =widget.model.gauge_location;
+     plant.text                   =widget.model.plant;
+     process_owner.text           = widget.model.process_owner;
+     process_owner_mail_id.text   = widget.model.process_owner_mail_id;
+     remark.text                  = widget.model.remark;
+     unit.text                    = widget.model.unit;
+     wppl_gauge_id_number.text    = widget.model.identification_number;
+     //TODO: Add acceptace_criteria, invoice_date, invoice_number, gauge_type
+    invoice_date.text = widget.model.invoice_date;
+    invoice_number.text = widget.model.invoice_number;
+    gauge_type.text = widget.model.gauge_type;
+    acceptance_criteria.text = widget.model.acceptance_criteria;
+     // setState(() {
+     //
+     // });
   }
 
 
@@ -119,7 +158,7 @@ class _ShowGaugeState extends State<ShowGauge> {
                     child: ShowGauge_Widget(heading: 'Gauge Manufacturer Id',data: gauge_manufacturer_id_number)
                 ),
                 Expanded(
-                    child: ShowGauge_Widget(heading: 'Unit',data: item_code)
+                    child: ShowGauge_Widget(heading: 'Unit',data: unit)
                 ),
               ],
             ),
@@ -147,7 +186,7 @@ class _ShowGaugeState extends State<ShowGauge> {
                     child: ShowGauge_Widget(heading: 'Location',data: physical_location)
                 ),
                 Expanded(
-                    child: ShowGauge_Widget(heading: 'Remark',data: plant)
+                    child: ShowGauge_Widget(heading: 'Remark',data: remark)
                 ),
                 Expanded(
                     child: ShowGauge_Widget(heading: 'Process Owner',data: process_owner)
@@ -161,20 +200,37 @@ class _ShowGaugeState extends State<ShowGauge> {
             Row(
               children: [
                 Expanded(
-                    child: ShowGauge_Widget(heading: 'Plant',data: remark)
+                    child: ShowGauge_Widget(heading: 'Plant',data: plant)
                 ),
                 Expanded(
-                    child: ShowGauge_Widget(heading: 'Item Code',data: unit)
+                    child: ShowGauge_Widget(heading: 'Item Code',data: item_code)
                 ),
                 Expanded(
-                    child: ShowGauge_WidgetEmpty()
+                    child: ShowGauge_Widget(heading: 'Invoice Date',data: invoice_date,)
+                ),
+                Expanded(
+                    child: ShowGauge_Widget(heading: 'Invoice Number',data: invoice_number,)
+                ),
+              ],
+            ),
+            SizedBox(height: 20,),
+            Row(
+              children: [
+                Expanded(
+                    child: ShowGauge_Widget(heading: 'Gauge type',data: gauge_type)
+                ),
+                Expanded(
+                    child: ShowGauge_Widget(heading: 'Acceptance Criteria',data: acceptance_criteria)
+                ),
+                Expanded(
+                    child: ShowGauge_WidgetEmpty(),
                 ),
                 Expanded(
                     child: ShowGauge_WidgetEmpty()
                 ),
               ],
             ),
-            SizedBox(height: 50,),
+            SizedBox(height: 30,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

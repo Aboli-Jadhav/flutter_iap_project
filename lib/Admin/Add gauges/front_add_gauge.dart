@@ -22,7 +22,7 @@ class _front_add_gaugeState extends State<front_add_gauge> {
   Color backred = Color(0xffDF3F3F);
   Color lred = Color(0xffFBEBEB);
   var _selected_gauges;
-  List<String> _gauges = [];
+  static List<String> _gauges = [];
 
   final _suggestion = TextEditingController();
   GlobalKey<AutoCompleteTextFieldState<String>> key = GlobalKey();
@@ -34,6 +34,7 @@ class _front_add_gaugeState extends State<front_add_gauge> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: lred,
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -68,6 +69,7 @@ class _front_add_gaugeState extends State<front_add_gauge> {
             // ),
 
             Container(
+              color: Colors.white,
               width: 0.3 * MediaQuery.of(context).size.width,
               child: SimpleAutoCompleteTextField(
                 key: key,
@@ -120,6 +122,7 @@ class _front_add_gaugeState extends State<front_add_gauge> {
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.grey),
                   borderRadius: BorderRadius.circular(5.0),
+                  color: Colors.white
                 ),
                 child: DropdownButton(
                   hint: Text('Please choose a gauge model'),
@@ -269,12 +272,16 @@ class _front_add_gaugeState extends State<front_add_gauge> {
           }else{
             _visible = true;
             _gauges.add(doc["model_sf"]);
+            _selected_gauges = doc['model_sf'];
+            setState(() {
+
+            });
           }
 
         });
-        setState(() {
-
-        });
+        // setState(() {
+        //
+        // });
 
         print("modelname list: $_gauges");
       }else{

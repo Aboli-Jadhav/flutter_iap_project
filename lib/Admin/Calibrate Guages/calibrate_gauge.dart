@@ -47,6 +47,13 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
   TextEditingController Gauge_location = TextEditingController();
   TextEditingController Acceptance_Criteria = TextEditingController();
 
+  TextEditingController certificate_number = TextEditingController();
+  TextEditingController nabl_accredation_status= TextEditingController();
+  TextEditingController proces_owner = TextEditingController();
+  TextEditingController process_owner_mail_id = TextEditingController();
+  TextEditingController unit = TextEditingController();
+  TextEditingController plant = TextEditingController();
+
   String calibration_date="";
   String calibration_due_date="";
   String uid="";
@@ -156,6 +163,16 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
               gauge_life     =doc["gauge_life"];
               invoice_number =doc["invoice_number"];
               invoice_date   =doc["invoice_date"];
+              //unit = doc["unit"];
+
+              certificate_number.text = doc['certificate_number'];
+              nabl_accredation_status.text = doc['nabl_accrediation_status'];
+              proces_owner.text = doc['process_owner'];
+              process_owner_mail_id.text = doc['process_owner_mail_id'];
+              unit.text = doc['unit'];
+              Acceptance_Criteria.text = doc['acceptance_criteria'];
+              plant.text = doc['plant'];
+
               setState(() {
                 calibration_date = doc["calibration_date"];
                 calibration_due_date = doc["calibration_due_date"];
@@ -542,6 +559,8 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                                 Text("Physical Gauge/Instrument Location",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
                                 SizedBox(width: 120,),
                                 Text("Acceptance Criteria",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
+                                SizedBox(width: 190,),
+                                Text("Certificate Number",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
 
 
                               ]
@@ -551,40 +570,6 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              // Container(
-                              //   height:50.0,
-                              //   width: 300,
-                              //   padding: EdgeInsets.symmetric(vertical: 5.0,horizontal: 10.0),
-                              //   decoration: BoxDecoration(
-                              //     border: Border.all(color: Colors.grey),
-                              //     borderRadius: BorderRadius.circular(5.0),
-                              //   ),
-                              //   child: DropdownButton(
-                              //     hint: Text('Please choose Location'), // Not necessary for Option 1
-                              //     value: _selected_location,
-                              //     onChanged: (newValue) {
-                              //       setState(() {
-                              //         _selected_location = newValue;
-                              //       });
-                              //
-                              //       Fluttertoast.showToast(
-                              //           msg: _selected_location,
-                              //           toastLength: Toast.LENGTH_SHORT,
-                              //           gravity: ToastGravity.CENTER,
-                              //           timeInSecForIosWeb: 1,
-                              //           backgroundColor: Colors.red,
-                              //           textColor: Colors.white,
-                              //           fontSize: 16.0
-                              //       );
-                              //     },
-                              //     items: _location.map((location) {
-                              //       return DropdownMenuItem(
-                              //         child: new Text(location),
-                              //         value: location,
-                              //       );
-                              //     }).toList(),
-                              //   ),
-                              // ),
                               Container(
                                 width: 300,
                                 height:37.0,
@@ -612,16 +597,138 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
 
                                   ),),
                               ),
+                              SizedBox(width: 100,),
+                              Container(
+                                width: 300,
+                                height:37.0,
+                                child: TextField(
+                                  controller: certificate_number,
+                                  decoration:const  InputDecoration(
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                     labelText: "Certificate Number",
+                                    border: OutlineInputBorder(),
+
+                                  ),),
+                              ),
 
                             ],
                           ),
+                          const SizedBox(height: 20,),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children:const  [
+                                Text("nabl accredation status",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
+                                SizedBox(width: 200,),
+                                Text("process owner",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
+                                SizedBox(width: 290,),
+                                Text("process owner mail id",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
+
+                              ]
+                          ),
+                          const  SizedBox(height: 10,),
+
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                width: 300,
+                                height:37.0,
+                                child: TextField(
+                                  controller: nabl_accredation_status,
+                                  decoration:const  InputDecoration(
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                     labelText: "nabl accredation status",
+                                    border: OutlineInputBorder(),
+
+                                  ),),
+                              ),
+                              SizedBox(width: 100,),
+                              Container(
+                                width: 300,
+                                height:37.0,
+                                child: TextField(
+                                  controller: proces_owner,
+                                  decoration:const  InputDecoration(
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    labelText: "process owner",
+                                    border: OutlineInputBorder(),
+
+                                  ),),
+                              ),
+                              SizedBox(width: 100,),
+                              Container(
+                                width: 300,
+                                height:37.0,
+                                child: TextField(
+                                  controller: process_owner_mail_id,
+                                  decoration:const  InputDecoration(
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    labelText: "process owner mail id",
+                                    border: OutlineInputBorder(),
+
+                                  ),),
+                              ),
+
+                            ],
+                          ),
+                          const SizedBox(height: 20,),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children:const  [
+                                Text("unit",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
+                                const SizedBox(width: 350,),
+                                Text("plant",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
+
+                              ]
+                          ),
+                          const  SizedBox(height: 10,),
+
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                width: 300,
+                                height:37.0,
+                                child: TextField(
+                                  controller: unit,
+                                  decoration:const  InputDecoration(
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    labelText: "unit",
+                                    border: OutlineInputBorder(),
+
+                                  ),),
+                              ),
+                              SizedBox(width: 100,),
+                              Container(
+                                width: 300,
+                                height:37.0,
+                                child: TextField(
+                                  controller: plant,
+                                  decoration:const  InputDecoration(
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    labelText: "plant",
+                                    border: OutlineInputBorder(),
+
+                                  ),),
+                              ),
+
+                            ],
+                          ),
+
+
 
                         ],
                       ),
 
                     ],
                   ),
-                  const SizedBox(height: 40,),
+                  const SizedBox(height: 20,),
                   ElevatedButton(
                     child: const  Text("CALIBRATE DATA"),
                     onPressed: () {
@@ -671,8 +778,14 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
       'gauge_life':gauge_life,
       'invoice_number':invoice_number,
       'invoice_date':invoice_date,
-
-
+      //TODO : add these parameters
+      'certificate_number':certificate_number.text,
+      'nabl_accrediation_status':nabl_accredation_status.text,
+      'process_owner':proces_owner.text,
+      'process_owner_mail_id':process_owner_mail_id.text,
+      'unit':unit.text,
+      'plant':plant.text,
+      'acceptance_criteria': Acceptance_Criteria.text
     })
         .then((value) {
       Fluttertoast.showToast(
@@ -713,6 +826,13 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
       'gauge_life':gauge_life,
       'invoice_number':invoice_number,
       'invoice_date':invoice_date,
+      'certificate_number':certificate_number.text,
+      'nabl_accrediation_status':nabl_accredation_status.text,
+      'process_owner':proces_owner.text,
+      'process_owner_mail_id':process_owner_mail_id.text,
+      'unit':unit.text, //fetch this
+      'plant':plant.text,
+      'acceptance_criteria': Acceptance_Criteria.text
 
 
     })

@@ -2,7 +2,7 @@ import 'package:autocomplete_textfield_ns/autocomplete_textfield_ns.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iap_project/master_admin/tab_header/tab.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:fluttertoast/fluttertoast.dart';
 import '../../date_picker.dart';
 import 'custom_dialog_box.dart';
 
@@ -52,9 +52,20 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
   GlobalKey<AutoCompleteTextFieldState<String>> key2 = GlobalKey();
   List<String> added2 = [];
   String currentText2 = "";
+  var _selected_plant;
+  List<String> _plants = ["BANJO", "NON BANJO"];
 
   Color backred = const Color(0xffDF3F3F);
   Color lred = const Color(0xffFBEBEB);
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    windal_short_form.text = "WPP";
+    last_number.text="00";
+    super.initState();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -588,6 +599,15 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
                                       color: Colors.black, fontSize: 18),
                                   textAlign: TextAlign.start,
                                 ),
+                                SizedBox(
+                                  width: 250,
+                                ),
+                                Text(
+                                  "Plant",
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 18),
+                                  textAlign: TextAlign.start,
+                                ),
                               ]),
                           const SizedBox(
                             height: 10,
@@ -622,6 +642,45 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
                                     //labelText: "Windal Short form",
                                     border: OutlineInputBorder(),
                                   ),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 100,
+                              ),
+                              Container(
+                                height: 37.0,
+                                width: 300,
+                                padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border: Border.all(color: Colors.black54),
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                                child: DropdownButton(
+                                  hint: const Text('Select Plant'),
+                                  // Not necessary for Option 1
+                                  value: _selected_plant,
+                                  onChanged: (newValue) {
+                                    setState(() {
+                                      _selected_plant = newValue;
+
+                                    });
+
+                                    Fluttertoast.showToast(
+                                        msg: _selected_plant,
+                                        toastLength: Toast.LENGTH_SHORT,
+                                        gravity: ToastGravity.CENTER,
+                                        timeInSecForIosWeb: 1,
+                                        backgroundColor: Colors.red,
+                                        textColor: Colors.white,
+                                        fontSize: 16.0);
+                                  },
+                                  items: _plants.map((location) {
+                                    return DropdownMenuItem(
+                                      child: new Text(location),
+                                      value: location,
+                                    );
+                                  }).toList(),
                                 ),
                               ),
                             ],
@@ -673,8 +732,7 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
       'item_code': item_code.text.toString(),
       'gauge_type': widget.gauge_name,
       'identification_number': identification_number.text.toString(),
-      'manufacturer_serial_number':
-      manufacturer_serial_number.text.toString(),
+      'manufacturer_serial_number': manufacturer_serial_number.text.toString(),
       'nominal_size': nominal_size.text.toString(),
       'minimum': minimum.text.toString(),
       'maximum': maximum.text.toString(),
@@ -689,7 +747,14 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
       'calibration_cost': "",
       'remark': "",
       'calibration_date': "",
-      'calibration_due_date': ""
+      'calibration_due_date': "",
+      'plant':_selected_plant,
+      'certificate_number': "",
+      'nabl_accrediation_status':"",
+      'process_owner':"",
+      'process_owner_mail_id':"",
+      'unit':"", //confirm about adding this textField in here and add_new_gauge_to_system
+      'acceptance_criteria':''
     })
     //.update({'GAUGE COST':'900'})
         .then((value) => print("671: data added successfully in gauges")) //we can use toast msg here

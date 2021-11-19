@@ -78,7 +78,7 @@ class _tab_headState extends State<tab_head> {
             Master_AddAdmins(),
             View_AdminList_DropDown(),
             edit_atri(),
-            front_view_gauge(),
+            front_view_gauge(gauge_name: [],gauge_location: [],),
             Manage_Scrap(),
             master_adminHome_Profile()
           ]),

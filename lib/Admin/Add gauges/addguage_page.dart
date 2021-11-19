@@ -47,6 +47,7 @@ class _add_GaugeState extends State<add_Gauge> {
   var item_code = TextEditingController();
   var gauge_type = TextEditingController();
   var _suggestion = TextEditingController();
+  var unit = TextEditingController();
   GlobalKey<AutoCompleteTextFieldState<String>> key = GlobalKey();
   List<String> added = [];
   String currentText = "";
@@ -132,8 +133,7 @@ class _add_GaugeState extends State<add_Gauge> {
           'item_code': item_code.text.toString(),
           'gauge_type': widget.gauge_name,
           'identification_number': identification_number.text.toString(),
-          'manufacturer_serial_number':
-              manufacturer_serial_number.text.toString(),
+          'manufacturer_serial_number': manufacturer_serial_number.text.toString(),
           'nominal_size': nominal_size.text.toString(),
           'minimum': minimum.text.toString(),
           'maximum': maximum.text.toString(),
@@ -148,7 +148,15 @@ class _add_GaugeState extends State<add_Gauge> {
           'calibration_cost': "",
           'remark': "",
           'calibration_date': "",
-          'calibration_due_date': ""
+          'calibration_due_date': "",
+      //TODO: ADD PLANT ATTRIBUTE IN THIS SCREEN FOR INPUT
+          'plant':_selected_plant,
+      'certificate_number': "",
+      'nabl_accrediation_status':"",
+      'process_owner':"",
+      'process_owner_mail_id':"",
+      'unit':unit.text.toString(), //confirm about adding this textField in here and add_new_gauge_to_system
+      'acceptance_criteria':''
         })
         //.update({'GAUGE COST':'900'})
         .then((value) => data_add_success()) //we can use toast msg here
@@ -284,10 +292,14 @@ class _add_GaugeState extends State<add_Gauge> {
   //   });
   // }
 
+  var _selected_plant;
+  List<String> _plants = ["BANJO", "NON BANJO"];
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    unit.text = "MM";
     gauge_type.text = widget.gauge_name;
     if(widget.model_name!=""){
       getFinalWpplModelNumber();
@@ -707,6 +719,21 @@ class _add_GaugeState extends State<add_Gauge> {
                                SizedBox(
                                 width: 230,
                               ),
+                              Text(
+                                "Plant",
+                                style:  TextStyle(
+                                    color: Colors.black, fontSize: 18),
+                                textAlign: TextAlign.start,
+                              ),
+                              SizedBox(
+                                width: 230,
+                              ),
+                              Text(
+                                "Unit",
+                                style:  TextStyle(
+                                    color: Colors.black, fontSize: 18),
+                                textAlign: TextAlign.start,
+                              ),
                             ]),
                         const SizedBox(
                           height: 10,
@@ -773,6 +800,57 @@ class _add_GaugeState extends State<add_Gauge> {
                                 }),
                               ),
                             ),
+                            const SizedBox(width: 100,),
+                            Container(
+                              height: 37.0,
+                              width: 300,
+                              padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: Border.all(color: Colors.black54),
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                              child: DropdownButton(
+                                hint: const Text('Select Plant'),
+                                // Not necessary for Option 1
+                                value: _selected_plant,
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    _selected_plant = newValue;
+
+                                  });
+
+                                  Fluttertoast.showToast(
+                                      msg: _selected_plant,
+                                      toastLength: Toast.LENGTH_SHORT,
+                                      gravity: ToastGravity.CENTER,
+                                      timeInSecForIosWeb: 1,
+                                      backgroundColor: Colors.red,
+                                      textColor: Colors.white,
+                                      fontSize: 16.0);
+                                },
+                                items: _plants.map((location) {
+                                  return DropdownMenuItem(
+                                    child: new Text(location),
+                                    value: location,
+                                  );
+                                }).toList(),
+                              ),
+                            ),
+                            const SizedBox(width: 100,),
+                            Container(
+                              width: 300,
+                              height: 37.0,
+                              child: TextField(
+                                controller: unit,
+                                decoration: const InputDecoration(
+                                  //labelText: "Invoice Number",
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  border: OutlineInputBorder(),
+                                ),
+                              ),
+                            ),
                           ],
                         )
                       ],
@@ -828,9 +906,9 @@ class _add_GaugeState extends State<add_Gauge> {
               int a = int.parse(doc["last_number"]);
               upload_final_number = a+1;
               if(a < 9) {
-                value = "WPP/${doc["gauge_sf"]}/${doc["model_sf"]}/0${a + 1}";
+                value = "${doc["windal_sf"]}/${doc["gauge_sf"]}/${doc["model_sf"]}/0${a + 1}";
               }else{
-                value = "WPP/${doc["gauge_sf"]}/${doc["model_sf"]}/${a + 1}";
+                value = "${doc["windal_sf"]}/${doc["gauge_sf"]}/${doc["model_sf"]}/${a + 1}";
               }
             });
             identification_number.text=value;
@@ -860,9 +938,9 @@ class _add_GaugeState extends State<add_Gauge> {
             int a = int.parse(doc["last_number"]);
             upload_final_number = a+1;
             if(a < 9){
-              value = "WPP/${doc["gauge_sf"]}/0${a+1}";
+              value = "${doc["windal_sf"]}/${doc["gauge_sf"]}/0${a+1}";
             }else{
-              value = "WPP/${doc["gauge_sf"]}/${a+1}";
+              value = "${doc["windal_sf"]}/${doc["gauge_sf"]}/${a+1}";
             }
 
           }

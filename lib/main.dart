@@ -2,6 +2,7 @@ import 'dart:js';
 import 'package:flutter/material.dart';
 import 'package:flutter_iap_project/Admin/Add%20gauges/addguage_page.dart';
 import 'package:flutter_iap_project/Admin/showgauge.dart';
+import 'package:flutter_iap_project/Admin/view_gauge_model.dart';
 import 'package:flutter_iap_project/master_admin/MasteradminHome_Page.dart';
 import 'Admin/Show Gauges.dart';
 import 'Authentication/services/navigator_service.dart';
@@ -48,7 +49,7 @@ void main() {
       '/adminpage' : (context) => Admin_Page(),
       '/addgauge' : (context) => add_Gauge(gauge_location: [],),
      // '/showgauge' : (context) => ShowGauge(wppl_number: "",manufacturer_number: "",gauge_type: ""),
-      '/showgauge' : (context) => ShowGauge(),
+      '/showgauge' : (context) => ShowGauge(model: ViewGaugeModel('', '', '', '', '', '', '', '','', '', '', '', '', '', '', '', '', '', '', '','', '', '', '', '', ''),),
       '/viewerhome' :(context) =>VIEWERHOME(),
       '/searchgauge' : (context) => search_gauge(),
       '/manageScrap':(context) => Manage_Scrap(),
@@ -66,7 +67,7 @@ void main() {
       '/edit_owner' : (context) => edit_owner(),
       '/edit_range' : (context) => edit_range(),
       '/edit_type' : (context) => edit_type(),
-      '/view_master_gau' : (context) => view_master_gau(),
+      '/view_master_gau' : (context) => view_master_gau(selected_option: '',selectedValue: ''),
       '/viewAdminList' : (context) => View_AdminList_DropDown(),
       '/master_adminHome': (context) => master_adminHome_Page(),
 
