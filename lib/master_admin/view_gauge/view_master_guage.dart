@@ -98,7 +98,7 @@ class _view_master_gauState extends State<view_master_gau> {
   @override
   void initState() {
     // TODO: implement initState
-
+  fetched_list = [];
     show = 0;
     Fluttertoast.showToast(
         msg: "${widget.selectedValue}\n${widget.selected_option}",
@@ -141,33 +141,120 @@ class _view_master_gauState extends State<view_master_gau> {
                     five: "Location"),
               ),
               show == 1
-                  ? Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 50.0, vertical: 30.0),
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: fetched_list.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return ExcelRow(
-                              // one:
-                              //     fetched_list[index].identification_number,
-                              // two: fetched_list[index].gauge_type,
-                              // three: fetched_list[index].nominal_size,
-                              // four:
-                              //     fetched_list[index].calibration_due_date,
-                              // five: fetched_list[index].gauge_location
-                             model: fetched_list[index],
-                          );
-                        },
+                  ? Container(
+                    height: 460,
+                    child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 50.0, vertical: 30.0),
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: fetched_list.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return ExcelRow(
+                                // one:
+                                //     fetched_list[index].identification_number,
+                                // two: fetched_list[index].gauge_type,
+                                // three: fetched_list[index].nominal_size,
+                                // four:
+                                //     fetched_list[index].calibration_due_date,
+                                // five: fetched_list[index].gauge_location
+                               model: fetched_list[index],
+                            );
+                          },
+                        ),
                       ),
-                    )
+                  )
                   : Center(
                       child: CircularProgressIndicator(),
                     ),
+              SizedBox(height: 20,),
+              Center(
+                child:
+                ElevatedButton(child: Text('Export To Excel'), onPressed: createExcel, style: ElevatedButton.styleFrom(primary: Colors.red),),
+              ),
             ],
           )),
     );
   }
+
+  Future<void> createExcel() async {
+    final Workbook workbook = Workbook();
+    final Worksheet sheet = workbook.worksheets[0];
+    sheet.getRangeByName('A1').setText('Gauge ID No.');
+    sheet.getRangeByName('B1').setText('Gauge Type');
+    sheet.getRangeByName('C1').setText('Gauge Size');
+    sheet.getRangeByName('D1').setText('Due Date');
+    sheet.getRangeByName('E1').setText('Location');
+    sheet.getRangeByName('F1').setText('Calibration Agency Name');
+    sheet.getRangeByName('G1').setText('Calibration Cost');
+    sheet.getRangeByName('H1').setText('Calibration Date');
+    sheet.getRangeByName('I1').setText('Calibration Frequency');
+    sheet.getRangeByName('J1').setText('Gauge Cost');
+    sheet.getRangeByName('K1').setText('Gauge Life');
+    sheet.getRangeByName('L1').setText('Gauge Make');
+    sheet.getRangeByName('M1').setText('Invoice Date');
+    sheet.getRangeByName('N1').setText('Invoice Number');
+    sheet.getRangeByName('O1').setText('Item Code');
+    sheet.getRangeByName('P1').setText('Manufacturer Serial Number');
+    sheet.getRangeByName('Q1').setText('Maximum');
+    sheet.getRangeByName('R1').setText('Minimum');
+    sheet.getRangeByName('S1').setText('Remark');
+    sheet.getRangeByName('T1').setText('Plant');
+    sheet.getRangeByName('U1').setText('Certificate Number');
+    sheet.getRangeByName('V1').setText('NABL Accrediation Status');
+    sheet.getRangeByName('W1').setText('Process Owner');
+    sheet.getRangeByName('X1').setText('Process Owner Mail Id');
+    sheet.getRangeByName('Y1').setText('Unit');
+    sheet.getRangeByName('Z1').setText('Acceptance Criteria');
+
+
+    for(int i=0;i<_view_master_gauState.fetched_list.length;i++){
+      sheet.getRangeByName("A"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].identification_number);
+      sheet.getRangeByName("B"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].gauge_type);
+      sheet.getRangeByName("C"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].nominal_size);
+      sheet.getRangeByName("D"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].calibration_due_date);
+      sheet.getRangeByName("E"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].gauge_location);
+      sheet.getRangeByName("F"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].calibration_agency_name);
+      sheet.getRangeByName("G"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].calibration_cost);
+      sheet.getRangeByName("H"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].calibration_date);
+      sheet.getRangeByName("I"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].calibration_frequency);
+      sheet.getRangeByName("J"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].gauge_cost);
+      sheet.getRangeByName("K"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].gauge_life);
+      sheet.getRangeByName("L"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].gauge_make);
+      sheet.getRangeByName("M"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].invoice_date);
+      sheet.getRangeByName("N"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].invoice_number);
+      sheet.getRangeByName("O"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].item_code);
+      sheet.getRangeByName("P"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].manufacturer_serial_number);
+      sheet.getRangeByName("Q"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].maximum);
+      sheet.getRangeByName("R"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].minimum);
+      sheet.getRangeByName("S"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].remark);
+      sheet.getRangeByName("T"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].plant);
+      sheet.getRangeByName("U"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].certificate_number);
+      sheet.getRangeByName("V"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].nabl_accrediation_status);
+      sheet.getRangeByName("W"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].process_owner);
+      sheet.getRangeByName("X"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].process_owner_mail_id);
+      sheet.getRangeByName("Y"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].unit);
+      sheet.getRangeByName("Z"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].acceptance_criteria);
+    }
+
+    final List<int> bytes = workbook.saveAsStream();
+    workbook.dispose();
+
+    if (kIsWeb) {
+      AnchorElement(
+          href:
+          'data:application/octet-stream;charset=utf-16le;base64,${base64.encode(bytes)}')
+        ..setAttribute('download', 'Output.xlsx')
+        ..click();
+    } else {
+      final String path = (await getApplicationSupportDirectory()).path;
+      final String fileName = Platform.isWindows ? '$path\\Output.xlsx' : '$path/Output.xlsx';
+      final File file = File(fileName);
+      await file.writeAsBytes(bytes, flush: true);
+      OpenFile.open(fileName);
+    }
+  }
+
 }
 
 class ExcelRowHeading extends StatelessWidget {
@@ -344,49 +431,8 @@ class ExcelRow extends StatelessWidget {
             ],
           ),
         )),
-        SizedBox(height: 20,),
-        Center(
-          child:
-          ElevatedButton(child: Text('Create Excel'), onPressed: createExcel, style: ElevatedButton.styleFrom(primary: Colors.red),),
-        ),
       ],
     );
-  }
-
-
-  Future<void> createExcel() async {
-    final Workbook workbook = Workbook();
-    final Worksheet sheet = workbook.worksheets[0];
-    sheet.getRangeByName('A1').setText('Gauge ID No.');
-    sheet.getRangeByName('B1').setText('Gauge Type');
-    sheet.getRangeByName('C1').setText('Gauge Size');
-    sheet.getRangeByName('D1').setText('Due Date');
-    sheet.getRangeByName('E1').setText('Location');
-
-    for(int i=0;i<_view_master_gauState.fetched_list.length;i++){
-      sheet.getRangeByName("A"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].identification_number);
-      sheet.getRangeByName("B"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].gauge_type);
-      sheet.getRangeByName("C"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].nominal_size);
-      sheet.getRangeByName("D"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].calibration_due_date);
-      sheet.getRangeByName("E"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].gauge_location);
-    }
-
-    final List<int> bytes = workbook.saveAsStream();
-    workbook.dispose();
-
-    if (kIsWeb) {
-      AnchorElement(
-          href:
-          'data:application/octet-stream;charset=utf-16le;base64,${base64.encode(bytes)}')
-        ..setAttribute('download', 'Output.xlsx')
-        ..click();
-    } else {
-      final String path = (await getApplicationSupportDirectory()).path;
-      final String fileName = Platform.isWindows ? '$path\\Output.xlsx' : '$path/Output.xlsx';
-      final File file = File(fileName);
-      await file.writeAsBytes(bytes, flush: true);
-      OpenFile.open(fileName);
-    }
   }
 
 }
