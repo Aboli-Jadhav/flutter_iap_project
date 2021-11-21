@@ -61,6 +61,10 @@ dev_dependencies:
   get_it: ^7.2.0
   stacked: ^2.2.5
   editable: ^2.0.0
+  syncfusion_flutter_xlsio: ^19.3.54-beta
+  path_provider: ^2.0.7
+  open_file: ^3.2.1
+  universal_html: ^2.0.8
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

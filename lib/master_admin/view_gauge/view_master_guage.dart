@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iap_project/Admin/view_gauge_model.dart';
@@ -5,6 +6,12 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:editable/editable.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_iap_project/Admin/showgauge.dart';
+import 'package:syncfusion_flutter_xlsio/xlsio.dart' show Workbook, Worksheet, ExcelDataRow, ExcelDataCell;
+import 'package:path_provider/path_provider.dart';
+import 'package:open_file/open_file.dart';
+import 'package:universal_html/html.dart' show AnchorElement;
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'dart:convert';
 
 class view_master_gau extends StatefulWidget {
   final String selectedValue;
@@ -22,7 +29,7 @@ class _view_master_gauState extends State<view_master_gau> {
   Color backred = Color(0xffDF3F3F);
   Color lred = Color(0xffFBEBEB);
   String final_selectedValue = '';
-  List<ViewGaugeModel> fetched_list = [];
+  static List<ViewGaugeModel> fetched_list = [];
 
   // List<ExcelRow> itemList = [
   //   const ExcelRow(one: "1", two: "1", three: "1", four: "1", five: "1"),
@@ -263,77 +270,127 @@ class ExcelRow extends StatelessWidget {
     double height = 35;
     Color color = Colors.black54;
 
-    return Material(
-        child: InkWell(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => ShowGauge(model: model)),
-        );
-      },
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          // const SizedBox(
-          //   width: 50.0,
-          // ),
-          Expanded(
-            child: Container(
-              //width: 300,
-              height: height,
-              decoration: BoxDecoration(border: Border.all(color: color)),
-              child: Center(child: Text(model.identification_number)),
-            ),
+    return Column(
+      children: [
+        Material(
+            child: InkWell(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ShowGauge(model: model)),
+            );
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // const SizedBox(
+              //   width: 50.0,
+              // ),
+              Expanded(
+                child: Container(
+                  //width: 300,
+                  height: height,
+                  decoration: BoxDecoration(border: Border.all(color: color)),
+                  child: Center(child: Text(model.identification_number)),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  //width: 300,
+                  height: height,
+                  decoration: BoxDecoration(border: Border.all(color: color)),
+                  child: Center(child: Text(model.gauge_type)),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  //width: 300,
+                  height: height,
+                  decoration: BoxDecoration(border: Border.all(color: color)),
+                  child: Center(child: Text(model.nominal_size)),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  // width: 300,
+                  height: height,
+                  decoration: BoxDecoration(border: Border.all(color: color)),
+                  child: Center(child: Text(model.calibration_due_date)),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  // width: 300,
+                  height: height,
+                  decoration: BoxDecoration(border: Border.all(color: color)),
+                  child: Center(child: Text(model.gauge_location)),
+                ),
+              ),
+              // Material(
+              // child: InkWell(
+              // onTap: ()=> print('row opened'),
+              // child: Container(
+              // width: 50,
+              // height: height,
+              // decoration:
+              // BoxDecoration(border: Border.all(color: color)),
+              // child: const Center(child: Icon(Icons.open_in_new,size: 15.0,)),
+              // ),
+              // ),
+              // ),
+              // const SizedBox(
+              //   width: 50.0,
+              // ),
+            ],
           ),
-          Expanded(
-            child: Container(
-              //width: 300,
-              height: height,
-              decoration: BoxDecoration(border: Border.all(color: color)),
-              child: Center(child: Text(model.gauge_type)),
-            ),
-          ),
-          Expanded(
-            child: Container(
-              //width: 300,
-              height: height,
-              decoration: BoxDecoration(border: Border.all(color: color)),
-              child: Center(child: Text(model.nominal_size)),
-            ),
-          ),
-          Expanded(
-            child: Container(
-              // width: 300,
-              height: height,
-              decoration: BoxDecoration(border: Border.all(color: color)),
-              child: Center(child: Text(model.calibration_due_date)),
-            ),
-          ),
-          Expanded(
-            child: Container(
-              // width: 300,
-              height: height,
-              decoration: BoxDecoration(border: Border.all(color: color)),
-              child: Center(child: Text(model.gauge_location)),
-            ),
-          ),
-          // Material(
-          // child: InkWell(
-          // onTap: ()=> print('row opened'),
-          // child: Container(
-          // width: 50,
-          // height: height,
-          // decoration:
-          // BoxDecoration(border: Border.all(color: color)),
-          // child: const Center(child: Icon(Icons.open_in_new,size: 15.0,)),
-          // ),
-          // ),
-          // ),
-          // const SizedBox(
-          //   width: 50.0,
-          // ),
-        ],
-      ),
-    ));
+        )),
+        SizedBox(height: 20,),
+        Center(
+          child:
+          ElevatedButton(child: Text('Create Excel'), onPressed: createExcel, style: ElevatedButton.styleFrom(primary: Colors.red),),
+        ),
+      ],
+    );
   }
+
+
+  Future<void> createExcel() async {
+    final Workbook workbook = Workbook();
+    final Worksheet sheet = workbook.worksheets[0];
+    sheet.getRangeByName('A1').setText('Gauge ID No.');
+    sheet.getRangeByName('B1').setText('Gauge Type');
+    sheet.getRangeByName('C1').setText('Gauge Size');
+    sheet.getRangeByName('D1').setText('Due Date');
+    sheet.getRangeByName('E1').setText('Location');
+
+    for(int i=0;i<_view_master_gauState.fetched_list.length;i++){
+      sheet.getRangeByName("A"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].identification_number);
+      sheet.getRangeByName("B"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].gauge_type);
+      sheet.getRangeByName("C"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].nominal_size);
+      sheet.getRangeByName("D"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].calibration_due_date);
+      sheet.getRangeByName("E"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].gauge_location);
+    }
+
+    final List<int> bytes = workbook.saveAsStream();
+    workbook.dispose();
+
+    if (kIsWeb) {
+      AnchorElement(
+          href:
+          'data:application/octet-stream;charset=utf-16le;base64,${base64.encode(bytes)}')
+        ..setAttribute('download', 'Output.xlsx')
+        ..click();
+    } else {
+      final String path = (await getApplicationSupportDirectory()).path;
+      final String fileName = Platform.isWindows ? '$path\\Output.xlsx' : '$path/Output.xlsx';
+      final File file = File(fileName);
+      await file.writeAsBytes(bytes, flush: true);
+      OpenFile.open(fileName);
+    }
+  }
+
 }
+
+
+
+
