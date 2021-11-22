@@ -207,7 +207,6 @@ class _View_AdminList_DropDownState extends State<View_AdminList_DropDown> {
   String currentText = "";
   TextEditingController gauge_location = TextEditingController();
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -323,7 +322,8 @@ class _View_AdminList_DropDownState extends State<View_AdminList_DropDown> {
                                 onTap: () {
                                   //TODO add dialog box
                                   //CustomDialogBox(title: "Are you sure you want to delete?", descriptions: "Admin ${fetched_data[index]} from Location ${delete_location} will be deleted", text: "XYZ");
-                                  deleteItemfinal(fetched_data[index],delete_location);
+                                  showAlertDialog(context,index);
+
                                 },
                                 child: Container(
                                   width: 50,
@@ -395,6 +395,38 @@ class _View_AdminList_DropDownState extends State<View_AdminList_DropDown> {
           ],
         ),
       ),
+    );
+  }
+
+  showAlertDialog(BuildContext context,var index) {
+
+    Widget cancelButton = TextButton(
+      child: Text("NO"),
+      onPressed: () {Navigator.of(context).pop();},
+    );
+    Widget launchButton = TextButton(
+      child: Text("YES"),
+      onPressed: () {deleteItemfinal(fetched_data[index],delete_location);
+      Navigator.of(context).pop();},
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Center(child: Text("Alert")),
+      content: Text(
+          "Do You Really Want To Delete"),
+      actions: [
+        cancelButton,
+        launchButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 }

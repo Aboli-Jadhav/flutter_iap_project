@@ -19,7 +19,6 @@ class _update_gauge_typeState extends State<update_gauge_type> {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   List<String> fetched_data = [];
 
-
   _changePetName() {
     newName = nctrl.text;
     Navigator.pop(context, newName);
@@ -209,7 +208,8 @@ class _update_gauge_typeState extends State<update_gauge_type> {
                     Material(
                       child: InkWell(
                         onTap: () {
-                          deleteItemfinal(fetched_data[index]);
+                          showAlertDialog(context,index);
+
                           print("Item deleted");
 
                         },
@@ -256,4 +256,39 @@ class _update_gauge_typeState extends State<update_gauge_type> {
       ),
     );
   }
+
+  showAlertDialog(BuildContext context,var index) {
+
+    Widget cancelButton = TextButton(
+      child: Text("NO"),
+      onPressed: () {Navigator.of(context).pop();},
+    );
+    Widget launchButton = TextButton(
+      child: Text("YES"),
+      onPressed: () {
+        deleteItemfinal(fetched_data[index]);
+        Navigator.of(context).pop();
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Center(child: Text("Alert")),
+      content: Text(
+          "Do You Really Want To Delete"),
+      actions: [
+        cancelButton,
+        launchButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
 }

@@ -211,8 +211,7 @@ class _update_locationState extends State<update_location> {
                     Material(
                       child: InkWell(
                         onTap: () {
-                          deleteItemfinal(fetched_data[index]);
-                          print("Item deleted");
+                          showAlertDialog(context,index);
 
                         },
                         child: Container(
@@ -258,4 +257,38 @@ class _update_locationState extends State<update_location> {
       ),
     );;
   }
+
+  showAlertDialog(BuildContext context,var index) {
+
+    Widget cancelButton = TextButton(
+      child: Text("NO"),
+      onPressed: () {Navigator.of(context).pop();},
+    );
+    Widget launchButton = TextButton(
+      child: Text("YES"),
+      onPressed: () {deleteItemfinal(fetched_data[index]);
+      Navigator.of(context).pop();
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Center(child: Text("Alert")),
+      content: Text(
+          "Do You Really Want To Delete"),
+      actions: [
+        cancelButton,
+        launchButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
 }
