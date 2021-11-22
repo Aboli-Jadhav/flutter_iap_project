@@ -1,10 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iap_project/date_picker.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_iap_project/date_picker2.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class AddToScrap extends StatefulWidget {
   const AddToScrap({Key? key}) : super(key: key);
@@ -104,6 +101,7 @@ class _AddToScrapState extends State<AddToScrap> {
         },
       );
     }
+
 
 
   void handleDelete() async {

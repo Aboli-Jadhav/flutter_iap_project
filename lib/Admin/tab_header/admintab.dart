@@ -1,12 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_iap_project/Admin/Add%20gauges/addguage_page.dart';
 import 'package:flutter_iap_project/Admin/Addviewer/Add_Viewer.dart';
-import 'package:flutter_iap_project/Admin/Calibrate%20Guages/calibrate_gauge.dart';
 import 'package:flutter_iap_project/Admin/Add gauges/front_add_gauge.dart';
 import 'package:flutter_iap_project/Admin/Calibrate%20Guages/gauge_calibrate_details.dart';
-import 'package:flutter_iap_project/Admin/Search%20Guages/search_gauge.dart';
 import 'package:flutter_iap_project/Profile_ad.dart';
+import 'package:flutter_iap_project/Suppiler/SupplierTab.dart';
 import 'package:flutter_iap_project/master_admin/Manage_scrap/Manage_Scrap.dart';
 import 'package:flutter_iap_project/master_admin/view_gauge/front_page.dart';
 
@@ -24,7 +22,7 @@ class admin_tab_head extends StatefulWidget{
 
 class _admin_tab_headState extends State<admin_tab_head>{
   Widget build(BuildContext){
-    return DefaultTabController(length: 6, child: Scaffold(
+    return DefaultTabController(length: 7, child: Scaffold(
       appBar: AppBar(
         toolbarHeight:0,
         backgroundColor: Colors.redAccent,
@@ -83,6 +81,13 @@ class _admin_tab_headState extends State<admin_tab_head>{
             ),
             Tab(
               child: Align(
+                alignment: Alignment.center,
+                child: Text("Suppliers"),
+
+              ),
+            ),
+            Tab(
+              child: Align(
 
                 alignment: Alignment.center,
                 child: Text("Logout"),
@@ -100,6 +105,7 @@ class _admin_tab_headState extends State<admin_tab_head>{
           gauge_calibrate_search(gauge_name:widget.gauge_name),
           //search_gauge(),
           Manage_Scrap(),
+          SupplierTab(),
           profile_ad(),
         ],
       ),
