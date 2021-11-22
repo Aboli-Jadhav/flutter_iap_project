@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_iap_project/Suppiler/SupplierTab.dart';
 import '../add_admin/Master_Add_Admins.dart';
 import '../View_admin/View_AdminList_DropDown.dart';
 import 'package:flutter_iap_project/master_admin/Edit_Attribute/edit_atri.dart';
@@ -24,7 +25,7 @@ class _tab_headState extends State<tab_head> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        length: 6,
+        length: 7,
         child: Scaffold(
           appBar: AppBar(
             toolbarHeight: 0,
@@ -69,6 +70,12 @@ class _tab_headState extends State<tab_head> {
                   Tab(
                     child: Align(
                       alignment: Alignment.center,
+                      child: Text("Supplier"),
+                    ),
+                  ),
+                  Tab(
+                    child: Align(
+                      alignment: Alignment.center,
                       child: Text("Manage Scraps"),
                     ),
                   ),
@@ -86,6 +93,7 @@ class _tab_headState extends State<tab_head> {
             View_AdminList_DropDown(gauge_location: widget.gauge_location,),
             edit_atri(),
             front_view_gauge(gauge_name: widget.gauge_name,gauge_location: widget.gauge_location,),
+            SupplierTab(),
             Manage_Scrap(),
             master_adminHome_Profile()
           ]),
