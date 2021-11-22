@@ -32,7 +32,7 @@ class _SupplierTabState extends State<SupplierTab> {
       setState(() {
 
       });
-      print("EgencyType: $agencyType");
+      print("AgencyType: $agencyType");
 
       //.then((value)
       //{
@@ -123,7 +123,7 @@ class _SupplierTabState extends State<SupplierTab> {
                       ),
                     );
                   },
-                  child: Text("View Suppliers",
+                  child: Text("Edit Suppliers",
                     style: TextStyle(
                         fontSize: 20.0,
                         color: Colors.white,
@@ -154,7 +154,7 @@ class _SupplierTabState extends State<SupplierTab> {
                       ),
                     );
                   },
-                  child: Text("Edit Supplier",
+                  child: Text("View Supplier",
                     style: TextStyle(
                         fontSize: 20.0,
                         color: Colors.white,
