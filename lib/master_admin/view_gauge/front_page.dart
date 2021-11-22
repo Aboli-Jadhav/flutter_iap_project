@@ -56,6 +56,10 @@ class _front_view_gaugeState extends State<front_view_gauge> {
   TextEditingController location = TextEditingController();
   TextEditingController plant = TextEditingController();
 
+
+
+  String selectedDate='';
+
   var _selected_gauges;
   String selectedValue='';
 
@@ -169,6 +173,7 @@ class _front_view_gaugeState extends State<front_view_gauge> {
                 calibration_due_date: calibration_due_date,
                 location: location,
                 plant: plant,
+                selectedDate: selectedDate,
               ),
               const SizedBox(
                 height: 30,
@@ -230,7 +235,8 @@ class _front_view_gaugeState extends State<front_view_gauge> {
                   case 'CALIBRATION DUE DATE': {
                   //statements;
                   //   selected_option = calibration_due_date.text;
-                    selected_option ="${calibration_due_date.toLocal()}".split(' ')[0];
+                    //selected_option ="${calibration_due_date.toLocal()}".split(' ')[0];
+                    selected_option = selectedDate;
                     final_selectedValue='calibration_due_date';
                   }
                   break;
@@ -331,11 +337,12 @@ class showWidgets extends StatefulWidget {
   final DateTime calibration_due_date;
   final TextEditingController location;
   final TextEditingController plant;
+  final String selectedDate;
 
   // DateTime selectedDate2 = DateTime.now();
   // DateTime selectedDate3 = DateTime.now();
 
-  const showWidgets({Key? key, required this.value,required this.gauge_name,required this.gauge_location,required this.selected_option,required this.type_of_gauge,required this.wppl_gauge_id_no, required this.gauge_make, required this.gauge_manufacturing_id_no,required this.size,required this.calibration_date,required this.calibration_due_date,required this.location,required this.plant}) : super(key: key);
+  const showWidgets({Key? key, required this.value,required this.gauge_name,required this.gauge_location,required this.selected_option,required this.type_of_gauge,required this.wppl_gauge_id_no, required this.gauge_make, required this.gauge_manufacturing_id_no,required this.size,required this.calibration_date,required this.calibration_due_date,required this.location,required this.plant, required this.selectedDate}) : super(key: key);
 
   @override
   _showWidgetsState createState() => _showWidgetsState();
@@ -514,7 +521,7 @@ class _showWidgetsState extends State<showWidgets> {
                       child: TextField(
                         controller: widget.gauge_manufacturing_id_no,
                         decoration: InputDecoration.collapsed(
-                          hintText: "Gauge type",
+                          hintText: "GAUGE/INSTRUMENT MANUFACTURING ID NO",
                           //fillColor: Colors.white,
                         ),
                       ),
@@ -596,6 +603,7 @@ class _showWidgetsState extends State<showWidgets> {
                   ),
 
                   TestPickerWidget(widget.calibration_due_date),
+                  //TestPickerWidget2(widget.selectedDate),
                 ],
               )
             // : SizedBox.shrink(),

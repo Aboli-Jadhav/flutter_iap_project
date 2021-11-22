@@ -57,7 +57,7 @@ void main() {
       '/viewScrap':(context) => ViewScrapOfGuageType(),
       '/addViewer': (context) => AddViewer(),
       '/adminEditProfile': (context) => Admin_Edit_Profile(),
-      '/master_add_admins': (context) => Master_AddAdmins(),
+      '/master_add_admins': (context) => Master_AddAdmins(gauge_location: [],),
       '/masterAdmin_EditProfile': (context) => MasterAdmin_EditProfile(),
       // '/calibrate gauge' : (context) => Calibrate_Gauge(),
       '/edit_attribute' : (context) => edit_atri(),
@@ -68,7 +68,7 @@ void main() {
       '/edit_range' : (context) => edit_range(),
       '/edit_type' : (context) => edit_type(),
       '/view_master_gau' : (context) => view_master_gau(selected_option: '',selectedValue: ''),
-      '/viewAdminList' : (context) => View_AdminList_DropDown(),
+      '/viewAdminList' : (context) => View_AdminList_DropDown(gauge_location: [],),
       '/master_adminHome': (context) => master_adminHome_Page(),
 
     },

@@ -9,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_iap_project/Admin/Calibrate%20Guages/calibrate_gauge.dart';
+import 'package:flutter_iap_project/Admin/Calibrate%20Guages/show_calibration_history.dart';
 import 'package:flutter_iap_project/suggestion_data.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:autocomplete_textfield_ns/autocomplete_textfield_ns.dart';
@@ -245,7 +246,38 @@ class _gauge_search_calibrate extends State<gauge_calibrate_search>{
 
               //Navigator.push(context,'/showgauge');
             },
-          )
+          ),
+          const SizedBox(height: 20,),
+          ElevatedButton(
+            child: Text("Show Calibration History"),
+            style: ElevatedButton.styleFrom(
+              primary: Colors.red,
+            ),
+            onPressed: () {
+              if(a.text.isEmpty){
+                Fluttertoast.showToast(
+                    msg: "Please Enter Wppl Gauge Number",
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.CENTER,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: Colors.red,
+                    textColor: Colors.white,
+                    fontSize: 16.0);
+                // Timer(
+                //   const Duration(milliseconds: 2000),
+                //     (){
+                //     }
+                // );
+                return;
+              }else{
+                Navigator.push(context,MaterialPageRoute(builder: (context) => ShowCalibrationHistory(wppl_number: a.text,),),);
+                //shareperferences();
+              }
+
+
+              //Navigator.push(context,'/showgauge');
+            },
+          ),
 
         ],
 

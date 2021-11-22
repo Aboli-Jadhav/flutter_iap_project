@@ -9,6 +9,13 @@ import 'package:flutter_iap_project/master_admin/view_gauge/front_page.dart';
 
 
 class tab_head extends StatefulWidget {
+
+  List<String> gauge_name=[];
+  List<String> gauge_location=[];
+
+
+  tab_head({required this.gauge_name,required this.gauge_location});
+
   @override
   _tab_headState createState() => _tab_headState();
 }
@@ -75,10 +82,10 @@ class _tab_headState extends State<tab_head> {
             ),
           ),
           body: TabBarView(children: [
-            Master_AddAdmins(),
-            View_AdminList_DropDown(),
+            Master_AddAdmins(gauge_location: widget.gauge_location,),
+            View_AdminList_DropDown(gauge_location: widget.gauge_location,),
             edit_atri(),
-            front_view_gauge(gauge_name: [],gauge_location: [],),
+            front_view_gauge(gauge_name: widget.gauge_name,gauge_location: widget.gauge_location,),
             Manage_Scrap(),
             master_adminHome_Profile()
           ]),
