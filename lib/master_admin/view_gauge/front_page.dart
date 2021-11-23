@@ -51,8 +51,8 @@ class _front_view_gaugeState extends State<front_view_gauge> {
   TextEditingController size = TextEditingController();
   //TextEditingController calibration_date = TextEditingController();
   //TextEditingController calibration_due_date = TextEditingController();
-  DateTime calibration_date = DateTime.now();
-  DateTime calibration_due_date = DateTime.now();
+  static var calibration_date =new TestPickerWidget2("");
+  static var calibration_due_date = new TestPickerWidget2("");
   TextEditingController location = TextEditingController();
   TextEditingController plant = TextEditingController();
 
@@ -169,8 +169,6 @@ class _front_view_gaugeState extends State<front_view_gauge> {
                 gauge_make: gauge_make,
                 gauge_manufacturing_id_no: gauge_manufacturing_id_no,
                 size: size,
-                calibration_date: calibration_date,
-                calibration_due_date: calibration_due_date,
                 location: location,
                 plant: plant,
                 selectedDate: selectedDate,
@@ -226,8 +224,9 @@ class _front_view_gaugeState extends State<front_view_gauge> {
                   case 'CALIBRATION DATE': {
                   //statements;
                   //   selected_option = calibration_date.text;
-                    selected_option = "${calibration_date.toLocal()}".split(' ')[0];
+                    selected_option = calibration_date.selectedDate;
                     final_selectedValue='calibration_date';
+                    calibration_date.selectedDate = "";
 
                   }
                   break;
@@ -236,8 +235,9 @@ class _front_view_gaugeState extends State<front_view_gauge> {
                   //statements;
                   //   selected_option = calibration_due_date.text;
                     //selected_option ="${calibration_due_date.toLocal()}".split(' ')[0];
-                    selected_option = selectedDate;
+                    selected_option = calibration_due_date.selectedDate;
                     final_selectedValue='calibration_due_date';
+                    calibration_due_date.selectedDate = "";
                   }
                   break;
 
@@ -333,8 +333,6 @@ class showWidgets extends StatefulWidget {
   final TextEditingController gauge_make;
   final TextEditingController gauge_manufacturing_id_no ;
   final TextEditingController size;
-  final DateTime calibration_date;
-  final DateTime calibration_due_date;
   final TextEditingController location;
   final TextEditingController plant;
   final String selectedDate;
@@ -342,7 +340,7 @@ class showWidgets extends StatefulWidget {
   // DateTime selectedDate2 = DateTime.now();
   // DateTime selectedDate3 = DateTime.now();
 
-  const showWidgets({Key? key, required this.value,required this.gauge_name,required this.gauge_location,required this.selected_option,required this.type_of_gauge,required this.wppl_gauge_id_no, required this.gauge_make, required this.gauge_manufacturing_id_no,required this.size,required this.calibration_date,required this.calibration_due_date,required this.location,required this.plant, required this.selectedDate}) : super(key: key);
+  const showWidgets({Key? key, required this.value,required this.gauge_name,required this.gauge_location,required this.selected_option,required this.type_of_gauge,required this.wppl_gauge_id_no, required this.gauge_make, required this.gauge_manufacturing_id_no,required this.size,required this.location,required this.plant, required this.selectedDate}) : super(key: key);
 
   @override
   _showWidgetsState createState() => _showWidgetsState();
@@ -582,7 +580,7 @@ class _showWidgetsState extends State<showWidgets> {
                     height: 10,
                   ),
 
-                  TestPickerWidget(widget.calibration_date),
+                  _front_view_gaugeState.calibration_date,
                 ],
               )
             // : SizedBox.shrink(),
@@ -602,7 +600,7 @@ class _showWidgetsState extends State<showWidgets> {
                     height: 10,
                   ),
 
-                  TestPickerWidget(widget.calibration_due_date),
+                  _front_view_gaugeState.calibration_due_date,
                   //TestPickerWidget2(widget.selectedDate),
                 ],
               )
