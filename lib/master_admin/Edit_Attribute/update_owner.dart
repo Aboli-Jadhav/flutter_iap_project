@@ -66,7 +66,7 @@ class _update_ownerState extends State<update_owner> {
         .collection("Chakan")
         .doc("Attributes")
         .collection("gauge location owner")
-        .add({'name': nctrl2.text}).then((value) {
+        .add({'name': nctrl2.text}).whenComplete(() {
       print("Data added Successfully");
       setState(() {
         //final_list2 =[];
@@ -94,14 +94,20 @@ class _update_ownerState extends State<update_owner> {
         .then((QuerySnapshot querysnapshot) {
       if (querysnapshot.docs.isNotEmpty) {
         querysnapshot.docs.forEach((element) async {
-          await element.reference.delete();
+          await element.reference.delete().whenComplete(()
+          {
+            setState(() {
+              //final_list2 =[];
+              nctrl2.clear();
+              fetched_data=[];
+            });
+          });
+          getData();
+          setState(() {
+
+          });
         });
-        setState(() {
-          //final_list2 =[];
-          nctrl2.clear();
-          fetched_data=[];
-        });
-        getData();
+
         //Provider.of<RefreshManager>(BuildContext context, listen: false)
       }
     });

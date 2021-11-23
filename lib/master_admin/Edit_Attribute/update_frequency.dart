@@ -67,15 +67,16 @@ class _update_itemState extends State<update_item> {
         .collection("Chakan")
         .doc("Attributes")
         .collection("gauge frequency")
-        .add({'name': nctrl2.text}).then((value) {
-      print("Data added Successfully");
-      setState(() {
-        //final_list2 =[];
-        nctrl2.clear();
-        fetched_data=[];
+        .add({'name': nctrl2.text}).whenComplete(()
+        {
+            print("Data added Successfully");
+            setState(() {
+              //final_list2 =[];
+              nctrl2.clear();
+              fetched_data=[];
+            });
+            getData();
       });
-      getData();
-    });
     // getData();
     //nctrl2.clear();
     //Provider.of<RefreshManager>(context,listen:false).isrefreshed=true;
@@ -92,20 +93,29 @@ class _update_itemState extends State<update_item> {
         .collection("gauge frequency")
         .where('name', isEqualTo: name)
         .get()
-        .then((QuerySnapshot querysnapshot) {
-      if (querysnapshot.docs.isNotEmpty) {
-        querysnapshot.docs.forEach((element) async {
-          await element.reference.delete();
-        });
-        setState(() {
-          //final_list2 =[];
-          nctrl2.clear();
-          fetched_data=[];
-        });
-        getData();
-        //Provider.of<RefreshManager>(BuildContext context, listen: false)
-      }
-    });
+        .then((QuerySnapshot querysnapshot)
+        {
+          if (querysnapshot.docs.isNotEmpty)
+          {
+            querysnapshot.docs.forEach((element) async
+            {
+              await element.reference.delete().whenComplete(()
+              {
+                  setState(() {
+                    nctrl2.clear();
+                    fetched_data=[];
+                  });
+              });
+              getData();
+              setState(() {
+                //final_list2 =[];
+
+              });
+            });
+
+            //Provider.of<RefreshManager>(BuildContext context, listen: false)
+          }
+      });
   }
 
   Future<String?> _showDialog(String name) async {

@@ -67,15 +67,16 @@ class _update_locationState extends State<update_location> {
         .collection("Chakan")
         .doc("Attributes")
         .collection("gauge location")
-        .add({'name': nctrl2.text}).then((value) {
-      print("Data added Successfully");
-      setState(() {
-        //final_list2 =[];
-        nctrl2.clear();
-        fetched_data=[];
-      });
-      getData();
-    });
+        .add({'name': nctrl2.text}).whenComplete(()
+        {
+          print("Data added Successfully");
+          setState(() {
+            //final_list2 =[];
+            nctrl2.clear();
+            fetched_data=[];
+          });
+          getData();
+        });
     // getData();
     //nctrl2.clear();
     //Provider.of<RefreshManager>(context,listen:false).isrefreshed=true;
@@ -95,14 +96,19 @@ class _update_locationState extends State<update_location> {
         .then((QuerySnapshot querysnapshot) {
       if (querysnapshot.docs.isNotEmpty) {
         querysnapshot.docs.forEach((element) async {
-          await element.reference.delete();
+          await element.reference.delete().whenComplete(() {
+            setState(() {
+              //final_list2 =[];
+              nctrl2.clear();
+              fetched_data=[];
+            });
+          });
+          getData();
+          setState(() {
+            //final_list2 =[];
+
+          });
         });
-        setState(() {
-          //final_list2 =[];
-          nctrl2.clear();
-          fetched_data=[];
-        });
-        getData();
         //Provider.of<RefreshManager>(BuildContext context, listen: false)
       }
     });
