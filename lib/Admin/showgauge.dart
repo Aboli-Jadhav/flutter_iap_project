@@ -1,5 +1,6 @@
 
 import "package:flutter/material.dart";
+import 'package:flutter_iap_project/Admin/Calibrate%20Guages/calibrate_gauge.dart';
 import 'package:flutter_iap_project/Admin/ShowGauge_WidgetEmpty.dart';
 import 'package:flutter_iap_project/Admin/view_gauge_model.dart';
 import 'showgauge_widget.dart';
@@ -240,8 +241,7 @@ class _ShowGaugeState extends State<ShowGauge> {
                     primary: Colors.red,
                   ),
                   onPressed: () {
-                    //Navigator.push(context,MaterialPageRoute(builder: (context) => view_master_gau()),);
-
+                    Navigator.push(context,MaterialPageRoute(builder: (context) => Calibrate_Gauge(wppl_number: widget.model.identification_number)),);
                   },
                 ),
                 const SizedBox(width: 50,),

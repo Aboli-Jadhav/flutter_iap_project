@@ -63,20 +63,23 @@ class _update_itemState extends State<update_item> {
   }
 
   void addItemToList() {
-    firestore
-        .collection("Chakan")
-        .doc("Attributes")
-        .collection("gauge frequency")
-        .add({'name': nctrl2.text}).whenComplete(()
-        {
-            print("Data added Successfully");
-            setState(() {
-              //final_list2 =[];
-              nctrl2.clear();
-              fetched_data=[];
-            });
-            getData();
+    if(nctrl2.text==""){
+      //TODO: Add dialog box saying please enter non empty value
+    }else {
+      firestore
+          .collection("Chakan")
+          .doc("Attributes")
+          .collection("gauge frequency")
+          .add({'name': nctrl2.text}).whenComplete(() {
+        print("Data added Successfully");
+        setState(() {
+          //final_list2 =[];
+          nctrl2.clear();
+          fetched_data = [];
+        });
+        getData();
       });
+    }
     // getData();
     //nctrl2.clear();
     //Provider.of<RefreshManager>(context,listen:false).isrefreshed=true;

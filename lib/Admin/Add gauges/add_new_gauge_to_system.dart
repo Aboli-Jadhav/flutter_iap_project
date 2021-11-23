@@ -45,6 +45,10 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
   var windal_short_form = TextEditingController();
   var last_number = TextEditingController();
   var _suggestion = TextEditingController();
+  var process_owner = TextEditingController();
+  var process_owner_mail_id = TextEditingController();
+  var unit = TextEditingController();
+
   GlobalKey<AutoCompleteTextFieldState<String>> key = GlobalKey();
   List<String> added = [];
   String currentText = "";
@@ -61,6 +65,7 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
   @override
   void initState() {
     // TODO: implement initState
+    unit.text = "MM";
     windal_short_form.text = "WPP";
     last_number.text="00";
     super.initState();
@@ -685,12 +690,88 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
                               ),
                             ],
                           ),
+                          const SizedBox(height: 20,),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: const[
+                                Text(
+                                  "Process Owner",
+                                  style:  TextStyle(
+                                      color: Colors.black, fontSize: 18),
+                                  textAlign: TextAlign.start,
+                                ),
+                                SizedBox(
+                                  width: 260,
+                                ),
+                                Text(
+                                  "Process Owner Mail id",
+                                  style:  TextStyle(
+                                      color: Colors.black, fontSize: 18),
+                                  textAlign: TextAlign.start,
+                                ),
+                                SizedBox(
+                                  width: 260,
+                                ),
+                                Text(
+                                  "Unit",
+                                  style:  TextStyle(
+                                      color: Colors.black, fontSize: 18),
+                                  textAlign: TextAlign.start,
+                                ),
+                              ]),
+                          const SizedBox(height: 10,),
+                          Row(
+                            children: [
+                              Container(
+                                width: 300,
+                                height: 37.0,
+                                child: TextField(
+                                  controller: process_owner,
+                                  decoration: const InputDecoration(
+                                    //labelText: "Invoice Number",
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    border: OutlineInputBorder(),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 100,),
+                              Container(
+                                width: 300,
+                                height: 37.0,
+                                child: TextField(
+                                  controller: process_owner_mail_id,
+                                  decoration: const InputDecoration(
+                                    //labelText: "Invoice Number",
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    border: OutlineInputBorder(),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 100,),
+                              Container(
+                                width: 300,
+                                height: 37.0,
+                                child: TextField(
+                                  controller: unit,
+                                  decoration: const InputDecoration(
+                                    //labelText: "Invoice Number",
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    border: OutlineInputBorder(),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+
                         ],
                       ),
                     ],
                   ),
                   const SizedBox(
-                    height: 40,
+                    height: 20,
                   ),
                   ElevatedButton(
                     child: const Text("ADD DATA"),
@@ -751,14 +832,14 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
       'plant':_selected_plant,
       'certificate_number': "",
       'nabl_accrediation_status':"",
-      'process_owner':"",
-      'process_owner_mail_id':"",
-      'unit':"", //confirm about adding this textField in here and add_new_gauge_to_system
+      'process_owner':process_owner.text.toString(),
+      'process_owner_mail_id':process_owner_mail_id.text.toString(),
+      'unit':unit.text.toString(), //confirm about adding this textField in here and add_new_gauge_to_system
       'acceptance_criteria':''
     })
     //.update({'GAUGE COST':'900'})
-        .then((value) => print("671: data added successfully in gauges")) //we can use toast msg here
-        .catchError((error) => print("672: error while adding data to last number"));
+        .then((value) => print("add_ new_gauge_to_ system 840: data added successfully in gauges")) //we can use toast msg here
+        .catchError((error) => print("add_ new_gauge_to_ system 841: error while adding data to last number"));
   }
 
   addDataInLastNumber() async {
@@ -775,7 +856,7 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
       'last_number': last_number.text.toString(),
       'windal_sf': windal_short_form.text.toString()
     }).then((value) =>
-            print("689:data added successfully in last number document"))
-    .catchError((onError)=>print("690: error while adding data to last number"));
+            print("add_ new_gauge_to_ system 858:data added successfully in last number document"))
+    .catchError((onError)=>print("add_ new_gauge_to_ system 859: error while adding data to last number"));
   }
 }

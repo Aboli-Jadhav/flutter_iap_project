@@ -48,6 +48,8 @@ class _add_GaugeState extends State<add_Gauge> {
   var gauge_type = TextEditingController();
   var _suggestion = TextEditingController();
   var unit = TextEditingController();
+  var process_owner = TextEditingController();
+  var process_owner_mail_id = TextEditingController();
   GlobalKey<AutoCompleteTextFieldState<String>> key = GlobalKey();
   List<String> added = [];
   String currentText = "";
@@ -153,8 +155,8 @@ class _add_GaugeState extends State<add_Gauge> {
           'plant':_selected_plant,
       'certificate_number': "",
       'nabl_accrediation_status':"",
-      'process_owner':"",
-      'process_owner_mail_id':"",
+      'process_owner':process_owner.text.toString(),
+      'process_owner_mail_id':process_owner_mail_id.text.toString(),
       'unit':unit.text.toString(), //confirm about adding this textField in here and add_new_gauge_to_system
       'acceptance_criteria':''
         })
@@ -184,6 +186,9 @@ class _add_GaugeState extends State<add_Gauge> {
     gauge_life.clear();
     invoice_number.clear();
     gauge_type.clear();
+    process_owner_mail_id.clear();
+    process_owner.clear();
+
     //selectedDate1 = DateTime
     //_selected_location ="";
   }
@@ -843,6 +848,58 @@ class _add_GaugeState extends State<add_Gauge> {
                               height: 37.0,
                               child: TextField(
                                 controller: unit,
+                                decoration: const InputDecoration(
+                                  //labelText: "Invoice Number",
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  border: OutlineInputBorder(),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 20,),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: const[
+                              Text(
+                                "Process Owner",
+                                style:  TextStyle(
+                                    color: Colors.black, fontSize: 18),
+                                textAlign: TextAlign.start,
+                              ),
+                              SizedBox(
+                                width: 230,
+                              ),
+                              Text(
+                                "Process Owner Mail id",
+                                style:  TextStyle(
+                                    color: Colors.black, fontSize: 18),
+                                textAlign: TextAlign.start,
+                              ),
+                            ]),
+                        const SizedBox(height: 10,),
+                        Row(
+                          children: [
+                            Container(
+                              width: 300,
+                              height: 37.0,
+                              child: TextField(
+                                controller: process_owner,
+                                decoration: const InputDecoration(
+                                  //labelText: "Invoice Number",
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  border: OutlineInputBorder(),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 100,),
+                            Container(
+                              width: 300,
+                              height: 37.0,
+                              child: TextField(
+                                controller: process_owner_mail_id,
                                 decoration: const InputDecoration(
                                   //labelText: "Invoice Number",
                                   fillColor: Colors.white,

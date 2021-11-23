@@ -51,7 +51,7 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
   TextEditingController nabl_accredation_status= TextEditingController();
   TextEditingController proces_owner = TextEditingController();
   TextEditingController process_owner_mail_id = TextEditingController();
-  TextEditingController unit = TextEditingController();
+ // TextEditingController unit = TextEditingController();
   TextEditingController plant = TextEditingController();
 
   String calibration_date="";
@@ -63,71 +63,13 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
   var gauge_life;
   var invoice_number;
   var invoice_date;
+  var fetched_processowner;
+  var fetched_processowner_mailid;
+  var fetched_unit;
 
 
 
 
-  // List<dynamic> _gauges = [];
-  // var _selected_gauges;
-  // List<dynamic> _frequency = [];
-  // var _selected_frequency;
-  // List<dynamic> _location = [];
-  // var _selected_location;
-  // List<dynamic> _location_owner = [];
-  // var _selected_location_owner;
-
-
-
-
-  // void addData()async{
-  //   var gauge_name="snap gauge";
-  //   var collection_name="all "+gauge_name;
-  //   var wpp_number = gauge_number.text.toString();
-  //   var manufacturer_number = identification_number.text.toString();
-  //   var final_number = wpp_number+"_"+manufacturer_number;
-  //   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  //   firestore.collection("Chakan")
-  //       .doc("Gauge Types")
-  //       .collection("All Gauges")
-  //       .doc(gauge_name)
-  //       .collection(collection_name)
-  //       .doc(final_number)
-  //       .set({
-  //     'gauge_number': gauge_number.text.toString(), // John Doe
-  //     'identification_number': identification_number.text.toString(), // Stokes and Sons
-  //     'certificate_number': certificate_number.text.toString(), // 42
-  //     'frequency': frequency.text.toString(),
-  //     'go_size':go_size.text.toString(),
-  //     'no_go_size':no_go_size.text.toString(),
-  //     'remark':remark.text.toString(),
-  //     'caliberated_on_date':"${selectedDate3.toLocal()}".split(' ')[0],
-  //     'caliberation_due_date':"${selectedDate2.toLocal()}".split(' ')[0],
-  //     'issued_date':"${selectedDate1.toLocal()}".split(' ')[0],
-  //   })
-  //   //.update({'GAUGE COST':'900'})
-  //       .then((value) => Fluttertoast.showToast(
-  //       msg:  "User Added",
-  //       toastLength: Toast.LENGTH_SHORT,
-  //       gravity: ToastGravity.CENTER,
-  //       timeInSecForIosWeb: 1,
-  //       backgroundColor: Colors.red,
-  //       textColor: Colors.white,
-  //       fontSize: 16.0
-  //   )) //we can use toast msg here
-  //       .catchError((error) => print("Failed to add user: $error"));
-  //
-  //
-  //
-  //   // Fluttertoast.showToast(
-  //   //     msg:  gauge_number.text.toString(),
-  //   //     toastLength: Toast.LENGTH_SHORT,
-  //   //     gravity: ToastGravity.CENTER,
-  //   //     timeInSecForIosWeb: 1,
-  //   //     backgroundColor: Colors.red,
-  //   //     textColor: Colors.white,
-  //   //     fontSize: 16.0
-  //   // );
-  // }
 
 
 
@@ -163,13 +105,16 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
               gauge_life     =doc["gauge_life"];
               invoice_number =doc["invoice_number"];
               invoice_date   =doc["invoice_date"];
+              fetched_processowner = doc["process_owner"];
+              fetched_processowner_mailid= doc["process_owner_mail_id"];
+              fetched_unit  = doc['unit'];
               //unit = doc["unit"];
 
               certificate_number.text = doc['certificate_number'];
               nabl_accredation_status.text = doc['nabl_accrediation_status'];
               proces_owner.text = doc['process_owner'];
               process_owner_mail_id.text = doc['process_owner_mail_id'];
-              unit.text = doc['unit'];
+              //unit.text = doc['unit'];
               Acceptance_Criteria.text = doc['acceptance_criteria'];
               plant.text = doc['plant'];
 
@@ -620,10 +565,10 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                               children:const  [
                                 Text("nabl accredation status",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
                                 SizedBox(width: 200,),
-                                Text("process owner",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
-                                SizedBox(width: 290,),
-                                Text("process owner mail id",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
-
+                                // Text("process owner",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
+                                // SizedBox(width: 290,),
+                                // Text("process owner mail id",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
+                                Text("plant",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
                               ]
                           ),
                           const  SizedBox(height: 10,),
@@ -644,66 +589,35 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
 
                                   ),),
                               ),
-                              SizedBox(width: 100,),
-                              Container(
-                                width: 300,
-                                height:37.0,
-                                child: TextField(
-                                  controller: proces_owner,
-                                  decoration:const  InputDecoration(
-                                    fillColor: Colors.white,
-                                    filled: true,
-                                    labelText: "process owner",
-                                    border: OutlineInputBorder(),
-
-                                  ),),
-                              ),
-                              SizedBox(width: 100,),
-                              Container(
-                                width: 300,
-                                height:37.0,
-                                child: TextField(
-                                  controller: process_owner_mail_id,
-                                  decoration:const  InputDecoration(
-                                    fillColor: Colors.white,
-                                    filled: true,
-                                    labelText: "process owner mail id",
-                                    border: OutlineInputBorder(),
-
-                                  ),),
-                              ),
-
-                            ],
-                          ),
-                          const SizedBox(height: 20,),
-                          Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children:const  [
-                                Text("unit",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
-                                const SizedBox(width: 350,),
-                                Text("plant",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
-
-                              ]
-                          ),
-                          const  SizedBox(height: 10,),
-
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Container(
-                                width: 300,
-                                height:37.0,
-                                child: TextField(
-                                  controller: unit,
-                                  decoration:const  InputDecoration(
-                                    fillColor: Colors.white,
-                                    filled: true,
-                                    labelText: "unit",
-                                    border: OutlineInputBorder(),
-
-                                  ),),
-                              ),
-                              SizedBox(width: 100,),
+                              // SizedBox(width: 100,),
+                              // Container(
+                              //   width: 300,
+                              //   height:37.0,
+                              //   child: TextField(
+                              //     controller: proces_owner,
+                              //     decoration:const  InputDecoration(
+                              //       fillColor: Colors.white,
+                              //       filled: true,
+                              //       labelText: "process owner",
+                              //       border: OutlineInputBorder(),
+                              //
+                              //     ),),
+                              // ),
+                              // SizedBox(width: 100,),
+                              // Container(
+                              //   width: 300,
+                              //   height:37.0,
+                              //   child: TextField(
+                              //     controller: process_owner_mail_id,
+                              //     decoration:const  InputDecoration(
+                              //       fillColor: Colors.white,
+                              //       filled: true,
+                              //       labelText: "process owner mail id",
+                              //       border: OutlineInputBorder(),
+                              //
+                              //     ),),
+                              // ),
+                              const SizedBox(width: 100,),
                               Container(
                                 width: 300,
                                 height:37.0,
@@ -712,14 +626,58 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                                   decoration:const  InputDecoration(
                                     fillColor: Colors.white,
                                     filled: true,
-                                    labelText: "plant",
+                                    //labelText: "plant",
                                     border: OutlineInputBorder(),
 
                                   ),),
                               ),
-
                             ],
                           ),
+                          // const SizedBox(height: 20,),
+                          // Row(
+                          //     mainAxisAlignment: MainAxisAlignment.start,
+                          //     children:const  [
+                          //       // Text("unit",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
+                          //       // const SizedBox(width: 350,),
+                          //       Text("plant",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
+                          //
+                          //     ]
+                          // ),
+                          // const  SizedBox(height: 10,),
+                          //
+                          // Row(
+                          //   mainAxisAlignment: MainAxisAlignment.start,
+                          //   children: [
+                          //     // Container(
+                          //     //   width: 300,
+                          //     //   height:37.0,
+                          //     //   child: TextField(
+                          //     //     controller: unit,
+                          //     //     decoration:const  InputDecoration(
+                          //     //       fillColor: Colors.white,
+                          //     //       filled: true,
+                          //     //       labelText: "unit",
+                          //     //       border: OutlineInputBorder(),
+                          //     //
+                          //     //     ),),
+                          //     // ),
+                          //     // SizedBox(width: 100,),
+                          //     Container(
+                          //       width: 300,
+                          //       height:37.0,
+                          //       child: TextField(
+                          //         controller: plant,
+                          //         decoration:const  InputDecoration(
+                          //           fillColor: Colors.white,
+                          //           filled: true,
+                          //           labelText: "plant",
+                          //           border: OutlineInputBorder(),
+                          //
+                          //         ),),
+                          //     ),
+                          //
+                          //   ],
+                          // ),
 
 
 
@@ -781,9 +739,9 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
       //TODO : add these parameters
       'certificate_number':certificate_number.text,
       'nabl_accrediation_status':nabl_accredation_status.text,
-      'process_owner':proces_owner.text,
-      'process_owner_mail_id':process_owner_mail_id.text,
-      'unit':unit.text,
+      'process_owner':fetched_processowner,
+      'process_owner_mail_id':fetched_processowner_mailid,
+      'unit':fetched_unit,
       'plant':plant.text,
       'acceptance_criteria': Acceptance_Criteria.text
     })
@@ -828,9 +786,9 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
       'invoice_date':invoice_date,
       'certificate_number':certificate_number.text,
       'nabl_accrediation_status':nabl_accredation_status.text,
-      'process_owner':proces_owner.text,
-      'process_owner_mail_id':process_owner_mail_id.text,
-      'unit':unit.text, //fetch this
+      'process_owner':fetched_processowner,
+      'process_owner_mail_id':fetched_processowner_mailid,
+      'unit':fetched_unit, //fetch this
       'plant':plant.text,
       'acceptance_criteria': Acceptance_Criteria.text
 
