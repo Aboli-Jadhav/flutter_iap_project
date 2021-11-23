@@ -41,12 +41,13 @@ class _ViewScopeOfSupplierState extends State<ViewScopeOfSupplier> {
     print(fetched_data);
   }
 
-  void addItemToList() {
+  void addItemToList()
+  {
     FirebaseFirestore.instance.collection("Chakan")
         .doc("Supplier")
         .collection("all_")
         .doc(widget.supplier_code.toString())
-        .collection("Scope").add({'name':scope.text.toString()}).then((value) {
+        .collection("Scope").add({'name':scope.text.toString()}).whenComplete(()  {
       print("Scope added Successfully");
       setState(() {
         //final_list2 =[];
@@ -54,10 +55,10 @@ class _ViewScopeOfSupplierState extends State<ViewScopeOfSupplier> {
         fetched_data=[];
       });
       getScope();
+      setState(() {
+
+      });
     });
-    // getData();
-    //nctrl2.clear();
-    //Provider.of<RefreshManager>(context,listen:false).isrefreshed=true;
 
 
   }
@@ -70,21 +71,22 @@ class _ViewScopeOfSupplierState extends State<ViewScopeOfSupplier> {
         .doc(widget.supplier_code.toString())
         .collection("Scope").where('name',isEqualTo: name)
         .get().then((QuerySnapshot querysnapshot) {
-
-        querysnapshot.docs.forEach((element) async {
-          await FirebaseFirestore.instance.collection("Chakan")
-              .doc("Supplier")
-              .collection("all_")
-              .doc(widget.supplier_code.toString())
-              .collection("Scope").doc(element.id).delete();
+      querysnapshot.docs.forEach((element) async {
+        await FirebaseFirestore.instance.collection("Chakan")
+            .doc("Supplier")
+            .collection("all_")
+            .doc(widget.supplier_code.toString())
+            .collection("Scope").doc(element.id).delete().whenComplete(() {
+          setState(() {
+            scope.clear();
+            fetched_data = [];
+          });
         });
+        getScope();
+        setState(() {
 
-      setState(() {
-        //final_list2 =[];
-        scope.clear();
-        fetched_data=[];
+        });
       });
-      getScope();
     }
     );
 

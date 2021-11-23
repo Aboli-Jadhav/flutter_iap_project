@@ -99,6 +99,7 @@ class _EditSupplierState extends State<EditSupplier>
         certFilenm=fileName;
         nabl_cert_link=await tp.child("$fileName").getDownloadURL();
         print(nabl_cert_link);
+        updateCertificateLinks();
       });
 
     }
@@ -134,6 +135,7 @@ class _EditSupplierState extends State<EditSupplier>
         Scopefilenm=fileName;
         lab_scope_link=await tp.child("$fileName").getDownloadURL();
         print(lab_scope_link);
+        updateScopeFileLinks();
       });
 
     }
@@ -158,6 +160,25 @@ class _EditSupplierState extends State<EditSupplier>
     print(agencytype);
   }
 
+  void updateCertificateLinks()
+  async {
+    await FirebaseFirestore.instance.collection("Chakan").doc("Supplier").collection("all_").doc(widget.supplierModel.scode.text.toString()).update(
+        {
+          'NABL_Certificate_Download_Link':nabl_cert_link.toString(),
+          'NABL_Certificate_FileName':certFilenm.toString(),
+
+        });
+  }
+
+  void updateScopeFileLinks()
+  async {
+    await FirebaseFirestore.instance.collection("Chakan").doc("Supplier").collection("all_").doc(widget.supplierModel.scode.text.toString()).update(
+        {
+          'NABL_Lab_Scope_Download_Link':lab_scope_link.toString(),
+          'NABL_Lab_Scope_FileName':Scopefilenm.toString(),
+
+        });
+  }
   // void handleDropChange(String val)
   // {
   //
@@ -204,10 +225,6 @@ class _EditSupplierState extends State<EditSupplier>
           'NABL_certificate_No':widget.supplierModel.nablNo.text.toString(),
           'NABL_Cert_Date':nabl_date.toString(),
           'NABL_Cert_Due_Date':nabl_due_date.toString(),
-          'NABL_Certificate_Download_Link':nabl_cert_link.toString(),
-          'NABL_Lab_Scope_Download_Link':lab_scope_link.toString(),
-          'NABL_Certificate_FileName':certFilenm.toString(),
-          'NABL_Lab_Scope_FileName':Scopefilenm.toString(),
 
         }
     ).whenComplete(()
