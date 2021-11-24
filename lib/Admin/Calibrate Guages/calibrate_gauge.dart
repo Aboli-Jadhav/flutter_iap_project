@@ -9,7 +9,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../date_picker2.dart';
-
+import 'package:flutter_iap_project/datepicker3.dart';
 class Calibrate_Gauge extends StatefulWidget{
   final String wppl_number;
   const Calibrate_Gauge({Key? key,required this.wppl_number}) : super(key: key);
@@ -31,8 +31,8 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
   late final String gauge_type;
 
 
-
-
+  DateTime temp = DateTime.now();
+  bool t = true;
 
   TextEditingController Gauge_Type = TextEditingController();
   TextEditingController Identification_Number = TextEditingController();
@@ -68,8 +68,7 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
   var fetched_unit;
 
 
-
-
+  var t1 = TestPickerWidget3("", 0, "");
 
 
 
@@ -120,9 +119,9 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
 
               setState(() {
                 calibration_date = doc["calibration_date"];
-                calibration_due_date = doc["calibration_due_date"];
+                calibration_due_date = "";
               });
-
+              t1 = TestPickerWidget3(calibration_date, int.parse(Calibration_Frequency.text), calibration_due_date);
               if(Calibration_Cost.text.isEmpty){
                 Fluttertoast.showToast(
                     msg: "Gauge is issued",
@@ -391,9 +390,7 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                                   ),),
                               ),
                               const SizedBox(width: 100,),
-
-                              TestPickerWidget2(calibration_date), //Calibration Date
-
+                              t1,
                               const SizedBox(width: 100,),
                               // Container(
                               //   height:50.0,
@@ -434,6 +431,9 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                                 height:37.0,
                                 child: TextField(
                                   controller: Calibration_Frequency,
+                                  onChanged: (value){
+                                    t1.freq = int.parse(Calibration_Frequency.text);
+                                  },
                                   decoration:const  InputDecoration(
                                     fillColor: Colors.white,
                                     filled: true,
@@ -463,8 +463,35 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
 
-                              TestPickerWidget2(calibration_due_date), //Callibration Due Date
+                          Container(
+                                width: 270,
+                                height: 37,
+                                padding: EdgeInsets.fromLTRB(20,6,3,10),
+                                decoration: BoxDecoration(
+                                    color: Colors.grey[100],
+                                    border: Border.all(color: Colors.black),
+                                    borderRadius: BorderRadius.all(Radius.circular(5))
+                                ),
+                                child: Text(
+                                  // "${widget.selectedDate.toLocal()}".split(' ')[0],
+                                  calibration_due_date,
+                                  style: TextStyle(fontSize: 19, fontWeight: FontWeight.w500),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ) ,
+                              IconButton(
+                                icon: Icon(Icons.calculate),
+                                onPressed: () {
+                                  // addData();
+                                  setState(() {
 
+                                    calibration_due_date = t1.select2;
+                                  });
+
+                                  //addCalibratedData();
+                                },
+
+                              ),
                               SizedBox(width: 90,),
                               Container(
                                 width: 300,
@@ -702,6 +729,7 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                             fontWeight: FontWeight.bold)),
 
                   ),
+
                 ],
               )
             ],
@@ -728,7 +756,7 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
       "calibration_cost":Calibration_Cost.text,
       "remark":Remark.text,
       "gauge_location": Gauge_location.text,
-      "calibration_date":calibration_date,
+      "calibration_date":t1.selectedDate,
       "calibration_due_date":calibration_due_date,
       "item_code": item_code,
       'gauge_make':gauge_make,
@@ -776,7 +804,7 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
       "calibration_cost":Calibration_Cost.text,
       "remark":Remark.text,
       "gauge_location": Gauge_location.text,
-      "calibration_date":calibration_date,
+      "calibration_date":t1.selectedDate,
       "calibration_due_date":calibration_due_date,
       "item_code": item_code,
       'gauge_make':gauge_make,
