@@ -18,6 +18,7 @@ class _update_locationState extends State<update_location> {
   TextEditingController nctrl2 = TextEditingController();
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   List<String> fetched_data = [];
+  final _formKey = GlobalKey<FormState>();
 
 
   _changePetName() {
@@ -175,11 +176,20 @@ class _update_locationState extends State<update_location> {
             width: 340,
             child: Padding(
               padding: EdgeInsets.all(20),
-              child: TextField(
-                controller: nctrl2,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Enter Location',
+              child: Form(
+                key: _formKey,
+                child: TextFormField(
+                  controller: nctrl2,
+                  validator: (value) {
+                    if (value!.isEmpty)
+                      return "Please Add Attribute ???";
+                    else
+                      return null;
+                  },
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Enter Location',
+                  ),
                 ),
               ),
             ),
@@ -188,7 +198,9 @@ class _update_locationState extends State<update_location> {
             color: Colors.red,
             child: Text('Add'),
             onPressed: () {
-              addItemToList();
+              if (_formKey.currentState!.validate()) {
+                addItemToList();
+              }
             },
           ),
           SizedBox(height: 30,),
