@@ -104,7 +104,7 @@ class _admin_tab_headState extends State<admin_tab_head>{
           front_add_gauge(gauge_name:widget.gauge_name,gauge_location:widget.gauge_location),
           gauge_calibrate_search(gauge_name:widget.gauge_name),
           //search_gauge(),
-          Manage_Scrap(),
+          Manage_Scrap(gauge_name: widget.gauge_name,),
           SupplierTab(),
           profile_ad(),
         ],

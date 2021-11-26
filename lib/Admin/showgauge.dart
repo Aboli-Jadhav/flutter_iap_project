@@ -3,6 +3,7 @@ import "package:flutter/material.dart";
 import 'package:flutter_iap_project/Admin/Calibrate%20Guages/calibrate_gauge.dart';
 import 'package:flutter_iap_project/Admin/ShowGauge_WidgetEmpty.dart';
 import 'package:flutter_iap_project/Admin/view_gauge_model.dart';
+import 'package:flutter_iap_project/master_admin/Manage_scrap/Add_To_Scrap.dart';
 import 'showgauge_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -252,6 +253,7 @@ class _ShowGaugeState extends State<ShowGauge> {
                   ),
                   onPressed: () {
                     //Navigator.push(context,MaterialPageRoute(builder: (context) => view_master_gau()),);
+                    Navigator.push(context,MaterialPageRoute(builder: (context) => AddToScrap(gauge_name: [],identification_number: widget.model.identification_number,manufacturer_number: widget.model.manufacturer_serial_number,nominal_size: widget.model.nominal_size,gauge_name_from_showgauge: widget.model.gauge_type,)),);
 
                   },
                 )

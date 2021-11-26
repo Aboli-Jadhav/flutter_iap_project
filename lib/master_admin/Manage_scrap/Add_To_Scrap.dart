@@ -1,10 +1,19 @@
+import 'package:autocomplete_textfield_ns/autocomplete_textfield_ns.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_iap_project/Admin/view_gauge_model.dart';
 import 'package:flutter_iap_project/date_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class AddToScrap extends StatefulWidget {
-  const AddToScrap({Key? key}) : super(key: key);
+
+  final List<String> gauge_name;
+  final String identification_number;
+  final String nominal_size;
+  final String manufacturer_number;
+  final String gauge_name_from_showgauge;
+  const AddToScrap({Key? key,required this.gauge_name, this.identification_number='', this.nominal_size ='',this.manufacturer_number = '', this.gauge_name_from_showgauge = ''}) : super(key: key);
 
   @override
   _AddToScrapState createState() => _AddToScrapState();
@@ -165,14 +174,29 @@ void handleDropChange(String ?val)
     });
   }
 
+  GlobalKey<AutoCompleteTextFieldState<String>> key = GlobalKey();
+  List<String> added = [];
+  String currentText = "";
+  TextEditingController type_of_gauge = TextEditingController();
+
   @override
   void initState() {
     super.initState();
-    get_All_GuageTypes();
+    if(widget.identification_number != ''){
+      type_of_gauge.text = widget.gauge_name_from_showgauge;
+      manufacturer_serial_number.text = widget.manufacturer_number;
+      identification_number.text = widget.identification_number;
+      nominal_size.text = widget.nominal_size;
+    }
+    //type_of_gauge.text = "abc";
+    //get_All_GuageTypes();
   }
 
   @override
   Widget build(BuildContext context) {
+
+
+
     return Container(
       child: Scaffold(
         appBar: AppBar(
@@ -213,8 +237,9 @@ void handleDropChange(String ?val)
                           width: 0.3 * MediaQuery.of(context).size.width,
                           height:40.0,
                           child: TextField(decoration: InputDecoration(
+                            enabled: widget.gauge_name_from_showgauge!=''? false: true,
                             hintText: "Enter Manufacture Serial number",
-                            labelText: " Manufacture Serial number",
+                            //labelText: " Manufacture Serial number",
                             border: OutlineInputBorder(),
 
                           ),
@@ -232,37 +257,74 @@ void handleDropChange(String ?val)
                             textAlign: TextAlign.center,  ),
                         ),
 
-                    Container(
-                      width: 300,
-                      height: 40,
-                      padding: EdgeInsets.fromLTRB(20,10,10,10),
-                      decoration: BoxDecoration(
-                          color: Colors.grey[100],
-                          border: Border.all(color: Colors.black),
-                          borderRadius: BorderRadius.all(Radius.circular(5))
-                      ),
+                        Container(
+                          color: Colors.white,
+                          width: 0.3 * MediaQuery.of(context).size.width,
+                          child: SimpleAutoCompleteTextField(
+                            key: key,
+                            controller: type_of_gauge,
+                            clearOnSubmit: false,
+                            //suggestions: gauge_type,
+                            suggestions: widget.gauge_name,
+                            style: const TextStyle(color: Colors.black, fontSize: 16.0),
+                            decoration: InputDecoration(
+                              enabled: widget.gauge_name_from_showgauge!=''? false: true,
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(5.0),
+                                )),
+                            textChanged: (text) {
+                              currentText = text;
 
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton<String>(
-                          value: _chosenValue,
-                          //elevation: 5,
-                          style: TextStyle(color: Colors.black),
+                            },
+                            textSubmitted: (text) => setState(() {
+                              if (text != "") {
+                                //_gauges.clear();
+                                Fluttertoast.showToast(
+                                    msg: text.toString(),
+                                    toastLength: Toast.LENGTH_SHORT,
+                                    gravity: ToastGravity.CENTER,
+                                    timeInSecForIosWeb: 1,
+                                    backgroundColor: Colors.red,
+                                    textColor: Colors.white,
+                                    fontSize: 16.0);
 
-                          items: guageTypes.map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                          }).toList(),
-                          hint: Text(
-                                "Select The Gauge Type",
-
+                                added.add(text);
+                              }
+                            }),
                           ),
-
-                          onChanged:handleDropChange,
                         ),
-                      ),
-                    ),
+                    // Container(
+                    //   width: 300,
+                    //   height: 40,
+                    //   padding: EdgeInsets.fromLTRB(20,10,10,10),
+                    //   decoration: BoxDecoration(
+                    //       color: Colors.grey[100],
+                    //       border: Border.all(color: Colors.black),
+                    //       borderRadius: BorderRadius.all(Radius.circular(5))
+                    //   ),
+                    //
+                    //   child: DropdownButtonHideUnderline(
+                    //     child: DropdownButton<String>(
+                    //       value: _chosenValue,
+                    //       //elevation: 5,
+                    //       style: TextStyle(color: Colors.black),
+                    //
+                    //       items: guageTypes.map<DropdownMenuItem<String>>((String value) {
+                    //             return DropdownMenuItem<String>(
+                    //               value: value,
+                    //               child: Text(value),
+                    //             );
+                    //       }).toList(),
+                    //       hint: Text(
+                    //             "Select The Gauge Type",
+                    //
+                    //       ),
+                    //
+                    //       onChanged:handleDropChange,
+                    //     ),
+                    //   ),
+                    // ),
                       ],
                     ),
 
@@ -282,7 +344,8 @@ void handleDropChange(String ?val)
                           height:40.0,
                           child: TextField(
                             decoration: InputDecoration(
-                              labelText: ("Instrument Identification Number"),
+                              enabled: widget.gauge_name_from_showgauge!=''? false: true,
+                              //labelText: ("Instrument Identification Number"),
                               hintText:  ("Enter Instrument Identification Number"),
                               border: OutlineInputBorder(),
                             ),
@@ -313,8 +376,9 @@ void handleDropChange(String ?val)
                           width: 0.3 * MediaQuery.of(context).size.width,
                           height:40.0,
                           child: TextField(
+                            enabled: widget.gauge_name_from_showgauge!=''? false: true,
                             decoration: InputDecoration(
-                              labelText: ("Nominal Size "),
+                              //labelText: ("Nominal Size "),
                               hintText:  ("ENTER Nominal Size "),
                               border: OutlineInputBorder(),
                             ),

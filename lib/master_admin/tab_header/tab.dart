@@ -3,6 +3,7 @@ import 'package:flutter_iap_project/Suppiler/SupplierTab.dart';
 import '../add_admin/Master_Add_Admins.dart';
 import '../View_admin/View_AdminList_DropDown.dart';
 import 'package:flutter_iap_project/master_admin/Edit_Attribute/edit_atri.dart';
+import '../front_page_masteradmin.dart';
 import '../view_gauge/view_master_guage.dart';
 import '../Manage_scrap/Manage_Scrap.dart';
 import '../Search/MasteradminHome_Profile.dart';
@@ -92,9 +93,9 @@ class _tab_headState extends State<tab_head> {
             Master_AddAdmins(gauge_location: widget.gauge_location,),
             View_AdminList_DropDown(gauge_location: widget.gauge_location,),
             edit_atri(),
-            front_view_gauge(gauge_name: widget.gauge_name,gauge_location: widget.gauge_location,),
+            front_view_gauge_masteradmin(gauge_name: widget.gauge_name,gauge_location: widget.gauge_location,),
             SupplierTab(),
-            Manage_Scrap(),
+            Manage_Scrap(gauge_name: widget.gauge_name,),
             master_adminHome_Profile()
           ]),
         )

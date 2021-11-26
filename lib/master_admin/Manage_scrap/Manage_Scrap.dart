@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_iap_project/master_admin/Manage_scrap/Add_To_Scrap.dart';
 
 class Manage_Scrap extends StatefulWidget {
-  const Manage_Scrap({Key? key}) : super(key: key);
+  final List<String> gauge_name;
+
+  const Manage_Scrap({Key? key, required this.gauge_name}) : super(key: key);
 
   @override
   _Manage_ScrapState createState() => _Manage_ScrapState();
@@ -34,7 +37,11 @@ class _Manage_ScrapState extends State<Manage_Scrap> {
                       ),),
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, '/addtoScrap');
+                   // Navigator.pushNamed(context, '/addtoScrap');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AddToScrap(gauge_name: widget.gauge_name)),
+                    );
                   },
                   label: Text("Add To Scrap",
                     style: TextStyle(
