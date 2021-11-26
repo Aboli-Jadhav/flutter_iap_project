@@ -21,10 +21,21 @@ class _ViewScopeOfSupplierState extends State<ViewScopeOfSupplier> {
 
   }
 
-  void getScope() {
-     FirebaseFirestore.instance.collection("Chakan").doc("Supplier").collection(
+  Future<String> returnIDOfDOc()
+  async {
+    String ret="";
+    await FirebaseFirestore.instance.collection("Chakan")
+        .doc("Supplier").collection("all_").where("agencyCode",isEqualTo: widget.supplier_code.toString())
+        .get().then((value) => ret=value.docs.first.id.toString());
+    print(ret);
+    return ret;
+  }
+
+  void getScope() async {
+    String RecId=await returnIDOfDOc();
+    FirebaseFirestore.instance.collection("Chakan").doc("Supplier").collection(
         "all_")
-        .doc(widget.supplier_code.toString()).collection("Scope").get().then((value)
+        .doc(RecId).collection("Scope").get().then((value)
         {
               value.docs.forEach((element)
               {
@@ -42,11 +53,13 @@ class _ViewScopeOfSupplierState extends State<ViewScopeOfSupplier> {
   }
 
   void addItemToList()
-  {
+  async{
+    String RecId=await returnIDOfDOc();
+
     FirebaseFirestore.instance.collection("Chakan")
         .doc("Supplier")
         .collection("all_")
-        .doc(widget.supplier_code.toString())
+        .doc(RecId)
         .collection("Scope").add({'name':scope.text.toString()}).whenComplete(()  {
       print("Scope added Successfully");
       setState(() {
@@ -63,19 +76,21 @@ class _ViewScopeOfSupplierState extends State<ViewScopeOfSupplier> {
 
   }
 
-  void deleteItemfinal(String name) {
+  void deleteItemfinal(String name) async{
     // FirebaseFirestore firestore2 = FirebaseFirestore.instance;
+    String RecId=await returnIDOfDOc();
+
     FirebaseFirestore.instance.collection("Chakan")
         .doc("Supplier")
         .collection("all_")
-        .doc(widget.supplier_code.toString())
+        .doc(RecId)
         .collection("Scope").where('name',isEqualTo: name)
         .get().then((QuerySnapshot querysnapshot) {
       querysnapshot.docs.forEach((element) async {
         await FirebaseFirestore.instance.collection("Chakan")
             .doc("Supplier")
             .collection("all_")
-            .doc(widget.supplier_code.toString())
+            .doc(RecId)
             .collection("Scope").doc(element.id).delete().whenComplete(() {
           setState(() {
             scope.clear();

@@ -198,53 +198,65 @@ class _AddSupplierState extends State<AddSupplier> {
     nabl_due_date=t2.selectedDate.toString();
     supplier_scopes=splitScope(scope_Of_supplier.text.toString());
 
-      await FirebaseFirestore.instance.collection("Chakan").doc("Supplier").collection("all_").doc(sup_code.text.toString()).set(
-            {
-                  'agencyName':sup_nm.text.toString(),
-                  'agencytype':_chosenValue,
-                  'agencyAddress':sup_address.text.toString(),
-                  'agencyCode':sup_code.text.toString(),
-                  'contact_person_nm':contact_nm.text.toString(),
-                  'contact_person_mailid':contact_mail.text.toString(),
-                  'contact_person_mob':contact_mob.text.toString(),
-                  'NABL_certificate_No':nabl_cer_no.text.toString(),
-                  'NABL_Cert_Date':nabl_date.toString(),
-                  'NABL_Cert_Due_Date':nabl_due_date.toString(),
-                  'NABL_Certificate_Download_Link':nabl_cert_link.toString(),
-                  'NABL_Lab_Scope_Download_Link':lab_scope_link.toString(),
-                  'NABL_Certificate_FileName':nabl_certificate_fileName.toString(),
-                  'NABL_Lab_Scope_FileName':nabl_labScope_fileName.toString(),
+    await FirebaseFirestore.instance.collection("Chakan").doc("Supplier").collection("all_").doc().set(
+        {
+          'agencyName':sup_nm.text.toString(),
+          'agencytype':_chosenValue,
+          'agencyAddress':sup_address.text.toString(),
+          'agencyCode':sup_code.text.toString(),
+          'contact_person_nm':contact_nm.text.toString(),
+          'contact_person_mailid':contact_mail.text.toString(),
+          'contact_person_mob':contact_mob.text.toString(),
+          'NABL_certificate_No':nabl_cer_no.text.toString(),
+          'NABL_Cert_Date':nabl_date.toString(),
+          'NABL_Cert_Due_Date':nabl_due_date.toString(),
+          'NABL_Certificate_Download_Link':nabl_cert_link.toString(),
+          'NABL_Lab_Scope_Download_Link':lab_scope_link.toString(),
+          'NABL_Certificate_FileName':nabl_certificate_fileName.toString(),
+          'NABL_Lab_Scope_FileName':nabl_labScope_fileName.toString(),
 
-            }
-      ).whenComplete(()
-      {
-        supplier_scopes.forEach((element)
-        async {
-          await FirebaseFirestore.instance.collection("Chakan")
-              .doc("Supplier").collection("all_").doc(sup_code.text.toString()).collection("Scope")
-              .doc().set(
-              {
-                'name':element,
-              }).onError((error, stackTrace)
-              {
-                _showMyDialog('Error','Add Supplier Failed !!!!!');
-                  print("Error Occured while creating Scope Collection.");
-              });
+        }
+    ).whenComplete(()
+    {
+      supplier_scopes.forEach((element)
+      async {
+
+        await FirebaseFirestore.instance.collection("Chakan")
+            .doc("Supplier").collection("all_").where("agencyCode",isEqualTo: sup_code.text.toString())
+            .get().then((value)
+        {
+          value.docs.forEach((record)
+          {
+            var id=record.id;
+            FirebaseFirestore.instance.collection("Chakan")
+                .doc("Supplier").collection("all_").doc(id).collection("Scope")
+                .doc().set(
+                {
+                  'name':element,
+                }).onError((error, stackTrace)
+            {
+              _showMyDialog('Error','Add Supplier Failed !!!!!');
+              print("Error Occured while creating Scope Collection.");
+            });
+          });
+
         });
-        _showMyDialog('Success','Supplier Added Successfully !!!!!');
 
       }
-      ).onError((error, stackTrace)
-      {
-        _showMyDialog('Error','Add Supplier Failed !!!!!');
-        print("Error Occured !!!");
-      });
+      );
+      _showMyDialog('Success','Supplier Added Successfully !!!!!');
+
+    }
+    ).onError((error, stackTrace)
+    {
+      _showMyDialog('Error','Add Supplier Failed !!!!!');
+      print("Error Occured !!!");
+    });
 
 
-      dispValues();
+    dispValues();
 
   }
-
 
   @override
   Widget build(BuildContext context) {
