@@ -68,6 +68,16 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
   var fetched_unit;
 
 
+  final List<String> _gauges = [
+    '30',
+    '90',
+    '180',
+    '365'
+  ];
+
+  var _selected_freq;
+  String selectedValue='';
+
   var t1 = TestPickerWidget3("", 0, "");
 
 
@@ -93,7 +103,8 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
               Minimum.text = doc["minimum"];
               Maximum.text = doc["maximum"];
               Calibration_Agency_Name.text = doc["calibration_agency_name"];
-              Calibration_Frequency.text = doc["calibration_frequency"];
+              //_selected_freq = doc["calibration_frequency"];
+              _selected_freq = '';
               Calibration_Cost.text = doc["calibration_cost"];
               Remark.text = doc["remark"];
               Gauge_location.text = doc["gauge_location"];
@@ -120,8 +131,11 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
               setState(() {
                 calibration_date = doc["calibration_date"];
                 calibration_due_date = "";
+                if(_selected_freq=='')
+                  _selected_freq = '30';
+                print(calibration_date);
               });
-              t1 = TestPickerWidget3(calibration_date, int.parse(Calibration_Frequency.text), calibration_due_date);
+              t1 = TestPickerWidget3(calibration_date, int.parse(_selected_freq), calibration_due_date);
               if(Calibration_Cost.text.isEmpty){
                 Fluttertoast.showToast(
                     msg: "Gauge is issued",
@@ -426,22 +440,61 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                               //     }).toList(),
                               //   ),
                               // ),
+                              // Container(
+                              //   width: 300,
+                              //   height:37.0,
+                              //   child: TextField(
+                              //     controller: Calibration_Frequency,
+                              //     onChanged: (value){
+                              //       t1.freq = int.parse(Calibration_Frequency.text);
+                              //     },
+                              //     decoration:const  InputDecoration(
+                              //       fillColor: Colors.white,
+                              //       filled: true,
+                              //      // labelText: "Caliberation Frequncy",
+                              //       border: OutlineInputBorder(),
+                              //
+                              //     ),),
+                              // ),
                               Container(
-                                width: 300,
-                                height:37.0,
-                                child: TextField(
-                                  controller: Calibration_Frequency,
-                                  onChanged: (value){
-                                    t1.freq = int.parse(Calibration_Frequency.text);
-                                  },
-                                  decoration:const  InputDecoration(
-                                    fillColor: Colors.white,
-                                    filled: true,
-                                   // labelText: "Caliberation Frequncy",
-                                    border: OutlineInputBorder(),
+                                height: 50.0,
+                                width: 390,
+                                padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border: Border.all(color: Colors.grey),
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                                child: DropdownButton(
+                                  hint: const Text('Please select frequency'),
+                                  // Not necessary for Option 1
+                                  value: _selected_freq,
+                                  onChanged: (newValue) {
+                                    t1.freq = int.parse(newValue.toString());
+                                    setState(() {
+                                      _selected_freq = newValue;
+                                      //selected_value = newValue.toString();
+                                    });
 
-                                  ),),
+                                    Fluttertoast.showToast(
+                                        msg: _selected_freq,
+                                        toastLength: Toast.LENGTH_SHORT,
+                                        gravity: ToastGravity.CENTER,
+                                        timeInSecForIosWeb: 1,
+                                        backgroundColor: Colors.red,
+                                        textColor: Colors.white,
+                                        fontSize: 16.0);
+                                  },
+                                  items: _gauges.map((location) {
+                                    return DropdownMenuItem(
+                                      child: new Text(location),
+                                      value: location,
+                                    );
+                                  }).toList(),
+                                ),
                               ),
+
+
                             ],
                           ),
 
@@ -752,7 +805,7 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
       "minimum":Minimum.text,
       "maximum":Maximum.text,
       "calibration_agency_name":Calibration_Agency_Name.text,
-      "calibration_frequency":Calibration_Frequency.text,
+      "calibration_frequency":_selected_freq,
       "calibration_cost":Calibration_Cost.text,
       "remark":Remark.text,
       "gauge_location": Gauge_location.text,
@@ -800,7 +853,7 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
       "minimum":Minimum.text,
       "maximum":Maximum.text,
       "calibration_agency_name":Calibration_Agency_Name.text,
-      "calibration_frequency":Calibration_Frequency.text,
+      "calibration_frequency":_selected_freq,
       "calibration_cost":Calibration_Cost.text,
       "remark":Remark.text,
       "gauge_location": Gauge_location.text,
