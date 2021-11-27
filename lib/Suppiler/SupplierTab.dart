@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_iap_project/Suppiler/delete_Supplier.dart';
 import 'EditviewSupplier.dart';
 import 'addSupplier.dart';
 
@@ -155,6 +156,37 @@ class _SupplierTabState extends State<SupplierTab> {
                     );
                   },
                   child: Text("View Supplier",
+                    style: TextStyle(
+                        fontSize: 20.0,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold
+
+                    ),
+                  ),
+
+                ),
+              ),
+              SizedBox(height: 100,),
+              Container(
+                width: 0.2 * MediaQuery.of(context).size.width,
+                height:50.0,
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(backred),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                          side: BorderSide(color: backred)
+                      ),
+                    ),),
+                  onPressed: () {
+                    Navigator.push(context,
+                      MaterialPageRoute(
+                        builder: (context) => new deleteSupplier(),
+                      ),
+                    );
+                  },
+                  child: Text("Delete Supplier",
                     style: TextStyle(
                         fontSize: 20.0,
                         color: Colors.white,

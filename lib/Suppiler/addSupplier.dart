@@ -26,8 +26,8 @@ class _AddSupplierState extends State<AddSupplier> {
   late ProgressDialog progressdialog;
   DateTime selectedDate=DateTime.now();
   List<String> agencyType=[];
-  var t1=new TestPickerWidget2(DateTime.now().toString());
-  var t2=new TestPickerWidget2(DateTime.now().toString());
+  var t1=new TestPickerWidget2("");
+  var t2=new TestPickerWidget2("");
 
   var sup_nm=TextEditingController();
   var agencytype;
@@ -42,6 +42,9 @@ class _AddSupplierState extends State<AddSupplier> {
   var nabl_due_date;
   var nabl_certificate_fileName,nabl_labScope_fileName,nabl_cert_link,lab_scope_link;
   List<String> supplier_scopes=[];
+  List<String> contact_nm_list =[];
+  List<String> contact_MobileNo_list =[];
+  List<String> contact_MailID_list =[];
 
   void fetchAttributeValues()
    async {
@@ -129,6 +132,7 @@ class _AddSupplierState extends State<AddSupplier> {
     //fetchAttributeValues();
     agencyType=widget.type;
     createProgressDialog();
+    nabl_cer_no.text="No Data Available";
 
   }
 
@@ -197,64 +201,152 @@ class _AddSupplierState extends State<AddSupplier> {
     nabl_date=t1.selectedDate.toString();
     nabl_due_date=t2.selectedDate.toString();
     supplier_scopes=splitScope(scope_Of_supplier.text.toString());
+    contact_nm_list=splitScope(contact_nm.text.toString());
+    contact_MobileNo_list=splitScope(contact_mob.text.toString());
+    contact_MailID_list=splitScope(contact_mail.text.toString());
 
-    await FirebaseFirestore.instance.collection("Chakan").doc("Supplier").collection("all_").doc().set(
-        {
-          'agencyName':sup_nm.text.toString(),
-          'agencytype':_chosenValue,
-          'agencyAddress':sup_address.text.toString(),
-          'agencyCode':sup_code.text.toString(),
-          'contact_person_nm':contact_nm.text.toString(),
-          'contact_person_mailid':contact_mail.text.toString(),
-          'contact_person_mob':contact_mob.text.toString(),
-          'NABL_certificate_No':nabl_cer_no.text.toString(),
-          'NABL_Cert_Date':nabl_date.toString(),
-          'NABL_Cert_Due_Date':nabl_due_date.toString(),
-          'NABL_Certificate_Download_Link':nabl_cert_link.toString(),
-          'NABL_Lab_Scope_Download_Link':lab_scope_link.toString(),
-          'NABL_Certificate_FileName':nabl_certificate_fileName.toString(),
-          'NABL_Lab_Scope_FileName':nabl_labScope_fileName.toString(),
-
-        }
-    ).whenComplete(()
-    {
-      supplier_scopes.forEach((element)
-      async {
-
-        await FirebaseFirestore.instance.collection("Chakan")
-            .doc("Supplier").collection("all_").where("agencyCode",isEqualTo: sup_code.text.toString())
-            .get().then((value)
-        {
-          value.docs.forEach((record)
-          {
-            var id=record.id;
-            FirebaseFirestore.instance.collection("Chakan")
-                .doc("Supplier").collection("all_").doc(id).collection("Scope")
-                .doc().set(
-                {
-                  'name':element,
-                }).onError((error, stackTrace)
+    if(sup_nm.text.isNotEmpty&&_chosenValue!=null&&sup_address.text.isNotEmpty
+    &&sup_code.text.isNotEmpty&&contact_mail.text.isNotEmpty&&supplier_scopes.length>=1&&
+        contact_MobileNo_list.length>=1&&contact_nm_list.length>=1)
+      {
+        await FirebaseFirestore.instance.collection("Chakan").doc("Supplier").collection("all_").doc().set(
             {
-              _showMyDialog('Error','Add Supplier Failed !!!!!');
-              print("Error Occured while creating Scope Collection.");
+              'agencyName':sup_nm.text.toString(),
+              'agencytype':_chosenValue,
+              'agencyAddress':sup_address.text.toString(),
+              'agencyCode':sup_code.text.toString(),
+              //'contact_person_nm':contact_nm.text.toString(),
+              'contact_person_mailid':contact_mail.text.toString(),
+              'contact_person_mob':contact_mob.text.toString(),
+              'NABL_certificate_No':nabl_cer_no.text.toString(),
+              'NABL_Cert_Date':nabl_date.toString(),
+              'NABL_Cert_Due_Date':nabl_due_date.toString(),
+              'NABL_Certificate_Download_Link':nabl_cert_link.toString(),
+              'NABL_Lab_Scope_Download_Link':lab_scope_link.toString(),
+              'NABL_Certificate_FileName':nabl_certificate_fileName.toString(),
+              'NABL_Lab_Scope_FileName':nabl_labScope_fileName.toString(),
+
+            }
+        ).whenComplete(()
+        {
+          supplier_scopes.forEach((element)
+          async {
+
+            await FirebaseFirestore.instance.collection("Chakan")
+                .doc("Supplier").collection("all_").where("agencyCode",isEqualTo: sup_code.text.toString())
+                .get().then((value)
+            {
+              value.docs.forEach((record)
+              {
+                var id=record.id;
+                FirebaseFirestore.instance.collection("Chakan")
+                    .doc("Supplier").collection("all_").doc(id).collection("Scope")
+                    .doc().set(
+                    {
+                      'name':element,
+                    }).onError((error, stackTrace)
+                {
+                  _showMyDialog('Error','Add Supplier Failed !!!!!');
+                  print("Error Occured while creating Scope Collection.");
+                });
+              });
+
             });
+
+          });
+          contact_nm_list.forEach((element)
+          async {
+
+            await FirebaseFirestore.instance.collection("Chakan")
+                .doc("Supplier").collection("all_").where("agencyCode",isEqualTo: sup_code.text.toString())
+                .get().then((value)
+            {
+              value.docs.forEach((record)
+              {
+                var id=record.id;
+                FirebaseFirestore.instance.collection("Chakan")
+                    .doc("Supplier").collection("all_").doc(id).collection("Contact_Name")
+                    .doc().set(
+                    {
+                      'name':element,
+                    }).onError((error, stackTrace)
+                {
+                  _showMyDialog('Error','Add Supplier Failed !!!!!');
+                  print("Error Occured while creating Name Collection.");
+                });
+              });
+
+            });
+
+          });
+          contact_MobileNo_list.forEach((element)
+          async {
+
+            await FirebaseFirestore.instance.collection("Chakan")
+                .doc("Supplier").collection("all_").where("agencyCode",isEqualTo: sup_code.text.toString())
+                .get().then((value)
+            {
+              value.docs.forEach((record)
+              {
+                var id=record.id;
+                FirebaseFirestore.instance.collection("Chakan")
+                    .doc("Supplier").collection("all_").doc(id).collection("Contact_Phone")
+                    .doc().set(
+                    {
+                      'name':element,
+                    }).onError((error, stackTrace)
+                {
+                  _showMyDialog('Error','Add Supplier Failed !!!!!');
+                  print("Error Occured while creating Phone Collection.");
+                });
+              });
+
+            });
+            _showMyDialog('Success','Supplier Added Successfully !!!!!');
+          });
+          contact_MailID_list.forEach((element)
+          async {
+
+            await FirebaseFirestore.instance.collection("Chakan")
+                .doc("Supplier").collection("all_").where("agencyCode",isEqualTo: sup_code.text.toString())
+                .get().then((value)
+            {
+              value.docs.forEach((record)
+              {
+                var id=record.id;
+                FirebaseFirestore.instance.collection("Chakan")
+                    .doc("Supplier").collection("all_").doc(id).collection("Contact_Emails")
+                    .doc().set(
+                    {
+                      'name':element,
+                    }).onError((error, stackTrace)
+                {
+                  _showMyDialog('Error','Add Supplier Failed !!!!!');
+                  print("Error Occured while creating Mail Collection.");
+                });
+              });
+
+            });
+            _showMyDialog('Success','Supplier Added Successfully !!!!!');
           });
 
+          //_showMyDialog('Success','Supplier Added Successfully !!!!!');
+
+        }
+        ).onError((error, stackTrace)
+        {
+          _showMyDialog('Error','Add Supplier Failed !!!!!');
+          print("Error Occured !!!");
         });
 
+
+        dispValues();resetAll();
       }
-      );
-      _showMyDialog('Success','Supplier Added Successfully !!!!!');
+    else
+      {
+        _showMyDialog('Empty Fields','Please enter all mandatory details !!!!!');
+      }
 
-    }
-    ).onError((error, stackTrace)
-    {
-      _showMyDialog('Error','Add Supplier Failed !!!!!');
-      print("Error Occured !!!");
-    });
-
-
-    dispValues();
 
   }
 
@@ -653,6 +745,8 @@ class _AddSupplierState extends State<AddSupplier> {
         nabl_labScope_fileName="";
          nabl_cert_link="";
          lab_scope_link="";
+         scope_Of_supplier.clear();
+
 
   }
 }
