@@ -194,9 +194,6 @@ void handleDropChange(String ?val)
 
   @override
   Widget build(BuildContext context) {
-
-
-
     return Container(
       child: Scaffold(
         appBar: AppBar(
