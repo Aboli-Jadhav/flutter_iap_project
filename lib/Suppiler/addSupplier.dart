@@ -62,6 +62,30 @@ class _AddSupplierState extends State<AddSupplier> {
      print(agencyType);
   }
 
+  void insertScopeAttributes(String nm)
+  {
+      FirebaseFirestore.instance.collection("Chakan").doc("SupplierAttributes")
+          .collection("Scopes").doc(nm).set({'name':nm}).whenComplete(() => print("Scope Added"));
+  }
+
+  void insertContactNAMEAttributes(String nm)
+  {
+    FirebaseFirestore.instance.collection("Chakan").doc("SupplierAttributes")
+        .collection("Contact_Names").doc(nm).set({'name':nm}).whenComplete(() => print("Name Added"));
+  }
+
+  void insertCONTACT_EMAILAttributes(String nm)
+  {
+    FirebaseFirestore.instance.collection("Chakan").doc("SupplierAttributes")
+        .collection("Contact_Emails").doc(nm).set({'name':nm}).whenComplete(() => print("Email Added"));
+  }
+
+  void insertCONTACT_PhoneAttributes(String nm)
+  {
+    FirebaseFirestore.instance.collection("Chakan").doc("SupplierAttributes")
+        .collection("Contact_Phone").doc(nm).set({'name':nm}).whenComplete(() => print("Phone Added"));
+  }
+
   void createProgressDialog()
   {
       progressdialog = ProgressDialog(context,type: ProgressDialogType.Normal);
@@ -231,7 +255,7 @@ class _AddSupplierState extends State<AddSupplier> {
         {
           supplier_scopes.forEach((element)
           async {
-
+            insertScopeAttributes(element);
             await FirebaseFirestore.instance.collection("Chakan")
                 .doc("Supplier").collection("all_").where("agencyCode",isEqualTo: sup_code.text.toString())
                 .get().then((value)
@@ -256,7 +280,7 @@ class _AddSupplierState extends State<AddSupplier> {
           });
           contact_nm_list.forEach((element)
           async {
-
+            insertContactNAMEAttributes(element);
             await FirebaseFirestore.instance.collection("Chakan")
                 .doc("Supplier").collection("all_").where("agencyCode",isEqualTo: sup_code.text.toString())
                 .get().then((value)
@@ -281,7 +305,7 @@ class _AddSupplierState extends State<AddSupplier> {
           });
           contact_MobileNo_list.forEach((element)
           async {
-
+            insertCONTACT_PhoneAttributes(element);
             await FirebaseFirestore.instance.collection("Chakan")
                 .doc("Supplier").collection("all_").where("agencyCode",isEqualTo: sup_code.text.toString())
                 .get().then((value)
@@ -306,7 +330,7 @@ class _AddSupplierState extends State<AddSupplier> {
           });
           contact_MailID_list.forEach((element)
           async {
-
+            insertCONTACT_EMAILAttributes(element);
             await FirebaseFirestore.instance.collection("Chakan")
                 .doc("Supplier").collection("all_").where("agencyCode",isEqualTo: sup_code.text.toString())
                 .get().then((value)

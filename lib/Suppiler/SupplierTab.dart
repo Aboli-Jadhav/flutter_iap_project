@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_iap_project/Suppiler/ViewData/view_data_ui.dart';
 import 'package:flutter_iap_project/Suppiler/delete_Supplier.dart';
 import 'EditviewSupplier.dart';
 import 'addSupplier.dart';
@@ -151,7 +152,7 @@ class _SupplierTabState extends State<SupplierTab> {
                   onPressed: () {
                     Navigator.push(context,
                       MaterialPageRoute(
-                        builder: (context) => new ViewSupplier(),
+                        builder: (context) => new view_data_ui(),
                       ),
                     );
                   },

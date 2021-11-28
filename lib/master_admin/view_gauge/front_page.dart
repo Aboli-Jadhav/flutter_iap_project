@@ -56,8 +56,6 @@ class _front_view_gaugeState extends State<front_view_gauge> {
   TextEditingController location = TextEditingController();
   TextEditingController plant = TextEditingController();
 
-
-
   String selectedDate='';
 
   var _selected_gauges;
