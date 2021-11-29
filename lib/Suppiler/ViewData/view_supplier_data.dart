@@ -41,7 +41,7 @@ class _view_supplier_dataState extends State<view_supplier_data> {
   int show = 0;
 
   void getMails(String RecId) async {
-    FirebaseFirestore.instance.collection("Chakan").doc("Supplier").collection(
+    await FirebaseFirestore.instance.collection("Chakan").doc("Supplier").collection(
         "all_")
         .doc(RecId).collection("Contact_Emails").get().then((value)
     {
@@ -69,10 +69,11 @@ class _view_supplier_dataState extends State<view_supplier_data> {
 
   void getNames(String RecId) async {
     print("Get Names Called");
-    FirebaseFirestore.instance.collection("Chakan").doc("Supplier").collection(
+   await  FirebaseFirestore.instance.collection("Chakan").doc("Supplier").collection(
         "all_")
         .doc(RecId).collection("Contact_Name").get().then((value)
     {
+      print("ValSize"+value.size.toString());
       if(value.docs.isNotEmpty)
       {
         value.docs.forEach((element)
@@ -99,7 +100,7 @@ class _view_supplier_dataState extends State<view_supplier_data> {
   }
 
   void getPhones(String RecId) async {
-    FirebaseFirestore.instance.collection("Chakan").doc("Supplier").collection(
+   await  FirebaseFirestore.instance.collection("Chakan").doc("Supplier").collection(
         "all_")
         .doc(RecId).collection("Contact_Phone").get().then((value)
     {
@@ -119,7 +120,7 @@ class _view_supplier_dataState extends State<view_supplier_data> {
   }
 
   void getScopes(String RecId) async {
-    FirebaseFirestore.instance.collection("Chakan").doc("Supplier").collection(
+    await FirebaseFirestore.instance.collection("Chakan").doc("Supplier").collection(
         "all_")
         .doc(RecId).collection("Scope").get().then((value)
     {
@@ -139,13 +140,13 @@ class _view_supplier_dataState extends State<view_supplier_data> {
     print(scopeList);
   }
 
-  void getAll(String id)
-  {
-    //print(id);
+  dynamic getAll(String id)
+   {
     getScopes(id);
     getNames(id);
     getPhones(id);
     getMails(id);
+    print("GET ALL ENDED");
   }
 
   void fetch() {
@@ -154,64 +155,84 @@ class _view_supplier_dataState extends State<view_supplier_data> {
         .doc("Supplier")
         .collection("all_").get().then((value)
     {
-      value.docs.forEach((element)
-      {
-        var fdb=fstore
-            .collection("Chakan")
-            .doc("Supplier")
-            .collection("all_")
-            .doc(element.id)
-            .get();
-        FirebaseFirestore.instance
-            .collection("Chakan")
-            .doc("Supplier")
-            .collection("all_")
-            .doc(element.id)
-            .collection(widget.selectedValue)
-            .where("name", isEqualTo: widget.selected_option)
-            .get()
-            .then((querySnapshot) {
-          if (querySnapshot.docs.isNotEmpty)
+      if(value.docs.isNotEmpty)
+        {
+          value.docs.forEach((element)
           {
-            print("HIIII"+element.id);getAll(element.id);
-            //querySnapshot.docs.forEach((doc)
-            //async {
-            fdb.then((doc)
-            {
-              View_supplier_data_model model=View_supplier_data_model(
-                  doc['agencyCode'],
-                  doc['NABL_certificate_No'],
-                  doc['agencyAddress'],
-                  doc['agencyName'],
-                  doc['NABL_Cert_Due_Date'],
-                  doc['NABL_Cert_Date'],
-                  doc['NABL_Lab_Scope_Download_Link'],
-                  doc['NABL_Certificate_Download_Link'],
-                  doc['NABL_Lab_Scope_FileName'],
-                  doc['NABL_Certificate_FileName'],
-                  doc['agencytype'],
-                  scopeList,ContactMob_List,ContactNm_List,
-                  ContactMail_List
-              );
-              fetched_list.add(model);print("MODEL"+model.snm);
+            var fdb=fstore
+                .collection("Chakan")
+                .doc("Supplier")
+                .collection("all_")
+                .doc(element.id)
+                .get();
+            FirebaseFirestore.instance
+                .collection("Chakan")
+                .doc("Supplier")
+                .collection("all_")
+                .doc(element.id)
+                .collection(widget.selectedValue)
+                .where("name", isEqualTo: widget.selected_option)
+                .get()
+                .then((querySnapshot) async {
+              print("SIZE"+querySnapshot.size.toString()+element.id);
+              if (querySnapshot.docs.isNotEmpty)
+              {
+                print("HIIII"+element.id); await getAll(element.id);
+                // querySnapshot.docs.forEach((doc)
+                // async {
+                fdb.then((doc)
+                {
+                  View_supplier_data_model model=View_supplier_data_model(
+                      doc['agencyCode'],
+                      doc['NABL_certificate_No'],
+                      doc['agencyAddress'],
+                      doc['agencyName'],
+                      doc['NABL_Cert_Due_Date'],
+                      doc['NABL_Cert_Date'],
+                      doc['NABL_Lab_Scope_Download_Link'],
+                      doc['NABL_Certificate_Download_Link'],
+                      doc['NABL_Lab_Scope_FileName'],
+                      doc['NABL_Certificate_FileName'],
+                      doc['agencytype'],
+                      scopeList,ContactMob_List,ContactNm_List,
+                      ContactMail_List
+                  );
+                  fetched_list.add(model);print("MODEL"+model.snm);
+                });
+
+                // });
+                setState(() {
+                  show = 1;
+                });
+                print("Fetched list: ${fetched_list[0].scode}");
+
+              }
+              else{
+                setState(() {
+                  if(fetched_list.length==0)
+                    {
+                      show=2;
+                    }
+                  else
+                    {
+                      show=1;
+                    }
+
+                });
+                print("view_supplier_datage 86 : OOPS file doesn't exists");
+              }
             });
 
-            //});
-            setState(() {
-              show = 1;
-            });
-            print("Fetched list: ${fetched_list[0].scode}");
+          });
+        }
+      else
+        {
+          setState(() {
+            show=2;
+          });
+          print("view_supplier_datage 85 : OOPS file doesn't exists");
+        }
 
-          }
-          else{
-            setState(() {
-              show=2;
-            });
-            print("view_supplier_datage 86 : OOPS file doesn't exists");
-          }
-        });
-
-      });
     });
 
   }
