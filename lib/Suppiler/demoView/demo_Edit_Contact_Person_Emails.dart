@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Edit_Contact_Person_Emails extends StatefulWidget {
+class demo_Edit_Contact_Person_Emails extends StatefulWidget {
   final String supplier_code;
-  const Edit_Contact_Person_Emails( {Key? key,required this.supplier_code}) : super(key: key);
+  final String stype;
+
+  const demo_Edit_Contact_Person_Emails( {Key? key,required this.supplier_code,required this.stype}) : super(key: key);
 
   @override
-  _Edit_Contact_Person_EmailsState createState() => _Edit_Contact_Person_EmailsState();
+  _demo_Edit_Contact_Person_EmailsState createState() => _demo_Edit_Contact_Person_EmailsState();
 }
 
-class _Edit_Contact_Person_EmailsState extends State<Edit_Contact_Person_Emails> {
+class _demo_Edit_Contact_Person_EmailsState extends State<demo_Edit_Contact_Person_Emails> {
   List<String> fetched_data = [];
   var scope=TextEditingController();
 
@@ -25,8 +27,24 @@ class _Edit_Contact_Person_EmailsState extends State<Edit_Contact_Person_Emails>
   async {
     String ret="";
     await FirebaseFirestore.instance.collection("Chakan")
-        .doc("Supplier").collection("all_").where("agencyCode",isEqualTo: widget.supplier_code.toString().trim())
-        .get().then((value) => ret=value.docs.first.id.toString());
+        .doc("Supplier").collection("all_")
+        .get().then((value)
+    {
+      for(var ele in value.docs)
+      {
+        if(ele.data()['agencyCode']==widget.supplier_code.trim()
+            &&  ele.data()['agencytype']==widget.stype.trim()
+        )
+        {
+          ret=ele.id;
+          return ret;
+        }
+        else
+        {
+          print("Record not present.");
+        }
+      }
+    });
     print(ret);
     return ret;
   }

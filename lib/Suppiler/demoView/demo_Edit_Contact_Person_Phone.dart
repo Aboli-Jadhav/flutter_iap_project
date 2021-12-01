@@ -1,15 +1,16 @@
-import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
-class Edit_Contact_Person_Emails extends StatefulWidget {
+class demo_Edit_Contact_Person_Phones extends StatefulWidget {
   final String supplier_code;
-  const Edit_Contact_Person_Emails( {Key? key,required this.supplier_code}) : super(key: key);
+  final String stype;
+  const demo_Edit_Contact_Person_Phones( {Key? key,required this.supplier_code,required this.stype}) : super(key: key);
 
   @override
-  _Edit_Contact_Person_EmailsState createState() => _Edit_Contact_Person_EmailsState();
+  _demo_Edit_Contact_Person_PhonesState createState() => _demo_Edit_Contact_Person_PhonesState();
 }
 
-class _Edit_Contact_Person_EmailsState extends State<Edit_Contact_Person_Emails> {
+class _demo_Edit_Contact_Person_PhonesState extends State<demo_Edit_Contact_Person_Phones> {
   List<String> fetched_data = [];
   var scope=TextEditingController();
 
@@ -17,7 +18,7 @@ class _Edit_Contact_Person_EmailsState extends State<Edit_Contact_Person_Emails>
   void initState() {
     // TODO: implement initState
     super.initState();
-    getScope();
+    getNames();
 
   }
 
@@ -25,17 +26,33 @@ class _Edit_Contact_Person_EmailsState extends State<Edit_Contact_Person_Emails>
   async {
     String ret="";
     await FirebaseFirestore.instance.collection("Chakan")
-        .doc("Supplier").collection("all_").where("agencyCode",isEqualTo: widget.supplier_code.toString().trim())
-        .get().then((value) => ret=value.docs.first.id.toString());
+        .doc("Supplier").collection("all_")
+        .get().then((value)
+    {
+      for(var ele in value.docs)
+      {
+        if(ele.data()['agencyCode']==widget.supplier_code.trim()
+            &&  ele.data()['agencytype']==widget.stype.trim()
+        )
+        {
+          ret=ele.id;
+          return ret;
+        }
+        else
+        {
+          print("Record not present.");
+        }
+      }
+    });
     print(ret);
     return ret;
   }
 
-  void getScope() async {
+  void getNames() async {
     String RecId=await returnIDOfDOc();
     FirebaseFirestore.instance.collection("Chakan").doc("Supplier").collection(
         "all_")
-        .doc(RecId).collection("Contact_Emails").get().then((value)
+        .doc(RecId).collection("Contact_Phone").get().then((value)
     {
       value.docs.forEach((element)
       {
@@ -60,14 +77,14 @@ class _Edit_Contact_Person_EmailsState extends State<Edit_Contact_Person_Emails>
         .doc("Supplier")
         .collection("all_")
         .doc(RecId)
-        .collection("Contact_Emails").add({'name':scope.text.toString().trim()}).whenComplete(()  {
-      print("Emails added Successfully");
+        .collection("Contact_Phone").add({'name':scope.text.toString().trim()}).whenComplete(()  {
+      print("Phone No added Successfully");
       setState(() {
         //final_list2 =[];
         scope.clear();
         fetched_data=[];
       });
-      getScope();
+      getNames();
       setState(() {
 
       });
@@ -84,20 +101,20 @@ class _Edit_Contact_Person_EmailsState extends State<Edit_Contact_Person_Emails>
         .doc("Supplier")
         .collection("all_")
         .doc(RecId)
-        .collection("Contact_Emails").where('name',isEqualTo: name.trim())
+        .collection("Contact_Phone").where('name',isEqualTo: name.trim())
         .get().then((QuerySnapshot querysnapshot) {
       querysnapshot.docs.forEach((element) async {
         await FirebaseFirestore.instance.collection("Chakan")
             .doc("Supplier")
             .collection("all_")
             .doc(RecId)
-            .collection("Contact_Emails").doc(element.id).delete().whenComplete(() {
+            .collection("Contact_Phone").doc(element.id).delete().whenComplete(() {
           setState(() {
             scope.clear();
             fetched_data = [];
           });
         });
-        getScope();
+        getNames();
         setState(() {
 
         });
@@ -107,6 +124,7 @@ class _Edit_Contact_Person_EmailsState extends State<Edit_Contact_Person_Emails>
 
 
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -122,7 +140,7 @@ class _Edit_Contact_Person_EmailsState extends State<Edit_Contact_Person_Emails>
                 controller: scope,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'Enter Contact Emails ',
+                  labelText: 'Enter Contact Mobile No ',
                 ),
               ),
             ),
@@ -161,7 +179,7 @@ class _Edit_Contact_Person_EmailsState extends State<Edit_Contact_Person_Emails>
                       child: InkWell(
                         onTap: () {
                           deleteItemfinal(fetched_data[index]);
-                          print("Contact_Emails deleted");
+                          print("Person Contact deleted");
 
                         },
                         child: Container(
@@ -175,6 +193,31 @@ class _Edit_Contact_Person_EmailsState extends State<Edit_Contact_Person_Emails>
 
                   ],
                 );
+                //return ExcelRow(one: fetched_data[index]);
+                //var pet = names[index];
+                // return Column(
+                //   children: [
+                //     ListTile(
+                //
+                //       shape: RoundedRectangleBorder(
+                //           side: BorderSide(color: Colors.red, width: 0.5),
+                //           borderRadius: BorderRadius.circular(10),
+                //
+                //       ),
+                //       key: ValueKey(index),
+                //       enabled: true,
+                //       onTap: () async {
+                //         var rename = await _showDialog(names[index]);
+                //         if (rename != null) {
+                //           names[index] = rename;
+                //           setState(() {});
+                //         }
+                //       },
+                //       title: Text(names[index]),
+                //     ),
+                //     SizedBox(height: 20,)
+                //   ],
+                // );
               },
             ),
           ):Container(color: Colors.red,),

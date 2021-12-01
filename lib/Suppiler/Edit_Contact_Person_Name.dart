@@ -25,7 +25,7 @@ class _Edit_Contact_Person_NameState extends State<Edit_Contact_Person_Name> {
   async {
     String ret="";
     await FirebaseFirestore.instance.collection("Chakan")
-        .doc("Supplier").collection("all_").where("agencyCode",isEqualTo: widget.supplier_code.toString())
+        .doc("Supplier").collection("all_").where("agencyCode",isEqualTo: widget.supplier_code.toString().trim())
         .get().then((value) => ret=value.docs.first.id.toString());
     print(ret);
     return ret;
@@ -60,7 +60,7 @@ class _Edit_Contact_Person_NameState extends State<Edit_Contact_Person_Name> {
         .doc("Supplier")
         .collection("all_")
         .doc(RecId)
-        .collection("Contact_Name").add({'name':scope.text.toString()}).whenComplete(()  {
+        .collection("Contact_Name").add({'name':scope.text.toString().trim().toUpperCase()}).whenComplete(()  {
       print("Scope added Successfully");
       setState(() {
         //final_list2 =[];
@@ -84,7 +84,7 @@ class _Edit_Contact_Person_NameState extends State<Edit_Contact_Person_Name> {
         .doc("Supplier")
         .collection("all_")
         .doc(RecId)
-        .collection("Contact_Name").where('name',isEqualTo: name)
+        .collection("Contact_Name").where('name',isEqualTo: name.trim().toUpperCase())
         .get().then((QuerySnapshot querysnapshot) {
       querysnapshot.docs.forEach((element) async {
         await FirebaseFirestore.instance.collection("Chakan")

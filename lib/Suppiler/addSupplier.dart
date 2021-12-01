@@ -64,26 +64,27 @@ class _AddSupplierState extends State<AddSupplier> {
 
   void insertScopeAttributes(String nm)
   {
+
       FirebaseFirestore.instance.collection("Chakan").doc("SupplierAttributes")
-          .collection("Scopes").doc(nm).set({'name':nm}).whenComplete(() => print("Scope Added"));
+          .collection("Scopes").doc(nm.trim().toUpperCase()).set({'name':nm.trim().toUpperCase()}).whenComplete(() => print("Scope Added"));
   }
 
   void insertContactNAMEAttributes(String nm)
   {
     FirebaseFirestore.instance.collection("Chakan").doc("SupplierAttributes")
-        .collection("Contact_Names").doc(nm).set({'name':nm}).whenComplete(() => print("Name Added"));
+        .collection("Contact_Names").doc(nm.trim()).set({'name':nm.trim()}).whenComplete(() => print("Name Added"));
   }
 
   void insertCONTACT_EMAILAttributes(String nm)
   {
     FirebaseFirestore.instance.collection("Chakan").doc("SupplierAttributes")
-        .collection("Contact_Emails").doc(nm).set({'name':nm}).whenComplete(() => print("Email Added"));
+        .collection("Contact_Emails").doc(nm.trim()).set({'name':nm.trim()}).whenComplete(() => print("Email Added"));
   }
 
   void insertCONTACT_PhoneAttributes(String nm)
   {
     FirebaseFirestore.instance.collection("Chakan").doc("SupplierAttributes")
-        .collection("Contact_Phone").doc(nm).set({'name':nm}).whenComplete(() => print("Phone Added"));
+        .collection("Contact_Phone").doc(nm.trim()).set({'name':nm.trim()}).whenComplete(() => print("Phone Added"));
   }
 
   void createProgressDialog()
@@ -224,10 +225,10 @@ class _AddSupplierState extends State<AddSupplier> {
   async {
     nabl_date=t1.selectedDate.toString();
     nabl_due_date=t2.selectedDate.toString();
-    supplier_scopes=splitScope(scope_Of_supplier.text.toString());
-    contact_nm_list=splitScope(contact_nm.text.toString());
-    contact_MobileNo_list=splitScope(contact_mob.text.toString());
-    contact_MailID_list=splitScope(contact_mail.text.toString());
+    supplier_scopes=splitScope(scope_Of_supplier.text.toString().trim());
+    contact_nm_list=splitScope(contact_nm.text.toString().trim());
+    contact_MobileNo_list=splitScope(contact_mob.text.toString().trim());
+    contact_MailID_list=splitScope(contact_mail.text.toString().trim());
 
     if(sup_nm.text.isNotEmpty&&_chosenValue!=null&&sup_address.text.isNotEmpty
     &&sup_code.text.isNotEmpty&&contact_mail.text.isNotEmpty&&supplier_scopes.length>=1&&
@@ -235,20 +236,20 @@ class _AddSupplierState extends State<AddSupplier> {
       {
         await FirebaseFirestore.instance.collection("Chakan").doc("Supplier").collection("all_").doc().set(
             {
-              'agencyName':sup_nm.text.toString(),
-              'agencytype':_chosenValue,
-              'agencyAddress':sup_address.text.toString(),
-              'agencyCode':sup_code.text.toString(),
+              'agencyName':sup_nm.text.toString().trim(),
+              'agencytype':_chosenValue.trim(),
+              'agencyAddress':sup_address.text.toString().trim(),
+              'agencyCode':sup_code.text.toString().trim(),
               //'contact_person_nm':contact_nm.text.toString(),
-              'contact_person_mailid':contact_mail.text.toString(),
-              'contact_person_mob':contact_mob.text.toString(),
-              'NABL_certificate_No':nabl_cer_no.text.toString(),
-              'NABL_Cert_Date':nabl_date.toString(),
-              'NABL_Cert_Due_Date':nabl_due_date.toString(),
-              'NABL_Certificate_Download_Link':nabl_cert_link.toString(),
-              'NABL_Lab_Scope_Download_Link':lab_scope_link.toString(),
-              'NABL_Certificate_FileName':nabl_certificate_fileName.toString(),
-              'NABL_Lab_Scope_FileName':nabl_labScope_fileName.toString(),
+              //'contact_person_mailid':contact_mail.text.toString().trim(),
+              //'contact_person_mob':contact_mob.text.toString().trim(),
+              'NABL_certificate_No':nabl_cer_no.text.toString().trim(),
+              'NABL_Cert_Date':nabl_date.toString().trim(),
+              'NABL_Cert_Due_Date':nabl_due_date.toString().trim(),
+              'NABL_Certificate_Download_Link':nabl_cert_link.toString().trim(),
+              'NABL_Lab_Scope_Download_Link':lab_scope_link.toString().trim(),
+              'NABL_Certificate_FileName':nabl_certificate_fileName.toString().trim(),
+              'NABL_Lab_Scope_FileName':nabl_labScope_fileName.toString().trim(),
 
             }
         ).whenComplete(()
@@ -257,7 +258,7 @@ class _AddSupplierState extends State<AddSupplier> {
           async {
             insertScopeAttributes(element);
             await FirebaseFirestore.instance.collection("Chakan")
-                .doc("Supplier").collection("all_").where("agencyCode",isEqualTo: sup_code.text.toString())
+                .doc("Supplier").collection("all_").where("agencyCode",isEqualTo: sup_code.text.toString().trim())
                 .get().then((value)
             {
               value.docs.forEach((record)
@@ -267,7 +268,7 @@ class _AddSupplierState extends State<AddSupplier> {
                     .doc("Supplier").collection("all_").doc(id).collection("Scope")
                     .doc().set(
                     {
-                      'name':element,
+                      'name':element.trim().toUpperCase(),
                     }).onError((error, stackTrace)
                 {
                   _showMyDialog('Error','Add Supplier Failed !!!!!');
@@ -292,7 +293,7 @@ class _AddSupplierState extends State<AddSupplier> {
                     .doc("Supplier").collection("all_").doc(id).collection("Contact_Name")
                     .doc().set(
                     {
-                      'name':element,
+                      'name':element.trim(),
                     }).onError((error, stackTrace)
                 {
                   _showMyDialog('Error','Add Supplier Failed !!!!!');
@@ -317,7 +318,7 @@ class _AddSupplierState extends State<AddSupplier> {
                     .doc("Supplier").collection("all_").doc(id).collection("Contact_Phone")
                     .doc().set(
                     {
-                      'name':element,
+                      'name':element.trim(),
                     }).onError((error, stackTrace)
                 {
                   _showMyDialog('Error','Add Supplier Failed !!!!!');
@@ -342,7 +343,7 @@ class _AddSupplierState extends State<AddSupplier> {
                     .doc("Supplier").collection("all_").doc(id).collection("Contact_Emails")
                     .doc().set(
                     {
-                      'name':element,
+                      'name':element.trim(),
                     }).onError((error, stackTrace)
                 {
                   _showMyDialog('Error','Add Supplier Failed !!!!!');
@@ -351,17 +352,18 @@ class _AddSupplierState extends State<AddSupplier> {
               });
 
             });
-            _showMyDialog('Success','Supplier Added Successfully !!!!!');
+
           });
 
           //_showMyDialog('Success','Supplier Added Successfully !!!!!');
 
         }
-        ).onError((error, stackTrace)
-        {
-          _showMyDialog('Error','Add Supplier Failed !!!!!');
-          print("Error Occured !!!");
-        });
+        ).whenComplete(() => _showMyDialog('Success','Supplier Added Successfully !!!!!'))
+            .onError((error, stackTrace)
+            {
+              _showMyDialog('Error','Add Supplier Failed !!!!!');
+              print("Error Occured !!!");
+            });
 
 
         dispValues();resetAll();

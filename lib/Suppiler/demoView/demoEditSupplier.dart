@@ -4,22 +4,24 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iap_project/Suppiler/Edit_Supplier_Contact_Details.dart';
+import 'package:flutter_iap_project/Suppiler/ViewData/View_Supplier_data_Model.dart';
+import 'package:flutter_iap_project/Suppiler/demoView/demoViewScope.dart';
+import 'package:flutter_iap_project/Suppiler/demoView/demo_Edit_Supplier_Contact_Details.dart';
 import 'package:progress_dialog/progress_dialog.dart';
-import 'SupplierDataModel.dart';
-import 'demoCalender.dart';
-import 'viewScope.dart';
+import '../../date_picker2.dart';
+import '../SupplierDataModel.dart';
 
-class EditSupplier extends StatefulWidget {
-  final SupplierDataModel supplierModel;
+class demoEditSupplier extends StatefulWidget {
+  final View_supplier_data_model supplierModel;
   final List<String> scopedatamodel;
 
-  const EditSupplier({Key? key, required this.supplierModel,required this.scopedatamodel}) : super(key: key);
+  const demoEditSupplier({Key? key, required this.supplierModel,required this.scopedatamodel}) : super(key: key);
 
   @override
-  _EditSupplierState createState() => _EditSupplierState();
+  _demoEditSupplierState createState() => _demoEditSupplierState();
 }
 
-class _EditSupplierState extends State<EditSupplier>
+class _demoEditSupplierState extends State<demoEditSupplier>
 {
 
   Color backred=Color(0xffDF3F3F);
@@ -34,16 +36,32 @@ class _EditSupplierState extends State<EditSupplier>
   List<String> supplierScope=[];
   List<String> agencytype=[];
 
+  TextEditingController sup_nm=TextEditingController();
+  TextEditingController sup_code=TextEditingController();
+  TextEditingController sup_type=TextEditingController();
+  TextEditingController sup_nabl_no=TextEditingController();
+  TextEditingController sup_address=TextEditingController();
+
+  void getAllTEXTControllers()
+  {
+      sup_nm.text=widget.supplierModel.snm.toString().trim();
+      sup_code.text=widget.supplierModel.scode.toString().trim();
+      sup_type.text=widget.supplierModel.stype.toString().trim();
+      sup_nabl_no.text=widget.supplierModel.nabl_no.toString().trim();
+      sup_address.text=widget.supplierModel.saddress.toString().trim();
+  }
+
   @override
   void initState() {
     // TODO: implement initState
+    getAllTEXTControllers();
     super.initState();
-    _chosenValue=widget.supplierModel.stype.text;
+    _chosenValue=widget.supplierModel.stype.toString();
     fetchAttributeValues();
     reqScope=widget.scopedatamodel.toList();
     createProgressDialog();
-    t1=new TestPickerWidget2(widget.supplierModel.nabldate.text.toString());
-    t2=new TestPickerWidget2(widget.supplierModel.nabldue.text.toString());
+    t1=new TestPickerWidget2(widget.supplierModel.nabldate.toString());
+    t2=new TestPickerWidget2(widget.supplierModel.nabldue.toString());
 
   }
 
@@ -87,7 +105,7 @@ class _EditSupplierState extends State<EditSupplier>
 
 
       var tp = FirebaseStorage.instance.ref()
-          .child("files/"+widget.supplierModel.scode.text.toString()+"/");
+          .child("files/"+widget.supplierModel.scode.toString()+"/");
 
       UploadTask task = tp.child("$fileName")
           .putData(file!);
@@ -124,7 +142,7 @@ class _EditSupplierState extends State<EditSupplier>
 
 
       var tp = FirebaseStorage.instance.ref()
-          .child("files/"+widget.supplierModel.scode.text.toString()+"/");
+          .child("files/"+widget.supplierModel.scode.toString()+"/");
 
       UploadTask task = tp.child("$fileName")
           .putData(file!);
@@ -144,15 +162,49 @@ class _EditSupplierState extends State<EditSupplier>
     }
   }
 
+  // Future<String> returnIDOfDOc()
+  // async {
+  //   String ret="";
+  //   await FirebaseFirestore.instance.collection("Chakan")
+  //       .doc("Supplier").collection("all_").where("agencyCode",isEqualTo: widget.supplierModel.scode.toString())
+  //       .get().then((value) => ret=value.docs.first.id.toString());
+  //   print(ret);
+  //   return ret;
+  // }
+
   Future<String> returnIDOfDOc()
   async {
     String ret="";
     await FirebaseFirestore.instance.collection("Chakan")
-        .doc("Supplier").collection("all_").where("agencyCode",isEqualTo: widget.supplierModel.scode.text.toString())
-        .get().then((value) => ret=value.docs.first.id.toString());
+        .doc("Supplier").collection("all_")
+        .get().then((value)
+    {
+      if(value.docs.isNotEmpty)
+        {
+          for(var ele in value.docs)
+          {
+            if(ele.data()['agencyCode']==widget.supplierModel.scode.trim()
+                &&  ele.data()['agencytype']==widget.supplierModel.stype.trim()
+            )
+            {
+              ret=ele.id;
+              break;
+            }
+            else
+            {
+              print("Record not present.");
+            }
+          }
+        }
+      else{
+        _showMyDialog("FAIL", "No SUCH RECORD !!!!");
+      }
+
+    });
     print(ret);
     return ret;
   }
+
 
   void updateCertificateLinks(var id)
   async {
@@ -219,38 +271,47 @@ class _EditSupplierState extends State<EditSupplier>
 
   void disp()
   {
-    print(widget.supplierModel.snm.text.toString());
+    print(widget.supplierModel.snm.toString());
   }
 
-  void update_A_Supplier()
+  dynamic update_A_Supplier()
   async {
     var nabl_date=t1.selectedDate.toString();
     var nabl_due_date=t2.selectedDate.toString();
     supplierScope=splitScope(demoScope.text.toString().trim().toUpperCase());
+    String id = await returnIDOfDOc();
+    print(id);
 
-    await FirebaseFirestore.instance.collection("Chakan")
-        .doc("Supplier").collection("all_").where("agencyCode",isEqualTo: widget.supplierModel.scode.text.toString())
-        .get().then((value) {
-      value.docs.forEach((record) {
-        var id = record.id;
+    // await FirebaseFirestore.instance.collection("Chakan")
+    //     .doc("Supplier").collection("all_").where("agencyCode",isEqualTo: widget.supplierModel.scode.toString())
+    //     .get().then((value) async {
+    //   if(value.docs.isNotEmpty) {
 
-        FirebaseFirestore.instance.collection("Chakan").doc("Supplier").collection("all_").doc(id).update(
+
+        await FirebaseFirestore.instance.collection("Chakan").doc("Supplier").collection("all_").doc(id).update(
             {
-              'agencyName':widget.supplierModel.snm.text.toString().trim(),
-              'agencytype':_chosenValue.toString().trim().toUpperCase(),
-              'agencyAddress':widget.supplierModel.saddress.text.toString().trim(),
-              'NABL_certificate_No':widget.supplierModel.nablNo.text.toString().trim(),
+              'agencyName':sup_nm.text.toString().trim(),
+              //'agencytype':_chosenValue.toString().trim().toUpperCase(),
+              'agencyAddress':sup_address.text.toString().trim(),
+              'NABL_certificate_No':sup_nabl_no.text.toString().trim(),
               'NABL_Cert_Date':nabl_date.toString(),
               'NABL_Cert_Due_Date':nabl_due_date.toString().trim(),
             }
-        ).whenComplete(()
+        ).then((value)
         {
           _showMyDialog("Success","Supplier Updated Successfully !!!!");
-        }).onError((error, stackTrace) => _showMyDialog("Success","Supplier Updated Successfully !!!!"));
 
+        }).catchError((error, stackTrace) {
+          _showMyDialog("FAIL","Supplier Update Failed !!!!");
 
-      });
-    });
+        });
+
+    //   }
+    //   else
+    //     {
+    //       _showMyDialog("Fail","Supplier Update Failed as there are no such records!!!!");
+    //     }
+    // });
 
     // supplierScope.forEach((element)
     // async {
@@ -264,6 +325,9 @@ class _EditSupplierState extends State<EditSupplier>
 
 
     //dispValues();
+    setState(() {
+
+    });
 
   }
 
@@ -320,7 +384,7 @@ class _EditSupplierState extends State<EditSupplier>
                                 height:37.0,
                                 child: TextField(
                                   enabled: true,
-                                  controller: widget.supplierModel.snm,
+                                  controller: sup_nm,
                                   decoration: InputDecoration(
                                     fillColor: Colors.white,
                                     filled: true,
@@ -367,7 +431,7 @@ class _EditSupplierState extends State<EditSupplier>
                                 height:37.0,
                                 child: TextField(
                                   enabled: true,
-                                  controller:widget.supplierModel.saddress ,
+                                  controller:sup_address ,
                                   decoration: InputDecoration(
                                     fillColor: Colors.white,
                                     filled: true,
@@ -397,7 +461,7 @@ class _EditSupplierState extends State<EditSupplier>
                                 height:37.0,
                                 child: TextField(
                                   enabled: false,
-                                  controller: widget.supplierModel.scode,
+                                  controller: sup_code,
                                   decoration: InputDecoration(
                                     fillColor: Colors.white,
                                     filled: true,
@@ -433,7 +497,7 @@ class _EditSupplierState extends State<EditSupplier>
                                 height:37.0,
                                 child: TextField(
                                   enabled: true,
-                                  controller: widget.supplierModel.nablNo,
+                                  controller: sup_nabl_no,
                                   decoration: InputDecoration(
                                     fillColor: Colors.white,
                                     filled: true,
@@ -509,7 +573,7 @@ class _EditSupplierState extends State<EditSupplier>
                               onPressed: (){
                                 Navigator.push(context,
                                     MaterialPageRoute(
-                                        builder: (context) => new viewScope(scode:widget.supplierModel.scode.text.toString().trim())
+                                        builder: (context) => new demoviewScope(scode:sup_code.text.trim(), stype: widget.supplierModel.stype.trim(),)
                                     ));
 
                               },
@@ -524,7 +588,7 @@ class _EditSupplierState extends State<EditSupplier>
                               onPressed: (){
                                 Navigator.push(context,
                                     MaterialPageRoute(
-                                        builder: (context) => new Edit_Supplier_Contact_Details(scode:widget.supplierModel.scode.text.toString())
+                                        builder: (context) => new demo_Edit_Supplier_Contact_Details(scode:widget.supplierModel.scode.toString(), stype: widget.supplierModel.stype.trim(),)
                                     ));
 
                               },

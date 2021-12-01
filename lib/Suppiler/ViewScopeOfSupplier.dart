@@ -60,7 +60,7 @@ class _ViewScopeOfSupplierState extends State<ViewScopeOfSupplier> {
         .doc("Supplier")
         .collection("all_")
         .doc(RecId)
-        .collection("Scope").add({'name':scope.text.toString()}).whenComplete(()  {
+        .collection("Scope").add({'name':scope.text.toString().trim().toUpperCase()}).whenComplete(()  {
       print("Scope added Successfully");
       setState(() {
         //final_list2 =[];
@@ -84,7 +84,7 @@ class _ViewScopeOfSupplierState extends State<ViewScopeOfSupplier> {
         .doc("Supplier")
         .collection("all_")
         .doc(RecId)
-        .collection("Scope").where('name',isEqualTo: name)
+        .collection("Scope").where('name',isEqualTo: name.trim().toUpperCase())
         .get().then((QuerySnapshot querysnapshot) {
       querysnapshot.docs.forEach((element) async {
         await FirebaseFirestore.instance.collection("Chakan")

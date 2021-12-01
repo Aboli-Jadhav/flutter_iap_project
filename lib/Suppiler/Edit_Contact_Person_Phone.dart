@@ -25,7 +25,7 @@ class _Edit_Contact_Person_PhonesState extends State<Edit_Contact_Person_Phones>
   async {
     String ret="";
     await FirebaseFirestore.instance.collection("Chakan")
-        .doc("Supplier").collection("all_").where("agencyCode",isEqualTo: widget.supplier_code.toString())
+        .doc("Supplier").collection("all_").where("agencyCode",isEqualTo: widget.supplier_code.toString().trim())
         .get().then((value) => ret=value.docs.first.id.toString());
     print(ret);
     return ret;
@@ -60,7 +60,7 @@ class _Edit_Contact_Person_PhonesState extends State<Edit_Contact_Person_Phones>
         .doc("Supplier")
         .collection("all_")
         .doc(RecId)
-        .collection("Contact_Phone").add({'name':scope.text.toString()}).whenComplete(()  {
+        .collection("Contact_Phone").add({'name':scope.text.toString().trim()}).whenComplete(()  {
       print("Phone No added Successfully");
       setState(() {
         //final_list2 =[];
@@ -84,7 +84,7 @@ class _Edit_Contact_Person_PhonesState extends State<Edit_Contact_Person_Phones>
         .doc("Supplier")
         .collection("all_")
         .doc(RecId)
-        .collection("Contact_Phone").where('name',isEqualTo: name)
+        .collection("Contact_Phone").where('name',isEqualTo: name.trim())
         .get().then((QuerySnapshot querysnapshot) {
       querysnapshot.docs.forEach((element) async {
         await FirebaseFirestore.instance.collection("Chakan")

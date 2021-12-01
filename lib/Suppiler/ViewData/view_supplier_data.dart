@@ -3,6 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iap_project/Admin/view_gauge_model.dart';
 import 'package:flutter_iap_project/Suppiler/ViewData/View_Supplier_data_Model.dart';
+import 'package:flutter_iap_project/Suppiler/demoView/demoEditSupplier.dart';
+import 'package:flutter_iap_project/Suppiler/demoView/demoViewScope.dart';
+import 'package:flutter_iap_project/Suppiler/demoView/demo_Edit_Supplier_Contact_Details.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:editable/editable.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -13,6 +16,8 @@ import 'package:open_file/open_file.dart';
 import 'package:universal_html/html.dart' show AnchorElement;
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'dart:convert';
+
+import '../viewScope.dart';
 
 class view_supplier_data extends StatefulWidget {
   final String selectedValue;
@@ -308,6 +313,9 @@ class _view_supplier_dataState extends State<view_supplier_data> {
         textColor: Colors.white,
         fontSize: 16.0);
     fetchData();
+    setState(() {
+
+    });
     super.initState();
   }
 
@@ -333,10 +341,10 @@ class _view_supplier_dataState extends State<view_supplier_data> {
               const Padding(
                 padding: EdgeInsets.fromLTRB(50.0, 30, 50, 15),
                 child: ExcelRowHeading(
-                    one: "Supplier Code.",
+                    one: "Supplier Code",
                     two: "Supplier Type",
                     three: "Supplier Name",
-                    four: "Scope Of Supplier",
+                    four: "EDIT CONTACT DETAILS AND SCOPE",
                     five:"NABL Certificate NO",
                     six:"NABL Lab Scope Certificate",
                 ),
@@ -556,7 +564,7 @@ class ExcelRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double height = 35;
+    double height = 100;
     Color color = Colors.black54;
 
     return Column(
@@ -564,10 +572,10 @@ class ExcelRow extends StatelessWidget {
         Material(
             child: InkWell(
               onTap: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => ShowGauge(model: model)),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => demoEditSupplier(scopedatamodel: model.scopeList, supplierModel: model,)),
+                );
                 print("ROWWWWWWWWW");
               },
               child: Row(
@@ -605,7 +613,16 @@ class ExcelRow extends StatelessWidget {
                       // width: 300,
                       height: height,
                       decoration: BoxDecoration(border: Border.all(color: color)),
-                      child: Center(child: Text(model.scopeList.toString())),
+                      child: Center(child: ElevatedButton( onPressed: ()
+                      {
+                        Navigator.push(context,
+                          MaterialPageRoute(
+                            builder: (context) => new demo_Edit_Supplier_Contact_Details(scode: model.scode.toString(), stype: model.stype.toString(),),
+                          ),
+                        );
+
+                      },
+                      child: Text("Edit Contact And Scope"),)),
                     ),
                   ),
                   Expanded(
@@ -618,10 +635,46 @@ class ExcelRow extends StatelessWidget {
                   ),
                   Expanded(
                     child: Container(
-                      // width: 300,
-                      height: height,
                       decoration: BoxDecoration(border: Border.all(color: color)),
-                      child: Center(child: Text(model.lab_scope_link)),
+                      height: height,
+                      child: Center(
+                        child: Column(
+                          children: [
+                            Container(
+                              // width: 300,
+                              height: 40,
+                              //decoration: BoxDecoration(border: Border.all(color: color)),
+                              child: Center(child: ElevatedButton( onPressed: ()
+                              {
+                                // Navigator.push(context,
+                                //   MaterialPageRoute(
+                                //     builder: (context) => new demo_Edit_Supplier_Contact_Details(scode: model.scode.toString(), stype: model.stype.toString(),),
+                                //   ),
+                                // );
+
+                              },
+                                child: Text("View NABL Lab Scope PDF"),)),
+                            ),
+                            SizedBox(height:10),
+                            Container(
+                              // width: 300,
+                              height: 40,
+                              //decoration: BoxDecoration(border: Border.all(color: color)),
+                              child: Center(child: ElevatedButton( onPressed: ()
+                              {
+                                // Navigator.push(context,
+                                //   MaterialPageRoute(
+                                //     builder: (context) => new demo_Edit_Supplier_Contact_Details(scode: model.scode.toString(), stype: model.stype.toString(),),
+                                //   ),
+                                // );
+
+                              },
+                                child: Text("View NABL Certificate PDF"),)),
+                            ),
+
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ],
