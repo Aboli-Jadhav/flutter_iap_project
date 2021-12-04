@@ -327,7 +327,7 @@ class _AddSupplierState extends State<AddSupplier> {
               });
 
             });
-            _showMyDialog('Success','Supplier Added Successfully !!!!!');
+            
           });
           contact_MailID_list.forEach((element)
           async {
@@ -358,7 +358,8 @@ class _AddSupplierState extends State<AddSupplier> {
           //_showMyDialog('Success','Supplier Added Successfully !!!!!');
 
         }
-        ).whenComplete(() => _showMyDialog('Success','Supplier Added Successfully !!!!!'))
+        ).whenComplete(() => print('Supplier Added Successfully !!!!!'))
+        .then((value) => _showMyDialog('Success','Supplier Added Successfully !!!!!'))
             .onError((error, stackTrace)
             {
               _showMyDialog('Error','Add Supplier Failed !!!!!');

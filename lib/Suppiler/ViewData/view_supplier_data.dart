@@ -1,12 +1,14 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'dart:html' as html;
 import 'package:flutter_iap_project/Admin/view_gauge_model.dart';
 import 'package:flutter_iap_project/Suppiler/ViewData/View_Supplier_data_Model.dart';
 import 'package:flutter_iap_project/Suppiler/demoView/demoEditSupplier.dart';
 import 'package:flutter_iap_project/Suppiler/demoView/demoViewScope.dart';
 import 'package:flutter_iap_project/Suppiler/demoView/demo_Edit_Supplier_Contact_Details.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:editable/editable.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_iap_project/Admin/showgauge.dart';
@@ -361,7 +363,8 @@ class _view_supplier_dataState extends State<view_supplier_data> {
                     itemCount: fetched_list.length,
                     itemBuilder: (BuildContext context, int index) {
                       return ExcelRow(
-                        model: fetched_list[index],
+                        model: fetched_list[index], val: widget.selectedValue, opt: widget.selected_option,
+
                       );
                     },
                   ),
@@ -555,12 +558,65 @@ class ExcelRow extends StatelessWidget {
   // final String four;
   // final String five;
   final View_supplier_data_model model;
+  final String val;
+  final String opt;
 
   const ExcelRow(
       {Key? key,
-        required this.model
+        required this.model,
+        required this.val,
+        required this.opt
       })
       : super(key: key);
+
+  static String downloadedLink="";
+
+  Future<void> _showMyDialog(String title,String str,BuildContext context) async {
+    //BuildContext context;
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          //backgroundColor: lred,
+          title: Text(title),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(str),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+
+  Future<void> getDownloadLink(String code,String filenm,BuildContext context)
+  async
+  {
+       // context:context;
+    print(code.toString()+filenm.toString());
+        var fstorage=FirebaseStorage.instance.ref();
+        //String downloadedLink ="";
+        downloadedLink= await fstorage.child("files/"+code.toString()+"/").child(filenm.toString()).getDownloadURL()
+            .whenComplete(() => print("Downloading"+downloadedLink));
+            //.then((value) =>  downloadedLink.toString());
+        if(downloadedLink=="")
+          {
+              _showMyDialog("Error", "UNABLE TO GET CERTIFICATE URL", context);
+          }
+       // return downloadedLink.toString();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -572,9 +628,10 @@ class ExcelRow extends StatelessWidget {
         Material(
             child: InkWell(
               onTap: () {
+                Navigator.pop(context);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => demoEditSupplier(scopedatamodel: model.scopeList, supplierModel: model,)),
+                  MaterialPageRoute(builder: (context) => demoEditSupplier(scopedatamodel: model.scopeList, supplierModel: model, svalue: val,selopt:opt)),
                 );
                 print("ROWWWWWWWWW");
               },
@@ -644,16 +701,39 @@ class ExcelRow extends StatelessWidget {
                               // width: 300,
                               height: 40,
                               //decoration: BoxDecoration(border: Border.all(color: color)),
-                              child: Center(child: ElevatedButton( onPressed: ()
-                              {
+                              child: Center(child: ElevatedButton(
+                                onPressed: ()
+                              async {
                                 // Navigator.push(context,
                                 //   MaterialPageRoute(
                                 //     builder: (context) => new demo_Edit_Supplier_Contact_Details(scode: model.scode.toString(), stype: model.stype.toString(),),
                                 //   ),
                                 // );
+                                if(model.stype == "Repairing"||model.stype == "Manufacturer")
+                                  {
+                                    _showMyDialog("ERROR","Repairing or Manufacturer Supplier types does not have Certificate !!", context);
+                                  }
+                                else {
+                                  await getDownloadLink(
+                                      model.scode, model.lab_scope_file_nm,
+                                      context).then((value)
+                                  {
+                                    var demo = html.window.open(downloadedLink, "_blank");
+                                    demo.addEventListener(
+                                        "onLoadedData", (event) {
+                                      print("Downloading !!!!"+downloadedLink);
+                                    });
+                                    demo.close();
+                                    _showMyDialog("Success", "Download Successful", context);
+                                  });
+
+                                }
+
+
+
 
                               },
-                                child: Text("View NABL Lab Scope PDF"),)),
+                                child: Text("Download NABL Lab Scope PDF"),)),
                             ),
                             SizedBox(height:10),
                             Container(
@@ -661,15 +741,39 @@ class ExcelRow extends StatelessWidget {
                               height: 40,
                               //decoration: BoxDecoration(border: Border.all(color: color)),
                               child: Center(child: ElevatedButton( onPressed: ()
-                              {
+                              async {
                                 // Navigator.push(context,
                                 //   MaterialPageRoute(
                                 //     builder: (context) => new demo_Edit_Supplier_Contact_Details(scode: model.scode.toString(), stype: model.stype.toString(),),
                                 //   ),
                                 // );
+                                if(model.stype == "Repairing"||model.stype == "Manufacturer")
+                                {
+                                  _showMyDialog("ERROR","Repairing or Manufacturer Supplier types does not have Certificate !!", context);
+                                }
+                                else {
+                                  var a=0;
+                                  await getDownloadLink(
+                                      model.scode, model.certificate_file_nm,
+                                      context).then((value)
+                                      {
+                                        var demo =  html.window.open(downloadedLink.toString(), model.certificate_file_nm);
+                                        demo.addEventListener(
+                                            "onLoadedData", (event) {
+                                          print("Downloading !!!!");
+                                          a=1;
+                                          demo.close();
+                                        });
+                                        _showMyDialog("Success", "Download Successful", context);
+
+                                      }
+                                  );
+
+
+                                }
 
                               },
-                                child: Text("View NABL Certificate PDF"),)),
+                                child: Text("Download NABL Certificate PDF"),)),
                             ),
 
                           ],

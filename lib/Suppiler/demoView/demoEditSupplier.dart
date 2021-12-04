@@ -5,6 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iap_project/Suppiler/Edit_Supplier_Contact_Details.dart';
 import 'package:flutter_iap_project/Suppiler/ViewData/View_Supplier_data_Model.dart';
+import 'package:flutter_iap_project/Suppiler/ViewData/view_supplier_data.dart';
 import 'package:flutter_iap_project/Suppiler/demoView/demoViewScope.dart';
 import 'package:flutter_iap_project/Suppiler/demoView/demo_Edit_Supplier_Contact_Details.dart';
 import 'package:progress_dialog/progress_dialog.dart';
@@ -14,8 +15,10 @@ import '../SupplierDataModel.dart';
 class demoEditSupplier extends StatefulWidget {
   final View_supplier_data_model supplierModel;
   final List<String> scopedatamodel;
+  final String svalue;
+  final String selopt;
 
-  const demoEditSupplier({Key? key, required this.supplierModel,required this.scopedatamodel}) : super(key: key);
+  const demoEditSupplier({Key? key, required this.supplierModel,required this.scopedatamodel,required this.svalue,required this.selopt}) : super(key: key);
 
   @override
   _demoEditSupplierState createState() => _demoEditSupplierState();
@@ -218,7 +221,7 @@ class _demoEditSupplierState extends State<demoEditSupplier>
 
   void updateScopeFileLinks(var id)
   async {
-    await FirebaseFirestore.instance.collection("chakan").doc("Supplier").collection("all_").doc(id).update(
+    await FirebaseFirestore.instance.collection("Chakan").doc("Supplier").collection("all_").doc(id).update(
         {
           'NABL_Lab_Scope_Download_Link':lab_scope_link.toString(),
           'NABL_Lab_Scope_FileName':Scopefilenm.toString(),
@@ -337,6 +340,13 @@ class _demoEditSupplierState extends State<demoEditSupplier>
       child: Scaffold(
         backgroundColor: lred,
         appBar: AppBar(
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+              Navigator.push(context, MaterialPageRoute(builder: (context) => view_supplier_data(selectedValue: widget.svalue, selected_option: widget.selopt)));
+            },
+            icon: Icon(Icons.arrow_back),
+          ),
           toolbarHeight: 50,
           backgroundColor: backred,
           title: const Text(

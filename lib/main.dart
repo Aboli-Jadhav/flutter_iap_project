@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iap_project/Admin/Add%20gauges/addguage_page.dart';
 import 'package:flutter_iap_project/Admin/showgauge.dart';
 import 'package:flutter_iap_project/Admin/view_gauge_model.dart';
+import 'package:flutter_iap_project/Suppiler/ViewData/View_Supplier_data_Model.dart';
+import 'package:flutter_iap_project/Suppiler/demoView/demoEditSupplier.dart';
 import 'package:flutter_iap_project/master_admin/MasteradminHome_Page.dart';
 import 'Admin/Show Gauges.dart';
 import 'Authentication/services/navigator_service.dart';
@@ -70,7 +72,7 @@ void main() {
       '/view_master_gau' : (context) => view_master_gau(selected_option: '',selectedValue: ''),
       '/viewAdminList' : (context) => View_AdminList_DropDown(gauge_location: [],),
       '/master_adminHome': (context) => master_adminHome_Page(),
-
+     // '/demo_edit_supplier': (context) => demoEditSupplier(supplierModel: View_supplier_data_model('','','','','','','','','','','',[],[],[],[]), scopedatamodel: []),
     },
     home:LoginOptionScrn(),
   ));

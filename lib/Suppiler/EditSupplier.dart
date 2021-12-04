@@ -144,11 +144,21 @@ class _EditSupplierState extends State<EditSupplier>
     }
   }
 
+  // Future<String> returnIDOfDOc()
+  // async {
+  //   String ret="";
+  //   await FirebaseFirestore.instance.collection("Chakan")
+  //       .doc("Supplier").collection("all_").where("agencyCode",isEqualTo: widget.supplierModel.scode.text.toString())
+  //       .get().then((value) => ret=value.docs.first.id.toString());
+  //   print(ret);
+  //   return ret;
+  // }
+
   Future<String> returnIDOfDOc()
   async {
     String ret="";
     await FirebaseFirestore.instance.collection("Chakan")
-        .doc("Supplier").collection("all_").where("agencyCode",isEqualTo: widget.supplierModel.scode.text.toString())
+        .doc("Supplier").collection("all_").where("agencyCode",isEqualTo: widget.supplierModel.scode.toString().trim())
         .get().then((value) => ret=value.docs.first.id.toString());
     print(ret);
     return ret;
