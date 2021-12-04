@@ -158,6 +158,19 @@ class _view_data_uiState extends State<view_data_ui> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 50,
+        backgroundColor: backred,
+        title: Text(
+          "View Supplier",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 30.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        centerTitle: true,
+      ),
       backgroundColor: lred,
       body: Row(
         mainAxisAlignment: MainAxisAlignment.center,
