@@ -121,6 +121,39 @@ class _AddSupplierState extends State<AddSupplier> {
         );
   }
 
+  Future<String> returnIDOfDOc()
+  async {
+    String ret="";
+    await FirebaseFirestore.instance.collection("Chakan")
+        .doc("Supplier").collection("all_")
+        .get().then((value)
+    {
+      if(value.docs.isNotEmpty)
+      {
+        for(var ele in value.docs)
+        {
+          if(ele.data()['agencyCode']==sup_code.text.toString().trim()
+              &&  ele.data()['agencytype']==_chosenValue.toString().trim()
+          )
+          {
+            ret=ele.id;
+            break;
+          }
+          else
+          {
+            print("Record not present.");
+          }
+        }
+      }
+      else{
+        _showMyDialog("FAIL", "No SUCH RECORD !!!!");
+      }
+
+    });
+    print(ret);
+    return ret;
+  }
+
   Future<void> _showMyDialog(String title,String str) async {
     return showDialog<void>(
       context: context,
@@ -252,12 +285,23 @@ class _AddSupplierState extends State<AddSupplier> {
               'NABL_Lab_Scope_FileName':nabl_labScope_fileName.toString().trim(),
 
             }
-        ).whenComplete(()
-        {
+        ).then((value)
+        async {
+          String currID=await returnIDOfDOc();
           supplier_scopes.forEach((element)
           async {
             insertScopeAttributes(element);
-            await FirebaseFirestore.instance.collection("Chakan")
+            FirebaseFirestore.instance.collection("Chakan")
+                .doc("Supplier").collection("all_").doc(currID.toString()).collection("Scope")
+                .doc().set(
+                {
+                  'name':element.trim().toUpperCase(),
+                }).onError((error, stackTrace)
+            {
+              _showMyDialog('Error','Add Supplier Failed !!!!!');
+              print("Error Occured while creating Scope Collection.");
+            });
+            /*await FirebaseFirestore.instance.collection("Chakan")
                 .doc("Supplier").collection("all_").where("agencyCode",isEqualTo: sup_code.text.toString().trim())
                 .get().then((value)
             {
@@ -276,83 +320,110 @@ class _AddSupplierState extends State<AddSupplier> {
                 });
               });
 
-            });
+            });*/
 
           });
           contact_nm_list.forEach((element)
           async {
             insertContactNAMEAttributes(element);
-            await FirebaseFirestore.instance.collection("Chakan")
-                .doc("Supplier").collection("all_").where("agencyCode",isEqualTo: sup_code.text.toString())
-                .get().then((value)
-            {
-              value.docs.forEach((record)
-              {
-                var id=record.id;
-                FirebaseFirestore.instance.collection("Chakan")
-                    .doc("Supplier").collection("all_").doc(id).collection("Contact_Name")
-                    .doc().set(
-                    {
-                      'name':element.trim(),
-                    }).onError((error, stackTrace)
+            // await FirebaseFirestore.instance.collection("Chakan")
+            //     .doc("Supplier").collection("all_").where("agencyCode",isEqualTo: sup_code.text.toString())
+            //     .get().then((value)
+            // {
+            //   value.docs.forEach((record)
+            //   {
+            //     var id=record.id;
+            //     FirebaseFirestore.instance.collection("Chakan")
+            //         .doc("Supplier").collection("all_").doc(id).collection("Contact_Name")
+            //         .doc().set(
+            //         {
+            //           'name':element.trim(),
+            //         }).onError((error, stackTrace)
+            //     {
+            //       _showMyDialog('Error','Add Supplier Failed !!!!!');
+            //       print("Error Occured while creating Name Collection.");
+            //     });
+            //   });
+            //
+            // });
+            FirebaseFirestore.instance.collection("Chakan")
+                .doc("Supplier").collection("all_").doc(currID.toString()).collection("Contact_Name")
+                .doc().set(
                 {
-                  _showMyDialog('Error','Add Supplier Failed !!!!!');
-                  print("Error Occured while creating Name Collection.");
-                });
-              });
-
+                  'name':element.trim(),
+                }).onError((error, stackTrace)
+            {
+              _showMyDialog('Error','Add Supplier Failed !!!!!');
+              print("Error Occured while creating Contact_Name Collection.");
             });
-
           });
           contact_MobileNo_list.forEach((element)
           async {
             insertCONTACT_PhoneAttributes(element);
-            await FirebaseFirestore.instance.collection("Chakan")
-                .doc("Supplier").collection("all_").where("agencyCode",isEqualTo: sup_code.text.toString())
-                .get().then((value)
-            {
-              value.docs.forEach((record)
-              {
-                var id=record.id;
-                FirebaseFirestore.instance.collection("Chakan")
-                    .doc("Supplier").collection("all_").doc(id).collection("Contact_Phone")
-                    .doc().set(
-                    {
-                      'name':element.trim(),
-                    }).onError((error, stackTrace)
+            // await FirebaseFirestore.instance.collection("Chakan")
+            //     .doc("Supplier").collection("all_").where("agencyCode",isEqualTo: sup_code.text.toString())
+            //     .get().then((value)
+            // {
+            //   value.docs.forEach((record)
+            //   {
+            //     var id=record.id;
+            //     FirebaseFirestore.instance.collection("Chakan")
+            //         .doc("Supplier").collection("all_").doc(id).collection("Contact_Phone")
+            //         .doc().set(
+            //         {
+            //           'name':element.trim(),
+            //         }).onError((error, stackTrace)
+            //     {
+            //       _showMyDialog('Error','Add Supplier Failed !!!!!');
+            //       print("Error Occured while creating Phone Collection.");
+            //     });
+            //   });
+            //
+            // });
+            FirebaseFirestore.instance.collection("Chakan")
+                .doc("Supplier").collection("all_").doc(currID.toString()).collection("Contact_Phone")
+                .doc().set(
                 {
-                  _showMyDialog('Error','Add Supplier Failed !!!!!');
-                  print("Error Occured while creating Phone Collection.");
-                });
-              });
-
+                  'name':element.trim(),
+                }).onError((error, stackTrace)
+            {
+              _showMyDialog('Error','Add Supplier Failed !!!!!');
+              print("Error Occured while creating Contact_Phone Collection.");
             });
-            
           });
           contact_MailID_list.forEach((element)
           async {
             insertCONTACT_EMAILAttributes(element);
-            await FirebaseFirestore.instance.collection("Chakan")
-                .doc("Supplier").collection("all_").where("agencyCode",isEqualTo: sup_code.text.toString())
-                .get().then((value)
-            {
-              value.docs.forEach((record)
-              {
-                var id=record.id;
-                FirebaseFirestore.instance.collection("Chakan")
-                    .doc("Supplier").collection("all_").doc(id).collection("Contact_Emails")
-                    .doc().set(
-                    {
-                      'name':element.trim(),
-                    }).onError((error, stackTrace)
+            // await FirebaseFirestore.instance.collection("Chakan")
+            //     .doc("Supplier").collection("all_").where("agencyCode",isEqualTo: sup_code.text.toString())
+            //     .get().then((value)
+            // {
+            //   value.docs.forEach((record)
+            //   {
+            //     var id=record.id;
+            //     FirebaseFirestore.instance.collection("Chakan")
+            //         .doc("Supplier").collection("all_").doc(id).collection("Contact_Emails")
+            //         .doc().set(
+            //         {
+            //           'name':element.trim(),
+            //         }).onError((error, stackTrace)
+            //     {
+            //       _showMyDialog('Error','Add Supplier Failed !!!!!');
+            //       print("Error Occured while creating Mail Collection.");
+            //     });
+            //   });
+            //
+            // });
+            FirebaseFirestore.instance.collection("Chakan")
+                .doc("Supplier").collection("all_").doc(currID.toString()).collection("Contact_Emails")
+                .doc().set(
                 {
-                  _showMyDialog('Error','Add Supplier Failed !!!!!');
-                  print("Error Occured while creating Mail Collection.");
-                });
-              });
-
+                  'name':element.trim(),
+                }).onError((error, stackTrace)
+            {
+              _showMyDialog('Error','Add Supplier Failed !!!!!');
+              print("Error Occured while creating COntact_Emails Collection.");
             });
-
           });
 
           //_showMyDialog('Success','Supplier Added Successfully !!!!!');
