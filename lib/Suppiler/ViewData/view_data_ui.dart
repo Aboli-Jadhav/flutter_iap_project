@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_iap_project/Admin/Add gauges/addguage_page.dart';
+import 'package:flutter_iap_project/Suppiler/ViewData/view_All_Suppliers.dart';
 import 'package:flutter_iap_project/Suppiler/ViewData/view_supplier_data.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:autocomplete_textfield_ns/autocomplete_textfield_ns.dart';
@@ -230,128 +231,147 @@ class _view_data_uiState extends State<view_data_ui> {
               const SizedBox(
                 height: 30,
               ),
-              ElevatedButton(
-                child: Text("View Gauge"),
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.red,
-                ),
-                onPressed: () {
+
+              Row(
+                children: [
+                  ElevatedButton(
+                    child: Text("View Suppliers"),
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.red,
+                    ),
+                    onPressed: () {
 
 
 
-                  switch(selectedValue) {
-                    case 'Type of Supplier': {
-                      // statements;
-                      selected_option = type_of_supplier.text;
-                      final_selectedValue='agencytype';
-                    }
-                    break;
+                      switch(selectedValue) {
+                        case 'Type of Supplier': {
+                          // statements;
+                          selected_option = type_of_supplier.text;
+                          final_selectedValue='agencytype';
+                        }
+                        break;
 
-                    case 'Supplier Code': {
-                      //statements;
-                      selected_option = sup_code.text;
-                      final_selectedValue='agencyCode';
-                    }
-                    break;
+                        case 'Supplier Code': {
+                          //statements;
+                          selected_option = sup_code.text;
+                          final_selectedValue='agencyCode';
+                        }
+                        break;
 
-                    case 'Supplier Contact Person Name': {
-                      //statements;
-                      selected_option = sup_contact_nm.text;
-                      final_selectedValue='Contact_Name';
-                    }
-                    break;
+                        case 'Supplier Contact Person Name': {
+                          //statements;
+                          selected_option = sup_contact_nm.text;
+                          final_selectedValue='Contact_Name';
+                        }
+                        break;
 
-                    case 'Supplier Contact Person Email': {
-                      //statements;
-                      selected_option = sup_contact_email.text;
-                      final_selectedValue='Contact_Emails';
-                    }
-                    break;
+                        case 'Supplier Contact Person Email': {
+                          //statements;
+                          selected_option = sup_contact_email.text;
+                          final_selectedValue='Contact_Emails';
+                        }
+                        break;
 
-                    case 'Supplier Contact Person Phone': {
-                      //statements;
-                      selected_option = sup_contact_mob.text;
-                      final_selectedValue='Contact_Phone';
-                    }
-                    break;
+                        case 'Supplier Contact Person Phone': {
+                          //statements;
+                          selected_option = sup_contact_mob.text;
+                          final_selectedValue='Contact_Phone';
+                        }
+                        break;
 
-                    case 'Supplier Name': {
-                      //statements;
-                      //   selected_option = calibration_date.text;
-                      selected_option = sup_nm.text;
-                      final_selectedValue='agencyName';
+                        case 'Supplier Name': {
+                          //statements;
+                          //   selected_option = calibration_date.text;
+                          selected_option = sup_nm.text;
+                          final_selectedValue='agencyName';
 
-                    }
-                    break;
+                        }
+                        break;
 
-                    case 'LOCATION': {
-                      selected_option = location.text;
-                      final_selectedValue='agencyAddress';
-                    }
-                    break;
+                        case 'LOCATION': {
+                          selected_option = location.text;
+                          final_selectedValue='agencyAddress';
+                        }
+                        break;
 
-                    case 'Scope': {
-                      //statements;
-                      selected_option = scope.text;
-                      final_selectedValue='Scope';
-                    }
-                    break;
+                        case 'Scope': {
+                          //statements;
+                          selected_option = scope.text;
+                          final_selectedValue='Scope';
+                        }
+                        break;
 
-                    default: {
-                      //statements;
-                      selected_option = 'none';
-                    }
-                    break;
-                  }
+                        default: {
+                          //statements;
+                          selected_option = 'none';
+                        }
+                        break;
+                      }
 
-                  // switch(selectedValue){
-                  //   case 'Type of gauge':{final_selectedValue='gauge_type';}
-                  //   break;
-                  //   case 'WPPL gauge ID no':{final_selectedValue='identification_number';}
-                  //   break;
-                  //   case 'GAUGE/INSTRUMENT MAKE':{final_selectedValue='gauge_make';}
-                  //   break;
-                  //   case 'GAUGE/INSTRUMENT MANUFACTURING ID NO':{final_selectedValue='manufacturer_serial_number';}
-                  //   break;
-                  //   case 'SIZE':{final_selectedValue='nominal_size';}
-                  //   break;
-                  //   case 'CALIBRATION DATE':{final_selectedValue='calibration_date';}
-                  //   break;
-                  //   case 'CALIBRATION DUE DATE':{final_selectedValue='calibration_due_date';}
-                  //   break;
-                  //   case 'LOCATION':{final_selectedValue='gauge_location';}
-                  //   break;
-                  //   case 'PLANT':{final_selectedValue='';}
-                  //   break;
-                  //
-                  //   default:{}
-                  //   break;
-                  // }
+                      // switch(selectedValue){
+                      //   case 'Type of gauge':{final_selectedValue='gauge_type';}
+                      //   break;
+                      //   case 'WPPL gauge ID no':{final_selectedValue='identification_number';}
+                      //   break;
+                      //   case 'GAUGE/INSTRUMENT MAKE':{final_selectedValue='gauge_make';}
+                      //   break;
+                      //   case 'GAUGE/INSTRUMENT MANUFACTURING ID NO':{final_selectedValue='manufacturer_serial_number';}
+                      //   break;
+                      //   case 'SIZE':{final_selectedValue='nominal_size';}
+                      //   break;
+                      //   case 'CALIBRATION DATE':{final_selectedValue='calibration_date';}
+                      //   break;
+                      //   case 'CALIBRATION DUE DATE':{final_selectedValue='calibration_due_date';}
+                      //   break;
+                      //   case 'LOCATION':{final_selectedValue='gauge_location';}
+                      //   break;
+                      //   case 'PLANT':{final_selectedValue='';}
+                      //   break;
+                      //
+                      //   default:{}
+                      //   break;
+                      // }
 
-                  Fluttertoast.showToast(
-                      msg: selected_option.toString(),
-                      toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.CENTER,
-                      timeInSecForIosWeb: 1,
-                      backgroundColor: Colors.red,
-                      textColor: Colors.white,
-                      fontSize: 16.0);
+                      Fluttertoast.showToast(
+                          msg: selected_option.toString(),
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.CENTER,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Colors.red,
+                          textColor: Colors.white,
+                          fontSize: 16.0);
 
-                  print(allnames);
-                  type_of_supplier.clear();
-                  sup_code.clear();
-                  location.clear();
-                  sup_nm.clear();
-                  location.clear();
+                      print(allnames);
+                      type_of_supplier.clear();
+                      sup_code.clear();
+                      location.clear();
+                      sup_nm.clear();
+                      location.clear();
 
 
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => view_supplier_data(selectedValue:final_selectedValue, selected_option:selected_option)),
-                  );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => view_supplier_data(selectedValue:final_selectedValue, selected_option:selected_option)),
+                      );
 
-                },
-              )
+                    },
+                  ),
+                  SizedBox(width: 70,),
+                  ElevatedButton(
+                    child: Text("View All Suppliers"),
+                    style: ElevatedButton.styleFrom(primary: Colors.red,),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => view_All_Supplier_Data()),
+                      );
+
+                    },
+                  ),
+                ],
+              ),
+
+
             ],
           ),
         ],

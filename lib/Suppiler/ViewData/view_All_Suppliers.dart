@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'dart:html' as html;
 import 'package:flutter_iap_project/Suppiler/ViewData/View_Supplier_data_Model.dart';
 import 'package:flutter_iap_project/Suppiler/demoView/demoEditSupplier.dart';
+import 'package:flutter_iap_project/Suppiler/demoView/demoEditSupplier_ForViewAll.dart';
 import 'package:flutter_iap_project/Suppiler/demoView/demo_Edit_Supplier_Contact_Details.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -17,19 +18,17 @@ import 'dart:convert';
 
 import '../viewScope.dart';
 
-class view_supplier_data extends StatefulWidget {
-  final String selectedValue;
-  final String selected_option;
+class view_All_Supplier_Data extends StatefulWidget {
 
-  const view_supplier_data(
-      {Key? key, required this.selectedValue, required this.selected_option})
+  const view_All_Supplier_Data(
+      {Key? key})
       : super(key: key);
 
   @override
-  _view_supplier_dataState createState() => _view_supplier_dataState();
+  _view_All_Supplier_DataState createState() => _view_All_Supplier_DataState();
 }
 
-class _view_supplier_dataState extends State<view_supplier_data> {
+class _view_All_Supplier_DataState extends State<view_All_Supplier_Data> {
   Color backred = Color(0xffDF3F3F);
   Color lred = Color(0xffFBEBEB);
   String final_selectedValue = '';
@@ -49,18 +48,18 @@ class _view_supplier_dataState extends State<view_supplier_data> {
         .doc(RecId).collection("Contact_Emails").get().then((value)
     {
       if(value.docs.isNotEmpty)
+      {
+        value.docs.forEach((element)
         {
-          value.docs.forEach((element)
-          {
-            element.data().entries.forEach((ele) {
-              ContactMail_List.add(ele.value);
-              print(ele.value);
-            });
+          element.data().entries.forEach((ele) {
+            ContactMail_List.add(ele.value);
+            print(ele.value);
           });
-          setState(()
-          {
-          });
-        }
+        });
+        setState(()
+        {
+        });
+      }
       else{
         print("EMPTY");
       }
@@ -72,7 +71,7 @@ class _view_supplier_dataState extends State<view_supplier_data> {
 
   void getNames(String RecId) async {
     print("Get Names Called");
-   await  FirebaseFirestore.instance.collection("Chakan").doc("Supplier").collection(
+    await  FirebaseFirestore.instance.collection("Chakan").doc("Supplier").collection(
         "all_")
         .doc(RecId).collection("Contact_Name").get().then((value)
     {
@@ -92,10 +91,10 @@ class _view_supplier_dataState extends State<view_supplier_data> {
         });
       }
       else
-        {
-          print("EMPTY");
+      {
+        print("EMPTY");
 
-        }
+      }
 
     }
     );
@@ -103,7 +102,7 @@ class _view_supplier_dataState extends State<view_supplier_data> {
   }
 
   void getPhones(String RecId) async {
-   await  FirebaseFirestore.instance.collection("Chakan").doc("Supplier").collection(
+    await  FirebaseFirestore.instance.collection("Chakan").doc("Supplier").collection(
         "all_")
         .doc(RecId).collection("Contact_Phone").get().then((value)
     {
@@ -144,7 +143,7 @@ class _view_supplier_dataState extends State<view_supplier_data> {
   }
 
   dynamic getAll(String id)
-   {
+  {
     getScopes(id);
     getNames(id);
     getPhones(id);
@@ -152,149 +151,193 @@ class _view_supplier_dataState extends State<view_supplier_data> {
     print("GET ALL ENDED");
   }
 
-  void fetch() {
-    FirebaseFirestore.instance
-        .collection("Chakan")
-        .doc("Supplier")
-        .collection("all_").get().then((value)
-    {
-      if(value.docs.isNotEmpty)
+  // void fetch() {
+  //   FirebaseFirestore.instance
+  //       .collection("Chakan")
+  //       .doc("Supplier")
+  //       .collection("all_").get().then((value)
+  //   {
+  //     if(value.docs.isNotEmpty)
+  //     {
+  //       value.docs.forEach((element)
+  //       {
+  //         var fdb=fstore
+  //             .collection("Chakan")
+  //             .doc("Supplier")
+  //             .collection("all_")
+  //             .doc(element.id)
+  //             .get();
+  //         FirebaseFirestore.instance
+  //             .collection("Chakan")
+  //             .doc("Supplier")
+  //             .collection("all_")
+  //             .doc(element.id)
+  //             .collection(widget.selectedValue)
+  //             .where("name", isEqualTo: widget.selected_option)
+  //             .get()
+  //             .then((querySnapshot) async {
+  //           print("SIZE"+querySnapshot.size.toString()+element.id);
+  //           if (querySnapshot.docs.isNotEmpty)
+  //           {
+  //             print("HIIII"+element.id); await getAll(element.id);
+  //             // querySnapshot.docs.forEach((doc)
+  //             // async {
+  //             fdb.then((doc)
+  //             {
+  //               View_supplier_data_model model=View_supplier_data_model(
+  //                   doc['agencyCode'],
+  //                   doc['NABL_certificate_No'],
+  //                   doc['agencyAddress'],
+  //                   doc['agencyName'],
+  //                   doc['NABL_Cert_Due_Date'],
+  //                   doc['NABL_Cert_Date'],
+  //                   doc['NABL_Lab_Scope_Download_Link'],
+  //                   doc['NABL_Certificate_Download_Link'],
+  //                   doc['NABL_Lab_Scope_FileName'],
+  //                   doc['NABL_Certificate_FileName'],
+  //                   doc['agencytype'],
+  //                   scopeList,ContactMob_List,ContactNm_List,
+  //                   ContactMail_List
+  //               );
+  //               fetched_list.add(model);print("MODEL"+model.snm);
+  //             });
+  //
+  //             // });
+  //             setState(() {
+  //               show = 1;
+  //             });
+  //             print("Fetched list: ${fetched_list[0].scode}");
+  //
+  //           }
+  //           else{
+  //             setState(() {
+  //               if(fetched_list.length==0)
+  //               {
+  //                 show=2;
+  //               }
+  //               else
+  //               {
+  //                 show=1;
+  //               }
+  //
+  //             });
+  //             print("view_supplier_datage 86 : OOPS file doesn't exists");
+  //           }
+  //         });
+  //
+  //       });
+  //     }
+  //     else
+  //     {
+  //       setState(() {
+  //         show=2;
+  //       });
+  //       print("view_supplier_datage 85 : OOPS file doesn't exists");
+  //     }
+  //
+  //   });
+  //
+  // }
+
+
+  // void fetchData() {
+  //
+  //   if(widget.selectedValue =="Contact_Name"||widget.selectedValue =="Contact_Emails"||
+  //       widget.selectedValue =="Contact_Phone"||widget.selectedValue =="Scope")
+  //   {
+  //     print("FETCH");
+  //     fetch();
+  //   }
+  //   else
+  //   {
+  //     FirebaseFirestore firestore = FirebaseFirestore.instance;
+  //     firestore
+  //         .collection("Chakan")
+  //         .doc("Supplier")
+  //         .collection("all_")
+  //         .where(widget.selectedValue, isEqualTo: widget.selected_option)
+  //         .get()
+  //         .then((QuerySnapshot querySnapshot) {
+  //       if (querySnapshot.docs.isNotEmpty) {
+  //         querySnapshot.docs.forEach((doc) {
+  //           getAll(doc.id);
+  //           View_supplier_data_model model=View_supplier_data_model(
+  //               doc['agencyCode'],
+  //               doc['NABL_certificate_No'],
+  //               doc['agencyAddress'],
+  //               doc['agencyName'],
+  //               doc['NABL_Cert_Due_Date'],
+  //               doc['NABL_Cert_Date'],
+  //               doc['NABL_Lab_Scope_Download_Link'],
+  //               doc['NABL_Certificate_Download_Link'],
+  //               doc['NABL_Lab_Scope_FileName'],
+  //               doc['NABL_Certificate_FileName'],
+  //               doc['agencytype'],
+  //               scopeList,ContactMob_List,ContactNm_List,
+  //               ContactMail_List
+  //           );
+  //
+  //           fetched_list.add(model);
+  //         });
+  //         setState(() {
+  //           show = 1;
+  //         });
+  //         print("Fetched list: ${fetched_list[0].scode}");
+  //       }
+  //       else{
+  //         setState(() {
+  //           show=2;
+  //         });
+  //         print("view_supplier_datage 86 : OOPS file doesn't exists");
+  //       }
+  //     });
+  //   }
+  //
+  // }
+
+  void fetchAll()
+  {
+        var fstore=FirebaseFirestore.instance;
+        fstore.collection("Chakan").doc("Supplier")
+        .collection("all_").get()
+        .then((value)
         {
-          value.docs.forEach((element)
-          {
-            var fdb=fstore
-                .collection("Chakan")
-                .doc("Supplier")
-                .collection("all_")
-                .doc(element.id)
-                .get();
-            FirebaseFirestore.instance
-                .collection("Chakan")
-                .doc("Supplier")
-                .collection("all_")
-                .doc(element.id)
-                .collection(widget.selectedValue)
-                .where("name", isEqualTo: widget.selected_option)
-                .get()
-                .then((querySnapshot) async {
-              print("SIZE"+querySnapshot.size.toString()+element.id);
-              if (querySnapshot.docs.isNotEmpty)
-              {
-                print("HIIII"+element.id); await getAll(element.id);
-                // querySnapshot.docs.forEach((doc)
-                // async {
-                fdb.then((doc)
+              if(value.docs.isNotEmpty)
                 {
-                  View_supplier_data_model model=View_supplier_data_model(
-                      doc['agencyCode'],
-                      doc['NABL_certificate_No'],
-                      doc['agencyAddress'],
-                      doc['agencyName'],
-                      doc['NABL_Cert_Due_Date'],
-                      doc['NABL_Cert_Date'],
-                      doc['NABL_Lab_Scope_Download_Link'],
-                      doc['NABL_Certificate_Download_Link'],
-                      doc['NABL_Lab_Scope_FileName'],
-                      doc['NABL_Certificate_FileName'],
-                      doc['agencytype'],
-                      scopeList,ContactMob_List,ContactNm_List,
-                      ContactMail_List
-                  );
-                  fetched_list.add(model);print("MODEL"+model.snm);
-                });
-
-                // });
-                setState(() {
-                  show = 1;
-                });
-                print("Fetched list: ${fetched_list[0].scode}");
-
-              }
-              else{
-                setState(() {
-                  if(fetched_list.length==0)
+                    value.docs.forEach((doc)
                     {
-                      show=2;
-                    }
-                  else
-                    {
-                      show=1;
-                    }
-
-                });
-                print("view_supplier_datage 86 : OOPS file doesn't exists");
-              }
-            });
-
-          });
-        }
-      else
-        {
-          setState(() {
-            show=2;
-          });
-          print("view_supplier_datage 85 : OOPS file doesn't exists");
-        }
-
-    });
-
-  }
-
-
-  void fetchData() {
-    print(widget.selectedValue+" "+widget.selected_option);
-
-    if(widget.selectedValue =="Contact_Name"||widget.selectedValue =="Contact_Emails"||
-        widget.selectedValue =="Contact_Phone"||widget.selectedValue =="Scope")
-      {
-        print("FETCH");
-            fetch();
-      }
-    else
-      {
-        FirebaseFirestore firestore = FirebaseFirestore.instance;
-        firestore
-            .collection("Chakan")
-            .doc("Supplier")
-            .collection("all_")
-            .where(widget.selectedValue, isEqualTo: widget.selected_option)
-            .get()
-            .then((QuerySnapshot querySnapshot) {
-          if (querySnapshot.docs.isNotEmpty) {
-            querySnapshot.docs.forEach((doc) {
-              getAll(doc.id);
-              View_supplier_data_model model=View_supplier_data_model(
-                  doc['agencyCode'],
-                  doc['NABL_certificate_No'],
-                  doc['agencyAddress'],
-                  doc['agencyName'],
-                  doc['NABL_Cert_Due_Date'],
-                  doc['NABL_Cert_Date'],
-                  doc['NABL_Lab_Scope_Download_Link'],
-                  doc['NABL_Certificate_Download_Link'],
-                  doc['NABL_Lab_Scope_FileName'],
-                  doc['NABL_Certificate_FileName'],
-                  doc['agencytype'],
-                  scopeList,ContactMob_List,ContactNm_List,
-                  ContactMail_List
-              );
-
-              fetched_list.add(model);
-            });
-            setState(() {
-              show = 1;
-            });
-            print("Fetched list: ${fetched_list[0].scode}");
-          }
-          else{
-            setState(() {
-              show=2;
-            });
-            print("view_supplier_datage 86 : OOPS file doesn't exists");
-          }
+                          getAll(doc.id);
+                          print(doc.id.toString());
+                          View_supplier_data_model model=View_supplier_data_model(
+                              doc['agencyCode'],
+                              doc['NABL_certificate_No'],
+                              doc['agencyAddress'],
+                              doc['agencyName'],
+                              doc['NABL_Cert_Due_Date'],
+                              doc['NABL_Cert_Date'],
+                              doc['NABL_Lab_Scope_Download_Link'],
+                              doc['NABL_Certificate_Download_Link'],
+                              doc['NABL_Lab_Scope_FileName'],
+                              doc['NABL_Certificate_FileName'],
+                              doc['agencytype'],
+                              scopeList,ContactMob_List,ContactNm_List,
+                              ContactMail_List
+                          );
+                          fetched_list.add(model);
+                    });
+                    setState(() {
+                      show = 1;
+                    });
+                    print("Fetched list: ${fetched_list[0].scode}");
+                }
+              else
+                {
+                  setState(() {
+                    show=2;
+                  });
+                  print("view_supplier_datage 86 : OOPS file doesn't exists");
+                }
         });
-      }
-
   }
 
   @override
@@ -303,14 +346,14 @@ class _view_supplier_dataState extends State<view_supplier_data> {
     fetched_list = [];
     show = 0;
     Fluttertoast.showToast(
-        msg: "${widget.selectedValue}\n${widget.selected_option}",
+        msg: "View ALl Suppliers",
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.CENTER,
         timeInSecForIosWeb: 5,
         backgroundColor: Colors.red,
         textColor: Colors.white,
         fontSize: 16.0);
-    fetchData();
+    fetchAll();
     setState(() {
 
     });
@@ -339,16 +382,16 @@ class _view_supplier_dataState extends State<view_supplier_data> {
               const Padding(
                 padding: EdgeInsets.fromLTRB(50.0, 30, 50, 15),
                 child: ExcelRowHeading(
-                    one: "Supplier Code",
-                    two: "Supplier Type",
-                    three: "Supplier Name",
-                    four: "Edit Contact Details And Scope",
-                    five:"NABL Certificate No.",
-                    six:"NABL Lab Scope Certificate",
+                  one: "Supplier Code",
+                  two: "Supplier Type",
+                  three: "Supplier Name",
+                  four: "Edit Contact Details And Scope",
+                  five:"NABL Certificate No.",
+                  six:"NABL Lab Scope Certificate",
                 ),
               ),
               Container(
-                height: 480,
+                height: 500,
                 //color: Colors.blueGrey,
                 child: show == 1
                     ? Padding(
@@ -359,7 +402,7 @@ class _view_supplier_dataState extends State<view_supplier_data> {
                     itemCount: fetched_list.length,
                     itemBuilder: (BuildContext context, int index) {
                       return ExcelRow(
-                        model: fetched_list[index], val: widget.selectedValue, opt: widget.selected_option,
+                        model: fetched_list[index]
 
                       );
                     },
@@ -369,70 +412,70 @@ class _view_supplier_dataState extends State<view_supplier_data> {
                 ),
               ),
               SizedBox(height: 10,),
-              Center(
-                child:
-                ElevatedButton(child: Text('Export To Excel'), onPressed: show==2? null: createExcel, style: ElevatedButton.styleFrom(primary: Colors.red),),
-              ),
+              // Center(
+              //   child:
+              //   ElevatedButton(child: Text('Export To Excel'), onPressed: show==2? null: createExcel, style: ElevatedButton.styleFrom(primary: Colors.red),),
+              // ),
             ],
           )),
     );
   }
 
-  doNotExport(){
-    print('No data to export');
-  }
-
-  Future<void> createExcel() async {
-    final Workbook workbook = Workbook();
-    final Worksheet sheet = workbook.worksheets[0];
-    sheet.getRangeByName('A1').setText('Sr. No.');
-    sheet.getRangeByName('B1').setText('Name Of Supplier');
-    sheet.getRangeByName('C1').setText('Vendor Code');
-    sheet.getRangeByName('D1').setText('Address');
-    sheet.getRangeByName('E1').setText('Contact Persons');
-    sheet.getRangeByName('F1').setText('Contact Numbers');
-    sheet.getRangeByName('G1').setText('Mail ID');
-    sheet.getRangeByName('H1').setText('Supplier Type (Manufacturer/Instrument SupplyCalibration/Repairing )');
-    sheet.getRangeByName('I1').setText('Scope of Supplier for Manufacturing ');
-    sheet.getRangeByName('J1').setText('Scope of Supplier for Calibration');
-    sheet.getRangeByName('K1').setText('NABL CERTIFICATE NO');
-    sheet.getRangeByName('L1').setText('NABL ISSUE DATE');
-    sheet.getRangeByName('M1').setText('NABL VALID UPTO');
-
-
-    for(int i=0;i<fetched_list.length;i++){
-      sheet.getRangeByName("A"+(i+2).toString()).setText((i+1).toString());
-      sheet.getRangeByName("B"+(i+2).toString()).setText(fetched_list[i].snm);
-      sheet.getRangeByName("C"+(i+2).toString()).setText(fetched_list[i].scode);
-      sheet.getRangeByName("D"+(i+2).toString()).setText(fetched_list[i].saddress);
-      sheet.getRangeByName("E"+(i+2).toString()).setText("");
-      sheet.getRangeByName("F"+(i+2).toString()).setText("");
-      sheet.getRangeByName("G"+(i+2).toString()).setText("");
-      sheet.getRangeByName("H"+(i+2).toString()).setText(fetched_list[i].stype);
-      sheet.getRangeByName("I"+(i+2).toString()).setText("");
-      sheet.getRangeByName("J"+(i+2).toString()).setText("");
-      sheet.getRangeByName("K"+(i+2).toString()).setText(fetched_list[i].nabl_no);
-      sheet.getRangeByName("L"+(i+2).toString()).setText(fetched_list[i].nabldate);
-      sheet.getRangeByName("M"+(i+2).toString()).setText(fetched_list[i].nabldue);
-    }
-
-    final List<int> bytes = workbook.saveAsStream();
-    workbook.dispose();
-
-    if (kIsWeb) {
-      AnchorElement(
-          href:
-          'data:application/octet-stream;charset=utf-16le;base64,${base64.encode(bytes)}')
-        ..setAttribute('download', 'Output.xlsx')
-        ..click();
-    } else {
-      final String path = (await getApplicationSupportDirectory()).path;
-      final String fileName = Platform.isWindows ? '$path\\Output.xlsx' : '$path/Output.xlsx';
-      final File file = File(fileName);
-      await file.writeAsBytes(bytes, flush: true);
-      OpenFile.open(fileName);
-    }
-  }
+  // doNotExport(){
+  //   print('No data to export');
+  // }
+  //
+  // Future<void> createExcel() async {
+  //   final Workbook workbook = Workbook();
+  //   final Worksheet sheet = workbook.worksheets[0];
+  //   sheet.getRangeByName('A1').setText('Sr. No.');
+  //   sheet.getRangeByName('B1').setText('Name Of Supplier');
+  //   sheet.getRangeByName('C1').setText('Vendor Code');
+  //   sheet.getRangeByName('D1').setText('Address');
+  //   sheet.getRangeByName('E1').setText('Contact Persons');
+  //   sheet.getRangeByName('F1').setText('Contact Numbers');
+  //   sheet.getRangeByName('G1').setText('Mail ID');
+  //   sheet.getRangeByName('H1').setText('Supplier Type (Manufacturer/Instrument SupplyCalibration/Repairing )');
+  //   sheet.getRangeByName('I1').setText('Scope of Supplier for Manufacturing ');
+  //   sheet.getRangeByName('J1').setText('Scope of Supplier for Calibration');
+  //   sheet.getRangeByName('K1').setText('NABL CERTIFICATE NO');
+  //   sheet.getRangeByName('L1').setText('NABL ISSUE DATE');
+  //   sheet.getRangeByName('M1').setText('NABL VALID UPTO');
+  //
+  //
+  //   for(int i=0;i<fetched_list.length;i++){
+  //     sheet.getRangeByName("A"+(i+2).toString()).setText((i+1).toString());
+  //     sheet.getRangeByName("B"+(i+2).toString()).setText(fetched_list[i].snm);
+  //     sheet.getRangeByName("C"+(i+2).toString()).setText(fetched_list[i].scode);
+  //     sheet.getRangeByName("D"+(i+2).toString()).setText(fetched_list[i].saddress);
+  //     sheet.getRangeByName("E"+(i+2).toString()).setText("");
+  //     sheet.getRangeByName("F"+(i+2).toString()).setText("");
+  //     sheet.getRangeByName("G"+(i+2).toString()).setText("");
+  //     sheet.getRangeByName("H"+(i+2).toString()).setText(fetched_list[i].stype);
+  //     sheet.getRangeByName("I"+(i+2).toString()).setText("");
+  //     sheet.getRangeByName("J"+(i+2).toString()).setText("");
+  //     sheet.getRangeByName("K"+(i+2).toString()).setText(fetched_list[i].nabl_no);
+  //     sheet.getRangeByName("L"+(i+2).toString()).setText(fetched_list[i].nabldate);
+  //     sheet.getRangeByName("M"+(i+2).toString()).setText(fetched_list[i].nabldue);
+  //   }
+  //
+  //   final List<int> bytes = workbook.saveAsStream();
+  //   workbook.dispose();
+  //
+  //   if (kIsWeb) {
+  //     AnchorElement(
+  //         href:
+  //         'data:application/octet-stream;charset=utf-16le;base64,${base64.encode(bytes)}')
+  //       ..setAttribute('download', 'Output.xlsx')
+  //       ..click();
+  //   } else {
+  //     final String path = (await getApplicationSupportDirectory()).path;
+  //     final String fileName = Platform.isWindows ? '$path\\Output.xlsx' : '$path/Output.xlsx';
+  //     final File file = File(fileName);
+  //     await file.writeAsBytes(bytes, flush: true);
+  //     OpenFile.open(fileName);
+  //   }
+  // }
 
 }
 
@@ -456,7 +499,7 @@ class ExcelRowHeading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double height = 35;
+    double height = 15;
     Color color = Colors.black54;
 
     return Material(
@@ -528,14 +571,10 @@ class ExcelRow extends StatelessWidget {
   // final String four;
   // final String five;
   final View_supplier_data_model model;
-  final String val;
-  final String opt;
 
   const ExcelRow(
       {Key? key,
         required this.model,
-        required this.val,
-        required this.opt
       })
       : super(key: key);
 
@@ -574,18 +613,18 @@ class ExcelRow extends StatelessWidget {
   Future<void> getDownloadLink(String code,String filenm,BuildContext context)
   async
   {
-       // context:context;
+    // context:context;
     print(code.toString()+filenm.toString());
-        var fstorage=FirebaseStorage.instance.ref();
-        //String downloadedLink ="";
-        downloadedLink= await fstorage.child("files/"+code.toString()+"/").child(filenm.toString()).getDownloadURL()
-            .whenComplete(() => print("Downloading"+downloadedLink));
-            //.then((value) =>  downloadedLink.toString());
-        if(downloadedLink=="")
-          {
-              _showMyDialog("Error", "UNABLE TO GET CERTIFICATE URL", context);
-          }
-       // return downloadedLink.toString();
+    var fstorage=FirebaseStorage.instance.ref();
+    //String downloadedLink ="";
+    downloadedLink= await fstorage.child("files/"+code.toString()+"/").child(filenm.toString()).getDownloadURL()
+        .whenComplete(() => print("Downloading"+downloadedLink));
+    //.then((value) =>  downloadedLink.toString());
+    if(downloadedLink=="")
+    {
+      _showMyDialog("Error", "UNABLE TO GET CERTIFICATE URL", context);
+    }
+    // return downloadedLink.toString();
   }
 
   @override
@@ -601,7 +640,7 @@ class ExcelRow extends StatelessWidget {
                 Navigator.pop(context);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => demoEditSupplier(scopedatamodel: model.scopeList, supplierModel: model, svalue: val,selopt:opt)),
+                  MaterialPageRoute(builder: (context) => Edit_For_ViewAll(scopedatamodel: model.scopeList, supplierModel: model)),
                 );
                 print("ROWWWWWWWWW");
               },
@@ -649,7 +688,7 @@ class ExcelRow extends StatelessWidget {
                         );
 
                       },
-                      child: Text("Edit Contact And Scope"),)),
+                        child: Text("Edit Contact And Scope"),)),
                     ),
                   ),
                   Expanded(
@@ -673,36 +712,36 @@ class ExcelRow extends StatelessWidget {
                               //decoration: BoxDecoration(border: Border.all(color: color)),
                               child: Center(child: ElevatedButton(
                                 onPressed: ()
-                              async {
-                                // Navigator.push(context,
-                                //   MaterialPageRoute(
-                                //     builder: (context) => new demo_Edit_Supplier_Contact_Details(scode: model.scode.toString(), stype: model.stype.toString(),),
-                                //   ),
-                                // );
-                                if(model.stype != "Calibration")
+                                async {
+                                  // Navigator.push(context,
+                                  //   MaterialPageRoute(
+                                  //     builder: (context) => new demo_Edit_Supplier_Contact_Details(scode: model.scode.toString(), stype: model.stype.toString(),),
+                                  //   ),
+                                  // );
+                                  if(model.stype == "Repairing"||model.stype == "Manufacturer")
                                   {
                                     _showMyDialog("ERROR","Repairing or Manufacturer Supplier types does not have Certificate !!", context);
                                   }
-                                else {
-                                  await getDownloadLink(
-                                      model.scode, model.lab_scope_file_nm,
-                                      context).then((value)
-                                  {
-                                    var demo = html.window.open(downloadedLink, "_blank");
-                                    demo.addEventListener(
-                                        "onLoadedData", (event) {
-                                      print("Downloading !!!!"+downloadedLink);
+                                  else {
+                                    await getDownloadLink(
+                                        model.scode, model.lab_scope_file_nm,
+                                        context).then((value)
+                                    {
+                                      var demo = html.window.open(downloadedLink, "_blank");
+                                      demo.addEventListener(
+                                          "onLoadedData", (event) {
+                                        print("Downloading !!!!"+downloadedLink);
+                                      });
+                                      demo.close();
+                                      _showMyDialog("Success", "Download Successful", context);
                                     });
-                                    demo.close();
-                                    _showMyDialog("Success", "Download Successful", context);
-                                  });
 
-                                }
+                                  }
 
 
 
 
-                              },
+                                },
                                 child: Text("Download NABL Lab Scope PDF"),)),
                             ),
                             SizedBox(height:10),
@@ -726,17 +765,17 @@ class ExcelRow extends StatelessWidget {
                                   await getDownloadLink(
                                       model.scode, model.certificate_file_nm,
                                       context).then((value)
-                                      {
-                                        var demo =  html.window.open(downloadedLink.toString(), model.certificate_file_nm);
-                                        demo.addEventListener(
-                                            "onLoadedData", (event) {
-                                          print("Downloading !!!!");
-                                          a=1;
-                                          demo.close();
-                                        });
-                                        _showMyDialog("Success", "Download Successful", context);
+                                  {
+                                    var demo =  html.window.open(downloadedLink.toString(), model.certificate_file_nm);
+                                    demo.addEventListener(
+                                        "onLoadedData", (event) {
+                                      print("Downloading !!!!");
+                                      a=1;
+                                      demo.close();
+                                    });
+                                    _showMyDialog("Success", "Download Successful", context);
 
-                                      }
+                                  }
                                   );
 
 

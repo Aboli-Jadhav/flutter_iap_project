@@ -1,3 +1,4 @@
+import 'package:autocomplete_textfield_ns/autocomplete_textfield_ns.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +13,11 @@ class demo_Edit_Contact_Person_Phones extends StatefulWidget {
 
 class _demo_Edit_Contact_Person_PhonesState extends State<demo_Edit_Contact_Person_Phones> {
   List<String> fetched_data = [];
-  var scope=TextEditingController();
+  var _suggestion=TextEditingController();
+
+  GlobalKey<AutoCompleteTextFieldState<String>> key = GlobalKey();
+  List<String> added = [];
+  String currentText = "";
 
   @override
   void initState() {
@@ -77,11 +82,11 @@ class _demo_Edit_Contact_Person_PhonesState extends State<demo_Edit_Contact_Pers
         .doc("Supplier")
         .collection("all_")
         .doc(RecId)
-        .collection("Contact_Phone").add({'name':scope.text.toString().trim()}).whenComplete(()  {
+        .collection("Contact_Phone").add({'name':_suggestion.text.toString().trim()}).whenComplete(()  {
       print("Phone No added Successfully");
       setState(() {
         //final_list2 =[];
-        scope.clear();
+        _suggestion.clear();
         fetched_data=[];
       });
       getNames();
@@ -110,7 +115,7 @@ class _demo_Edit_Contact_Person_PhonesState extends State<demo_Edit_Contact_Pers
             .doc(RecId)
             .collection("Contact_Phone").doc(element.id).delete().whenComplete(() {
           setState(() {
-            scope.clear();
+            _suggestion.clear();
             fetched_data = [];
           });
         });
@@ -132,20 +137,31 @@ class _demo_Edit_Contact_Person_PhonesState extends State<demo_Edit_Contact_Pers
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          SizedBox(
-            width: 340,
-            child: Padding(
-              padding: EdgeInsets.all(20),
-              child: TextField(
-                controller: scope,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Enter Contact Mobile No ',
-                ),
-              ),
+          Container(
+            width: 300,
+            height: 37,
+            child: SimpleAutoCompleteTextField(
+              key: key,
+              controller: _suggestion,
+              clearOnSubmit: false,
+              //suggestions: gauge_type,
+              suggestions: fetched_data,
+              style: const TextStyle(
+                  color: Colors.black, fontSize: 16.0),
+              decoration: InputDecoration(
+                  fillColor: Colors.white,
+                  filled: true,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                  )),
+              textChanged: (text) => currentText= text,
+              textSubmitted: (text) => setState(() {
+                if (text != "") {
+                  added.add(text);
+                }
+              }),
             ),
-          ),
-          RaisedButton(
+          ),          RaisedButton(
             color: Colors.red,
             child: Text('Add'),
             onPressed: () {

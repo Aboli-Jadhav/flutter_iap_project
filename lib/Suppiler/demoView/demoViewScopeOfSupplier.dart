@@ -1,3 +1,4 @@
+import 'package:autocomplete_textfield_ns/autocomplete_textfield_ns.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +13,11 @@ class demoViewScopeOfSupplier extends StatefulWidget {
 
 class _demoViewScopeOfSupplierState extends State<demoViewScopeOfSupplier> {
   List<String> fetched_data = [];
-  var scope=TextEditingController();
+  var _suggestion=TextEditingController();
+
+  GlobalKey<AutoCompleteTextFieldState<String>> key = GlobalKey();
+  List<String> added = [];
+  String currentText = "";
 
   @override
   void initState() {
@@ -79,11 +84,11 @@ class _demoViewScopeOfSupplierState extends State<demoViewScopeOfSupplier> {
         .doc("Supplier")
         .collection("all_")
         .doc(RecId)
-        .collection("Scope").add({'name':scope.text.toString().trim().toUpperCase()}).whenComplete(()  {
+        .collection("Scope").add({'name':_suggestion.text.toString().trim().toUpperCase()}).whenComplete(()  {
       print("Scope added Successfully");
       setState(() {
         //final_list2 =[];
-        scope.clear();
+        _suggestion.clear();
         fetched_data=[];
       });
       getScope();
@@ -112,7 +117,7 @@ class _demoViewScopeOfSupplierState extends State<demoViewScopeOfSupplier> {
             .doc(RecId)
             .collection("Scope").doc(element.id).delete().whenComplete(() {
           setState(() {
-            scope.clear();
+            _suggestion.clear();
             fetched_data = [];
           });
         });
@@ -134,20 +139,31 @@ class _demoViewScopeOfSupplierState extends State<demoViewScopeOfSupplier> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          SizedBox(
-            width: 340,
-            child: Padding(
-              padding: EdgeInsets.all(20),
-              child: TextField(
-                controller: scope,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Enter Scope ',
-                ),
-              ),
+          Container(
+            width: 300,
+            height: 37,
+            child: SimpleAutoCompleteTextField(
+              key: key,
+              controller: _suggestion,
+              clearOnSubmit: false,
+              //suggestions: gauge_type,
+              suggestions: fetched_data,
+              style: const TextStyle(
+                  color: Colors.black, fontSize: 16.0),
+              decoration: InputDecoration(
+                  fillColor: Colors.white,
+                  filled: true,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                  )),
+              textChanged: (text) => currentText= text,
+              textSubmitted: (text) => setState(() {
+                if (text != "") {
+                  added.add(text);
+                }
+              }),
             ),
-          ),
-          RaisedButton(
+          ),          RaisedButton(
             color: Colors.red,
             child: Text('Add'),
             onPressed: () {

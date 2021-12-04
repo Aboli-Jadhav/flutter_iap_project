@@ -12,7 +12,7 @@ class delete_Supplier_Rows extends StatefulWidget {
 
 class _delete_Supplier_RowsState extends State<delete_Supplier_Rows> {
   List<DeleteModel> fetched_data = [];
-  List<String> code_list = [];
+  List<String> name_list = [];
 
   var scope=TextEditingController();
   GlobalKey<AutoCompleteTextFieldState<String>> key2 = GlobalKey();
@@ -29,7 +29,7 @@ class _delete_Supplier_RowsState extends State<delete_Supplier_Rows> {
   Color lred=Color(0xffFBEBEB);
 
   List<String> agencyType=[];
-  var supplier_code;
+  var supplier_names;
 
   void fetchAttributeValues()
   async {
@@ -45,6 +45,30 @@ class _delete_Supplier_RowsState extends State<delete_Supplier_Rows> {
       });
     });
     print(agencyType);
+  }
+
+  void getSpecificCodes() async {
+    //String RecId=await returnIDOfDOc();
+    FirebaseFirestore.instance.collection("Chakan").doc("Supplier").collection(
+        "all_")
+        .get().then((value)
+    {
+      value.docs.forEach((element)
+      {
+        print(element.id);
+        String code=element.data()['agencyName'];
+        String type=element.data()['agencytype'];
+        if(!name_list.contains(code)) {
+          name_list.add(code);
+          fetched_data.add(DeleteModel(type, code));
+        }
+      });
+      setState(() {
+
+      });
+    }
+    );
+    print(fetched_data);
   }
 
 
@@ -78,7 +102,7 @@ class _delete_Supplier_RowsState extends State<delete_Supplier_Rows> {
       {
         for(var ele in value.docs)
         {
-          if(ele.data()['agencyCode']==nm.trim()
+          if(ele.data()['agencyName']==nm.trim()
               &&  ele.data()['agencytype']==typ.trim()
           )
           {
@@ -99,6 +123,8 @@ class _delete_Supplier_RowsState extends State<delete_Supplier_Rows> {
     print(ret);
     return ret;
   }
+
+
 
   Future<void> _showMyDialog(String title,String str) async {
     return showDialog<void>(
@@ -138,10 +164,10 @@ class _delete_Supplier_RowsState extends State<delete_Supplier_Rows> {
       value.docs.forEach((element)
       {
         print(element.id);
-        String code=element.data()['agencyCode'];
+        String code=element.data()['agencyName'];
         String type=element.data()['agencytype'];
-        code_list.add(code);
-        fetched_data.add(DeleteModel(type, code));
+          name_list.add(code);
+          fetched_data.add(DeleteModel(type, code));
 
       });
       setState(() {
@@ -151,6 +177,8 @@ class _delete_Supplier_RowsState extends State<delete_Supplier_Rows> {
     );
     print(fetched_data);
   }
+
+
 
 
 
@@ -326,7 +354,7 @@ class _delete_Supplier_RowsState extends State<delete_Supplier_Rows> {
                 child: Padding(
                   padding: EdgeInsets.all(20),
                   child:
-                  Text("Enter Supplier Code and Type :-"),
+                  Text("Enter Supplier Name and Type :-"),
                 ),
               ),
               SizedBox(width:20),
@@ -338,7 +366,7 @@ class _delete_Supplier_RowsState extends State<delete_Supplier_Rows> {
                   controller: _suggestion2,
                   clearOnSubmit: false,
                   //suggestions: gauge_type,
-                  suggestions: code_list,
+                  suggestions: name_list,
                   style: const TextStyle(
                       color: Colors.black, fontSize: 16.0),
                   decoration: InputDecoration(
@@ -398,7 +426,7 @@ class _delete_Supplier_RowsState extends State<delete_Supplier_Rows> {
           ),
           SizedBox(height: 30,),
           fetched_data!=[]? SizedBox(
-            width: 400,
+            width: 900,
             child:  ListView.builder(
 
               scrollDirection: Axis.vertical,
@@ -417,6 +445,14 @@ class _delete_Supplier_RowsState extends State<delete_Supplier_Rows> {
                         height: 45,
                         decoration: BoxDecoration(border: Border.all(color: Colors.black54)),
                         child: Center(child: Text(fetched_data[index].code,style: TextStyle(fontSize: 20),)),
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        //width: 300,
+                        height: 45,
+                        decoration: BoxDecoration(border: Border.all(color: Colors.black54)),
+                        child: Center(child: Text(fetched_data[index].type,style: TextStyle(fontSize: 20),)),
                       ),
                     ),
                     Material(
