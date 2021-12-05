@@ -13,6 +13,8 @@ import 'package:universal_html/html.dart' show AnchorElement;
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'dart:convert';
 
+import '../showgauge_masteradmin.dart';
+
 class view_master_gau extends StatefulWidget {
   final String selectedValue;
   final String selected_option;
@@ -371,7 +373,8 @@ class ExcelRow extends StatelessWidget {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ShowGauge(model: model)),
+              //MaterialPageRoute(builder: (context) => ShowGauge(model: model)),
+              MaterialPageRoute(builder: (context) => ShowGauge_MasterAdmin(model: model)),
             );
           },
           child: Row(

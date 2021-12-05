@@ -8,6 +8,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_iap_project/Admin/Calibrate%20Guages/add_calibration_history.dart';
 import 'package:flutter_iap_project/Admin/Calibrate%20Guages/calibrate_gauge.dart';
 import 'package:flutter_iap_project/Admin/Calibrate%20Guages/show_calibration_history.dart';
 import 'package:flutter_iap_project/suggestion_data.dart';
@@ -15,27 +16,30 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:autocomplete_textfield_ns/autocomplete_textfield_ns.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class gauge_calibrate_search extends StatefulWidget{
-
+class gauge_calibrate_search extends StatefulWidget {
   List<String> gauge_name;
-  gauge_calibrate_search({Key? key,required this.gauge_name}):super(key: key);
-  _gauge_search_calibrate createState()=> _gauge_search_calibrate();
 
+  gauge_calibrate_search({Key? key, required this.gauge_name})
+      : super(key: key);
+
+  _gauge_search_calibrate createState() => _gauge_search_calibrate();
 }
 
-class _gauge_search_calibrate extends State<gauge_calibrate_search>{
-  Color backred=Color(0xffDF3F3F);
-  Color lred=Color(0xffFBEBEB);
+class _gauge_search_calibrate extends State<gauge_calibrate_search> {
+  Color backred = Color(0xffDF3F3F);
+  Color lred = Color(0xffFBEBEB);
 
   final _suggestion = TextEditingController();
   GlobalKey<AutoCompleteTextFieldState<String>> key = GlobalKey();
   List<String> added = [];
   String currentText = "";
 
-  List<String> gauge_type = ['Plain Type Gauge', 'snap gauge',
+  List<String> gauge_type = [
+    'Plain Type Gauge',
+    'snap gauge',
     'Ring Type Gauge',
     'Limit Type Gauge',
-  'Pin Type Gauge',
+    'Pin Type Gauge',
     'Caliper Type Gauge',
     'Feeler Type Gauge',
     'Screw Pitch Gauges',
@@ -50,34 +54,33 @@ class _gauge_search_calibrate extends State<gauge_calibrate_search>{
     super.initState();
   }
 
-
   var a = TextEditingController();
+
   // var b = TextEditingController();
 
   // List<String> _locations = ['A', 'B', 'C', 'D']; // Option 2
   var _selectedLocation;
 
-
-  List<String> _locations=[];// Option 2
-
-
+  List<String> _locations = []; // Option 2
 
   Future<void> shareperferences() async {
-
     SharedPreferences claibratedata = await SharedPreferences.getInstance();
-    claibratedata .setString('Gauge Type', _suggestion.text);
-    claibratedata .setString('Item Code', a.text);
+    claibratedata.setString('Gauge Type', _suggestion.text);
+    claibratedata.setString('Item Code', a.text);
   }
 
   void getGaugetype() {
-
     FirebaseFirestore firestore = FirebaseFirestore.instance;
-    firestore.collection("Chakan")
+    firestore
+        .collection("Chakan")
         .doc("Attributes")
         .collection("gauge types")
-        .doc("1W6qHZfSxKcRAy7ycg52").get().then((DocumentSnapshot documentSnapshot) {
+        .doc("1W6qHZfSxKcRAy7ycg52")
+        .get()
+        .then((DocumentSnapshot documentSnapshot) {
       if (documentSnapshot.exists) {
-        Map<String, dynamic> data = documentSnapshot.data() as Map<String, dynamic>;
+        Map<String, dynamic> data =
+            documentSnapshot.data() as Map<String, dynamic>;
         List<String> list = [];
         data.forEach((key, value) {
           list.add(value);
@@ -90,18 +93,13 @@ class _gauge_search_calibrate extends State<gauge_calibrate_search>{
           print(_locations.runtimeType);
           // we can use this list for dropdown
         });
-      }else{
+      } else {
         print('Document does not exist on the database');
       }
     });
-
-
   }
 
-
-
-
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
       // appBar: AppBar(
       //    toolbarHeight: 60.0,
@@ -120,27 +118,34 @@ class _gauge_search_calibrate extends State<gauge_calibrate_search>{
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 500.0),
             width: 500,
-            height:50,
-            child:const Text( " WPPL Identification Gauge Number  " , style: TextStyle(color: Colors.black,fontSize: 22),
-              textAlign: TextAlign.center,  ),
+            height: 50,
+            child: const Text(
+              " WPPL Identification Gauge Number  ",
+              style: TextStyle(color: Colors.black, fontSize: 22),
+              textAlign: TextAlign.center,
+            ),
           ),
 
-          const SizedBox(height:1.0,),
+          const SizedBox(
+            height: 1.0,
+          ),
 
           Container(
             width: 0.3 * MediaQuery.of(context).size.width,
-            height:50.0,
+            height: 50.0,
             child: TextField(
               controller: a,
               decoration: const InputDecoration(
                 hintText: "Enter WPPL GAUGE NUMBER",
                 //labelText: "WPPL Identification Gauge Number",
                 border: OutlineInputBorder(),
-
-              ),),
+              ),
+            ),
           ),
 
-          SizedBox(height: 30.0,),
+          SizedBox(
+            height: 30.0,
+          ),
 
           // Container(
           //   width: 0.3 * MediaQuery.of(context).size.width,
@@ -211,11 +216,9 @@ class _gauge_search_calibrate extends State<gauge_calibrate_search>{
 
           // SizedBox(height: 30,),
 
-
-
-
-
-          SizedBox(height: 30,),
+          SizedBox(
+            height: 30,
+          ),
 
           ElevatedButton(
             child: Text("Calibrate Gauge"),
@@ -223,7 +226,7 @@ class _gauge_search_calibrate extends State<gauge_calibrate_search>{
               primary: Colors.red,
             ),
             onPressed: () {
-              if(a.text.isEmpty){
+              if (a.text.isEmpty) {
                 Fluttertoast.showToast(
                     msg: "Please Enter Wppl Gauge Number",
                     toastLength: Toast.LENGTH_SHORT,
@@ -238,23 +241,30 @@ class _gauge_search_calibrate extends State<gauge_calibrate_search>{
                 //     }
                 // );
                 return;
-              }else{
-                Navigator.push(context,MaterialPageRoute(builder: (context) => Calibrate_Gauge(wppl_number: a.text,)),);
+              } else {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Calibrate_Gauge(
+                            wppl_number: a.text,
+                          )),
+                );
                 //shareperferences();
               }
-
 
               //Navigator.push(context,'/showgauge');
             },
           ),
-          const SizedBox(height: 20,),
+          const SizedBox(
+            height: 20,
+          ),
           ElevatedButton(
             child: Text("Show Calibration History"),
             style: ElevatedButton.styleFrom(
               primary: Colors.red,
             ),
             onPressed: () {
-              if(a.text.isEmpty){
+              if (a.text.isEmpty) {
                 Fluttertoast.showToast(
                     msg: "Please Enter Wppl Gauge Number",
                     toastLength: Toast.LENGTH_SHORT,
@@ -263,24 +273,53 @@ class _gauge_search_calibrate extends State<gauge_calibrate_search>{
                     backgroundColor: Colors.red,
                     textColor: Colors.white,
                     fontSize: 16.0);
-                // Timer(
-                //   const Duration(milliseconds: 2000),
-                //     (){
-                //     }
-                // );
                 return;
-              }else{
-                Navigator.push(context,MaterialPageRoute(builder: (context) => ShowCalibrationHistory(wppl_number: a.text,),),);
+              } else {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ShowCalibrationHistory(
+                      wppl_number: a.text,
+                    ),
+                  ),
+                );
                 //shareperferences();
               }
-
 
               //Navigator.push(context,'/showgauge');
             },
           ),
-
+          const SizedBox(
+            height: 20,
+          ),
+          ElevatedButton(
+            onPressed: () {
+              if (a.text.isEmpty) {
+                Fluttertoast.showToast(
+                    msg: "Please Enter Wppl Gauge Number",
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.CENTER,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: Colors.red,
+                    textColor: Colors.white,
+                    fontSize: 16.0);
+                return;
+              } else {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AddCalibrationHistory(wppl_number:a.text.toString())
+                  ),
+                );
+                //shareperferences();
+              }
+            },
+            child: const Text("Add Calibration History"),
+            style: ElevatedButton.styleFrom(
+              primary: Colors.red,
+            ),
+          ),
         ],
-
       ),
     );
   }
