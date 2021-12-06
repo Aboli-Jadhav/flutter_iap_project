@@ -392,7 +392,7 @@ class _view_All_Supplier_DataState extends State<view_All_Supplier_Data> {
                 ),
               ),
               Container(
-                height: 500,
+                height: 480,
                 //color: Colors.blueGrey,
                 child: show == 1
                     ? Padding(
