@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:html' as html;
 import 'package:flutter_iap_project/Suppiler/ViewData/View_Supplier_data_Model.dart';
+import 'package:flutter_iap_project/Suppiler/ViewData/return_All_SubCollections_List.dart';
 import 'package:flutter_iap_project/Suppiler/demoView/demoEditSupplier.dart';
 import 'package:flutter_iap_project/Suppiler/demoView/demoEditSupplier_ForViewAll.dart';
 import 'package:flutter_iap_project/Suppiler/demoView/demo_Edit_Supplier_Contact_Details.dart';
@@ -412,72 +413,99 @@ class _view_All_Supplier_DataState extends State<view_All_Supplier_Data> {
                 ),
               ),
               SizedBox(height: 10,),
-              // Center(
-              //   child:
-              //   ElevatedButton(child: Text('Export To Excel'), onPressed: show==2? null: createExcel, style: ElevatedButton.styleFrom(primary: Colors.red),),
-              // ),
+              Center(
+                child:
+                ElevatedButton(child: Text('Export To Excel'), onPressed: show==2? null: createExcel, style: ElevatedButton.styleFrom(primary: Colors.red),),
+              ),
             ],
           )),
     );
   }
 
-  // doNotExport(){
-  //   print('No data to export');
-  // }
-  //
-  // Future<void> createExcel() async {
-  //   final Workbook workbook = Workbook();
-  //   final Worksheet sheet = workbook.worksheets[0];
-  //   sheet.getRangeByName('A1').setText('Sr. No.');
-  //   sheet.getRangeByName('B1').setText('Name Of Supplier');
-  //   sheet.getRangeByName('C1').setText('Vendor Code');
-  //   sheet.getRangeByName('D1').setText('Address');
-  //   sheet.getRangeByName('E1').setText('Contact Persons');
-  //   sheet.getRangeByName('F1').setText('Contact Numbers');
-  //   sheet.getRangeByName('G1').setText('Mail ID');
-  //   sheet.getRangeByName('H1').setText('Supplier Type (Manufacturer/Instrument SupplyCalibration/Repairing )');
-  //   sheet.getRangeByName('I1').setText('Scope of Supplier for Manufacturing ');
-  //   sheet.getRangeByName('J1').setText('Scope of Supplier for Calibration');
-  //   sheet.getRangeByName('K1').setText('NABL CERTIFICATE NO');
-  //   sheet.getRangeByName('L1').setText('NABL ISSUE DATE');
-  //   sheet.getRangeByName('M1').setText('NABL VALID UPTO');
-  //
-  //
-  //   for(int i=0;i<fetched_list.length;i++){
-  //     sheet.getRangeByName("A"+(i+2).toString()).setText((i+1).toString());
-  //     sheet.getRangeByName("B"+(i+2).toString()).setText(fetched_list[i].snm);
-  //     sheet.getRangeByName("C"+(i+2).toString()).setText(fetched_list[i].scode);
-  //     sheet.getRangeByName("D"+(i+2).toString()).setText(fetched_list[i].saddress);
-  //     sheet.getRangeByName("E"+(i+2).toString()).setText("");
-  //     sheet.getRangeByName("F"+(i+2).toString()).setText("");
-  //     sheet.getRangeByName("G"+(i+2).toString()).setText("");
-  //     sheet.getRangeByName("H"+(i+2).toString()).setText(fetched_list[i].stype);
-  //     sheet.getRangeByName("I"+(i+2).toString()).setText("");
-  //     sheet.getRangeByName("J"+(i+2).toString()).setText("");
-  //     sheet.getRangeByName("K"+(i+2).toString()).setText(fetched_list[i].nabl_no);
-  //     sheet.getRangeByName("L"+(i+2).toString()).setText(fetched_list[i].nabldate);
-  //     sheet.getRangeByName("M"+(i+2).toString()).setText(fetched_list[i].nabldue);
-  //   }
-  //
-  //   final List<int> bytes = workbook.saveAsStream();
-  //   workbook.dispose();
-  //
-  //   if (kIsWeb) {
-  //     AnchorElement(
-  //         href:
-  //         'data:application/octet-stream;charset=utf-16le;base64,${base64.encode(bytes)}')
-  //       ..setAttribute('download', 'Output.xlsx')
-  //       ..click();
-  //   } else {
-  //     final String path = (await getApplicationSupportDirectory()).path;
-  //     final String fileName = Platform.isWindows ? '$path\\Output.xlsx' : '$path/Output.xlsx';
-  //     final File file = File(fileName);
-  //     await file.writeAsBytes(bytes, flush: true);
-  //     OpenFile.open(fileName);
-  //   }
-  // }
 
+  doNotExport(){
+    print('No data to export');
+  }
+
+  Future<void> createExcel() async {
+    final Workbook workbook = Workbook();
+    final Worksheet sheet = workbook.worksheets[0];
+    sheet.getRangeByName('A1').setText('Sr. No.');
+    sheet.getRangeByName('B1').setText('Name Of Supplier');
+    sheet.getRangeByName('C1').setText('Vendor Code');
+    sheet.getRangeByName('D1').setText('Address');
+    sheet.getRangeByName('E1').setText('Contact Persons');
+    sheet.getRangeByName('F1').setText('Contact Numbers');
+    sheet.getRangeByName('G1').setText('Mail ID');
+    sheet.getRangeByName('H1').setText('Supplier Type (Manufacturer/Instrument SupplyCalibration/Repairing )');
+    sheet.getRangeByName('I1').setText('Scope of Supplier');
+    sheet.getRangeByName('J1').setText('NABL CERTIFICATE NO');
+    sheet.getRangeByName('K1').setText('NABL ISSUE DATE');
+    sheet.getRangeByName('L1').setText('NABL VALID UPTO');
+
+
+    for(int i=0;i<fetched_list.length;i++){
+
+      return_all_subCollections_List all=new return_all_subCollections_List(fetched_list[i].scode,
+          fetched_list[i].stype);
+
+      String name = "";
+      String mail = "";
+      String number = "";
+      String sc = "";
+
+      List<String> nm=await all.getNames();
+      List<String> Email=await all.getEmails();
+      List<String> Phone=await all.getPhones();
+      List<String> Scopes=await all.getScope();
+      //print('Futures :'+nm[i]+ ""+all.getEmails().toString());
+      for(int j=0;j<nm.length;j++)
+        name = name + nm[j] +",";
+
+      for(int j=0;j<Email.length;j++)
+        mail = mail + Email[j] +",";
+
+      for(int j=0;j<Phone.length;j++)
+        number = number + Phone[j] +",";
+
+      for(int j=0;j<Scopes.length;j++)
+        sc = sc + Scopes[j] +",";
+
+      print("Scopes := "+sc);
+
+      sheet.getRangeByName("A"+(i+2).toString()).setText((i+1).toString());
+      sheet.getRangeByName("B"+(i+2).toString()).setText(fetched_list[i].snm);
+      sheet.getRangeByName("C"+(i+2).toString()).setText(fetched_list[i].scode);
+      sheet.getRangeByName("D"+(i+2).toString()).setText(fetched_list[i].saddress);
+      sheet.getRangeByName("E"+(i+2).toString()).setText(name);
+      sheet.getRangeByName("F"+(i+2).toString()).setText(number);
+      sheet.getRangeByName("G"+(i+2).toString()).setText(mail);
+      sheet.getRangeByName("H"+(i+2).toString()).setText(fetched_list[i].stype);
+      sheet.getRangeByName("I"+(i+2).toString()).setText(sc);
+      sheet.getRangeByName("J"+(i+2).toString()).setText(fetched_list[i].nabl_no);
+      sheet.getRangeByName("K"+(i+2).toString()).setText(fetched_list[i].nabldate);
+      sheet.getRangeByName("L"+(i+2).toString()).setText(fetched_list[i].nabldue);
+    }
+
+    final List<int> bytes = workbook.saveAsStream();
+    workbook.dispose();
+
+    if (kIsWeb) {
+      AnchorElement(
+          href:
+          'data:application/octet-stream;charset=utf-16le;base64,${base64.encode(bytes)}')
+        ..setAttribute('download', 'Output.xlsx')
+        ..click();
+    } else {
+      final String path = (await getApplicationSupportDirectory()).path;
+      final String fileName = Platform.isWindows ? '$path\\Output.xlsx' : '$path/Output.xlsx';
+      final File file = File(fileName);
+      await file.writeAsBytes(bytes, flush: true);
+      OpenFile.open(fileName);
+    }
+  }
 }
+
 
 class ExcelRowHeading extends StatelessWidget {
   final String one;
@@ -712,20 +740,22 @@ class ExcelRow extends StatelessWidget {
                               //decoration: BoxDecoration(border: Border.all(color: color)),
                               child: Center(child: ElevatedButton(
                                 onPressed: ()
-                                async {
-                                  // Navigator.push(context,
-                                  //   MaterialPageRoute(
-                                  //     builder: (context) => new demo_Edit_Supplier_Contact_Details(scode: model.scode.toString(), stype: model.stype.toString(),),
-                                  //   ),
-                                  // );
-                                  if(model.stype == "Repairing"||model.stype == "Manufacturer")
+                                async
+                                {
+                                  if(model.stype != "Calibration")
                                   {
                                     _showMyDialog("ERROR","Repairing or Manufacturer Supplier types does not have Certificate !!", context);
                                   }
-                                  else {
-                                    await getDownloadLink(
-                                        model.scode, model.lab_scope_file_nm,
-                                        context).then((value)
+                                  else if(model.lab_scope_link == null || model.lab_scope_file_nm== null||
+                                      model.lab_scope_link == "" || model.lab_scope_file_nm == ""||
+                                      model.lab_scope_link == "null" || model.lab_scope_file_nm== "null"
+                                  )
+                                  {
+                                    _showMyDialog("Problem", "Lab Scope Certificate not Available !!!!", context);
+                                  }
+                                  else
+                                  {
+                                    await getDownloadLink(model.scode, model.lab_scope_file_nm,context).then((value)
                                     {
                                       var demo = html.window.open(downloadedLink, "_blank");
                                       demo.addEventListener(
@@ -735,10 +765,7 @@ class ExcelRow extends StatelessWidget {
                                       demo.close();
                                       _showMyDialog("Success", "Download Successful", context);
                                     });
-
                                   }
-
-
 
 
                                 },
@@ -751,16 +778,19 @@ class ExcelRow extends StatelessWidget {
                               //decoration: BoxDecoration(border: Border.all(color: color)),
                               child: Center(child: ElevatedButton( onPressed: ()
                               async {
-                                // Navigator.push(context,
-                                //   MaterialPageRoute(
-                                //     builder: (context) => new demo_Edit_Supplier_Contact_Details(scode: model.scode.toString(), stype: model.stype.toString(),),
-                                //   ),
-                                // );
                                 if(model.stype == "Repairing"||model.stype == "Manufacturer")
                                 {
                                   _showMyDialog("ERROR","Repairing or Manufacturer Supplier types does not have Certificate !!", context);
                                 }
-                                else {
+                                else if(model.nabl_cert_link == null || model.certificate_file_nm== null||
+                                    model.nabl_cert_link == "" || model.certificate_file_nm == ""||
+                                    model.nabl_cert_link == "null" || model.certificate_file_nm== "null"
+                                )
+                                {
+                                  _showMyDialog("Problem", "Certificate not Available !!!!", context);
+                                }
+                                else
+                                {
                                   var a=0;
                                   await getDownloadLink(
                                       model.scode, model.certificate_file_nm,
@@ -777,8 +807,6 @@ class ExcelRow extends StatelessWidget {
 
                                   }
                                   );
-
-
                                 }
 
                               },

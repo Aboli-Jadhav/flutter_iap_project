@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 class demoEdit_Contact_Person_Name extends StatefulWidget {
   final String supplier_code;
+
   final String stype;
   const demoEdit_Contact_Person_Name( {Key? key,required this.supplier_code,required this.stype}) : super(key: key);
 
@@ -14,6 +15,8 @@ class demoEdit_Contact_Person_Name extends StatefulWidget {
 class _demoEdit_Contact_Person_NameState extends State<demoEdit_Contact_Person_Name> {
   List<String> fetched_data = [];
   var _suggestion=TextEditingController();
+  Color backred=Color(0xffDF3F3F);
+  Color lred=Color(0xffFBEBEB);
 
   GlobalKey<AutoCompleteTextFieldState<String>> key = GlobalKey();
   List<String> added = [];
@@ -26,6 +29,35 @@ class _demoEdit_Contact_Person_NameState extends State<demoEdit_Contact_Person_N
     getNames();
 
   }
+
+  Future<void> _showMyDialog(String title,String str) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: lred,
+          title: Text(title),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(str),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
 
   Future<String> returnIDOfDOc()
   async {
@@ -93,7 +125,8 @@ class _demoEdit_Contact_Person_NameState extends State<demoEdit_Contact_Person_N
       setState(() {
 
       });
-    });
+    }).then((value) => _showMyDialog("Success", "Contact Person Added Successfully !!!!"))
+        .catchError((error) => _showMyDialog("Error", "Error Occured..."));
 
 
   }
@@ -118,7 +151,8 @@ class _demoEdit_Contact_Person_NameState extends State<demoEdit_Contact_Person_N
             _suggestion.clear();
             fetched_data = [];
           });
-        });
+        }).then((value) => _showMyDialog("Success", "Name Deleted Successfully !!!!"))
+            .catchError((error) => _showMyDialog("Error", "Error Occured..."));;
         getNames();
         setState(() {
 

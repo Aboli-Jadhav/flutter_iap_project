@@ -19,6 +19,9 @@ class _demoViewScopeOfSupplierState extends State<demoViewScopeOfSupplier> {
   List<String> added = [];
   String currentText = "";
 
+  Color backred=Color(0xffDF3F3F);
+  Color lred=Color(0xffFBEBEB);
+
   @override
   void initState() {
     // TODO: implement initState
@@ -95,10 +98,40 @@ class _demoViewScopeOfSupplierState extends State<demoViewScopeOfSupplier> {
       setState(() {
 
       });
-    });
+    }).then((value) => _showMyDialog("Success", "Scope Added Successfully !!!!"))
+        .catchError((error) => _showMyDialog("Error", "Error Occured..."));
 
 
   }
+
+  Future<void> _showMyDialog(String title,String str) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: lred,
+          title: Text(title),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(str),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
 
   void deleteItemfinal(String name) async{
     // FirebaseFirestore firestore2 = FirebaseFirestore.instance;
@@ -120,7 +153,8 @@ class _demoViewScopeOfSupplierState extends State<demoViewScopeOfSupplier> {
             _suggestion.clear();
             fetched_data = [];
           });
-        });
+        }).then((value) => _showMyDialog("Success", "Scope Deleted Successfully !!!!"))
+            .catchError((error) => _showMyDialog("Error", "Error Occured..."));
         getScope();
         setState(() {
 

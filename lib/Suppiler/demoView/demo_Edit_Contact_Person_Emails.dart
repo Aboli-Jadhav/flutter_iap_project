@@ -6,6 +6,7 @@ class demo_Edit_Contact_Person_Emails extends StatefulWidget {
   final String supplier_code;
   final String stype;
 
+
   const demo_Edit_Contact_Person_Emails( {Key? key,required this.supplier_code,required this.stype}) : super(key: key);
 
   @override
@@ -15,6 +16,9 @@ class demo_Edit_Contact_Person_Emails extends StatefulWidget {
 class _demo_Edit_Contact_Person_EmailsState extends State<demo_Edit_Contact_Person_Emails> {
   List<String> fetched_data = [];
   var _suggestion=TextEditingController();
+
+  Color backred=Color(0xffDF3F3F);
+  Color lred=Color(0xffFBEBEB);
 
   GlobalKey<AutoCompleteTextFieldState<String>> key = GlobalKey();
   List<String> added = [];
@@ -94,10 +98,40 @@ class _demo_Edit_Contact_Person_EmailsState extends State<demo_Edit_Contact_Pers
       setState(() {
 
       });
-    });
+    }).then((value) => _showMyDialog("Success", "Email Added Successfully !!!!"))
+        .catchError((error) => _showMyDialog("Error", "Error Occured..."));
 
 
   }
+
+  Future<void> _showMyDialog(String title,String str) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: lred,
+          title: Text(title),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(str),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
 
   void deleteItemfinal(String name) async{
     // FirebaseFirestore firestore2 = FirebaseFirestore.instance;
@@ -119,7 +153,8 @@ class _demo_Edit_Contact_Person_EmailsState extends State<demo_Edit_Contact_Pers
             _suggestion.clear();
             fetched_data = [];
           });
-        });
+        }).then((value) => _showMyDialog("Success", "Email Deleted Successfully !!!!"))
+        .catchError((error) => _showMyDialog("Error", "Error Occured..."));
         getScope();
         setState(() {
 

@@ -14,6 +14,8 @@ class demo_Edit_Contact_Person_Phones extends StatefulWidget {
 class _demo_Edit_Contact_Person_PhonesState extends State<demo_Edit_Contact_Person_Phones> {
   List<String> fetched_data = [];
   var _suggestion=TextEditingController();
+  Color backred=Color(0xffDF3F3F);
+  Color lred=Color(0xffFBEBEB);
 
   GlobalKey<AutoCompleteTextFieldState<String>> key = GlobalKey();
   List<String> added = [];
@@ -93,7 +95,9 @@ class _demo_Edit_Contact_Person_PhonesState extends State<demo_Edit_Contact_Pers
       setState(() {
 
       });
-    });
+    })
+        .then((value) => _showMyDialog("Success", "Phone  Added Successfully !!!!"))
+        .catchError((error) => _showMyDialog("Error", "Error Occured..."));
 
 
   }
@@ -118,7 +122,9 @@ class _demo_Edit_Contact_Person_PhonesState extends State<demo_Edit_Contact_Pers
             _suggestion.clear();
             fetched_data = [];
           });
-        });
+        })
+            .then((value) => _showMyDialog("Success", "Phone Deleted Successfully !!!!"))
+            .catchError((error) => _showMyDialog("Error", "Error Occured..."));
         getNames();
         setState(() {
 
@@ -129,6 +135,35 @@ class _demo_Edit_Contact_Person_PhonesState extends State<demo_Edit_Contact_Pers
 
 
   }
+
+  Future<void> _showMyDialog(String title,String str) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: lred,
+          title: Text(title),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(str),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
 
 
   @override

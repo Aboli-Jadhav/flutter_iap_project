@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:html' as html;
 import 'package:flutter_iap_project/Suppiler/ViewData/View_Supplier_data_Model.dart';
+import 'package:flutter_iap_project/Suppiler/ViewData/return_All_SubCollections_List.dart';
 import 'package:flutter_iap_project/Suppiler/demoView/demoEditSupplier.dart';
 import 'package:flutter_iap_project/Suppiler/demoView/demo_Edit_Supplier_Contact_Details.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -393,27 +394,53 @@ class _view_supplier_dataState extends State<view_supplier_data> {
     sheet.getRangeByName('F1').setText('Contact Numbers');
     sheet.getRangeByName('G1').setText('Mail ID');
     sheet.getRangeByName('H1').setText('Supplier Type (Manufacturer/Instrument SupplyCalibration/Repairing )');
-    sheet.getRangeByName('I1').setText('Scope of Supplier for Manufacturing ');
-    sheet.getRangeByName('J1').setText('Scope of Supplier for Calibration');
-    sheet.getRangeByName('K1').setText('NABL CERTIFICATE NO');
-    sheet.getRangeByName('L1').setText('NABL ISSUE DATE');
-    sheet.getRangeByName('M1').setText('NABL VALID UPTO');
+    sheet.getRangeByName('I1').setText('Scope of Supplier');
+    sheet.getRangeByName('J1').setText('NABL CERTIFICATE NO');
+    sheet.getRangeByName('K1').setText('NABL ISSUE DATE');
+    sheet.getRangeByName('L1').setText('NABL VALID UPTO');
 
 
     for(int i=0;i<fetched_list.length;i++){
+
+      return_all_subCollections_List all=new return_all_subCollections_List(fetched_list[i].scode,
+      fetched_list[i].stype);
+
+      String name = "";
+      String mail = "";
+      String number = "";
+      String sc = "";
+
+      List<String> nm=await all.getNames();
+      List<String> Email=await all.getEmails();
+      List<String> Phone=await all.getPhones();
+      List<String> Scopes=await all.getScope();
+      //print('Futures :'+nm[i]+ ""+all.getEmails().toString());
+      for(int j=0;j<nm.length;j++)
+        name = name + nm[j] +",";
+
+      for(int j=0;j<Email.length;j++)
+        mail = mail + Email[j] +",";
+
+      for(int j=0;j<Phone.length;j++)
+        number = number + Phone[j] +",";
+
+      for(int j=0;j<Scopes.length;j++)
+        sc = sc + Scopes[j] +",";
+
+      print("Scopes := "+sc);
+
       sheet.getRangeByName("A"+(i+2).toString()).setText((i+1).toString());
       sheet.getRangeByName("B"+(i+2).toString()).setText(fetched_list[i].snm);
       sheet.getRangeByName("C"+(i+2).toString()).setText(fetched_list[i].scode);
       sheet.getRangeByName("D"+(i+2).toString()).setText(fetched_list[i].saddress);
-      sheet.getRangeByName("E"+(i+2).toString()).setText("");
-      sheet.getRangeByName("F"+(i+2).toString()).setText("");
-      sheet.getRangeByName("G"+(i+2).toString()).setText("");
+      sheet.getRangeByName("E"+(i+2).toString()).setText(name);
+      sheet.getRangeByName("F"+(i+2).toString()).setText(number);
+      sheet.getRangeByName("G"+(i+2).toString()).setText(mail);
       sheet.getRangeByName("H"+(i+2).toString()).setText(fetched_list[i].stype);
-      sheet.getRangeByName("I"+(i+2).toString()).setText("");
-      sheet.getRangeByName("J"+(i+2).toString()).setText("");
-      sheet.getRangeByName("K"+(i+2).toString()).setText(fetched_list[i].nabl_no);
-      sheet.getRangeByName("L"+(i+2).toString()).setText(fetched_list[i].nabldate);
-      sheet.getRangeByName("M"+(i+2).toString()).setText(fetched_list[i].nabldue);
+      sheet.getRangeByName("I"+(i+2).toString()).setText(sc);
+      sheet.getRangeByName("J"+(i+2).toString()).setText(fetched_list[i].nabl_no);
+      sheet.getRangeByName("K"+(i+2).toString()).setText(fetched_list[i].nabldate);
+      sheet.getRangeByName("L"+(i+2).toString()).setText(fetched_list[i].nabldue);
     }
 
     final List<int> bytes = workbook.saveAsStream();
@@ -433,8 +460,9 @@ class _view_supplier_dataState extends State<view_supplier_data> {
       OpenFile.open(fileName);
     }
   }
+  }
 
-}
+
 
 class ExcelRowHeading extends StatelessWidget {
   final String one;
@@ -585,6 +613,7 @@ class ExcelRow extends StatelessWidget {
           {
               _showMyDialog("Error", "UNABLE TO GET CERTIFICATE URL", context);
           }
+
        // return downloadedLink.toString();
   }
 
@@ -625,6 +654,7 @@ class ExcelRow extends StatelessWidget {
                       height: height,
                       decoration: BoxDecoration(border: Border.all(color: color)),
                       child: Center(child: Text(model.stype)),
+
                     ),
                   ),
                   Expanded(
@@ -673,36 +703,35 @@ class ExcelRow extends StatelessWidget {
                               //decoration: BoxDecoration(border: Border.all(color: color)),
                               child: Center(child: ElevatedButton(
                                 onPressed: ()
-                              async {
-                                // Navigator.push(context,
-                                //   MaterialPageRoute(
-                                //     builder: (context) => new demo_Edit_Supplier_Contact_Details(scode: model.scode.toString(), stype: model.stype.toString(),),
-                                //   ),
-                                // );
-                                if(model.stype != "Calibration")
-                                  {
-                                    _showMyDialog("ERROR","Repairing or Manufacturer Supplier types does not have Certificate !!", context);
-                                  }
-                                else {
-                                  await getDownloadLink(
-                                      model.scode, model.lab_scope_file_nm,
-                                      context).then((value)
-                                  {
-                                    var demo = html.window.open(downloadedLink, "_blank");
-                                    demo.addEventListener(
-                                        "onLoadedData", (event) {
-                                      print("Downloading !!!!"+downloadedLink);
-                                    });
-                                    demo.close();
-                                    _showMyDialog("Success", "Download Successful", context);
-                                  });
+                                async
+                                {
+                                    if(model.stype != "Calibration")
+                                    {
+                                        _showMyDialog("ERROR","Repairing or Manufacturer Supplier types does not have Certificate !!", context);
+                                    }
+                                    else if(model.lab_scope_link == null || model.lab_scope_file_nm== null||
+                                    model.lab_scope_link == "" || model.lab_scope_file_nm == ""||
+                                    model.lab_scope_link == "null" || model.lab_scope_file_nm== "null"
+                                    )
+                                    {
+                                      _showMyDialog("Problem", "Lab Scope Certificate not Available !!!!", context);
+                                    }
+                                    else
+                                    {
+                                          await getDownloadLink(model.scode, model.lab_scope_file_nm,context).then((value)
+                                          {
+                                            var demo = html.window.open(downloadedLink, "_blank");
+                                            demo.addEventListener(
+                                                "onLoadedData", (event) {
+                                              print("Downloading !!!!"+downloadedLink);
+                                            });
+                                            demo.close();
+                                            _showMyDialog("Success", "Download Successful", context);
+                                          });
+                                    }
 
-                                }
 
-
-
-
-                              },
+                                },
                                 child: Text("Download NABL Lab Scope PDF"),)),
                             ),
                             SizedBox(height:10),
@@ -712,35 +741,36 @@ class ExcelRow extends StatelessWidget {
                               //decoration: BoxDecoration(border: Border.all(color: color)),
                               child: Center(child: ElevatedButton( onPressed: ()
                               async {
-                                // Navigator.push(context,
-                                //   MaterialPageRoute(
-                                //     builder: (context) => new demo_Edit_Supplier_Contact_Details(scode: model.scode.toString(), stype: model.stype.toString(),),
-                                //   ),
-                                // );
                                 if(model.stype == "Repairing"||model.stype == "Manufacturer")
                                 {
                                   _showMyDialog("ERROR","Repairing or Manufacturer Supplier types does not have Certificate !!", context);
                                 }
-                                else {
-                                  var a=0;
-                                  await getDownloadLink(
-                                      model.scode, model.certificate_file_nm,
-                                      context).then((value)
-                                      {
-                                        var demo =  html.window.open(downloadedLink.toString(), model.certificate_file_nm);
-                                        demo.addEventListener(
-                                            "onLoadedData", (event) {
-                                          print("Downloading !!!!");
-                                          a=1;
-                                          demo.close();
-                                        });
-                                        _showMyDialog("Success", "Download Successful", context);
+                                else if(model.nabl_cert_link == null || model.certificate_file_nm== null||
+                                    model.nabl_cert_link == "" || model.certificate_file_nm == ""||
+                                model.nabl_cert_link == "null" || model.certificate_file_nm== "null"
+                                )
+                                    {
+                                      _showMyDialog("Problem", "Certificate not Available !!!!", context);
+                                    }
+                                  else
+                                  {
+                                    var a=0;
+                                    await getDownloadLink(
+                                        model.scode, model.certificate_file_nm,
+                                        context).then((value)
+                                    {
+                                      var demo =  html.window.open(downloadedLink.toString(), model.certificate_file_nm);
+                                      demo.addEventListener(
+                                          "onLoadedData", (event) {
+                                        print("Downloading !!!!");
+                                        a=1;
+                                        demo.close();
+                                      });
+                                      _showMyDialog("Success", "Download Successful", context);
 
-                                      }
-                                  );
-
-
-                                }
+                                    }
+                                    );
+                                  }
 
                               },
                                 child: Text("Download NABL Certificate PDF"),)),
