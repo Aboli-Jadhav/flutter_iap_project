@@ -7,7 +7,8 @@ import 'package:flutter_iap_project/Suppiler/demoView/demo_Edit_Contact_Person_E
 class demo_View_Contact_Person_Emails extends StatefulWidget {
   final String scode;
   final String stype;
-  const demo_View_Contact_Person_Emails({Key? key,required this.scode,required this.stype}) : super(key: key);
+  final String sname;
+  const demo_View_Contact_Person_Emails({Key? key,required this.scode,required this.stype,required this.sname}) : super(key: key);
 
   @override
   _demo_View_Contact_Person_EmailsState createState() => _demo_View_Contact_Person_EmailsState();
@@ -44,7 +45,7 @@ class _demo_View_Contact_Person_EmailsState extends State<demo_View_Contact_Pers
             children: <Widget>[
               Column(
                 children: [
-                  demo_Edit_Contact_Person_Emails(supplier_code:widget.scode.toString(), stype: widget.stype ,)
+                  demo_Edit_Contact_Person_Emails(supplier_code:widget.scode.toString(), stype: widget.stype, sname:widget.sname ,)
                 ],
               )
             ],

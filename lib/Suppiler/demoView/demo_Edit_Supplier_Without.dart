@@ -12,20 +12,20 @@ import 'package:progress_dialog/progress_dialog.dart';
 import '../../date_picker2.dart';
 import '../SupplierDataModel.dart';
 
-class demoEditSupplier extends StatefulWidget {
+class EditSupplierWithoutCol extends StatefulWidget {
   final View_supplier_data_model supplierModel;
   final List<String> scopedatamodel;
   final String svalue;
   final String selopt;
 
 
-  const demoEditSupplier({Key? key, required this.supplierModel,required this.scopedatamodel,required this.svalue,required this.selopt}) : super(key: key);
+  const EditSupplierWithoutCol({Key? key, required this.supplierModel,required this.scopedatamodel,required this.svalue,required this.selopt}) : super(key: key);
 
   @override
-  _demoEditSupplierState createState() => _demoEditSupplierState();
+  _EditSupplierWithoutColState createState() => _EditSupplierWithoutColState();
 }
 
-class _demoEditSupplierState extends State<demoEditSupplier>
+class _EditSupplierWithoutColState extends State<EditSupplierWithoutCol>
 {
 
   Color backred=Color(0xffDF3F3F);
@@ -48,11 +48,11 @@ class _demoEditSupplierState extends State<demoEditSupplier>
 
   void getAllTEXTControllers()
   {
-      sup_nm.text=widget.supplierModel.snm.toString().trim();
-      sup_code.text=widget.supplierModel.scode.toString().trim();
-      sup_type.text=widget.supplierModel.stype.toString().trim();
-      sup_nabl_no.text=widget.supplierModel.nabl_no.toString().trim();
-      sup_address.text=widget.supplierModel.saddress.toString().trim();
+    sup_nm.text=widget.supplierModel.snm.toString().trim();
+    sup_code.text=widget.supplierModel.scode.toString().trim();
+    sup_type.text=widget.supplierModel.stype.toString().trim();
+    sup_nabl_no.text=widget.supplierModel.nabl_no.toString().trim();
+    sup_address.text=widget.supplierModel.saddress.toString().trim();
   }
 
   @override
@@ -109,7 +109,7 @@ class _demoEditSupplierState extends State<demoEditSupplier>
 
 
       var tp = FirebaseStorage.instance.ref()
-          .child("files/"+widget.supplierModel.scode.toString()+"/");
+          .child("files/"+widget.supplierModel.snm.toString()+"_"+widget.supplierModel.stype.toString()+"/");
 
       UploadTask task = tp.child("$fileName")
           .putData(file!);
@@ -146,7 +146,7 @@ class _demoEditSupplierState extends State<demoEditSupplier>
 
 
       var tp = FirebaseStorage.instance.ref()
-          .child("files/"+widget.supplierModel.scode.toString()+"/");
+          .child("files/"+widget.supplierModel.snm.toString()+"_"+widget.supplierModel.stype.toString()+"/");
 
       UploadTask task = tp.child("$fileName")
           .putData(file!);
@@ -184,22 +184,23 @@ class _demoEditSupplierState extends State<demoEditSupplier>
         .get().then((value)
     {
       if(value.docs.isNotEmpty)
+      {
+        for(var ele in value.docs)
         {
-          for(var ele in value.docs)
+          if(ele.data()['agencyCode']==widget.supplierModel.scode.trim()
+              &&  ele.data()['agencytype']==_chosenValue.trim().toString()
+              && ele.data()['agencyName']== sup_nm.text.toString()
+          )
           {
-            if(ele.data()['agencyCode']==widget.supplierModel.scode.trim()
-                &&  ele.data()['agencytype']==widget.supplierModel.stype.trim()
-            )
-            {
-              ret=ele.id;
-              break;
-            }
-            else
-            {
-              print("Record not present.");
-            }
+            ret=ele.id;
+            break;
+          }
+          else
+          {
+            print("Record not present.");
           }
         }
+      }
       else{
         _showMyDialog("FAIL", "No SUCH RECORD !!!!");
       }
@@ -292,23 +293,23 @@ class _demoEditSupplierState extends State<demoEditSupplier>
     //   if(value.docs.isNotEmpty) {
 
 
-        await FirebaseFirestore.instance.collection("Chakan").doc("Supplier").collection("all_").doc(id).update(
-            {
-              'agencyName':sup_nm.text.toString().trim(),
-              //'agencytype':_chosenValue.toString().trim().toUpperCase(),
-              'agencyAddress':sup_address.text.toString().trim(),
-              'NABL_certificate_No':sup_nabl_no.text.toString().trim(),
-              'NABL_Cert_Date':nabl_date.toString(),
-              'NABL_Cert_Due_Date':nabl_due_date.toString().trim(),
-            }
-        ).then((value)
+    await FirebaseFirestore.instance.collection("Chakan").doc("Supplier").collection("all_").doc(id).update(
         {
-          _showMyDialog("Success","Supplier Updated Successfully !!!!");
+          'agencyName':sup_nm.text.toString().trim(),
+          //'agencytype':_chosenValue.toString().trim().toUpperCase(),
+          'agencyAddress':sup_address.text.toString().trim(),
+          'NABL_certificate_No':sup_nabl_no.text.toString().trim(),
+          'NABL_Cert_Date':nabl_date.toString(),
+          'NABL_Cert_Due_Date':nabl_due_date.toString().trim(),
+        }
+    ).then((value)
+    {
+      _showMyDialog("Success","Supplier Updated Successfully !!!!");
 
-        }).catchError((error, stackTrace) {
-          _showMyDialog("FAIL","Supplier Update Failed !!!!");
+    }).catchError((error, stackTrace) {
+      _showMyDialog("FAIL","Supplier Update Failed !!!!");
 
-        });
+    });
 
     //   }
     //   else
@@ -570,7 +571,7 @@ class _demoEditSupplierState extends State<demoEditSupplier>
                                   ),
                                 )
                             ),
-                            SizedBox(width: 100,),
+                            SizedBox(width: 300,),
                             TextButton(
                               onPressed: add_NABL_LAB_ScopePdf_To_Cloud,
                               child:Text("Upload NABL Lab Scope",
@@ -579,36 +580,36 @@ class _demoEditSupplierState extends State<demoEditSupplier>
                                 ),
                               ),
                             ),
-                            SizedBox(width: 100,),
-                            TextButton(
-                              onPressed: (){
-                                Navigator.push(context,
-                                    MaterialPageRoute(
-                                        builder: (context) => new demoviewScope(scode:sup_code.text.trim(), stype: widget.supplierModel.stype.trim(), sname: widget.supplierModel.snm.trim())
-                                    ));
-
-                              },
-                              child:Text("View Scope Of Supplier",
-                                style: TextStyle(
-                                  fontSize: 20,fontWeight:FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            SizedBox(width: 100,),
-                            TextButton(
-                              onPressed: (){
-                                Navigator.push(context,
-                                    MaterialPageRoute(
-                                        builder: (context) => new demo_Edit_Supplier_Contact_Details(scode:widget.supplierModel.scode.toString(), stype: widget.supplierModel.stype.trim(), sname: widget.supplierModel.snm.trim())
-                                    ));
-
-                              },
-                              child:Text("Edit Supplier Contact Details",
-                                style: TextStyle(
-                                  fontSize: 20,fontWeight:FontWeight.bold,
-                                ),
-                              ),
-                            ),
+                            //SizedBox(width: 100,),
+                            // TextButton(
+                            //   onPressed: (){
+                            //     Navigator.push(context,
+                            //         MaterialPageRoute(
+                            //             builder: (context) => new demoviewScope(scode:sup_code.text.trim(), stype: widget.supplierModel.stype.trim(), sname: widget.supplierModel.snm.trim())
+                            //         ));
+                            //
+                            //   },
+                            //   child:Text("View Scope Of Supplier",
+                            //     style: TextStyle(
+                            //       fontSize: 20,fontWeight:FontWeight.bold,
+                            //     ),
+                            //   ),
+                            // ),
+                            //SizedBox(width: 100,),
+                            // TextButton(
+                            //   onPressed: (){
+                            //     Navigator.push(context,
+                            //         MaterialPageRoute(
+                            //             builder: (context) => new demo_Edit_Supplier_Contact_Details(scode:widget.supplierModel.scode.toString(), stype: widget.supplierModel.stype.trim(), sname: widget.supplierModel.snm.trim())
+                            //         ));
+                            //
+                            //   },
+                            //   child:Text("Edit Supplier Contact Details",
+                            //     style: TextStyle(
+                            //       fontSize: 20,fontWeight:FontWeight.bold,
+                            //     ),
+                            //   ),
+                            // ),
                           ],
                         ),
 

@@ -6,7 +6,8 @@ import 'package:flutter_iap_project/Suppiler/demoView/demo_Edit_Contact_Person_N
 class demoView_Contact_Person_Name extends StatefulWidget {
   final String scode;
   final String stype;
-  const demoView_Contact_Person_Name({Key? key,required this.scode,required this.stype}) : super(key: key);
+  final String sname;
+  const demoView_Contact_Person_Name({Key? key,required this.scode,required this.stype,required this.sname}) : super(key: key);
 
   @override
   _demoView_Contact_Person_NameState createState() => _demoView_Contact_Person_NameState();
@@ -43,7 +44,7 @@ class _demoView_Contact_Person_NameState extends State<demoView_Contact_Person_N
             children: <Widget>[
               Column(
                 children: [
-                  demoEdit_Contact_Person_Name(supplier_code:widget.scode.toString(), stype: widget.stype)
+                  demoEdit_Contact_Person_Name(supplier_code:widget.scode.toString(), stype: widget.stype, sname: widget.sname,)
                 ],
               )
             ],

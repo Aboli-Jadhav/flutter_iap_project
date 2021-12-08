@@ -5,9 +5,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class demo_Edit_Contact_Person_Emails extends StatefulWidget {
   final String supplier_code;
   final String stype;
+  final String sname;
 
-
-  const demo_Edit_Contact_Person_Emails( {Key? key,required this.supplier_code,required this.stype}) : super(key: key);
+  const demo_Edit_Contact_Person_Emails( {Key? key,required this.supplier_code,required this.stype,required this.sname}) : super(key: key);
 
   @override
   _demo_Edit_Contact_Person_EmailsState createState() => _demo_Edit_Contact_Person_EmailsState();
@@ -43,6 +43,7 @@ class _demo_Edit_Contact_Person_EmailsState extends State<demo_Edit_Contact_Pers
       {
         if(ele.data()['agencyCode']==widget.supplier_code.trim()
             &&  ele.data()['agencytype']==widget.stype.trim()
+            && ele.data()['agencyName']==widget.sname.trim()
         )
         {
           ret=ele.id;

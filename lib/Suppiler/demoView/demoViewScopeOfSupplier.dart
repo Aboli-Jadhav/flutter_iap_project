@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 class demoViewScopeOfSupplier extends StatefulWidget {
   final String supplier_code;
   final String stype;
-  const demoViewScopeOfSupplier( {Key? key,required this.supplier_code,required this.stype}) : super(key: key);
+  final String sname;
+  const demoViewScopeOfSupplier( {Key? key,required this.supplier_code,required this.stype,required this.sname}) : super(key: key);
 
   @override
   _demoViewScopeOfSupplierState createState() => _demoViewScopeOfSupplierState();
@@ -41,6 +42,7 @@ class _demoViewScopeOfSupplierState extends State<demoViewScopeOfSupplier> {
             {
               if(ele.data()['agencyCode']==widget.supplier_code.trim()
               &&  ele.data()['agencytype']==widget.stype.trim()
+                  && ele.data()['agencyName']==widget.sname.trim()
               )
                 {
                     ret=ele.id;

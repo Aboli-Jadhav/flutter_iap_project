@@ -3,8 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class return_all_subCollections_List
 {
-  final supplier_code,stype;
-  return_all_subCollections_List( this.supplier_code,this.stype);
+  final supplier_code,stype,sname;
+  return_all_subCollections_List( this.supplier_code,this.stype,this.sname);
 
   List<String> fetched_nm = [];
   List<String> fetched_scope = [];
@@ -23,6 +23,7 @@ class return_all_subCollections_List
       {
         if(ele.data()['agencyCode']==this.supplier_code.trim()
             &&  ele.data()['agencytype']==this.stype.trim()
+            && ele.data()['agencyName']==this.sname.trim()
         )
         {
           ret=ele.id;

@@ -13,7 +13,8 @@ import 'demoViewScopeOfSupplier.dart';
 class demo_Edit_Supplier_Contact_Details extends StatefulWidget {
   final String scode;
   final String stype;
-  const demo_Edit_Supplier_Contact_Details({Key? key,required this.scode, required this.stype}) : super(key: key);
+  final String sname;
+  const demo_Edit_Supplier_Contact_Details({Key? key,required this.scode, required this.stype,required this.sname}) : super(key: key);
 
   @override
   _demo_Edit_Supplier_Contact_DetailsState createState() => _demo_Edit_Supplier_Contact_DetailsState();
@@ -52,7 +53,7 @@ class _demo_Edit_Supplier_Contact_DetailsState extends State<demo_Edit_Supplier_
                     onPressed: (){
                       Navigator.push(context,
                           MaterialPageRoute(
-                              builder: (context) => new demo_View_Contact_Person_Emails(scode: widget.scode, stype: widget.stype,)
+                              builder: (context) => new demo_View_Contact_Person_Emails(scode: widget.scode, stype: widget.stype, sname: widget.sname,)
                           ));
 
                     },
@@ -67,7 +68,7 @@ class _demo_Edit_Supplier_Contact_DetailsState extends State<demo_Edit_Supplier_
                     onPressed: (){
                       Navigator.push(context,
                           MaterialPageRoute(
-                              builder: (context) => new demoView_Contact_Person_Name(scode: widget.scode, stype: widget.stype,)
+                              builder: (context) => new demoView_Contact_Person_Name(scode: widget.scode, stype: widget.stype, sname: widget.sname,)
                           ));
 
                     },
@@ -82,7 +83,7 @@ class _demo_Edit_Supplier_Contact_DetailsState extends State<demo_Edit_Supplier_
                     onPressed: (){
                       Navigator.push(context,
                           MaterialPageRoute(
-                              builder: (context) => new demo_View_Contact_Person_Phones(scode: widget.scode, stype: widget.stype,)
+                              builder: (context) => new demo_View_Contact_Person_Phones(scode: widget.scode, stype: widget.stype, sname: widget.sname,)
                           ));
 
                     },
@@ -97,7 +98,7 @@ class _demo_Edit_Supplier_Contact_DetailsState extends State<demo_Edit_Supplier_
                     onPressed: (){
                       Navigator.push(context,
                           MaterialPageRoute(
-                              builder: (context) => new demoviewScope(scode: widget.scode, stype: widget.stype)
+                              builder: (context) => new demoviewScope(scode: widget.scode, stype: widget.stype, sname: widget.sname,)
                           ));
 
                     },

@@ -206,7 +206,7 @@ class _AddSupplierState extends State<AddSupplier> {
 
 
       var tp = FirebaseStorage.instance.ref()
-          .child("files/"+sup_code.text.toString()+"/");
+          .child("files/"+sup_nm.text.toString()+"_"+_chosenValue.toString()+"/");
 
       UploadTask task = tp.child("$fileName")
           .putData(file!);
@@ -236,7 +236,7 @@ class _AddSupplierState extends State<AddSupplier> {
 
 
       var tp = FirebaseStorage.instance.ref()
-          .child("files/"+sup_code.text.toString()+"/");
+          .child("files/"+sup_nm.text.toString()+"_"+_chosenValue.toString()+"/");
 
       UploadTask task = tp.child("$fileName")
           .putData(file!);

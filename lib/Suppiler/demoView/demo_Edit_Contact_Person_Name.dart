@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 
 class demoEdit_Contact_Person_Name extends StatefulWidget {
   final String supplier_code;
-
+  final String sname;
   final String stype;
-  const demoEdit_Contact_Person_Name( {Key? key,required this.supplier_code,required this.stype}) : super(key: key);
+  const demoEdit_Contact_Person_Name( {Key? key,required this.supplier_code,required this.stype,required this.sname}) : super(key: key);
 
   @override
   _demoEdit_Contact_Person_NameState createState() => _demoEdit_Contact_Person_NameState();
@@ -70,6 +70,7 @@ class _demoEdit_Contact_Person_NameState extends State<demoEdit_Contact_Person_N
       {
         if(ele.data()['agencyCode']==widget.supplier_code.trim()
             &&  ele.data()['agencytype']==widget.stype.trim()
+            && ele.data()['agencyName']==widget.sname.trim()
         )
         {
           ret=ele.id;

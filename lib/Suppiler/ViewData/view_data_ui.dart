@@ -24,13 +24,13 @@ class _view_data_uiState extends State<view_data_ui> {
   String final_selectedValue='';
   final List<String> _supplier = [
     'Type of Supplier',
+    'Supplier Name',
     'Supplier Code',
     'Supplier Contact Person Name',
     'Supplier Contact Person Email',
     'Supplier Contact Person Phone',
-    'Supplier Name',
     'Scope',
-    'LOCATION'
+    'Location'
 
   ];
 
@@ -288,7 +288,7 @@ class _view_data_uiState extends State<view_data_ui> {
                         }
                         break;
 
-                        case 'LOCATION': {
+                        case 'Location': {
                           selected_option = location.text;
                           final_selectedValue='agencyAddress';
                         }

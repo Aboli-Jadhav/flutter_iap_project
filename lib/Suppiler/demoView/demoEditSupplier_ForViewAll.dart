@@ -106,7 +106,7 @@ class _Edit_For_ViewAllState extends State<Edit_For_ViewAll>
 
 
       var tp = FirebaseStorage.instance.ref()
-          .child("files/"+widget.supplierModel.scode.toString()+"/");
+          .child("files/"+widget.supplierModel.snm.toString()+"_"+widget.supplierModel.stype.toString()+"/");
 
       UploadTask task = tp.child("$fileName")
           .putData(file!);
@@ -143,7 +143,7 @@ class _Edit_For_ViewAllState extends State<Edit_For_ViewAll>
 
 
       var tp = FirebaseStorage.instance.ref()
-          .child("files/"+widget.supplierModel.scode.toString()+"/");
+          .child("files/"+sup_nm.text.toString()+"_"+_chosenValue.toString()+"/");
 
       UploadTask task = tp.child("$fileName")
           .putData(file!);
@@ -185,7 +185,8 @@ class _Edit_For_ViewAllState extends State<Edit_For_ViewAll>
         for(var ele in value.docs)
         {
           if(ele.data()['agencyCode']==widget.supplierModel.scode.trim()
-              &&  ele.data()['agencytype']==widget.supplierModel.stype.trim()
+              &&  ele.data()['agencytype']==_chosenValue.trim().toString()
+              && ele.data()['agencyName']== sup_nm.text.toString()
           )
           {
             ret=ele.id;
@@ -567,7 +568,7 @@ class _Edit_For_ViewAllState extends State<Edit_For_ViewAll>
                                   ),
                                 )
                             ),
-                            SizedBox(width: 100,),
+                            SizedBox(width: 300,),
                             TextButton(
                               onPressed: add_NABL_LAB_ScopePdf_To_Cloud,
                               child:Text("Upload NABL Lab Scope",
@@ -576,36 +577,36 @@ class _Edit_For_ViewAllState extends State<Edit_For_ViewAll>
                                 ),
                               ),
                             ),
-                            SizedBox(width: 100,),
-                            TextButton(
-                              onPressed: (){
-                                Navigator.push(context,
-                                    MaterialPageRoute(
-                                        builder: (context) => new demoviewScope(scode:sup_code.text.trim(), stype: widget.supplierModel.stype.trim(),)
-                                    ));
-
-                              },
-                              child:Text("View Scope Of Supplier",
-                                style: TextStyle(
-                                  fontSize: 20,fontWeight:FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            SizedBox(width: 100,),
-                            TextButton(
-                              onPressed: (){
-                                Navigator.push(context,
-                                    MaterialPageRoute(
-                                        builder: (context) => new demo_Edit_Supplier_Contact_Details(scode:widget.supplierModel.scode.toString(), stype: widget.supplierModel.stype.trim(),)
-                                    ));
-
-                              },
-                              child:Text("Edit Supplier Contact Details",
-                                style: TextStyle(
-                                  fontSize: 20,fontWeight:FontWeight.bold,
-                                ),
-                              ),
-                            ),
+                            //SizedBox(width: 100,),
+                            // TextButton(
+                            //   onPressed: (){
+                            //     Navigator.push(context,
+                            //         MaterialPageRoute(
+                            //             builder: (context) => new demoviewScope(scode:sup_code.text.trim(), stype: widget.supplierModel.stype.trim(),sname: widget.supplierModel.snm.trim())
+                            //         ));
+                            //
+                            //   },
+                            //   child:Text("View Scope Of Supplier",
+                            //     style: TextStyle(
+                            //       fontSize: 20,fontWeight:FontWeight.bold,
+                            //     ),
+                            //   ),
+                            // ),
+                            // SizedBox(width: 100,),
+                            // TextButton(
+                            //   onPressed: (){
+                            //     Navigator.push(context,
+                            //         MaterialPageRoute(
+                            //             builder: (context) => new demo_Edit_Supplier_Contact_Details(scode:widget.supplierModel.scode.toString(), stype: widget.supplierModel.stype.trim(),sname: widget.supplierModel.snm.trim())
+                            //         ));
+                            //
+                            //   },
+                            //   child:Text("Edit Supplier Contact Details",
+                            //     style: TextStyle(
+                            //       fontSize: 20,fontWeight:FontWeight.bold,
+                            //     ),
+                            //   ),
+                            // ),
                           ],
                         ),
 

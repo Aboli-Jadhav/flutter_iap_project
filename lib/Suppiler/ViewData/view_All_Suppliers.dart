@@ -442,12 +442,13 @@ class _view_All_Supplier_DataState extends State<view_All_Supplier_Data> {
     sheet.getRangeByName('J1').setText('NABL CERTIFICATE NO');
     sheet.getRangeByName('K1').setText('NABL ISSUE DATE');
     sheet.getRangeByName('L1').setText('NABL VALID UPTO');
-
+    sheet.getRangeByName('M1').setText('NABL Certificate Download Link');
+    sheet.getRangeByName('N1').setText('NABL Lab Scope Download Link');
 
     for(int i=0;i<fetched_list.length;i++){
 
       return_all_subCollections_List all=new return_all_subCollections_List(fetched_list[i].scode,
-          fetched_list[i].stype);
+          fetched_list[i].stype,fetched_list[i].snm);
 
       String name = "";
       String mail = "";
@@ -459,6 +460,9 @@ class _view_All_Supplier_DataState extends State<view_All_Supplier_Data> {
       List<String> Phone=await all.getPhones();
       List<String> Scopes=await all.getScope();
       //print('Futures :'+nm[i]+ ""+all.getEmails().toString());
+      for(int j=0;j<Scopes.length;j++)
+        sc = sc + Scopes[j] +",";
+
       for(int j=0;j<nm.length;j++)
         name = name + nm[j] +",";
 
@@ -468,10 +472,7 @@ class _view_All_Supplier_DataState extends State<view_All_Supplier_Data> {
       for(int j=0;j<Phone.length;j++)
         number = number + Phone[j] +",";
 
-      for(int j=0;j<Scopes.length;j++)
-        sc = sc + Scopes[j] +",";
 
-      print("Scopes := "+sc);
 
       sheet.getRangeByName("A"+(i+2).toString()).setText((i+1).toString());
       sheet.getRangeByName("B"+(i+2).toString()).setText(fetched_list[i].snm);
@@ -485,6 +486,8 @@ class _view_All_Supplier_DataState extends State<view_All_Supplier_Data> {
       sheet.getRangeByName("J"+(i+2).toString()).setText(fetched_list[i].nabl_no);
       sheet.getRangeByName("K"+(i+2).toString()).setText(fetched_list[i].nabldate);
       sheet.getRangeByName("L"+(i+2).toString()).setText(fetched_list[i].nabldue);
+      sheet.getRangeByName("M"+(i+2).toString()).setText(fetched_list[i].nabl_cert_link);
+      sheet.getRangeByName("N"+(i+2).toString()).setText(fetched_list[i].lab_scope_link);
     }
 
     final List<int> bytes = workbook.saveAsStream();
@@ -638,20 +641,21 @@ class ExcelRow extends StatelessWidget {
   }
 
 
-  Future<void> getDownloadLink(String code,String filenm,BuildContext context)
+  Future<void> getDownloadLink(String nm,String type,String filenm,BuildContext context)
   async
   {
     // context:context;
-    print(code.toString()+filenm.toString());
+    print(nm.toString()+type.toString());
     var fstorage=FirebaseStorage.instance.ref();
     //String downloadedLink ="";
-    downloadedLink= await fstorage.child("files/"+code.toString()+"/").child(filenm.toString()).getDownloadURL()
-        .whenComplete(() => print("Downloading"+downloadedLink));
+    downloadedLink= await fstorage.child("files/"+nm.toString()+"_"+type.toString()+"/").child(filenm.toString()).getDownloadURL()
+        .whenComplete(() => print("Downloazding"+downloadedLink));
     //.then((value) =>  downloadedLink.toString());
     if(downloadedLink=="")
     {
       _showMyDialog("Error", "UNABLE TO GET CERTIFICATE URL", context);
     }
+
     // return downloadedLink.toString();
   }
 
@@ -711,7 +715,7 @@ class ExcelRow extends StatelessWidget {
                       {
                         Navigator.push(context,
                           MaterialPageRoute(
-                            builder: (context) => new demo_Edit_Supplier_Contact_Details(scode: model.scode.toString(), stype: model.stype.toString(),),
+                            builder: (context) => new demo_Edit_Supplier_Contact_Details(scode: model.scode.toString(), stype: model.stype.toString(), sname: model.snm.toString()),
                           ),
                         );
 
@@ -755,7 +759,7 @@ class ExcelRow extends StatelessWidget {
                                   }
                                   else
                                   {
-                                    await getDownloadLink(model.scode, model.lab_scope_file_nm,context).then((value)
+                                    await getDownloadLink(model.snm,model.stype, model.lab_scope_file_nm,context).then((value)
                                     {
                                       var demo = html.window.open(downloadedLink, "_blank");
                                       demo.addEventListener(
@@ -793,7 +797,7 @@ class ExcelRow extends StatelessWidget {
                                 {
                                   var a=0;
                                   await getDownloadLink(
-                                      model.scode, model.certificate_file_nm,
+                                      model.snm,model.stype, model.certificate_file_nm,
                                       context).then((value)
                                   {
                                     var demo =  html.window.open(downloadedLink.toString(), model.certificate_file_nm);

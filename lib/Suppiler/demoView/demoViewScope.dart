@@ -7,7 +7,8 @@ import 'demoViewScopeOfSupplier.dart';
 class demoviewScope extends StatefulWidget {
   final String scode;
   final String stype;
-  const demoviewScope({Key? key,required this.scode,required this.stype}) : super(key: key);
+  final String sname;
+  const demoviewScope({Key? key,required this.scode,required this.stype,required this.sname}) : super(key: key);
 
   @override
   _demoviewScopeState createState() => _demoviewScopeState();
@@ -44,7 +45,7 @@ class _demoviewScopeState extends State<demoviewScope> {
             children: <Widget>[
               Column(
                 children: [
-                  demoViewScopeOfSupplier(supplier_code:widget.scode, stype: widget.stype,)
+                  demoViewScopeOfSupplier(supplier_code:widget.scode, stype: widget.stype,sname: widget.sname)
                 ],
               )
             ],
