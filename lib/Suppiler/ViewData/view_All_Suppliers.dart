@@ -458,10 +458,8 @@ class _view_All_Supplier_DataState extends State<view_All_Supplier_Data> {
       List<String> nm=await all.getNames();
       List<String> Email=await all.getEmails();
       List<String> Phone=await all.getPhones();
-      List<String> Scopes=await all.getScope();
+      String sclist=await all.getScope();
       //print('Futures :'+nm[i]+ ""+all.getEmails().toString());
-      for(int j=0;j<Scopes.length;j++)
-        sc = sc + Scopes[j] +",";
 
       for(int j=0;j<nm.length;j++)
         name = name + nm[j] +",";
@@ -473,6 +471,7 @@ class _view_All_Supplier_DataState extends State<view_All_Supplier_Data> {
         number = number + Phone[j] +",";
 
 
+      print(sclist.length);
 
       sheet.getRangeByName("A"+(i+2).toString()).setText((i+1).toString());
       sheet.getRangeByName("B"+(i+2).toString()).setText(fetched_list[i].snm);
@@ -482,7 +481,7 @@ class _view_All_Supplier_DataState extends State<view_All_Supplier_Data> {
       sheet.getRangeByName("F"+(i+2).toString()).setText(number);
       sheet.getRangeByName("G"+(i+2).toString()).setText(mail);
       sheet.getRangeByName("H"+(i+2).toString()).setText(fetched_list[i].stype);
-      sheet.getRangeByName("I"+(i+2).toString()).setText(sc);
+      sheet.getRangeByName("I"+(i+2).toString()).setText(await all.getScope());
       sheet.getRangeByName("J"+(i+2).toString()).setText(fetched_list[i].nabl_no);
       sheet.getRangeByName("K"+(i+2).toString()).setText(fetched_list[i].nabldate);
       sheet.getRangeByName("L"+(i+2).toString()).setText(fetched_list[i].nabldue);

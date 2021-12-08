@@ -100,7 +100,7 @@ class return_all_subCollections_List
     return fetched_phones;
   }
 
-  Future<List<String>> getScope()  async {
+  Future<String> getScope()  async {
     String RecId= await returnIDOfDOc();
     FirebaseFirestore.instance.collection("Chakan").doc("Supplier").collection(
         "all_")
@@ -116,9 +116,16 @@ class return_all_subCollections_List
 
     }
     );
-    print(fetched_scope);
-    return fetched_scope;
+    String sc="";
+    for(int j=0;j<fetched_scope.length;j++)
+      {
+        sc = sc + fetched_scope[j] +",";
+      }
+    print("SC="+sc);
+
+    return sc;
   }
 
 
 }
+
