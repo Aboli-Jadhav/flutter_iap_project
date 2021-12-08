@@ -418,8 +418,8 @@ class _view_supplier_dataState extends State<view_supplier_data> {
       List<String> Phone=await all.getPhones();
       List<String> Scopes=await all.getScope();
       //print('Futures :'+nm[i]+ ""+all.getEmails().toString());
-      for(int j=0;j<Scopes.length;j++)
-        sc = sc + Scopes[j] +",";
+      for(int j=0;j<scopeList.length;j++)
+        sc = sc + scopeList[j] +",";
 
       for(int j=0;j<nm.length;j++)
         name = name + nm[j] +",";
@@ -430,7 +430,7 @@ class _view_supplier_dataState extends State<view_supplier_data> {
       for(int j=0;j<Phone.length;j++)
         number = number + Phone[j] +",";
 
-
+      print(scopeList.length);
 
       sheet.getRangeByName("A"+(i+2).toString()).setText((i+1).toString());
       sheet.getRangeByName("B"+(i+2).toString()).setText(fetched_list[i].snm);
