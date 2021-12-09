@@ -378,9 +378,9 @@ class _EditSupplierWithoutColState extends State<EditSupplierWithoutCol>
                             children: const
                             [
                               Text("Supplier Agency Name",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
-                              SizedBox(width: 200,),
+                              SizedBox(width: 220,),
                               Text("Supplier Type",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
-                              SizedBox(width: 200,),
+                              SizedBox(width: 290,),
                               Text("Supplier Address",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
                             ]),
                         const SizedBox(
@@ -393,7 +393,7 @@ class _EditSupplierWithoutColState extends State<EditSupplierWithoutCol>
                             [
                               Container(
                                 width: 300,
-                                height:37.0,
+                                height:57.0,
                                 child: TextField(
                                   enabled: true,
                                   controller: sup_nm,
@@ -408,7 +408,7 @@ class _EditSupplierWithoutColState extends State<EditSupplierWithoutCol>
                               SizedBox(width: 100,),
                               Container(
                                 width: 300,
-                                height: 40,
+                                height: 50,
                                 padding: EdgeInsets.fromLTRB(20,10,10,10),
                                 decoration: BoxDecoration(
                                     color: Colors.grey[100],
@@ -440,7 +440,7 @@ class _EditSupplierWithoutColState extends State<EditSupplierWithoutCol>
                               SizedBox(width: 100,),
                               Container(
                                 width: 300,
-                                height:37.0,
+                                height:57.0,
                                 child: TextField(
                                   enabled: true,
                                   controller:sup_address ,
@@ -454,7 +454,7 @@ class _EditSupplierWithoutColState extends State<EditSupplierWithoutCol>
                               ),
                             ]
                         ),
-
+                        SizedBox(height: 25,),
                         Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: const
@@ -470,7 +470,7 @@ class _EditSupplierWithoutColState extends State<EditSupplierWithoutCol>
                             [
                               Container(
                                 width: 300,
-                                height:37.0,
+                                height:57.0,
                                 child: TextField(
                                   enabled: false,
                                   controller: sup_code,
@@ -485,15 +485,15 @@ class _EditSupplierWithoutColState extends State<EditSupplierWithoutCol>
                               SizedBox(width: 100,),
                             ]
                         ),
-
+                        SizedBox(height: 25,),
                         Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: const
                             [
-                              Text("NABL Certificate NUmber",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
+                              Text("NABL Certificate Number",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
                               SizedBox(width: 200,),
                               Text("NABL Certificate Date",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
-                              SizedBox(width: 200,),
+                              SizedBox(width: 230,),
                               Text("NABL Certificate Due Date",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
                             ]),
                         const SizedBox(
@@ -506,7 +506,7 @@ class _EditSupplierWithoutColState extends State<EditSupplierWithoutCol>
                             [
                               Container(
                                 width: 300,
-                                height:37.0,
+                                height:57.0,
                                 child: TextField(
                                   enabled: true,
                                   controller: sup_nabl_no,
@@ -571,7 +571,7 @@ class _EditSupplierWithoutColState extends State<EditSupplierWithoutCol>
                                   ),
                                 )
                             ),
-                            SizedBox(width: 300,),
+                            SizedBox(width: 600,),
                             TextButton(
                               onPressed: add_NABL_LAB_ScopePdf_To_Cloud,
                               child:Text("Upload NABL Lab Scope",
@@ -640,7 +640,6 @@ class _EditSupplierWithoutColState extends State<EditSupplierWithoutCol>
                               ),
                             ),
 
-                            SizedBox(width: 250,),
 
                             // Container(
                             //   height: 40,
