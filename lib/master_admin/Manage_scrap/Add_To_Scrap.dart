@@ -111,8 +111,6 @@ class _AddToScrapState extends State<AddToScrap> {
       );
     }
 
-
-
   void handleDelete() async {
 
     var guageID=identification_number.text.toString();
@@ -133,7 +131,7 @@ class _AddToScrapState extends State<AddToScrap> {
                           'scrap_note_id_no': scrap_note_id_no.text.toString()
                   });
               await FirebaseFirestore.instance.collection("Chakan").doc("Scrap")
-                  .collection("all_scrap").doc(element.id).update(Map.fromEntries(element.data().entries));
+                  .collection("all_scrap").doc(element.id).update(Map.fromEntries(element.data().entries)).onError((error, stackTrace) => _showDialog("Error", "OOPS ! Error Occured white Adding..."));
 
               await FirebaseFirestore.instance.collection("Chakan").doc("Gauges")
                   .collection("All gauges").doc(element.id).collection("History").get()
@@ -147,7 +145,7 @@ class _AddToScrapState extends State<AddToScrap> {
                         await FirebaseFirestore.instance.collection("Chakan").doc("Gauges")
                             .collection("All gauges").doc(element.id).collection("History").doc(ele.id).delete().then((value) => print("Collection Delete"));
                       });
-                  });
+                  }).onError((error, stackTrace) => _showDialog("Error","Ünable to Transfer History Contents !!"));
 
               await FirebaseFirestore.instance.collection("Chakan").doc("Gauges")
                   .collection("All gauges").doc(element.id).delete()
@@ -156,18 +154,46 @@ class _AddToScrapState extends State<AddToScrap> {
                     print(element.id + " Success!");
                     _showMyDialog();
 
-                  });
-        //print("ABOLI");
+                  })
+                  .onError((error, stackTrace) => _showDialog("ERROR","Cant Move the Guage To Scrap !!!!"));
       });
 
-      });
+      }).onError((error, stackTrace) => _showDialog("Problem","Guage with given ID is not available  !!!!"));
 
 
   }
 
+  _showDialog(String title,String str) async {
+    //BuildContext context;
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: lred,
+          title: Text(title),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(str),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
 
-void handleDropChange(String ?val)
+  void handleDropChange(String ?val)
   {
     setState(() {
       _chosenValue=val;
@@ -291,37 +317,6 @@ void handleDropChange(String ?val)
                             }),
                           ),
                         ),
-                    // Container(
-                    //   width: 300,
-                    //   height: 40,
-                    //   padding: EdgeInsets.fromLTRB(20,10,10,10),
-                    //   decoration: BoxDecoration(
-                    //       color: Colors.grey[100],
-                    //       border: Border.all(color: Colors.black),
-                    //       borderRadius: BorderRadius.all(Radius.circular(5))
-                    //   ),
-                    //
-                    //   child: DropdownButtonHideUnderline(
-                    //     child: DropdownButton<String>(
-                    //       value: _chosenValue,
-                    //       //elevation: 5,
-                    //       style: TextStyle(color: Colors.black),
-                    //
-                    //       items: guageTypes.map<DropdownMenuItem<String>>((String value) {
-                    //             return DropdownMenuItem<String>(
-                    //               value: value,
-                    //               child: Text(value),
-                    //             );
-                    //       }).toList(),
-                    //       hint: Text(
-                    //             "Select The Gauge Type",
-                    //
-                    //       ),
-                    //
-                    //       onChanged:handleDropChange,
-                    //     ),
-                    //   ),
-                    // ),
                       ],
                     ),
 

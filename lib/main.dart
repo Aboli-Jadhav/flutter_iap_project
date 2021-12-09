@@ -56,7 +56,7 @@ void main() {
       '/searchgauge' : (context) => search_gauge(),
       '/manageScrap':(context) => Manage_Scrap(gauge_name: [],),
       '/addtoScrap':(context) => AddToScrap(gauge_name: [],),
-      '/viewScrap':(context) => ViewScrapOfGuageType(),
+      '/viewScrap':(context) => View_Scrap_UI(),
       '/addViewer': (context) => AddViewer(),
       '/adminEditProfile': (context) => Admin_Edit_Profile(),
       '/master_add_admins': (context) => Master_AddAdmins(gauge_location: [],),
