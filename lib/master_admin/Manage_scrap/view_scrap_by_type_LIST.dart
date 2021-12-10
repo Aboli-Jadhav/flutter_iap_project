@@ -8,6 +8,9 @@ import 'package:universal_html/html.dart' show AnchorElement;
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'ScrapDataModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:open_file/open_file.dart';
+import 'dart:convert';
 
 class view_Scrap_by_type_LIST extends StatefulWidget {
 
@@ -234,15 +237,99 @@ class _view_Scrap_by_type_LISTState extends State<view_Scrap_by_type_LIST> {
                 ),
               ),
               SizedBox(height: 10,),
-              // Center(
-              //   child:
-              //   ElevatedButton(child: Text('Export To Excel'), onPressed: show==2? null: createExcel, style: ElevatedButton.styleFrom(primary: Colors.red),),
-              // ),
+              Center(
+                child:
+                ElevatedButton(child: Text('Export To Excel'), onPressed: createExcel, style: ElevatedButton.styleFrom(primary: Colors.red),),
+              ),
             ],
           )),
     );
   }
+  Future<void> createExcel() async {
+    final Workbook workbook = Workbook();
+    final Worksheet sheet = workbook.worksheets[0];
+    sheet.getRangeByName('A1').setText('Gauge ID No.');
+    sheet.getRangeByName('B1').setText('Gauge Type');
+    sheet.getRangeByName('C1').setText('Gauge Size');
+    sheet.getRangeByName('D1').setText('Due Date');
+    sheet.getRangeByName('E1').setText('Location');
+    sheet.getRangeByName('F1').setText('Calibration Agency Name');
+    sheet.getRangeByName('G1').setText('Calibration Cost');
+    sheet.getRangeByName('H1').setText('Calibration Date');
+    sheet.getRangeByName('I1').setText('Calibration Frequency');
+    sheet.getRangeByName('J1').setText('Gauge Cost');
+    sheet.getRangeByName('K1').setText('Gauge Life');
+    sheet.getRangeByName('L1').setText('Gauge Make');
+    sheet.getRangeByName('M1').setText('Invoice Date');
+    sheet.getRangeByName('N1').setText('Invoice Number');
+    sheet.getRangeByName('O1').setText('Item Code');
+    sheet.getRangeByName('P1').setText('Manufacturer Serial Number');
+    sheet.getRangeByName('Q1').setText('Maximum');
+    sheet.getRangeByName('R1').setText('Minimum');
+    sheet.getRangeByName('S1').setText('Remark');
+    sheet.getRangeByName('T1').setText('Plant');
+    sheet.getRangeByName('U1').setText('Certificate Number');
+    sheet.getRangeByName('V1').setText('NABL Accrediation Status');
+    sheet.getRangeByName('W1').setText('Process Owner');
+    sheet.getRangeByName('X1').setText('Process Owner Mail Id');
+    sheet.getRangeByName('Y1').setText('Unit');
+    sheet.getRangeByName('Z1').setText('Acceptance Criteria');
+    sheet.getRangeByName('AA1').setText('Reason');
+    sheet.getRangeByName('AB1').setText('Scrap Date');
+    sheet.getRangeByName('AC1').setText('Scrap Id No.');
+    sheet.getRangeByName('AD1').setText('Responsible Person');
 
+
+    for(int i=0;i<fetchedlist.length;i++){
+      sheet.getRangeByName("A"+(i+2).toString()).setText(fetchedlist[i].identification_number);
+      sheet.getRangeByName("B"+(i+2).toString()).setText(fetchedlist[i].gauge_type);
+      sheet.getRangeByName("C"+(i+2).toString()).setText(fetchedlist[i].nominal_size);
+      sheet.getRangeByName("D"+(i+2).toString()).setText(fetchedlist[i].calibration_due_date);
+      sheet.getRangeByName("E"+(i+2).toString()).setText(fetchedlist[i].gauge_location);
+      sheet.getRangeByName("F"+(i+2).toString()).setText(fetchedlist[i].calibration_agency_name);
+      sheet.getRangeByName("G"+(i+2).toString()).setText(fetchedlist[i].calibration_cost);
+      sheet.getRangeByName("H"+(i+2).toString()).setText(fetchedlist[i].calibration_date);
+      sheet.getRangeByName("I"+(i+2).toString()).setText(fetchedlist[i].calibration_frequency);
+      sheet.getRangeByName("J"+(i+2).toString()).setText(fetchedlist[i].gauge_cost);
+      sheet.getRangeByName("K"+(i+2).toString()).setText(fetchedlist[i].gauge_life);
+      sheet.getRangeByName("L"+(i+2).toString()).setText(fetchedlist[i].gauge_make);
+      sheet.getRangeByName("M"+(i+2).toString()).setText(fetchedlist[i].invoice_date);
+      sheet.getRangeByName("N"+(i+2).toString()).setText(fetchedlist[i].invoice_number);
+      sheet.getRangeByName("O"+(i+2).toString()).setText(fetchedlist[i].item_code);
+      sheet.getRangeByName("P"+(i+2).toString()).setText(fetchedlist[i].manufacturer_serial_number);
+      sheet.getRangeByName("Q"+(i+2).toString()).setText(fetchedlist[i].maximum);
+      sheet.getRangeByName("R"+(i+2).toString()).setText(fetchedlist[i].minimum);
+      sheet.getRangeByName("S"+(i+2).toString()).setText(fetchedlist[i].remark);
+      sheet.getRangeByName("T"+(i+2).toString()).setText(fetchedlist[i].plant);
+      sheet.getRangeByName("U"+(i+2).toString()).setText(fetchedlist[i].certificate_number);
+      sheet.getRangeByName("V"+(i+2).toString()).setText(fetchedlist[i].nabl_accrediation_status);
+      sheet.getRangeByName("W"+(i+2).toString()).setText(fetchedlist[i].process_owner);
+      sheet.getRangeByName("X"+(i+2).toString()).setText(fetchedlist[i].process_owner_mail_id);
+      sheet.getRangeByName("Y"+(i+2).toString()).setText(fetchedlist[i].unit);
+      sheet.getRangeByName("Z"+(i+2).toString()).setText(fetchedlist[i].acceptance_criteria);
+      sheet.getRangeByName("AA"+(i+2).toString()).setText(fetchedlist[i].reason);
+      sheet.getRangeByName("AB"+(i+2).toString()).setText(fetchedlist[i].scrap_date);
+      sheet.getRangeByName("AC"+(i+2).toString()).setText(fetchedlist[i].scrap_note_id_no);
+      sheet.getRangeByName("AD"+(i+2).toString()).setText(fetchedlist[i].responsible_person);
+    }
+
+    final List<int> bytes = workbook.saveAsStream();
+    workbook.dispose();
+
+    if (kIsWeb) {
+      AnchorElement(
+          href:
+          'data:application/octet-stream;charset=utf-16le;base64,${base64.encode(bytes)}')
+        ..setAttribute('download', 'Output.xlsx')
+        ..click();
+    } else {
+      final String path = (await getApplicationSupportDirectory()).path;
+      final String fileName = Platform.isWindows ? '$path\\Output.xlsx' : '$path/Output.xlsx';
+      final File file = File(fileName);
+      await file.writeAsBytes(bytes, flush: true);
+      OpenFile.open(fileName);
+    }
+  }
 }
 
 
