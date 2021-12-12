@@ -11,8 +11,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 class front_add_gauge extends StatefulWidget {
   List<String> gauge_name = [];
   List<String> gauge_location = [];
+  List<String> gauge_location_owner=[];
 
-  front_add_gauge({required this.gauge_name, required this.gauge_location});
+  front_add_gauge({required this.gauge_name, required this.gauge_location, required this.gauge_location_owner});
 
   @override
   _front_add_gaugeState createState() => _front_add_gaugeState();
@@ -183,6 +184,7 @@ class _front_add_gaugeState extends State<front_add_gauge> {
                           MaterialPageRoute(
                               builder: (context) =>
                                   add_Gauge(
+                                    gauge_location_owner: widget.gauge_location_owner,
                                     gauge_location: widget.gauge_location,
                                     gauge_name: _suggestion.text,
                                     model_name: _selected_gauges.toString(),)),
@@ -194,6 +196,7 @@ class _front_add_gaugeState extends State<front_add_gauge> {
                           MaterialPageRoute(
                               builder: (context) =>
                                   add_Gauge(
+                                    gauge_location_owner: widget.gauge_location_owner,
                                       gauge_location: widget.gauge_location,
                                       gauge_name: _suggestion.text)),
                         );
@@ -232,7 +235,7 @@ class _front_add_gaugeState extends State<front_add_gauge> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => AddNewGaugeToSystem(gauge_location: widget.gauge_location,gauge_name:widget.gauge_name)),
+                            builder: (context) => AddNewGaugeToSystem(gauge_location: widget.gauge_location,gauge_name:widget.gauge_name,gauge_location_owner: widget.gauge_location_owner,)),
                       );
                     },
                     child: const Text("Add new gauge to System"),

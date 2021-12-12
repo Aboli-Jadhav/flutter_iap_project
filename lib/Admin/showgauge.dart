@@ -233,32 +233,32 @@ class _ShowGaugeState extends State<ShowGauge> {
               ],
             ),
             SizedBox(height: 30,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  child: Text("Calibrate Gauge"),
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.red,
-                  ),
-                  onPressed: () {
-                    Navigator.push(context,MaterialPageRoute(builder: (context) => Calibrate_Gauge(wppl_number: widget.model.identification_number)),);
-                  },
-                ),
-                const SizedBox(width: 50,),
-                ElevatedButton(
-                  child: Text("Scrap Gauge"),
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.red,
-                  ),
-                  onPressed: () {
-                    //Navigator.push(context,MaterialPageRoute(builder: (context) => view_master_gau()),);
-                    Navigator.push(context,MaterialPageRoute(builder: (context) => AddToScrap(gauge_name: [],identification_number: widget.model.identification_number,manufacturer_number: widget.model.manufacturer_serial_number,nominal_size: widget.model.nominal_size,gauge_name_from_showgauge: widget.model.gauge_type,)),);
-
-                  },
-                )
-              ],
-            )
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     ElevatedButton(
+            //       child: Text("Calibrate Gauge"),
+            //       style: ElevatedButton.styleFrom(
+            //         primary: Colors.red,
+            //       ),
+            //       onPressed: () {
+            //         Navigator.push(context,MaterialPageRoute(builder: (context) => Calibrate_Gauge(wppl_number: widget.model.identification_number)),);
+            //       },
+            //     ),
+            //     const SizedBox(width: 50,),
+            //     ElevatedButton(
+            //       child: Text("Scrap Gauge"),
+            //       style: ElevatedButton.styleFrom(
+            //         primary: Colors.red,
+            //       ),
+            //       onPressed: () {
+            //         //Navigator.push(context,MaterialPageRoute(builder: (context) => view_master_gau()),);
+            //         Navigator.push(context,MaterialPageRoute(builder: (context) => AddToScrap(gauge_name: [],identification_number: widget.model.identification_number,manufacturer_number: widget.model.manufacturer_serial_number,nominal_size: widget.model.nominal_size,gauge_name_from_showgauge: widget.model.gauge_type,)),);
+            //
+            //       },
+            //     )
+            //   ],
+            // )
           ],
         ),
       ),

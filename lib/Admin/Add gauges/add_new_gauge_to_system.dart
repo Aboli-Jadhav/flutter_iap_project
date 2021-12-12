@@ -9,9 +9,10 @@ import 'custom_dialog_box.dart';
 class AddNewGaugeToSystem extends StatefulWidget {
   final List<String> gauge_location;
   final List<String> gauge_name;
+  final List<String> gauge_location_owner;
 
   const AddNewGaugeToSystem(
-      {Key? key, required this.gauge_location, required this.gauge_name})
+      {Key? key, required this.gauge_location, required this.gauge_name, required this.gauge_location_owner})
       : super(key: key);
 
   @override
@@ -58,6 +59,12 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
   String currentText2 = "";
   var _selected_plant;
   List<String> _plants = ["BANJO", "NON BANJO"];
+
+  GlobalKey<AutoCompleteTextFieldState<String>> key3 = GlobalKey();
+  List<String> added3 = [];
+  String currentText3 = "";
+  var _suggestion3 = TextEditingController();
+
 
   Color backred = const Color(0xffDF3F3F);
   Color lred = const Color(0xffFBEBEB);
@@ -343,7 +350,7 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
                               width: 320,
                             ),
                             Text(
-                              "Gauge/Instrument Make",
+                              "Process Owner",
                               style: TextStyle(
                                   color: Colors.black, fontSize: 18),
                               textAlign: TextAlign.start,
@@ -352,7 +359,7 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
                               width: 210,
                             ),
                             Text(
-                              "Gauge Manufacturing Cost (INR)",
+                              "Process Owner Mail id",
                               style: TextStyle(
                                   color: Colors.black, fontSize: 18),
                               textAlign: TextAlign.start,
@@ -384,31 +391,45 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
                               width: 100,
                             ),
                             Container(
+                              color: Colors.white,
                               width: 300,
-                              height: 37.0,
-                              child: TextField(
-                                controller: gauge_make,
-                                decoration: const InputDecoration(
-                                  fillColor: Colors.white,
-                                  filled: true,
-                                  //labelText: "Instrument Make",
-                                  border: OutlineInputBorder(),
-                                ),
+                              height:37,
+                              child: SimpleAutoCompleteTextField(
+                                key: key3,
+                                controller: _suggestion3,
+                                clearOnSubmit: false,
+                                //suggestions: gauge_type,
+                                suggestions: widget.gauge_location_owner,
+                                style: const TextStyle(color: Colors.black, fontSize: 16.0),
+                                decoration: InputDecoration(
+                                    //hintText: "",
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(5.0),
+                                    )),
+                                textChanged: (text) {
+                                  currentText3 = text;
+
+                                },
+                                textSubmitted: (text) => setState(() {
+                                  if (text != "") {
+                                    changeProcessOwnerEmailId();
+                                    added3.add(text);
+                                  }
+                                }),
                               ),
                             ),
-                            const SizedBox(
-                              width: 100,
-                            ),
+
+                            const SizedBox(width: 100,),
                             Container(
                               width: 300,
                               height: 37.0,
                               child: TextField(
-                                controller: gauge_cost,
+                                controller: process_owner_mail_id,
                                 decoration: const InputDecoration(
+                                  //labelText: "Invoice Number",
                                   fillColor: Colors.white,
                                   filled: true,
-                                  //labelText: "Instrument Cost",
-                                  border: const OutlineInputBorder(),
+                                  border: OutlineInputBorder(),
                                 ),
                               ),
                             ),
@@ -694,7 +715,7 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: const[
                               Text(
-                                "Process Owner",
+                                "Gauge/Instrument Make",
                                 style:  TextStyle(
                                     color: Colors.black, fontSize: 18),
                                 textAlign: TextAlign.start,
@@ -703,7 +724,7 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
                                 width: 260,
                               ),
                               Text(
-                                "Process Owner Mail id",
+                                "Gauge Manufacturing Cost (INR)",
                                 style:  TextStyle(
                                     color: Colors.black, fontSize: 18),
                                 textAlign: TextAlign.start,
@@ -725,26 +746,28 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
                               width: 300,
                               height: 37.0,
                               child: TextField(
-                                controller: process_owner,
+                                controller: gauge_make,
                                 decoration: const InputDecoration(
-                                  //labelText: "Invoice Number",
                                   fillColor: Colors.white,
                                   filled: true,
+                                  //labelText: "Instrument Make",
                                   border: OutlineInputBorder(),
                                 ),
                               ),
                             ),
-                            const SizedBox(width: 100,),
+                            const SizedBox(
+                              width: 100,
+                            ),
                             Container(
                               width: 300,
                               height: 37.0,
                               child: TextField(
-                                controller: process_owner_mail_id,
+                                controller: gauge_cost,
                                 decoration: const InputDecoration(
-                                  //labelText: "Invoice Number",
                                   fillColor: Colors.white,
                                   filled: true,
-                                  border: OutlineInputBorder(),
+                                  //labelText: "Instrument Cost",
+                                  border: const OutlineInputBorder(),
                                 ),
                               ),
                             ),
@@ -856,5 +879,33 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
     }).then((value) =>
             print("add_ new_gauge_to_ system 858:data added successfully in last number document"))
     .catchError((onError)=>print("add_ new_gauge_to_ system 859: error while adding data to last number"));
+  }
+
+  void changeProcessOwnerEmailId() async{
+
+    String emailid='';
+    FirebaseFirestore firestore = await FirebaseFirestore.instance;
+    await firestore.collection("Chakan")
+        .doc("Attributes")
+        .collection("gauge location owner")
+         .where("name",isEqualTo: _suggestion3.text)
+        .get()
+        .then((QuerySnapshot querySnapshot){
+      if(querySnapshot.docs.isNotEmpty){
+        querySnapshot.docs.forEach((doc) {
+          //print(doc['email'].toString().trim());
+          emailid = doc['email'].toString().trim();
+          process_owner_mail_id.text = doc['email'].toString().trim();
+          //gauge_locations_owner.add(doc['name'].toString().trim());
+        });
+      }else{
+        print('Gauge location owner emailid: The Result is Empty');
+      }
+      setState(() {
+
+      });
+      print("Gauge location owner emailid: ${emailid} ");
+
+    });
   }
 }

@@ -23,11 +23,14 @@ class front_view_gauge extends StatefulWidget {
   _front_view_gaugeState createState() => _front_view_gaugeState();
 }
 
+var selected_plant;
+List<String> _plants = ["BANJO", "NON BANJO"];
+
 class _front_view_gaugeState extends State<front_view_gauge> {
   Color backred = Color(0xffDF3F3F);
   Color lred = Color(0xffFBEBEB);
   //String search_value='';
-  String selected_option='';
+  var selected_option;
 
 
   String final_selectedValue='';
@@ -248,8 +251,8 @@ class _front_view_gaugeState extends State<front_view_gauge> {
 
                     case 'PLANT': {
                       //statements;
-                      selected_option = plant.text;
-                      final_selectedValue='';
+                      selected_option = selected_plant;
+                      final_selectedValue='plant';
                     }
                     break;
 
@@ -284,14 +287,14 @@ class _front_view_gaugeState extends State<front_view_gauge> {
                   //   break;
                   // }
 
-                  Fluttertoast.showToast(
-                      msg: selected_option.toString(),
-                      toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.CENTER,
-                      timeInSecForIosWeb: 1,
-                      backgroundColor: Colors.red,
-                      textColor: Colors.white,
-                      fontSize: 16.0);
+                  // Fluttertoast.showToast(
+                  //     msg: selected_option.toString(),
+                  //     toastLength: Toast.LENGTH_SHORT,
+                  //     gravity: ToastGravity.CENTER,
+                  //     timeInSecForIosWeb: 1,
+                  //     backgroundColor: Colors.red,
+                  //     textColor: Colors.white,
+                  //     fontSize: 16.0);
 
                   type_of_gauge.clear();
                   wppl_gauge_id_no.clear();
@@ -304,10 +307,22 @@ class _front_view_gaugeState extends State<front_view_gauge> {
                   plant.clear();
 
 
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => view_master_gau(selectedValue:final_selectedValue, selected_option:selected_option)),
-                  );
+                  if(selected_option==null||selected_option==""){
+                    //TODO: Add dialog box instead of toast
+                    Fluttertoast.showToast(
+                        msg: "Please select a value",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.CENTER,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white,
+                        fontSize: 16.0);
+                  }else{
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => view_master_gau(selectedValue:final_selectedValue, selected_option:selected_option)),
+                    );
+                  }
 
                 },
               )
@@ -445,7 +460,7 @@ class _showWidgetsState extends State<showWidgets> {
                       child: TextField(
                         controller: widget.wppl_gauge_id_no,
                         decoration: const InputDecoration.collapsed(
-                          hintText: "WPPL gauge number",
+                          hintText: "",
                           //fillColor: Colors.white,
                         ),
                       ),
@@ -481,7 +496,7 @@ class _showWidgetsState extends State<showWidgets> {
                       child: TextField(
                         controller: widget.gauge_make,
                         decoration: InputDecoration.collapsed(
-                          hintText: "Gauge type",
+                          hintText: "",
                           //fillColor: Colors.white,
                         ),
                       ),
@@ -517,7 +532,7 @@ class _showWidgetsState extends State<showWidgets> {
                       child: TextField(
                         controller: widget.gauge_manufacturing_id_no,
                         decoration: InputDecoration.collapsed(
-                          hintText: "GAUGE/INSTRUMENT MANUFACTURING ID NO",
+                         hintText: "",
                           //fillColor: Colors.white,
                         ),
                       ),
@@ -676,23 +691,59 @@ class _showWidgetsState extends State<showWidgets> {
                     height: 10,
                   ),
                   Container(
-                    height: 50,
-                    width: 390,
+                    //height: 37.0,
+                    width: 0.3 * MediaQuery.of(context).size.width,
+                    padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
                     decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(5)
+                      color: Colors.white,
+                      border: Border.all(color: Colors.black54),
+                      borderRadius: BorderRadius.circular(5.0),
                     ),
-                    child: Center(
-                      child: TextField(
-                        controller: widget.plant,
-                        decoration: InputDecoration.collapsed(
-                          hintText: "Gauge type",
-                          //fillColor: Colors.white,
-                        ),
-                      ),
+                    child: DropdownButton(
+                      hint: const Text('Select Plant'),
+                      // Not necessary for Option 1
+                      value: selected_plant,
+                      onChanged: (newValue) {
+                        setState(() {
+                          selected_plant = newValue;
+
+                        });
+
+                        Fluttertoast.showToast(
+                            msg: selected_plant,
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white,
+                            fontSize: 16.0);
+                      },
+                      items: _plants.map((location) {
+                        return DropdownMenuItem(
+                          child: new Text(location),
+                          value: location,
+                        );
+                      }).toList(),
                     ),
-                  )
+                  ),
+                  // Container(
+                  //   height: 50,
+                  //   width: 390,
+                  //   decoration: BoxDecoration(
+                  //       border: Border.all(color: Colors.grey),
+                  //       color: Colors.white,
+                  //       borderRadius: BorderRadius.circular(5)
+                  //   ),
+                  //   child: Center(
+                  //     child: TextField(
+                  //       controller: widget.plant,
+                  //       decoration: InputDecoration.collapsed(
+                  //         hintText: "Gauge plant",
+                  //         //fillColor: Colors.white,
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               )
             // : SizedBox.shrink(),

@@ -21,6 +21,7 @@ class _Admin_PageState extends State<Admin_Page> {
   Color lred=Color(0xffFBEBEB);
   List<String> gauge_names=[];
   List<String> gauge_locations=[];
+  List<String> gauge_locations_owner=[];
 
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
@@ -33,6 +34,7 @@ class _Admin_PageState extends State<Admin_Page> {
     // TODO: implement initState
     fetchGaugeNames();
     fetchGaugeLocation();
+    fetchGaugeLocationOwner();
     super.initState();
 
   }
@@ -49,12 +51,34 @@ class _Admin_PageState extends State<Admin_Page> {
           gauge_locations.add(doc['name'].toString().trim());
         });
       }else{
-        print('The Result is Empty');
+        print('Gauge location list: The Result is Empty');
       }
       setState(() {
 
       });
-      print("Gauge Name list: $gauge_locations");
+      print("Gauge location list: $gauge_locations");
+
+    });
+  }
+
+  void fetchGaugeLocationOwner() async{
+    FirebaseFirestore firestore = await FirebaseFirestore.instance;
+    await firestore.collection("Chakan")
+        .doc("Attributes")
+        .collection("gauge location owner")
+        .get()
+        .then((QuerySnapshot querySnapshot){
+      if(querySnapshot.docs.isNotEmpty){
+        querySnapshot.docs.forEach((doc) {
+          gauge_locations_owner.add(doc['name'].toString().trim());
+        });
+      }else{
+        print('Gauge location owner list: The Result is Empty');
+      }
+      setState(() {
+
+      });
+      print("Gauge location owner list: $gauge_locations_owner");
 
     });
   }
@@ -71,7 +95,7 @@ class _Admin_PageState extends State<Admin_Page> {
           gauge_names.add(doc['name'].toString().trim());
         });
       }else{
-        print('The Result is Empty');
+        print('Gauge Name List: The Result is Empty');
       }
       setState(() {
 
@@ -100,7 +124,7 @@ class _Admin_PageState extends State<Admin_Page> {
           centerTitle: true,
         ),
 
-        body: admin_tab_head(gauge_name: gauge_names,gauge_location: gauge_locations,),
+        body: admin_tab_head(gauge_name: gauge_names,gauge_location: gauge_locations,gauge_location_owner: gauge_locations_owner,),
         //_widgetOptions[_selectedIndex],
         // bottomNavigationBar: BottomNavigationBar(
         //   backgroundColor: backred,

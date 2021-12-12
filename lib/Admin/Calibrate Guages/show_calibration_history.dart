@@ -143,22 +143,25 @@ class _view_master_gauState extends State<ShowCalibrationHistory> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Scaffold(
-          appBar: AppBar(
-            toolbarHeight: 50,
-            backgroundColor: backred,
-            title: Text(
-              "View Gauge Calibration History",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 30.0,
-                fontWeight: FontWeight.bold,
-              ),
+    return Scaffold(
+      backgroundColor: lred,
+        appBar: AppBar(
+          toolbarHeight: 50,
+          backgroundColor: backred,
+          title: Text(
+            "View Gauge Calibration History",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 30.0,
+              fontWeight: FontWeight.bold,
             ),
-            centerTitle: true,
           ),
-          body: Column(
+          centerTitle: true,
+        ),
+        body: Container(
+          //color: Colors.red,
+          width: MediaQuery.of(context).size.width,
+          child: Column(
             children: [
               const Padding(
                 padding: EdgeInsets.fromLTRB(50.0, 30, 50, 15),
@@ -169,31 +172,34 @@ class _view_master_gauState extends State<ShowCalibrationHistory> {
                     four: "Due Date",
                     five: "Location"),
               ),
-              Container(
-                height: 480,
-                //color: Colors.blueGrey,
-                child: show == 1
-                    ? Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 50.0, vertical: 30.0),
-                  child: ListView.builder(
-                    //shrinkWrap: true,
-                    itemCount: fetched_list.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return ExcelRow(
-                        // one:
-                        //     fetched_list[index].identification_number,
-                        // two: fetched_list[index].gauge_type,
-                        // three: fetched_list[index].nominal_size,
-                        // four:
-                        //     fetched_list[index].calibration_due_date,
-                        // five: fetched_list[index].gauge_location
-                        model: fetched_list[index],
-                      );
-                    },
+              Expanded(
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  //height: 480,
+                  //color: Colors.blueGrey,
+                  child: show == 1
+                      ? Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 50.0, vertical: 30.0),
+                    child: ListView.builder(
+                      //shrinkWrap: true,
+                      itemCount: fetched_list.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return ExcelRow(
+                          // one:
+                          //     fetched_list[index].identification_number,
+                          // two: fetched_list[index].gauge_type,
+                          // three: fetched_list[index].nominal_size,
+                          // four:
+                          //     fetched_list[index].calibration_due_date,
+                          // five: fetched_list[index].gauge_location
+                          model: fetched_list[index],
+                        );
+                      },
+                    ),
+                  ): show==2 ? Center(child: Text("No such data"),): Center(
+                    child: CircularProgressIndicator(),
                   ),
-                ): show==2 ? Center(child: Text("No such data"),): Center(
-                  child: CircularProgressIndicator(),
                 ),
               ),
               SizedBox(height: 20,),
@@ -201,9 +207,10 @@ class _view_master_gauState extends State<ShowCalibrationHistory> {
                 child:
                 ElevatedButton(child: Text('Export To Excel'), onPressed: show==2? null: createExcel, style: ElevatedButton.styleFrom(primary: Colors.red),),
               ),
+              SizedBox(height: 30,),
             ],
-          )),
-    );
+          ),
+        ));
   }
 
   doNotExport(){
@@ -311,58 +318,57 @@ class ExcelRowHeading extends StatelessWidget {
     double height = 35;
     Color color = Colors.black54;
 
-    return Material(
-        child: InkWell(
-          onTap: () => print('whole row clicked'),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // const SizedBox(
-              //   width: 50.0,
-              // ),
-              Expanded(
-                child: Center(
-                  child: Text(
-                    one,
-                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18.0),
-                  ),
-                ),
+    return Container(
+      height: 50,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          // const SizedBox(
+          //   width: 50.0,
+          // ),
+          Expanded(
+            child: Center(
+              child: Text(
+                one,
+                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18.0),
               ),
-              Expanded(
-                child: Center(
-                    child: Text(
-                      two,
-                      style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18.0),
-                    )),
-              ),
-              Expanded(
-                child: Center(
-                    child: Text(
-                      three,
-                      style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18.0),
-                    )),
-              ),
-              Expanded(
-                child: Center(
-                    child: Text(
-                      four,
-                      style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18.0),
-                    )),
-              ),
-              Expanded(
-                child: Center(
-                    child: Text(
-                      five,
-                      style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18.0),
-                    )),
-              ),
-
-              // const SizedBox(
-              //   width: 50.0,
-              // ),
-            ],
+            ),
           ),
-        ));
+          Expanded(
+            child: Center(
+                child: Text(
+                  two,
+                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18.0),
+                )),
+          ),
+          Expanded(
+            child: Center(
+                child: Text(
+                  three,
+                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18.0),
+                )),
+          ),
+          Expanded(
+            child: Center(
+                child: Text(
+                  four,
+                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18.0),
+                )),
+          ),
+          Expanded(
+            child: Center(
+                child: Text(
+                  five,
+                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18.0),
+                )),
+          ),
+
+          // const SizedBox(
+          //   width: 50.0,
+          // ),
+        ],
+      ),
+    );
   }
 }
 

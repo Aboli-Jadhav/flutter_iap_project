@@ -1,3 +1,4 @@
+import 'package:autocomplete_textfield_ns/autocomplete_textfield_ns.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
@@ -7,7 +8,8 @@ import 'package:flutter_iap_project/Authentication/ui/input_field.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AddViewer extends StatefulWidget {
-  const AddViewer({Key? key}) : super(key: key);
+  final List<String> gauge_location;
+  const AddViewer({Key? key, required this.gauge_location}) : super(key: key);
 
   // Changes remaining
 
@@ -24,6 +26,11 @@ class _AddViewerState extends State<AddViewer> {
 
   Color backred=Color(0xffDF3F3F);
   Color lred=Color(0xffFBEBEB);
+
+  final _suggestion = TextEditingController();
+  GlobalKey<AutoCompleteTextFieldState<String>> key = GlobalKey();
+  List<String> added = [];
+  String currentText = "";
 
   @override
   Widget build(BuildContext context) {
@@ -84,17 +91,43 @@ class _AddViewerState extends State<AddViewer> {
 
                     SizedBox(height: 17,),
                     Container(
+                      color: Colors.white,
                       width: 0.3 * MediaQuery.of(context).size.width,
-                      height:50.0,
-                      child: TextField(
-                        controller: location6,
+                      child: SimpleAutoCompleteTextField(
+                        key: key,
+                        controller: _suggestion,
+                        clearOnSubmit: false,
+                        //suggestions: gauge_type,
+                        suggestions: widget.gauge_location,
+                        style: const TextStyle(color: Colors.black, fontSize: 16.0),
                         decoration: InputDecoration(
-                          labelText: ("Location"),
-                          hintText:  ("Enter the Location of the Viewer"),
-                          border: OutlineInputBorder(),
-                        ),
+                          hintText: "Enter Location",
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5.0),
+                            )),
+                        textChanged: (text) {
+                          currentText = text;
+
+                        },
+                        textSubmitted: (text) => setState(() {
+                          if (text != "") {
+                            added.add(text);
+                          }
+                        }),
                       ),
                     ),
+                    // Container(
+                    //   width: 0.3 * MediaQuery.of(context).size.width,
+                    //   height:50.0,
+                    //   child: TextField(
+                    //     controller: location6,
+                    //     decoration: InputDecoration(
+                    //       labelText: ("Location"),
+                    //       hintText:  ("Enter the Location of the Viewer"),
+                    //       border: OutlineInputBorder(),
+                    //     ),
+                    //   ),
+                    // ),
 
                     SizedBox(height: 17,),
 

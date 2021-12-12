@@ -13,9 +13,10 @@ class admin_tab_head extends StatefulWidget{
 
    List<String> gauge_name=[];
    List<String> gauge_location=[];
+   List<String> gauge_location_owner=[];
 
 
-  admin_tab_head({required this.gauge_name,required this.gauge_location});
+  admin_tab_head({required this.gauge_name,required this.gauge_location,required this.gauge_location_owner});
 
   _admin_tab_headState  createState() =>  _admin_tab_headState();
 }
@@ -99,9 +100,9 @@ class _admin_tab_headState extends State<admin_tab_head>{
       body: TabBarView(
         physics: NeverScrollableScrollPhysics(),
         children: [
-          AddViewer(),
+          AddViewer(gauge_location: widget.gauge_location),
           front_view_gauge(gauge_name: widget.gauge_name,gauge_location: widget.gauge_location,),
-          front_add_gauge(gauge_name:widget.gauge_name,gauge_location:widget.gauge_location),
+          front_add_gauge(gauge_name:widget.gauge_name,gauge_location:widget.gauge_location,gauge_location_owner: widget.gauge_location_owner,),
           gauge_calibrate_search(gauge_name:widget.gauge_name),
           //search_gauge(),
           Manage_Scrap(gauge_name: widget.gauge_name,),
