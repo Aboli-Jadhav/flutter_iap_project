@@ -258,7 +258,7 @@ class _AddToScrapState extends State<AddToScrap> {
                         ),
                         Container(
                           width: 0.3 * MediaQuery.of(context).size.width,
-                          height:40.0,
+
                           child: TextField(decoration: InputDecoration(
                             enabled: widget.gauge_name_from_showgauge!=''? false: true,
                             hintText: "Enter Manufacture Serial number",
@@ -333,7 +333,7 @@ class _AddToScrapState extends State<AddToScrap> {
                           ),),
                         Container(
                           width: 0.3 * MediaQuery.of(context).size.width,
-                          height:40.0,
+
                           child: TextField(
                             decoration: InputDecoration(
                               enabled: widget.gauge_name_from_showgauge!=''? false: true,
@@ -366,7 +366,7 @@ class _AddToScrapState extends State<AddToScrap> {
                           ),),
                         Container(
                           width: 0.3 * MediaQuery.of(context).size.width,
-                          height:40.0,
+
                           child: TextField(
                             enabled: widget.gauge_name_from_showgauge!=''? false: true,
                             decoration: InputDecoration(
@@ -394,7 +394,7 @@ class _AddToScrapState extends State<AddToScrap> {
 
                         Container(
                           width: 0.3 * MediaQuery.of(context).size.width,
-                          height:40.0,
+
                           child: TextField(
                             decoration: InputDecoration(
                               labelText: ("Reason"),
@@ -421,7 +421,7 @@ class _AddToScrapState extends State<AddToScrap> {
 
                         Container(
                           width: 0.3 * MediaQuery.of(context).size.width,
-                          height:40.0,
+
                           child: TextField(
                             decoration: InputDecoration(
                               labelText: ("Resposible Person"),
@@ -454,7 +454,7 @@ class _AddToScrapState extends State<AddToScrap> {
 
                         Container(
                           width: 0.3 * MediaQuery.of(context).size.width,
-                          height:40.0,
+
                           child: TextField(
                             decoration: InputDecoration(
                               labelText: ("Scrap Note ID No"),
