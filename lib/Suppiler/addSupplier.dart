@@ -483,9 +483,9 @@ class _AddSupplierState extends State<AddSupplier> {
                               children: const
                               [
                                 Text("Supplier Agency Name",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
-                                SizedBox(width: 200,),
+                                SizedBox(width: 220,),
                                 Text("Supplier Type",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
-                                SizedBox(width: 200,),
+                                SizedBox(width: 290,),
                                 Text("Supplier Address",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
                               ]),
                           const SizedBox(
@@ -498,7 +498,6 @@ class _AddSupplierState extends State<AddSupplier> {
                               [
                                 Container(
                                   width: 300,
-                                  height:37.0,
                                   child: TextField(
                                     enabled: true,
                                     controller: sup_nm,
@@ -545,7 +544,6 @@ class _AddSupplierState extends State<AddSupplier> {
                                 SizedBox(width: 100,),
                                 Container(
                                   width: 300,
-                                  height:37.0,
                                   child: TextField(
                                     enabled: true,
                                     controller:sup_address ,
@@ -559,15 +557,15 @@ class _AddSupplierState extends State<AddSupplier> {
                                 ),
                               ]
                           ),
-
+                          SizedBox(height: 20,),
                           Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: const
                               [
                                 Text("Supplier Code",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
-                                SizedBox(width: 200,),
+                                SizedBox(width: 290,),
                                 Text("Supplier Contact Person Name",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
-                                SizedBox(width: 200,),
+                                SizedBox(width: 180,),
                                 Text("Contact Person Email",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
                               ]),
                           const SizedBox(
@@ -580,7 +578,6 @@ class _AddSupplierState extends State<AddSupplier> {
                               [
                                 Container(
                                   width: 300,
-                                  height:37.0,
                                   child: TextField(
                                     enabled: true,
                                     controller: sup_code,
@@ -595,7 +592,6 @@ class _AddSupplierState extends State<AddSupplier> {
                                 SizedBox(width: 100,),
                                 Container(
                                   width: 300,
-                                  height:37.0,
                                   child: TextField(
                                     enabled: true,
                                     controller: contact_nm,
@@ -610,7 +606,6 @@ class _AddSupplierState extends State<AddSupplier> {
                                 SizedBox(width: 100,),
                                 Container(
                                   width: 300,
-                                  height:37.0,
                                   child: TextField(
                                     enabled: true,
                                     controller: contact_mail,
@@ -624,6 +619,7 @@ class _AddSupplierState extends State<AddSupplier> {
                                 ),
                               ]
                           ),
+                          SizedBox(height: 20,),
                           Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: const
@@ -641,7 +637,6 @@ class _AddSupplierState extends State<AddSupplier> {
                               [
                                 Container(
                                   width: 300,
-                                  height:37.0,
                                   child: TextField(
                                     enabled: true,
                                     controller: contact_mob,
@@ -656,14 +651,15 @@ class _AddSupplierState extends State<AddSupplier> {
 
                               ]
                           ),
+                          SizedBox(height: 20,),
                           Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: const
                               [
-                                Text("NABL Certificate NUmber",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
+                                Text("NABL Certificate Number",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
                                 SizedBox(width: 200,),
                                 Text("NABL Certificate Date",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
-                                SizedBox(width: 200,),
+                                SizedBox(width: 230,),
                                 Text("NABL Certificate Due Date",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
                               ]),
                           const SizedBox(
@@ -678,7 +674,6 @@ class _AddSupplierState extends State<AddSupplier> {
                               [
                                 Container(
                                   width: 300,
-                                  height:37.0,
                                   child: TextField(
                                     enabled: true,
                                     controller: nabl_cer_no,
@@ -697,7 +692,7 @@ class _AddSupplierState extends State<AddSupplier> {
 
                               ]
                           ),
-                          SizedBox(height: 30,),
+                          SizedBox(height: 20,),
 
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -730,7 +725,7 @@ class _AddSupplierState extends State<AddSupplier> {
 
                             ],
                           ),
-                          SizedBox(height: 30,),
+                          SizedBox(height: 20,),
 
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -758,7 +753,7 @@ class _AddSupplierState extends State<AddSupplier> {
                             ],
 
                           ),
-                          SizedBox(height: 30,),
+                          SizedBox(height: 20,),
 
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,

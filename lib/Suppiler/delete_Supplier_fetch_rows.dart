@@ -360,7 +360,6 @@ class _delete_Supplier_RowsState extends State<delete_Supplier_Rows> {
               SizedBox(width:20),
               Container(
                 width: 300,
-                height: 37,
                 child: SimpleAutoCompleteTextField(
                   key: key2,
                   controller: _suggestion2,
@@ -386,7 +385,6 @@ class _delete_Supplier_RowsState extends State<delete_Supplier_Rows> {
               SizedBox(width:20),
               Container(
                 width: 300,
-                height: 37,
                 child: SimpleAutoCompleteTextField(
                   key: key3,
                   controller: _suggestion3,

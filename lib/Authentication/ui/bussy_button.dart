@@ -30,22 +30,18 @@ class _BusyButtonState extends State<BusyButton> {
         onPressed:  widget.onPressed,
         child: AnimatedContainer(
 
-          height: widget.busy ? 40 : null,
-          width: widget.busy ? 100 : null,
+          height: 40 ,
+          width: 100,
           duration: const Duration(milliseconds: 300),
           alignment: Alignment.center,
           padding: EdgeInsets.symmetric(
-              horizontal: widget.busy ? 3 : 7,
-              vertical: widget.busy ? 5 : 5),
+              horizontal: 3,
+              vertical: 5),
 
-          child: !widget.busy
-              ? Text(
+          child: Text(
             widget.title,
             style: TextStyle(fontWeight: FontWeight.w700, color: Colors.white),
           )
-              : CircularProgressIndicator(
-              strokeWidth: 2,
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.white)),
         ),
       ),
     );
