@@ -14,6 +14,7 @@ class LoginViewModel extends BaseModel {
   final NavigationService _navigationService = locator<NavigationService>();
 
   Future login({
+    required BuildContext c,
     required int r,
     required String email,
     required String password,
@@ -33,20 +34,51 @@ class LoginViewModel extends BaseModel {
         _navigationService.navigateTo(r);
 
       } else {
-        Fluttertoast.showToast(
-            msg: "Login Failure",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1
-        );
+        Widget okButton = TextButton(
+            child: Text("OK"),
+            onPressed: () { Navigator.pop(c) ;},
+          );
+
+          // set up the AlertDialog
+          AlertDialog alert = AlertDialog(
+            title: Text("Error"),
+            content: Text("Not Able To Connect"),
+            actions: [
+              okButton,
+            ],
+          );
+
+          // show the dialog
+          showDialog(
+            context: c,
+            builder: (BuildContext context) {
+              return alert;
+            },
+          );
+
 
       }
     } else {
-      Fluttertoast.showToast(
-          msg: "Wrong Credentials Please Try Again",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1
+      Widget okButton = TextButton(
+        child: Text("OK"),
+        onPressed: () {Navigator.pop(c) ; },
+      );
+
+      // set up the AlertDialog
+      AlertDialog alert = AlertDialog(
+        title: Text("Failed"),
+        content: Text("Wrong Credentials"),
+        actions: [
+          okButton,
+        ],
+      );
+
+      // show the dialog
+      showDialog(
+        context: c,
+        builder: (BuildContext context) {
+          return alert;
+        },
       );
     }
   }

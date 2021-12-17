@@ -74,6 +74,7 @@ class _master_adminLoginState extends State<master_adminLogin> {
                         busy: model.busy,
                         onPressed: () {
                           model.login(
+                            c: context,
                             r: 1,
                             email: emailController3.text,
                             password: passwordController3.text,

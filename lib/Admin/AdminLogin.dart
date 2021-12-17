@@ -81,6 +81,7 @@ class _AdminLogin extends State<AdminLogin>{
                    if(value.docs.isNotEmpty){
                      print("He is a Viewer");
                      model.login(
+                       c: context,
                        r: 2,
                        email: emailController.text,
                        password: passwordController.text,
@@ -90,12 +91,30 @@ class _AdminLogin extends State<AdminLogin>{
                      print("He is not a Viewer");
                      //this.f = false;
 
-                     Fluttertoast.showToast(
-                         msg: "Wrong Credentials Please Try Again",
-                         toastLength: Toast.LENGTH_SHORT,
-                         gravity: ToastGravity.CENTER,
-                         timeInSecForIosWeb: 1
+
+                       // set up the button
+                     Widget okButton = TextButton(
+                       child: Text("OK"),
+                       onPressed: () {Navigator.pop(context) ; },
                      );
+
+                     // set up the AlertDialog
+                     AlertDialog alert = AlertDialog(
+                       title: Text("Failed"),
+                       content: Text("Wrong Credentials"),
+                       actions: [
+                         okButton,
+                       ],
+                     );
+
+                     // show the dialog
+                     showDialog(
+                       context: context,
+                       builder: (BuildContext context) {
+                         return alert;
+                       },
+                     );
+
                    }
                  })
                  .catchError((error) => print("Firebase Error"));

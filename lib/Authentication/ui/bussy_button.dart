@@ -30,18 +30,18 @@ class _BusyButtonState extends State<BusyButton> {
         onPressed:  widget.onPressed,
         child: AnimatedContainer(
 
-          height: 40 ,
-          width: 100,
-          duration: const Duration(milliseconds: 300),
-          alignment: Alignment.center,
-          padding: EdgeInsets.symmetric(
-              horizontal: 3,
-              vertical: 5),
+            height: 40 ,
+            width: 100,
+            duration: const Duration(milliseconds: 300),
+            alignment: Alignment.center,
+            padding: EdgeInsets.symmetric(
+                horizontal: 3,
+                vertical: 5),
 
-          child: Text(
-            widget.title,
-            style: TextStyle(fontWeight: FontWeight.w700, color: Colors.white),
-          )
+            child: Text(
+              widget.title,
+              style: TextStyle(fontWeight: FontWeight.w700, color: Colors.white),
+            )
         ),
       ),
     );

@@ -90,6 +90,7 @@ class _Viewerlogin extends State<ViewerLogin>{
 
                         if(value.docs.isNotEmpty){
                           model.login(
+                            c: context,
                             r: 3,
                             email: emailController2.text,
                             password: passwordController2.text,
