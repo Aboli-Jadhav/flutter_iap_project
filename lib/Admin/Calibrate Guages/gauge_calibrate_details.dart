@@ -227,6 +227,7 @@ class _gauge_search_calibrate extends State<gauge_calibrate_search> {
             ),
             onPressed: () {
               if (a.text.isEmpty) {
+                //TODO: Add dialog box here
                 Fluttertoast.showToast(
                     msg: "Please Enter Wppl Gauge Number",
                     toastLength: Toast.LENGTH_SHORT,
@@ -265,6 +266,7 @@ class _gauge_search_calibrate extends State<gauge_calibrate_search> {
             ),
             onPressed: () {
               if (a.text.isEmpty) {
+                //TODO: Add dialog box here
                 Fluttertoast.showToast(
                     msg: "Please Enter Wppl Gauge Number",
                     toastLength: Toast.LENGTH_SHORT,
@@ -295,6 +297,7 @@ class _gauge_search_calibrate extends State<gauge_calibrate_search> {
           ElevatedButton(
             onPressed: () {
               if (a.text.isEmpty) {
+                //TODO: Add dialog box here
                 Fluttertoast.showToast(
                     msg: "Please Enter Wppl Gauge Number",
                     toastLength: Toast.LENGTH_SHORT,

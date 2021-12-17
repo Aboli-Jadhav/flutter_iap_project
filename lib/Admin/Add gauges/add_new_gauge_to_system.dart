@@ -87,7 +87,7 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
           toolbarHeight: 50,
           backgroundColor: backred,
           title: const Text(
-            "Add Gauge",
+            "Add New Gauge to System",
             style: TextStyle(
               color: Colors.white,
               fontSize: 30.0,
@@ -798,6 +798,9 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
                 ElevatedButton(
                   child: const Text("ADD DATA"),
                   onPressed: () async {
+                    // if(){
+                    //
+                    // }
                     await addData();
                     Navigator.of(context).pop();
                     showDialog(
@@ -832,7 +835,7 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
         .collection("All gauges")
         .add({
       'item_code': item_code.text.toString(),
-      'gauge_type': widget.gauge_name,
+      'gauge_type': _suggestion2.text.toString().trim(),
       'identification_number': identification_number.text.toString(),
       'manufacturer_serial_number': manufacturer_serial_number.text.toString(),
       'nominal_size': nominal_size.text.toString(),

@@ -307,7 +307,7 @@ class _front_view_gaugeState extends State<front_view_gauge> {
                   plant.clear();
 
 
-                  if(selected_option==null||selected_option==""){
+                  if(selected_option==null||selected_option==""||_selected_gauges==null||_selected_gauges==""){
                     //TODO: Add dialog box instead of toast
                     Fluttertoast.showToast(
                         msg: "Please select a value",

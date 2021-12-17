@@ -173,10 +173,24 @@ class _front_add_gaugeState extends State<front_add_gauge> {
                     //_gauges.clear();
 
                     //await () {
+                    if(_suggestion.text==""||_suggestion.text==null){
+                      //TODO: Add dialog box here
+                      Fluttertoast.showToast(
+                          msg: "Please select gauge type",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.CENTER,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Colors.red,
+                          textColor: Colors.white,
+                          fontSize: 16.0);
+                      return;
+                    }
                       if (_visible) {
                         if (_selected_gauges == null) {
+                          print("please select model ");
                           return;
                         }
+
                         print("gauename: ${_suggestion
                             .text}, modelname: ${_selected_gauges.toString()}");
                         Navigator.push(
