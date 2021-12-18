@@ -11,7 +11,7 @@ class NavigationService {
 
   Future<dynamic> navigateTo(int r, {dynamic arguments}) {
     if(r==2)
-    return _navigationKey.currentState!.pushNamed('/adminpage', arguments: arguments);
+      return _navigationKey.currentState!.pushNamed('/adminpage', arguments: arguments);
     else if(r==1)
       return _navigationKey.currentState!.pushNamed('/master_adminHome', arguments: arguments);
     else

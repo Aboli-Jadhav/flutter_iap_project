@@ -39,91 +39,95 @@ class _AdminLogin extends State<AdminLogin>{
           ),
           centerTitle: true,
         ),
-     body:Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-       children: [
-           Center(
-             child: Image.asset("assets/logo.png",scale: 1.5,),
-           ),
-         SizedBox(height: 30,),
-         Text("  Admin   " ,
-           style: TextStyle(
-             fontSize: 25.0,
-             //fontWeight: FontWeight.bold,
-           ),
-         ),
-         SizedBox(height: 30,),
-         InputField(
-           placeholder: 'Email',
-           controller: emailController,
-         ),
-      SizedBox(height: 10.0),
-         InputField(
-           placeholder: 'Password',
-           password: true,
-           controller: passwordController,
-         ),
-         SizedBox(height: 5.0),
-
-             BusyButton(
-               title: 'Login',
-               busy: model.busy,
-               onPressed:  () async {
-                 FirebaseFirestore.instance
-                     .collection('Chakan')
-                     .doc("Admin_User")
-                     .collection("All_AdminUser")
-                     .where('Email',isEqualTo: emailController.text)
-                     .get()
-                     .then((value) async {
-
-                   if(value.docs.isNotEmpty){
-                     print("He is a Viewer");
-                     model.login(
-                       c: context,
-                       r: 2,
-                       email: emailController.text,
-                       password: passwordController.text,
-                     );
-                     //this.f = true;
-                   }else{
-                     print("He is not a Viewer");
-                     //this.f = false;
-
-
-                       // set up the button
-                     Widget okButton = TextButton(
-                       child: Text("OK"),
-                       onPressed: () {Navigator.pop(context) ; },
-                     );
-
-                     // set up the AlertDialog
-                     AlertDialog alert = AlertDialog(
-                       title: Text("Failed"),
-                       content: Text("Wrong Credentials"),
-                       actions: [
-                         okButton,
-                       ],
-                     );
-
-                     // show the dialog
-                     showDialog(
-                       context: context,
-                       builder: (BuildContext context) {
-                         return alert;
-                       },
-                     );
-
-                   }
-                 })
-                 .catchError((error) => print("Firebase Error"));
-
-
-               },
+     body:ListView(
+       children: <Widget>[
+         Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+           children: [
+               Center(
+                 child: Image.asset("assets/logo.png",scale: 1.5,),
+               ),
+             SizedBox(height: 30,),
+             Text("  Admin   " ,
+               style: TextStyle(
+                 fontSize: 25.0,
+                 //fontWeight: FontWeight.bold,
+               ),
              ),
+             SizedBox(height: 30,),
+             InputField(
+               placeholder: 'Email',
+               controller: emailController,
+             ),
+          SizedBox(height: 10.0),
+             InputField(
+               placeholder: 'Password',
+               password: true,
+               controller: passwordController,
+             ),
+             SizedBox(height: 5.0),
+
+                 BusyButton(
+                   title: 'Login',
+                   busy: model.busy,
+                   onPressed:  () async {
+                     FirebaseFirestore.instance
+                         .collection('Chakan')
+                         .doc("Admin_User")
+                         .collection("All_AdminUser")
+                         .where('Email',isEqualTo: emailController.text)
+                         .get()
+                         .then((value) async {
+
+                       if(value.docs.isNotEmpty){
+                         print("He is a Viewer");
+                         model.login(
+                           c: context,
+                           r: 2,
+                           email: emailController.text,
+                           password: passwordController.text,
+                         );
+                         //this.f = true;
+                       }else{
+                         print("He is not a Viewer");
+                         //this.f = false;
 
 
+                           // set up the button
+                         Widget okButton = TextButton(
+                           child: Text("OK"),
+                           onPressed: () {Navigator.pop(context) ; },
+                         );
+
+                         // set up the AlertDialog
+                         AlertDialog alert = AlertDialog(
+                           title: Text("Failed"),
+                           content: Text("Wrong Credentials"),
+                           actions: [
+                             okButton,
+                           ],
+                         );
+
+                         // show the dialog
+                         showDialog(
+                           context: context,
+                           builder: (BuildContext context) {
+                             return alert;
+                           },
+                         );
+
+                       }
+                     })
+                     .catchError((error) => print("Firebase Error"));
+
+
+                   },
+                 ),
+
+
+           ],
+         ),
        ],
      ) ,
 

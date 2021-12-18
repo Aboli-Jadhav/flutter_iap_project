@@ -309,14 +309,28 @@ class _front_view_gaugeState extends State<front_view_gauge> {
 
                   if(selected_option==null||selected_option==""||_selected_gauges==null||_selected_gauges==""){
                     //TODO: Add dialog box instead of toast
-                    Fluttertoast.showToast(
-                        msg: "Please select a value",
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.CENTER,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.red,
-                        textColor: Colors.white,
-                        fontSize: 16.0);
+                    Widget okButton = TextButton(
+                      child: Text("OK"),
+                      onPressed: () { Navigator.pop(context);},
+                    );
+
+                    // set up the AlertDialog
+                    AlertDialog alert = AlertDialog(
+                      title: Text("Warning"),
+                      content: Text("Please select a value"),
+                      actions: [
+                        okButton,
+                      ],
+                    );
+
+                    // show the dialog
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return alert;
+                      },
+                    );
+
                   }else{
                     Navigator.push(
                       context,

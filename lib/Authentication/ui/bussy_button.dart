@@ -31,17 +31,21 @@ class _BusyButtonState extends State<BusyButton> {
         child: AnimatedContainer(
 
             height: 40 ,
-            width: 100,
+            width: 100 ,
             duration: const Duration(milliseconds: 300),
             alignment: Alignment.center,
             padding: EdgeInsets.symmetric(
-                horizontal: 3,
-                vertical: 5),
+                horizontal: widget.busy ? 3 : 7,
+                vertical: widget.busy ? 5 : 5),
 
-            child: Text(
-              widget.title,
-              style: TextStyle(fontWeight: FontWeight.w700, color: Colors.white),
-            )
+          child: !widget.busy
+              ? Text(
+                widget.title,
+                style: TextStyle(fontWeight: FontWeight.w700, color: Colors.white),
+              )
+                  : CircularProgressIndicator(
+              strokeWidth: 2,
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.white)),
         ),
       ),
     );

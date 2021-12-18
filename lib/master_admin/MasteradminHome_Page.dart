@@ -16,14 +16,16 @@ class _master_adminHome_PageState extends State<master_adminHome_Page> {
   Color lred=Color(0xffFBEBEB);
   List<String> gauge_names=[];
   List<String> gauge_locations=[];
-
+  bool isLoading = true;
   @override
   void initState() {
     // TODO: implement initState
     fetchGaugeNames();
     fetchGaugeLocation();
     super.initState();
-
+    setState(() {
+      isLoading = false;
+    });
   }
 
   void fetchGaugeLocation() async{
@@ -89,7 +91,7 @@ class _master_adminHome_PageState extends State<master_adminHome_Page> {
           centerTitle: true,
         ),
 
-        body:
+        body: isLoading ? Center(child: CircularProgressIndicator()) :
         tab_head(gauge_name: gauge_names,gauge_location: gauge_locations,),
       ),
     );

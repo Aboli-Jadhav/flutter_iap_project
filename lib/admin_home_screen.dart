@@ -28,7 +28,7 @@ class _Admin_PageState extends State<Admin_Page> {
     home_p(),
     profile_ad()
   ];
-
+  bool isLoading = true;
   @override
   void initState() {
     // TODO: implement initState
@@ -36,7 +36,9 @@ class _Admin_PageState extends State<Admin_Page> {
     fetchGaugeLocation();
     fetchGaugeLocationOwner();
     super.initState();
-
+    setState(() {
+      isLoading = false;
+    });
   }
 
   void fetchGaugeLocation() async{
@@ -124,7 +126,7 @@ class _Admin_PageState extends State<Admin_Page> {
           centerTitle: true,
         ),
 
-        body: admin_tab_head(gauge_name: gauge_names,gauge_location: gauge_locations,gauge_location_owner: gauge_locations_owner,),
+        body: isLoading ? Center(child: CircularProgressIndicator()) : admin_tab_head(gauge_name: gauge_names,gauge_location: gauge_locations,gauge_location_owner: gauge_locations_owner,),
         //_widgetOptions[_selectedIndex],
         // bottomNavigationBar: BottomNavigationBar(
         //   backgroundColor: backred,

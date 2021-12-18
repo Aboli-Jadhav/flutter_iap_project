@@ -175,14 +175,27 @@ class _front_add_gaugeState extends State<front_add_gauge> {
                     //await () {
                     if(_suggestion.text==""||_suggestion.text==null){
                       //TODO: Add dialog box here
-                      Fluttertoast.showToast(
-                          msg: "Please select gauge type",
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.CENTER,
-                          timeInSecForIosWeb: 1,
-                          backgroundColor: Colors.red,
-                          textColor: Colors.white,
-                          fontSize: 16.0);
+                      Widget okButton = TextButton(
+                        child: Text("OK"),
+                        onPressed: () { Navigator.pop(context);},
+                      );
+
+                      // set up the AlertDialog
+                      AlertDialog alert = AlertDialog(
+                        title: Text("Warning"),
+                        content: Text("Please Select The Gauge Type"),
+                        actions: [
+                          okButton,
+                        ],
+                      );
+
+                      // show the dialog
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return alert;
+                        },
+                      );
                       return;
                     }
                       if (_visible) {

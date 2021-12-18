@@ -228,14 +228,27 @@ class _gauge_search_calibrate extends State<gauge_calibrate_search> {
             onPressed: () {
               if (a.text.isEmpty) {
                 //TODO: Add dialog box here
-                Fluttertoast.showToast(
-                    msg: "Please Enter Wppl Gauge Number",
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.CENTER,
-                    timeInSecForIosWeb: 1,
-                    backgroundColor: Colors.red,
-                    textColor: Colors.white,
-                    fontSize: 16.0);
+                Widget okButton = TextButton(
+                  child: Text("OK"),
+                  onPressed: () { Navigator.pop(context);},
+                );
+
+                // set up the AlertDialog
+                AlertDialog alert = AlertDialog(
+                  title: Text("Warning"),
+                  content: Text("Please Enter Wppl Gauge Number"),
+                  actions: [
+                    okButton,
+                  ],
+                );
+
+                // show the dialog
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return alert;
+                  },
+                );
                 // Timer(
                 //   const Duration(milliseconds: 2000),
                 //     (){
@@ -267,14 +280,27 @@ class _gauge_search_calibrate extends State<gauge_calibrate_search> {
             onPressed: () {
               if (a.text.isEmpty) {
                 //TODO: Add dialog box here
-                Fluttertoast.showToast(
-                    msg: "Please Enter Wppl Gauge Number",
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.CENTER,
-                    timeInSecForIosWeb: 1,
-                    backgroundColor: Colors.red,
-                    textColor: Colors.white,
-                    fontSize: 16.0);
+                Widget okButton = TextButton(
+                  child: Text("OK"),
+                  onPressed: () { Navigator.pop(context);},
+                );
+
+                // set up the AlertDialog
+                AlertDialog alert = AlertDialog(
+                  title: Text("Warning"),
+                  content: Text("Please Enter Wppl Gauge Number"),
+                  actions: [
+                    okButton,
+                  ],
+                );
+
+                // show the dialog
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return alert;
+                  },
+                );
                 return;
               } else {
                 Navigator.push(
@@ -298,14 +324,27 @@ class _gauge_search_calibrate extends State<gauge_calibrate_search> {
             onPressed: () {
               if (a.text.isEmpty) {
                 //TODO: Add dialog box here
-                Fluttertoast.showToast(
-                    msg: "Please Enter Wppl Gauge Number",
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.CENTER,
-                    timeInSecForIosWeb: 1,
-                    backgroundColor: Colors.red,
-                    textColor: Colors.white,
-                    fontSize: 16.0);
+                Widget okButton = TextButton(
+                  child: Text("OK"),
+                  onPressed: () { Navigator.pop(context);},
+                );
+
+                // set up the AlertDialog
+                AlertDialog alert = AlertDialog(
+                  title: Text("Warning"),
+                  content: Text("Please Enter Wppl Gauge Number"),
+                  actions: [
+                    okButton,
+                  ],
+                );
+
+                // show the dialog
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return alert;
+                  },
+                );
                 return;
               } else {
                 Navigator.push(
