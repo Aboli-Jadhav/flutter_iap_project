@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'master_admin/MasteradminLogin.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LoginOptionScrn extends StatefulWidget {
   const LoginOptionScrn({Key? key}) : super(key: key);
@@ -11,6 +12,37 @@ class LoginOptionScrn extends StatefulWidget {
 class _LoginOptionScrnState extends State<LoginOptionScrn> {
   Color backred=Color(0xffDF3F3F);
   Color lred=Color(0xffFBEBEB);
+
+  // void VerifyUploadedData()
+  // {
+  //   var count=0;
+  //   FirebaseFirestore.instance.collection("Chakan")
+  //       .doc("Gauge wppl next no")
+  //       .collection("all numbers")
+  //       .get()
+  //       .then((value)
+  //   {
+  //     value.docs.forEach((element)
+  //     {
+  //       if(element.data()["model_sf"]=="")
+  //       {
+  //         print("\nPaddle := \t"+element.id+"\t"+element.data().toString());
+  //
+  //       }
+  //       count++;
+  //     });
+  //     print("COUNT ="+count.toString());
+  //   });
+  //
+  // }
+
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   VerifyUploadedData();
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
