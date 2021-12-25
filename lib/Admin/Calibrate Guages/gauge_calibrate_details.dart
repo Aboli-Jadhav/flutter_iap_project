@@ -101,6 +101,7 @@ class _gauge_search_calibrate extends State<gauge_calibrate_search> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: lred,
       // appBar: AppBar(
       //    toolbarHeight: 60.0,
       //        backgroundColor: backred,
@@ -133,6 +134,7 @@ class _gauge_search_calibrate extends State<gauge_calibrate_search> {
           Container(
             width: 0.3 * MediaQuery.of(context).size.width,
             height: 50.0,
+            color: Colors.white,
             child: TextField(
               controller: a,
               decoration: const InputDecoration(

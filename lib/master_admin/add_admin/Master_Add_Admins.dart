@@ -155,16 +155,16 @@ class _Master_AddAdminsState extends State<Master_AddAdmins> {
                             onPressed: () {
                               FirebaseFirestore.instance.collection("Chakan").doc("Admin_User").collection("All_AdminUser").add(
                                   {
-                                    "Name" : name5.text,
-                                    "Contact" : contact5.text,
+                                    "Name" : name5.text.toString().trim(),
+                                    "Contact" : contact5.text.toString().trim(),
                                     "Location" : gauge_location.text,
-                                    "Email" : emailController5.text
+                                    "Email" : emailController5.text.toString().trim()
                                   }).then((_){
                                 print("Success");
                               });
                               model.signUp(
-                                email: emailController5.text,
-                                password: passwordController5.text,
+                                email: emailController5.text.toString().trim(),
+                                password: passwordController5.text.toString().trim(),
                               );
                               emailController5.clear();
                               passwordController5.clear();

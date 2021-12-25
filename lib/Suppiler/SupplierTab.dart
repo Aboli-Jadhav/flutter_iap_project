@@ -70,7 +70,7 @@ class _SupplierTabState extends State<SupplierTab> {
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
-
+        backgroundColor: lred,
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

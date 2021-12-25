@@ -39,6 +39,7 @@ class _AddViewerState extends State<AddViewer> {
     builder: (context, model, child) =>
       Container(
         child:Scaffold(
+          backgroundColor: lred,
           // appBar: AppBar(
           //   toolbarHeight: 50,
           //   backgroundColor: backred,
@@ -62,6 +63,7 @@ class _AddViewerState extends State<AddViewer> {
                     Text("Viewer's Details"),
                     SizedBox(height: 17,),
                     Container(
+                      color: Colors.white,
                       width: 0.3 * MediaQuery.of(context).size.width,
                       height:50.0,
                       child: TextField(
@@ -79,6 +81,7 @@ class _AddViewerState extends State<AddViewer> {
                     Container(
                       width: 0.3 * MediaQuery.of(context).size.width,
                       height:50.0,
+                      color: Colors.white,
                       child: TextField(
                         controller: contact6,
                         decoration: InputDecoration(
@@ -156,16 +159,16 @@ class _AddViewerState extends State<AddViewer> {
                               onPressed: () {
                                 FirebaseFirestore.instance.collection("Chakan").doc("Viewer_User").collection("Add_ViewUser").add(
                                     {
-                                      "Name" : name6.text,
-                                      "Contact" : contact6.text,
-                                      "Location" : location6.text,
-                                      "Email" : emailController6.text
+                                      "Name" : name6.text.toString().trim(),
+                                      "Contact" : contact6.text.toString().trim(),
+                                      "Location" : _suggestion.text,
+                                      "Email" : emailController6.text.toString().trim()
                                     }).then((_){
                                   print("Success");
                                 });
                                 model.signUp(
-                                  email: emailController6.text,
-                                  password: passwordController6.text,
+                                  email: emailController6.text.toString().trim(),
+                                  password: passwordController6.text.toString().trim(),
                                 );
                                 emailController6.clear();
                                 passwordController6.clear();

@@ -18,7 +18,7 @@ class _Manage_ScrapState extends State<Manage_Scrap> {
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
-
+        backgroundColor: lred,
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

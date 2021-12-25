@@ -834,17 +834,17 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
         .doc("Gauges")
         .collection("All gauges")
         .add({
-      'item_code': item_code.text.toString(),
-      'gauge_type': _suggestion2.text.toString().trim(),
-      'identification_number': identification_number.text.toString(),
-      'manufacturer_serial_number': manufacturer_serial_number.text.toString(),
-      'nominal_size': nominal_size.text.toString(),
-      'minimum': minimum.text.toString(),
-      'maximum': maximum.text.toString(),
-      'gauge_make': gauge_make.text.toString(),
-      'gauge_cost': gauge_cost.text.toString(),
-      'gauge_life': gauge_life.text.toString(),
-      'invoice_number': invoice_number.text.toString(),
+      'item_code': item_code.text.toString().trim(),
+      'gauge_type': _suggestion2.text.toString(),
+      'identification_number': identification_number.text.toString().trim(),
+      'manufacturer_serial_number': manufacturer_serial_number.text.toString().trim(),
+      'nominal_size': nominal_size.text.toString().trim(),
+      'minimum': minimum.text.toString().trim(),
+      'maximum': maximum.text.toString().trim(),
+      'gauge_make': gauge_make.text.toString().trim(),
+      'gauge_cost': gauge_cost.text.toString().trim(),
+      'gauge_life': gauge_life.text.toString().trim(),
+      'invoice_number': invoice_number.text.toString().trim(),
       'invoice_date': "${selectedDate1.toLocal()}".split(' ')[0],
       'gauge_location': _suggestion.text.toString(),
       'calibration_agency_name': "",
@@ -856,9 +856,9 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
       'plant':_selected_plant,
       'certificate_number': "",
       'nabl_accrediation_status':"",
-      'process_owner':process_owner.text.toString(),
-      'process_owner_mail_id':process_owner_mail_id.text.toString(),
-      'unit':unit.text.toString(), //confirm about adding this textField in here and add_new_gauge_to_system
+      'process_owner':_suggestion3.text.toString(),
+      'process_owner_mail_id':process_owner_mail_id.text.toString().trim(),
+      'unit':unit.text.toString().trim(), //confirm about adding this textField in here and add_new_gauge_to_system
       'acceptance_criteria':''
     })
     //.update({'GAUGE COST':'900'})
