@@ -153,24 +153,133 @@ class _Master_AddAdminsState extends State<Master_AddAdmins> {
                             title: 'Add Admin',
                             busy: model.busy,
                             onPressed: () {
-                              FirebaseFirestore.instance.collection("Chakan").doc("Admin_User").collection("All_AdminUser").add(
-                                  {
-                                    "Name" : name5.text.toString().trim(),
-                                    "Contact" : contact5.text.toString().trim(),
-                                    "Location" : gauge_location.text,
-                                    "Email" : emailController5.text.toString().trim()
-                                  }).then((_){
-                                print("Success");
-                              });
-                              model.signUp(
-                                email: emailController5.text.toString().trim(),
-                                password: passwordController5.text.toString().trim(),
-                              );
-                              emailController5.clear();
-                              passwordController5.clear();
-                              name5.clear();
-                              contact5.clear();
-                              gauge_location.clear();
+
+                              final isValidEmail = RegExp(
+                                  r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                  .hasMatch(emailController5.text.toString().trim());
+                              final isValidnum = RegExp(r'[0-9]{10}$')
+                                  .hasMatch(contact5.text.toString().trim());
+                              if(name5.text.toString().trim() =="" || contact5.text.toString().trim() == "" || gauge_location.text =="" || emailController5.text.toString().trim() == "" || passwordController5.text.toString().trim() ==""){
+                                Widget okButton = TextButton(
+                                  child: Text("OK"),
+                                  onPressed: () { Navigator.pop(context);},
+                                );
+
+                                // set up the AlertDialog
+                                AlertDialog alert = AlertDialog(
+                                  title: Text("Warning"),
+                                  content: Text("Please Enter All The Attributes"),
+                                  actions: [
+                                    okButton,
+                                  ],
+                                );
+
+                                // show the dialog
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return alert;
+                                  },
+                                );
+                                return;
+                              }
+                              else if(!isValidnum){
+                                Widget okButton = TextButton(
+                                  child: Text("OK"),
+                                  onPressed: () { Navigator.pop(context);},
+                                );
+
+                                // set up the AlertDialog
+                                AlertDialog alert = AlertDialog(
+                                  title: Text("Warning"),
+                                  content: Text("Invalid Contact Number"),
+                                  actions: [
+                                    okButton,
+                                  ],
+                                );
+
+                                // show the dialog
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return alert;
+                                  },
+                                );
+                                return;
+                              }
+                              else if(!isValidEmail){
+                                Widget okButton = TextButton(
+                                  child: Text("OK"),
+                                  onPressed: () { Navigator.pop(context);},
+                                );
+
+                                // set up the AlertDialog
+                                AlertDialog alert = AlertDialog(
+                                  title: Text("Warning"),
+                                  content: Text("Invalid Email Id"),
+                                  actions: [
+                                    okButton,
+                                  ],
+                                );
+
+                                // show the dialog
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return alert;
+                                  },
+                                );
+                                return;
+
+                              }
+                              else if(passwordController5.text.toString().trim().length<6){
+                                Widget okButton = TextButton(
+                                  child: Text("OK"),
+                                  onPressed: () { Navigator.pop(context);},
+                                );
+
+                                // set up the AlertDialog
+                                AlertDialog alert = AlertDialog(
+                                  title: Text("Warning"),
+                                  content: Text("Please Enter Strong Password"),
+                                  actions: [
+                                    okButton,
+                                  ],
+                                );
+
+                                // show the dialog
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return alert;
+                                  },
+                                );
+                                return;
+                              }
+                              else {
+                                FirebaseFirestore.instance.collection("Chakan")
+                                    .doc("Admin_User").collection(
+                                    "All_AdminUser").add(
+                                    {
+                                      "Name": name5.text.toString().trim(),
+                                      "Contact": contact5.text.toString().trim(),
+                                      "Location": gauge_location.text,
+                                      "Email": emailController5.text.toString().trim()
+                                    })
+                                    .then((_) {
+                                  print("Success");
+                                });
+                                model.signUp(
+                                  email: emailController5.text.toString()
+                                      .trim(),
+                                  password: passwordController5.text.toString().trim(),
+                                );
+                                emailController5.clear();
+                                passwordController5.clear();
+                                name5.clear();
+                                contact5.clear();
+                                gauge_location.clear();
+                              }
                             },
                           ),
                           Container(
