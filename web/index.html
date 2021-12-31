@@ -31,9 +31,30 @@
 
   <title>flutter_iap_project</title>
   <link rel="manifest" href="manifest.json">
-</head>
-<body>
 
+  <!-- new -->
+  <style>
+      .container {
+        width: 100vw;
+        height: 100vh;
+        display: flex; /* Default Axis is X*/
+        justify-content: center; /* Main Axis */
+        align-items: center; /* Cross Axis */
+      }
+      .indicator{
+        width: 35vw;
+      }
+
+
+    </style>
+
+</head>
+
+<body style="overflow: hidden", bgcolor="#FFFFFF">
+<!-- new -->
+<div id="loading_indicator" class="container">
+  <img class="indicator" src="./assets/loading.gif"/>
+</div>
 
 <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-storage.js"></script>
@@ -124,5 +145,21 @@
       loadMainDartJs();
     }
   </script>
+
+<script src="main.dart.js" type="application/javascript"></script>
+
+
+<script>
+window.onload = function () {
+setTimeout(function () {
+var loadingIndicator = document.getElementById("loading_indicator");
+if (loadingIndicator) {
+loadingIndicator.remove();
+}
+}, 10000);
+};
+
+</script>
+
 </body>
 </html>
