@@ -115,6 +115,7 @@ class _Admin_PageState extends State<Admin_Page> {
         appBar: AppBar(
           toolbarHeight: 45,
           backgroundColor: backred,
+          automaticallyImplyLeading: false,
           title: const Text("Windals Precision Ltd.",
             style: TextStyle(
               color: Colors.white,
