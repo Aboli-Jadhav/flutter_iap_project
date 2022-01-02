@@ -4,7 +4,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iap_project/Suppiler/Edit_Supplier_Contact_Details.dart';
-import 'package:progress_dialog/progress_dialog.dart';
+import 'package:sn_progress_dialog/progress_dialog.dart';
 import 'SupplierDataModel.dart';
 import 'demoCalender.dart';
 import 'viewScope.dart';
@@ -92,10 +92,18 @@ class _EditSupplierState extends State<EditSupplier>
       UploadTask task = tp.child("$fileName")
           .putData(file!);
       print(fileName);
-      progressdialog.show();
-      task.whenComplete(()
+      progressdialog.show(
+          max: 100,
+          msg: 'Uploading...',
+          progressType: ProgressType.valuable,
+          backgroundColor: backred,
+          progressValueColor: lred,
+          progressBgColor: Colors.white70,
+          msgColor: Colors.white,
+          valueColor: Colors.white
+      );      task.whenComplete(()
       async {
-        progressdialog.hide();
+        progressdialog.close();
         print("File Uploaded");
         certFilenm=fileName;
         nabl_cert_link=await tp.child("$fileName").getDownloadURL();
@@ -129,10 +137,19 @@ class _EditSupplierState extends State<EditSupplier>
       UploadTask task = tp.child("$fileName")
           .putData(file!);
       print(fileName);
-      progressdialog.show();
+      progressdialog.show(
+          max: 100,
+          msg: 'Uploading...',
+          progressType: ProgressType.valuable,
+          backgroundColor: backred,
+          progressValueColor: lred,
+          progressBgColor: Colors.white70,
+          msgColor: Colors.white,
+          valueColor: Colors.white
+      );
       task.whenComplete(()
       async {
-        progressdialog.hide();
+        progressdialog.close();
         print("File Uploaded");
         Scopefilenm=fileName;
         lab_scope_link=await tp.child("$fileName").getDownloadURL();
@@ -210,21 +227,8 @@ class _EditSupplierState extends State<EditSupplier>
 
   void createProgressDialog()
   {
-    progressdialog = ProgressDialog(context,type: ProgressDialogType.Normal);
-    progressdialog.style(
-        message: 'Uploading file...',
-        borderRadius: 10.0,
-        backgroundColor: Colors.white,
-        progressWidget: CircularProgressIndicator(),
-        elevation: 10.0,
-        insetAnimCurve: Curves.easeInOut,
-        progress: 0.0,
-        maxProgress: 100.0,
-        progressTextStyle: TextStyle(
-            color: Colors.black, fontSize: 13.0, fontWeight: FontWeight.w400),
-        messageTextStyle: TextStyle(
-            color: Colors.black, fontSize: 19.0, fontWeight: FontWeight.w600)
-    );
+    progressdialog = ProgressDialog(context:context);
+
   }
 
   void disp()

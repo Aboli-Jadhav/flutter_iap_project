@@ -3,15 +3,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_iap_project/Suppiler/Edit_Supplier_Contact_Details.dart';
 import 'package:flutter_iap_project/Suppiler/ViewData/View_Supplier_data_Model.dart';
 import 'package:flutter_iap_project/Suppiler/ViewData/view_All_Suppliers.dart';
-import 'package:flutter_iap_project/Suppiler/ViewData/view_supplier_data.dart';
-import 'package:flutter_iap_project/Suppiler/demoView/demoViewScope.dart';
-import 'package:flutter_iap_project/Suppiler/demoView/demo_Edit_Supplier_Contact_Details.dart';
-import 'package:progress_dialog/progress_dialog.dart';
+import 'package:sn_progress_dialog/sn_progress_dialog.dart';
 import '../../date_picker2.dart';
-import '../SupplierDataModel.dart';
 
 class Edit_For_ViewAll extends StatefulWidget {
   final View_supplier_data_model supplierModel;
@@ -111,10 +106,19 @@ class _Edit_For_ViewAllState extends State<Edit_For_ViewAll>
       UploadTask task = tp.child("$fileName")
           .putData(file!);
       print(fileName);
-      progressdialog.show();
+      progressdialog.show(
+          max: 100,
+          msg: 'Uploading...',
+          progressType: ProgressType.valuable,
+          backgroundColor: backred,
+          progressValueColor: lred,
+          progressBgColor: Colors.white70,
+          msgColor: Colors.white,
+          valueColor: Colors.white
+      );
       task.whenComplete(()
       async {
-        progressdialog.hide();
+        progressdialog.close();
         print("File Uploaded");
         certFilenm=fileName;
         nabl_cert_link=await tp.child("$fileName").getDownloadURL();
@@ -148,10 +152,19 @@ class _Edit_For_ViewAllState extends State<Edit_For_ViewAll>
       UploadTask task = tp.child("$fileName")
           .putData(file!);
       print(fileName);
-      progressdialog.show();
+      progressdialog.show(
+          max: 100,
+          msg: 'Uploading...',
+          progressType: ProgressType.valuable,
+          backgroundColor: backred,
+          progressValueColor: lred,
+          progressBgColor: Colors.white70,
+          msgColor: Colors.white,
+          valueColor: Colors.white
+      );
       task.whenComplete(()
       async {
-        progressdialog.hide();
+        progressdialog.close();
         print("File Uploaded");
         Scopefilenm=fileName;
         lab_scope_link=await tp.child("$fileName").getDownloadURL();
@@ -254,21 +267,7 @@ class _Edit_For_ViewAllState extends State<Edit_For_ViewAll>
 
   void createProgressDialog()
   {
-    progressdialog = ProgressDialog(context,type: ProgressDialogType.Normal);
-    progressdialog.style(
-        message: 'Uploading file...',
-        borderRadius: 10.0,
-        backgroundColor: Colors.white,
-        progressWidget: CircularProgressIndicator(),
-        elevation: 10.0,
-        insetAnimCurve: Curves.easeInOut,
-        progress: 0.0,
-        maxProgress: 100.0,
-        progressTextStyle: TextStyle(
-            color: Colors.black, fontSize: 13.0, fontWeight: FontWeight.w400),
-        messageTextStyle: TextStyle(
-            color: Colors.black, fontSize: 19.0, fontWeight: FontWeight.w600)
-    );
+    progressdialog = ProgressDialog(context:context);
   }
 
   void disp()
