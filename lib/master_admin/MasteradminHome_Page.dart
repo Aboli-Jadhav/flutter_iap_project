@@ -81,7 +81,7 @@ class _master_adminHome_PageState extends State<master_adminHome_Page> {
           automaticallyImplyLeading: false,
           toolbarHeight: 45,
           backgroundColor: backred,
-          title: Text("Windals Precision Ltd.",
+          title: Text("Windals Precision Pvt Ltd.",
             style: TextStyle(
               color: Colors.white,
               fontSize: 20.0,

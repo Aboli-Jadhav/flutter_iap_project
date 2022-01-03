@@ -20,7 +20,7 @@ class _home_pState extends State<home_p> {
         appBar: AppBar(
           toolbarHeight: 30,
           backgroundColor: backred,
-          title: Text("Windals Precision Ltd.",
+          title: Text("Windals Precision Pvt Ltd.",
             style: TextStyle(
               color: Colors.white,
               fontSize: 20,

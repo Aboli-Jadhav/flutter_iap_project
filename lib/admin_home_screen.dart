@@ -116,7 +116,7 @@ class _Admin_PageState extends State<Admin_Page> {
           toolbarHeight: 45,
           backgroundColor: backred,
           automaticallyImplyLeading: false,
-          title: const Text("Windals Precision Ltd.",
+          title: const Text("Windals Precision Pvt Ltd.",
             style: TextStyle(
               color: Colors.white,
               fontSize: 20.0,

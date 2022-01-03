@@ -34,7 +34,7 @@ class _Viewerlogin extends State<ViewerLogin>{
         appBar: AppBar(
           toolbarHeight: 60,
           backgroundColor: backred,
-          title: Text("Windals Precision Ltd.",
+          title: Text("Windals Precision Pvt Ltd.",
             style: TextStyle(
               color: Colors.white,
               fontSize: 50.0,

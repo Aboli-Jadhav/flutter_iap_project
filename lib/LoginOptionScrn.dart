@@ -59,7 +59,7 @@ class _LoginOptionScrnState extends State<LoginOptionScrn> {
             Image.asset("assets/logo12.png",
             ),
             SizedBox(width: 40,),
-            Text("Windals Precision Ltd.",
+            Text("Windals Precision Pvt Ltd.",
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
