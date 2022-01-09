@@ -2,11 +2,13 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iap_project/Admin/view_gauge_model.dart';
+import 'package:flutter_iap_project/Admin/view_gauge_model_2.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:editable/editable.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_iap_project/Admin/showgauge.dart';
-import 'package:syncfusion_flutter_xlsio/xlsio.dart' show Workbook, Worksheet, ExcelDataRow, ExcelDataCell;
+import 'package:syncfusion_flutter_xlsio/xlsio.dart'
+    show Workbook, Worksheet, ExcelDataRow, ExcelDataCell;
 import 'package:path_provider/path_provider.dart';
 import 'package:open_file/open_file.dart';
 import 'package:universal_html/html.dart' show AnchorElement;
@@ -31,7 +33,7 @@ class _view_master_gauState extends State<view_master_gau> {
   Color backred = Color(0xffDF3F3F);
   Color lred = Color(0xffFBEBEB);
   String final_selectedValue = '';
-  static List<ViewGaugeModel> fetched_list = [];
+  static List<ViewGaugeModel2> fetched_list = [];
 
   // List<ExcelRow> itemList = [
   //   const ExcelRow(one: "1", two: "1", three: "1", four: "1", five: "1"),
@@ -57,27 +59,28 @@ class _view_master_gauState extends State<view_master_gau> {
         .then((QuerySnapshot querySnapshot) {
       if (querySnapshot.docs.isNotEmpty) {
         querySnapshot.docs.forEach((doc) {
+          print("certificate number is ${doc['certificate_number']}");
           ViewGaugeModel model = ViewGaugeModel(
-              doc['calibration_agency_name'],
-              doc['calibration_cost'],
-              doc['calibration_date'],
-              doc['calibration_due_date'],
-              doc['calibration_frequency'],
-              doc['gauge_cost'],
-              doc['gauge_life'],
-              doc['gauge_location'],
-              doc['gauge_make'],
-              doc['gauge_type'],
-              doc['identification_number'],
-              doc['invoice_date'],
-              doc['invoice_number'],
-              doc['item_code'],
-              doc['manufacturer_serial_number'],
-              doc['maximum'],
-              doc['minimum'],
-              doc['nominal_size'],
-              doc['remark'],
-              doc['plant'],
+            doc['calibration_agency_name'],
+            doc['calibration_cost'],
+            doc['calibration_date'],
+            doc['calibration_due_date'],
+            doc['calibration_frequency'],
+            doc['gauge_cost'],
+            doc['gauge_life'],
+            doc['gauge_location'],
+            doc['gauge_make'],
+            doc['gauge_type'],
+            doc['identification_number'],
+            doc['invoice_date'],
+            doc['invoice_number'],
+            doc['item_code'],
+            doc['manufacturer_serial_number'],
+            doc['maximum'],
+            doc['minimum'],
+            doc['nominal_size'],
+            doc['remark'],
+            doc['plant'],
             doc['certificate_number'],
             doc['nabl_accrediation_status'],
             doc['process_owner'],
@@ -85,15 +88,47 @@ class _view_master_gauState extends State<view_master_gau> {
             doc['unit'],
             doc['acceptance_criteria'],
           );
-          fetched_list.add(model);
+
+          ViewGaugeModel2 newmodel = ViewGaugeModel2(
+              calibration_agency_name: doc['calibration_agency_name'],
+              calibration_cost: doc['calibration_cost'],
+              calibration_date: doc['calibration_date'],
+              calibration_due_date: doc['calibration_due_date'],
+              calibration_frequency: doc['calibration_frequency'],
+              gauge_cost: doc['gauge_cost'],
+              gauge_life: doc['gauge_life'],
+              gauge_location: doc['gauge_location'],
+              gauge_make: doc['gauge_make'],
+              gauge_type: doc['gauge_type'],
+              identification_number: doc['identification_number'],
+              invoice_date: doc['invoice_date'],
+              invoice_number: doc['invoice_number'],
+              item_code: doc['item_code'],
+              manufacturer_serial_number: doc['manufacturer_serial_number'],
+              maximum: doc['maximum'],
+              minimum: doc['minimum'],
+              nominal_size: doc['nominal_size'],
+              remark: doc['remark'],
+              plant: doc['plant'],
+              certificate_number: doc['certificate_number'],
+              nabl_accrediation_status: doc['nabl_accrediation_status'],
+              process_owner: doc['process_owner'],
+              process_owner_mail_id: doc['process_owner_mail_id'],
+              unit: doc['unit'],
+              acceptance_criteria: doc['acceptance_criteria']
+          );
+
+          //ViewGaugeModel model1 = ViewGaugeModel();
+
+          fetched_list.add(newmodel);
         });
         setState(() {
           show = 1;
         });
         print("Fetched list: ${fetched_list[0].calibration_agency_name}");
-      }else{
+      } else {
         setState(() {
-          show=2;
+          show = 2;
         });
         print("view_master_gauge 86 : OOPS file doesn't exists");
       }
@@ -103,7 +138,7 @@ class _view_master_gauState extends State<view_master_gau> {
   @override
   void initState() {
     // TODO: implement initState
-  fetched_list = [];
+    fetched_list = [];
     show = 0;
     Fluttertoast.showToast(
         msg: "${widget.selectedValue}\n${widget.selected_option}",
@@ -135,7 +170,10 @@ class _view_master_gauState extends State<view_master_gau> {
             centerTitle: true,
           ),
           body: Container(
-            width: MediaQuery.of(context).size.width,
+            width: MediaQuery
+                .of(context)
+                .size
+                .width,
             //color: Colors.red,
             child: Column(
               children: [
@@ -151,7 +189,10 @@ class _view_master_gauState extends State<view_master_gau> {
                 Expanded(
                   child: Container(
                     //height: 480,
-                    width: MediaQuery.of(context).size.width,
+                    width: MediaQuery
+                        .of(context)
+                        .size
+                        .width,
                     //color: Colors.blueGrey,
                     child: show == 1
                         ? Padding(
@@ -173,7 +214,9 @@ class _view_master_gauState extends State<view_master_gau> {
                           );
                         },
                       ),
-                    ): show==2 ? Center(child: Text("No such data"),): Center(
+                    ) : show == 2
+                        ? Center(child: Text("No such data"),)
+                        : Center(
                       child: CircularProgressIndicator(),
                     ),
                   ),
@@ -181,7 +224,9 @@ class _view_master_gauState extends State<view_master_gau> {
                 SizedBox(height: 20,),
                 Center(
                   child:
-                  ElevatedButton(child: Text('Export To Excel'), onPressed: show==2? null: createExcel, style: ElevatedButton.styleFrom(primary: Colors.red),),
+                  ElevatedButton(child: Text('Export To Excel'),
+                    onPressed: show == 2 ? null : createExcel,
+                    style: ElevatedButton.styleFrom(primary: Colors.red),),
                 ),
                 SizedBox(height: 30,),
               ],
@@ -190,7 +235,7 @@ class _view_master_gauState extends State<view_master_gau> {
     );
   }
 
-   doNotExport(){
+  doNotExport() {
     print('No data to export');
   }
 
@@ -225,33 +270,59 @@ class _view_master_gauState extends State<view_master_gau> {
     sheet.getRangeByName('Z1').setText('Acceptance Criteria');
 
 
-    for(int i=0;i<_view_master_gauState.fetched_list.length;i++){
-      sheet.getRangeByName("A"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].identification_number);
-      sheet.getRangeByName("B"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].gauge_type);
-      sheet.getRangeByName("C"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].nominal_size);
-      sheet.getRangeByName("D"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].calibration_due_date);
-      sheet.getRangeByName("E"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].gauge_location);
-      sheet.getRangeByName("F"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].calibration_agency_name);
-      sheet.getRangeByName("G"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].calibration_cost);
-      sheet.getRangeByName("H"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].calibration_date);
-      sheet.getRangeByName("I"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].calibration_frequency);
-      sheet.getRangeByName("J"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].gauge_cost);
-      sheet.getRangeByName("K"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].gauge_life);
-      sheet.getRangeByName("L"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].gauge_make);
-      sheet.getRangeByName("M"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].invoice_date);
-      sheet.getRangeByName("N"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].invoice_number);
-      sheet.getRangeByName("O"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].item_code);
-      sheet.getRangeByName("P"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].manufacturer_serial_number);
-      sheet.getRangeByName("Q"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].maximum);
-      sheet.getRangeByName("R"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].minimum);
-      sheet.getRangeByName("S"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].remark);
-      sheet.getRangeByName("T"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].plant);
-      sheet.getRangeByName("U"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].certificate_number);
-      sheet.getRangeByName("V"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].nabl_accrediation_status);
-      sheet.getRangeByName("W"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].process_owner);
-      sheet.getRangeByName("X"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].process_owner_mail_id);
-      sheet.getRangeByName("Y"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].unit);
-      sheet.getRangeByName("Z"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].acceptance_criteria);
+    for (int i = 0; i < _view_master_gauState.fetched_list.length; i++) {
+      sheet.getRangeByName("A" + (i + 2).toString()).setText(
+          _view_master_gauState.fetched_list[i].identification_number);
+      sheet.getRangeByName("B" + (i + 2).toString()).setText(
+          _view_master_gauState.fetched_list[i].gauge_type);
+      sheet.getRangeByName("C" + (i + 2).toString()).setText(
+          _view_master_gauState.fetched_list[i].nominal_size);
+      sheet.getRangeByName("D" + (i + 2).toString()).setText(
+          _view_master_gauState.fetched_list[i].calibration_due_date);
+      sheet.getRangeByName("E" + (i + 2).toString()).setText(
+          _view_master_gauState.fetched_list[i].gauge_location);
+      sheet.getRangeByName("F" + (i + 2).toString()).setText(
+          _view_master_gauState.fetched_list[i].calibration_agency_name);
+      sheet.getRangeByName("G" + (i + 2).toString()).setText(
+          _view_master_gauState.fetched_list[i].calibration_cost);
+      sheet.getRangeByName("H" + (i + 2).toString()).setText(
+          _view_master_gauState.fetched_list[i].calibration_date);
+      sheet.getRangeByName("I" + (i + 2).toString()).setText(
+          _view_master_gauState.fetched_list[i].calibration_frequency);
+      sheet.getRangeByName("J" + (i + 2).toString()).setText(
+          _view_master_gauState.fetched_list[i].gauge_cost);
+      sheet.getRangeByName("K" + (i + 2).toString()).setText(
+          _view_master_gauState.fetched_list[i].gauge_life);
+      sheet.getRangeByName("L" + (i + 2).toString()).setText(
+          _view_master_gauState.fetched_list[i].gauge_make);
+      sheet.getRangeByName("M" + (i + 2).toString()).setText(
+          _view_master_gauState.fetched_list[i].invoice_date);
+      sheet.getRangeByName("N" + (i + 2).toString()).setText(
+          _view_master_gauState.fetched_list[i].invoice_number);
+      sheet.getRangeByName("O" + (i + 2).toString()).setText(
+          _view_master_gauState.fetched_list[i].item_code);
+      sheet.getRangeByName("P" + (i + 2).toString()).setText(
+          _view_master_gauState.fetched_list[i].manufacturer_serial_number);
+      sheet.getRangeByName("Q" + (i + 2).toString()).setText(
+          _view_master_gauState.fetched_list[i].maximum);
+      sheet.getRangeByName("R" + (i + 2).toString()).setText(
+          _view_master_gauState.fetched_list[i].minimum);
+      sheet.getRangeByName("S" + (i + 2).toString()).setText(
+          _view_master_gauState.fetched_list[i].remark);
+      sheet.getRangeByName("T" + (i + 2).toString()).setText(
+          _view_master_gauState.fetched_list[i].plant);
+      sheet.getRangeByName("U" + (i + 2).toString()).setText(
+          _view_master_gauState.fetched_list[i].certificate_number);
+      sheet.getRangeByName("V" + (i + 2).toString()).setText(
+          _view_master_gauState.fetched_list[i].nabl_accrediation_status);
+      sheet.getRangeByName("W" + (i + 2).toString()).setText(
+          _view_master_gauState.fetched_list[i].process_owner);
+      sheet.getRangeByName("X" + (i + 2).toString()).setText(
+          _view_master_gauState.fetched_list[i].process_owner_mail_id);
+      sheet.getRangeByName("Y" + (i + 2).toString()).setText(
+          _view_master_gauState.fetched_list[i].unit);
+      sheet.getRangeByName("Z" + (i + 2).toString()).setText(
+          _view_master_gauState.fetched_list[i].acceptance_criteria);
     }
 
     final List<int> bytes = workbook.saveAsStream();
@@ -260,12 +331,15 @@ class _view_master_gauState extends State<view_master_gau> {
     if (kIsWeb) {
       AnchorElement(
           href:
-          'data:application/octet-stream;charset=utf-16le;base64,${base64.encode(bytes)}')
+          'data:application/octet-stream;charset=utf-16le;base64,${base64
+              .encode(bytes)}')
         ..setAttribute('download', 'Output.xlsx')
         ..click();
     } else {
       final String path = (await getApplicationSupportDirectory()).path;
-      final String fileName = Platform.isWindows ? '$path\\Output.xlsx' : '$path/Output.xlsx';
+      final String fileName = Platform.isWindows
+          ? '$path\\Output.xlsx'
+          : '$path/Output.xlsx';
       final File file = File(fileName);
       await file.writeAsBytes(bytes, flush: true);
       OpenFile.open(fileName);
@@ -281,13 +355,12 @@ class ExcelRowHeading extends StatelessWidget {
   final String four;
   final String five;
 
-  const ExcelRowHeading(
-      {Key? key,
-      @required this.one = "",
-      @required this.two = "",
-      @required this.three = "",
-      @required this.four = "",
-      @required this.five = ""})
+  const ExcelRowHeading({Key? key,
+    @required this.one = "",
+    @required this.two = "",
+    @required this.three = "",
+    @required this.four = "",
+    @required this.five = ""})
       : super(key: key);
 
   @override
@@ -297,56 +370,61 @@ class ExcelRowHeading extends StatelessWidget {
 
     return Material(
         child: InkWell(
-      onTap: () => print('whole row clicked'),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          // const SizedBox(
-          //   width: 50.0,
-          // ),
-          Expanded(
-            child: Center(
-              child: Text(
-                one,
-                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18.0),
+          onTap: () => print('whole row clicked'),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // const SizedBox(
+              //   width: 50.0,
+              // ),
+              Expanded(
+                child: Center(
+                  child: Text(
+                    one,
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500, fontSize: 18.0),
+                  ),
+                ),
               ),
-            ),
-          ),
-          Expanded(
-            child: Center(
-                child: Text(
-              two,
-              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18.0),
-            )),
-          ),
-          Expanded(
-            child: Center(
-                child: Text(
-              three,
-              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18.0),
-            )),
-          ),
-          Expanded(
-            child: Center(
-                child: Text(
-              four,
-              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18.0),
-            )),
-          ),
-          Expanded(
-            child: Center(
-                child: Text(
-              five,
-              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18.0),
-            )),
-          ),
+              Expanded(
+                child: Center(
+                    child: Text(
+                      two,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500, fontSize: 18.0),
+                    )),
+              ),
+              Expanded(
+                child: Center(
+                    child: Text(
+                      three,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500, fontSize: 18.0),
+                    )),
+              ),
+              Expanded(
+                child: Center(
+                    child: Text(
+                      four,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500, fontSize: 18.0),
+                    )),
+              ),
+              Expanded(
+                child: Center(
+                    child: Text(
+                      five,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500, fontSize: 18.0),
+                    )),
+              ),
 
-          // const SizedBox(
-          //   width: 50.0,
-          // ),
-        ],
-      ),
-    ));
+              // const SizedBox(
+              //   width: 50.0,
+              // ),
+            ],
+          ),
+        ));
   }
 }
 
@@ -356,17 +434,16 @@ class ExcelRow extends StatelessWidget {
   // final String three;
   // final String four;
   // final String five;
-  final ViewGaugeModel model;
+  final ViewGaugeModel2 model;
 
-  const ExcelRow(
-      {Key? key,
-      // required this.one,
-      // required this.two,
-      // required this.three,
-      // required this.four,
-      // required this.five
-        required this.model
-      })
+  const ExcelRow({Key? key,
+    // required this.one,
+    // required this.two,
+    // required this.three,
+    // required this.four,
+    // required this.five
+    required this.model
+  })
       : super(key: key);
 
   @override
@@ -378,77 +455,83 @@ class ExcelRow extends StatelessWidget {
       children: [
         Material(
             child: InkWell(
-          onTap: () {
-            Navigator.push(
-              context,
-              //MaterialPageRoute(builder: (context) => ShowGauge(model: model)),
-              MaterialPageRoute(builder: (context) => ShowGauge_MasterAdmin(model: model)),
-            );
-          },
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // const SizedBox(
-              //   width: 50.0,
-              // ),
-              Expanded(
-                child: Container(
-                  //width: 300,
-                  height: height,
-                  decoration: BoxDecoration(border: Border.all(color: color)),
-                  child: Center(child: Text(model.identification_number)),
-                ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  //MaterialPageRoute(builder: (context) => ShowGauge(model: model)),
+                  MaterialPageRoute(builder: (context) =>
+                      ShowGauge_MasterAdmin(model: model)),
+                );
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // const SizedBox(
+                  //   width: 50.0,
+                  // ),
+                  Expanded(
+                    child: Container(
+                      //width: 300,
+                      height: height,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: color)),
+                      child: Center(child: Text(model.identification_number)),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      //width: 300,
+                      height: height,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: color)),
+                      child: Center(child: Text(model.gauge_type)),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      //width: 300,
+                      height: height,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: color)),
+                      child: Center(child: Text(model.nominal_size)),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      // width: 300,
+                      height: height,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: color)),
+                      child: Center(child: Text(model.calibration_due_date)),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      // width: 300,
+                      height: height,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: color)),
+                      child: Center(child: Text(model.gauge_location)),
+                    ),
+                  ),
+                  // Material(
+                  // child: InkWell(
+                  // onTap: ()=> print('row opened'),
+                  // child: Container(
+                  // width: 50,
+                  // height: height,
+                  // decoration:
+                  // BoxDecoration(border: Border.all(color: color)),
+                  // child: const Center(child: Icon(Icons.open_in_new,size: 15.0,)),
+                  // ),
+                  // ),
+                  // ),
+                  // const SizedBox(
+                  //   width: 50.0,
+                  // ),
+                ],
               ),
-              Expanded(
-                child: Container(
-                  //width: 300,
-                  height: height,
-                  decoration: BoxDecoration(border: Border.all(color: color)),
-                  child: Center(child: Text(model.gauge_type)),
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  //width: 300,
-                  height: height,
-                  decoration: BoxDecoration(border: Border.all(color: color)),
-                  child: Center(child: Text(model.nominal_size)),
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  // width: 300,
-                  height: height,
-                  decoration: BoxDecoration(border: Border.all(color: color)),
-                  child: Center(child: Text(model.calibration_due_date)),
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  // width: 300,
-                  height: height,
-                  decoration: BoxDecoration(border: Border.all(color: color)),
-                  child: Center(child: Text(model.gauge_location)),
-                ),
-              ),
-              // Material(
-              // child: InkWell(
-              // onTap: ()=> print('row opened'),
-              // child: Container(
-              // width: 50,
-              // height: height,
-              // decoration:
-              // BoxDecoration(border: Border.all(color: color)),
-              // child: const Center(child: Icon(Icons.open_in_new,size: 15.0,)),
-              // ),
-              // ),
-              // ),
-              // const SizedBox(
-              //   width: 50.0,
-              // ),
-            ],
-          ),
-        )),
+            )),
       ],
     );
   }

@@ -59,7 +59,6 @@ class ViewGaugeModel{
       this._nabl_accrediation_status,
       this._process_owner,
       this._process_owner_mail_id
-
       );
 
   String get certificate_number => _certificate_number;

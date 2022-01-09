@@ -4,6 +4,7 @@ import 'package:flutter_iap_project/Admin/Calibrate%20Guages/calibrate_gauge.dar
 import 'package:flutter_iap_project/Admin/ShowGauge_WidgetEmpty.dart';
 import 'package:flutter_iap_project/Admin/showgauge_widget.dart';
 import 'package:flutter_iap_project/Admin/view_gauge_model.dart';
+import 'package:flutter_iap_project/Admin/view_gauge_model_2.dart';
 import 'package:flutter_iap_project/master_admin/Manage_scrap/Add_To_Scrap.dart';
 //import 'showgauge_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -15,7 +16,7 @@ class ShowGauge_MasterAdmin extends StatefulWidget {
   // final String manufacturer_number;
   // final String gauge_type;
   //const ShowGauge({Key? key, required this.wppl_number,required this.manufacturer_number,required this.gauge_type}) : super(key: key);
-  final ViewGaugeModel model;
+  final ViewGaugeModel2 model;
   const ShowGauge_MasterAdmin({Key? key,required this.model}) : super(key: key);
 
 

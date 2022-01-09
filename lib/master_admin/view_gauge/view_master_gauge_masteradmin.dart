@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iap_project/Admin/view_gauge_model.dart';
+import 'package:flutter_iap_project/Admin/view_gauge_model_2.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:editable/editable.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -31,7 +32,7 @@ class _view_master_gauState extends State<view_master_gauge_masteradmin> {
   Color backred = Color(0xffDF3F3F);
   Color lred = Color(0xffFBEBEB);
   String final_selectedValue = '';
-  static List<ViewGaugeModel> fetched_list = [];
+  static List<ViewGaugeModel2> fetched_list = [];
 
   // List<ExcelRow> itemList = [
   //   const ExcelRow(one: "1", two: "1", three: "1", four: "1", five: "1"),
@@ -85,7 +86,36 @@ class _view_master_gauState extends State<view_master_gauge_masteradmin> {
             doc['unit'],
             doc['acceptance_criteria'],
           );
-          fetched_list.add(model);
+
+          ViewGaugeModel2 newmodel = ViewGaugeModel2(
+              calibration_agency_name: doc['calibration_agency_name'],
+              calibration_cost: doc['calibration_cost'],
+              calibration_date: doc['calibration_date'],
+              calibration_due_date: doc['calibration_due_date'],
+              calibration_frequency: doc['calibration_frequency'],
+              gauge_cost: doc['gauge_cost'],
+              gauge_life: doc['gauge_life'],
+              gauge_location: doc['gauge_location'],
+              gauge_make: doc['gauge_make'],
+              gauge_type: doc['gauge_type'],
+              identification_number: doc['identification_number'],
+              invoice_date: doc['invoice_date'],
+              invoice_number: doc['invoice_number'],
+              item_code: doc['item_code'],
+              manufacturer_serial_number: doc['manufacturer_serial_number'],
+              maximum: doc['maximum'],
+              minimum: doc['minimum'],
+              nominal_size: doc['nominal_size'],
+              remark: doc['remark'],
+              plant: doc['plant'],
+              certificate_number: doc['certificate_number'],
+              nabl_accrediation_status: doc['nabl_accrediation_status'],
+              process_owner: doc['process_owner'],
+              process_owner_mail_id: doc['process_owner_mail_id'],
+              unit: doc['unit'],
+              acceptance_criteria: doc['acceptance_criteria']
+          );
+          fetched_list.add(newmodel);
         });
         setState(() {
           show = 1;
@@ -348,7 +378,7 @@ class ExcelRow extends StatelessWidget {
   // final String three;
   // final String four;
   // final String five;
-  final ViewGaugeModel model;
+  final ViewGaugeModel2 model;
 
   const ExcelRow(
       {Key? key,
