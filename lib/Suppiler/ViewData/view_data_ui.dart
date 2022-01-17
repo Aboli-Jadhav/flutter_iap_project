@@ -24,7 +24,7 @@ class _view_data_uiState extends State<view_data_ui> {
   String final_selectedValue='';
   final List<String> _supplier = [
     'Type of Supplier',
-    'Supplier Name',
+    'Supplier Agency Name',
     'Supplier Code',
     'Supplier Contact Person Name',
     'Supplier Contact Person Email',
@@ -48,6 +48,10 @@ class _view_data_uiState extends State<view_data_ui> {
   List<String> allmails=[];
   List<String> allPhones=[];
   List<String> agencyType=[];
+  Set<String> agencynames={};
+  Set<String> agencycodes={};
+  Set<String> adresses={};
+
 
   FirebaseFirestore fstore=FirebaseFirestore.instance;
 
@@ -55,6 +59,44 @@ class _view_data_uiState extends State<view_data_ui> {
 
   var _selected_gauges;
   String selectedValue='';
+
+  void fetchAllSupplierCodes()
+  {
+    fstore.collection("Chakan")
+        .doc("Supplier")
+        .collection("all_")
+        .get()
+        .then((value)
+    {
+      value.docs.forEach((element)
+      {
+        agencycodes.add(element.data()['agencyCode'].toString());
+      });
+    });
+    print(agencycodes);
+    setState(() {
+
+    });
+  }
+
+  void fetchAllSupplierAddress()
+  {
+    fstore.collection("Chakan")
+        .doc("Supplier")
+        .collection("all_")
+        .get()
+        .then((value)
+    {
+      value.docs.forEach((element)
+      {
+        adresses.add(element.data()['agencyAddress'].toString());
+      });
+    });
+    print(adresses);
+    setState(() {
+
+    });
+  }
 
   void fetchAllScopes()
   {
@@ -77,6 +119,26 @@ class _view_data_uiState extends State<view_data_ui> {
 
       });
   }
+
+  void fetchAllSupplierNames()
+  {
+    fstore.collection("Chakan")
+        .doc("Supplier")
+        .collection("all_")
+        .get()
+        .then((value)
+    {
+      value.docs.forEach((element)
+      {
+        agencynames.add(element.data()['agencyName'].toString());
+      });
+    });
+    print(agencynames);
+    setState(() {
+
+    });
+  }
+
 
   void fetchAllContactInfo()
   {
@@ -155,6 +217,9 @@ class _view_data_uiState extends State<view_data_ui> {
       fetchAllContactInfo();
       fetchAllScopes();
       fetchAttributeValues();
+      fetchAllSupplierNames();
+      fetchAllSupplierCodes();
+      fetchAllSupplierAddress();
   }
 
   Widget build(BuildContext context) {
@@ -223,10 +288,10 @@ class _view_data_uiState extends State<view_data_ui> {
                 height: 30,
               ),
               showWidgets(value: selectedValue, selected_option: selected_option,
-                  sup_name: sup_nm, sup_code: sup_code, scopes: allscope, sup_types: agencyType,
+                  agencyNamesList: agencynames, sup_code: sup_code, scopes: allscope, sup_types: agencyType,
                   cont_mails: allmails, cont_nms: allnames, cont_phones: allPhones,
                   location: location, type_of_supplier: type_of_supplier, contact_email: sup_contact_email, scope_sup: scope,
-                  contact_mob: sup_contact_mob,contact_nms: sup_contact_nm
+                  contact_mob: sup_contact_mob,contact_nms: sup_contact_nm,sup_name: sup_nm, agencyCodeSet: agencycodes, allAddress: adresses,
               ),
               const SizedBox(
                 height: 30,
@@ -279,7 +344,7 @@ class _view_data_uiState extends State<view_data_ui> {
                         }
                         break;
 
-                        case 'Supplier Name': {
+                        case 'Supplier Agency Name': {
                           //statements;
                           //   selected_option = calibration_date.text;
                           selected_option = sup_nm.text;
@@ -398,14 +463,18 @@ class showWidgets extends StatefulWidget {
   final TextEditingController contact_email;
   final TextEditingController contact_nms;
   final TextEditingController scope_sup;
+  final Set<String> agencyNamesList;
+  final Set<String> agencyCodeSet;
+  final Set<String> allAddress;
 
+  
 
-  const showWidgets({Key? key, required this.value ,required this.selected_option,required this.sup_name,required this.sup_code,
+  const showWidgets({Key? key, required this.value ,required this.selected_option,required this.agencyNamesList,required this.sup_code,
   required this.scopes,required this.sup_types,required this.cont_mails,
     required this.cont_nms,required this.cont_phones,
     required this.location,required this.type_of_supplier
     ,required this.contact_mob,required this.contact_email,required this.contact_nms,
-  required this.scope_sup
+  required this.scope_sup, required this.sup_name,required this.agencyCodeSet, required this.allAddress
   }) : super(key: key);
 
   @override
@@ -433,6 +502,16 @@ class _showWidgetsState extends State<showWidgets> {
   List<String> added5 = [];
   String currentText5 = "";
 
+  GlobalKey<AutoCompleteTextFieldState<String>> key6 = GlobalKey();
+  List<String> added6 = [];
+  String currentText6 = "";
+  GlobalKey<AutoCompleteTextFieldState<String>> key7 = GlobalKey();
+  List<String> added7 = [];
+  String currentText7 = "";
+
+  GlobalKey<AutoCompleteTextFieldState<String>> key8 = GlobalKey();
+  List<String> added8 = [];
+  String currentText8 = "";
 
 
 
@@ -502,33 +581,51 @@ class _showWidgetsState extends State<showWidgets> {
 
             widget.value == "Supplier Code" ? Container(
                 height: 100,
-                //color: Colors.green,
+                //color: Colors.red,
                 child: //widget.value == "Type of Gauge" ?
                 Column(
                   children: [
                     const Text(
-                      "Enter Supplier Code",
+                      "Enter Supplier Agency Name",
                       style: TextStyle(fontSize: 22),
                     ),
                     const SizedBox(
                       height: 10,
                     ),
                     Container(
-                      height: 50,
-                      width: 390,
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey),
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(5)
-                      ),
-                      child: Center(
-                        child: TextField(
-                          controller: widget.sup_code,
-                          decoration: const InputDecoration.collapsed(
-                            hintText: "Supplier Code",
-                            //fillColor: Colors.white,
-                          ),
-                        ),
+                      color: Colors.white,
+                      width: 0.3 * MediaQuery.of(context).size.width,
+                      child: SimpleAutoCompleteTextField(
+                        key: key7,
+                        controller: widget.sup_code,
+                        clearOnSubmit: false,
+                        //suggestions: gauge_type,
+                        suggestions: widget.agencyCodeSet.toList(),
+                        style: const TextStyle(color: Colors.black, fontSize: 16.0),
+                        decoration: InputDecoration(
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5.0),
+                            )),
+                        textChanged: (text) {
+                          currentText7 = text;
+
+                        },
+                        textSubmitted: (text) => setState(() {
+                          if (text != "") {
+                            //_gauges.clear();
+                            Fluttertoast.showToast(
+                                msg: text.toString(),
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: Colors.red,
+                                textColor: Colors.white,
+                                fontSize: 16.0);
+
+                            added7.add(text);
+                          }
+                        }),
                       ),
                     )
                   ],
@@ -536,35 +633,53 @@ class _showWidgetsState extends State<showWidgets> {
               // : SizedBox.shrink(),
             ): const SizedBox(height: 0.1,),
 
-            widget.value == 'Supplier Name' ? Container(
+            widget.value == 'Supplier Agency Name' ? Container(
                 height: 100,
-                //color: Colors.blue,
+                //color: Colors.red,
                 child: //widget.value == "Type of Gauge" ?
                 Column(
                   children: [
                     const Text(
-                      "Supplier Name",
+                      "Enter Supplier Agency Name",
                       style: TextStyle(fontSize: 22),
                     ),
                     const SizedBox(
                       height: 10,
                     ),
                     Container(
-                      height: 50,
-                      width: 390,
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey),
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(5)
-                      ),
-                      child: Center(
-                        child: TextField(
-                          controller: widget.sup_name,
-                          decoration: InputDecoration.collapsed(
-                            hintText: "Gauge type",
-                            //fillColor: Colors.white,
-                          ),
-                        ),
+                      color: Colors.white,
+                      width: 0.3 * MediaQuery.of(context).size.width,
+                      child: SimpleAutoCompleteTextField(
+                        key: key6,
+                        controller: widget.sup_name,
+                        clearOnSubmit: false,
+                        //suggestions: gauge_type,
+                        suggestions: widget.agencyNamesList.toList(),
+                        style: const TextStyle(color: Colors.black, fontSize: 16.0),
+                        decoration: InputDecoration(
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5.0),
+                            )),
+                        textChanged: (text) {
+                          currentText6 = text;
+
+                        },
+                        textSubmitted: (text) => setState(() {
+                          if (text != "") {
+                            //_gauges.clear();
+                            Fluttertoast.showToast(
+                                msg: text.toString(),
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: Colors.red,
+                                textColor: Colors.white,
+                                fontSize: 16.0);
+
+                            added6.add(text);
+                          }
+                        }),
                       ),
                     )
                   ],
@@ -572,40 +687,57 @@ class _showWidgetsState extends State<showWidgets> {
               // : SizedBox.shrink(),
             ): const SizedBox(height: 0.1,),
 
-            widget.value == 'LOCATION' ? Container(
+            widget.value == 'Location' ? Container(
                 height: 100,
-                //color: Colors.orange,
+                //color: Colors.red,
                 child: //widget.value == "Type of Gauge" ?
                 Column(
                   children: [
                     const Text(
-                      "Enter Location",
+                      "Enter Supplier Location",
                       style: TextStyle(fontSize: 22),
                     ),
                     const SizedBox(
                       height: 10,
                     ),
                     Container(
-                      height: 50,
-                      width: 390,
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey),
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(5)
-                      ),
-                      child: Center(
-                        child: TextField(
+                        color: Colors.white,
+                        width: 0.3 * MediaQuery.of(context).size.width,
+                        child: SimpleAutoCompleteTextField(
+                          key: key8,
                           controller: widget.location,
-                          decoration: InputDecoration.collapsed(
-                            hintText: "Location",
-                            //fillColor: Colors.white,
-                          ),
+                          clearOnSubmit: false,
+                          //suggestions: gauge_type,
+                          suggestions: widget.allAddress.toList(),
+                          style: const TextStyle(color: Colors.black, fontSize: 16.0),
+                          decoration: InputDecoration(
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5.0),
+                              )),
+                          textChanged: (text) {
+                            currentText8 = text;
+
+                          },
+                          textSubmitted: (text) => setState(() {
+                            if (text != "") {
+                              //_gauges.clear();
+                              Fluttertoast.showToast(
+                                  msg: text.toString(),
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.CENTER,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: Colors.red,
+                                  textColor: Colors.white,
+                                  fontSize: 16.0);
+
+                              added8.add(text);
+                            }
+                          }),
                         ),
-                      ),
                     )
                   ],
                 )
-              // : SizedBox.shrink(),
             ): const SizedBox(height: 0.1,),
 
             widget.value == 'Scope' ? Container(
@@ -615,7 +747,7 @@ class _showWidgetsState extends State<showWidgets> {
                 Column(
                   children: [
                     const Text(
-                      "Enter Supplier the Scope",
+                      "Enter Supplier Scope",
                       style: TextStyle(fontSize: 22),
                     ),
                     const SizedBox(

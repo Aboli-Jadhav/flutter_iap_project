@@ -710,7 +710,12 @@ class ExcelRow extends StatelessWidget {
                       // width: 300,
                       height: height,
                       decoration: BoxDecoration(border: Border.all(color: color)),
-                      child: Center(child: ElevatedButton( onPressed: ()
+                      child: Center(child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.red, // background
+                          // onPrimary: Colors.white, // foreground
+                        ),
+                        onPressed: ()
                       {
                         Navigator.push(context,
                           MaterialPageRoute(
@@ -742,6 +747,10 @@ class ExcelRow extends StatelessWidget {
                               height: 40,
                               //decoration: BoxDecoration(border: Border.all(color: color)),
                               child: Center(child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.red, // background
+                                 // onPrimary: Colors.white, // foreground
+                                ),
                                 onPressed: ()
                                 async
                                 {
@@ -779,7 +788,12 @@ class ExcelRow extends StatelessWidget {
                               // width: 300,
                               height: 40,
                               //decoration: BoxDecoration(border: Border.all(color: color)),
-                              child: Center(child: ElevatedButton( onPressed: ()
+                              child: Center(child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.red, // background
+                                  // onPrimary: Colors.white, // foreground
+                                ),
+                                onPressed: ()
                               async {
                                 if(model.stype == "Repairing"||model.stype == "Manufacturer")
                                 {
