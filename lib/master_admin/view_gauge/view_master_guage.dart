@@ -31,7 +31,7 @@ class view_master_gau extends StatefulWidget {
 
 class _view_master_gauState extends State<view_master_gau> {
   Color backred = Color(0xffDF3F3F);
-  Color lred = Color(0xffFBEBEB);
+  Color lred = Color(0xffFBEBEB); //
   String final_selectedValue = '';
   static List<ViewGaugeModel2> fetched_list = [];
 
