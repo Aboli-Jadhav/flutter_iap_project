@@ -398,7 +398,7 @@ class _demoEditSupplierState extends State<demoEditSupplier>
                                 width: 300,
                                 height:37.0,
                                 child: TextField(
-                                  enabled: true,
+                                  enabled: false,
                                   controller: sup_nm,
                                   decoration: InputDecoration(
                                     fillColor: Colors.white,
@@ -419,26 +419,31 @@ class _demoEditSupplierState extends State<demoEditSupplier>
                                     borderRadius: BorderRadius.all(Radius.circular(5))
                                 ),
 
-                                child: DropdownButtonHideUnderline(
-                                  child: DropdownButton<String>(
-                                    value: _chosenValue,
-                                    //elevation: 5,
-                                    style: TextStyle(color: Colors.black),
+                                child:
+                                IgnorePointer(
+                                  ignoring:  true,
+                                  child:DropdownButtonHideUnderline(
+                                    child: DropdownButton<String>(
+                                      value: _chosenValue,
+                                      //elevation: 5,
+                                      style: TextStyle(color: Colors.black),
 
-                                    items: agencytype.map<DropdownMenuItem<String>>((String value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value,
-                                        child: Text(value),
-                                      );
-                                    }).toList(),
-                                    // hint: Text(
-                                    //   "Select The Agency Type",
-                                    //
-                                    // ),
+                                      items: agencytype.map<DropdownMenuItem<String>>((String value) {
+                                        return DropdownMenuItem<String>(
+                                          value: value,
+                                          child: Text(value),
+                                        );
+                                      }).toList(),
+                                      // hint: Text(
+                                      //   "Select The Agency Type",
+                                      //
+                                      // ),
 
-                                    onChanged:handleDropChange,
+                                      onChanged:handleDropChange,
+                                    ),
                                   ),
-                                ),
+
+                                )
                               ),
                               SizedBox(width: 100,),
                               Container(

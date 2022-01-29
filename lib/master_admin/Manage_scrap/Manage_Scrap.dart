@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iap_project/master_admin/Manage_scrap/Add_To_Scrap.dart';
+import 'package:flutter_iap_project/master_admin/Manage_scrap/view_scrap_New.dart';
 
 class Manage_Scrap extends StatefulWidget {
   final List<String> gauge_name;
@@ -71,7 +72,11 @@ class _Manage_ScrapState extends State<Manage_Scrap> {
                       ),
                     ),),
                   onPressed: () {
-                    Navigator.pushNamed(context, '/viewScrap');
+                    Navigator.push(context,
+                      MaterialPageRoute(
+                        builder: (context) => new view_Scrap_new(),
+                      ),
+                    );
                   },
                   child: Text("View Scrap",
                     style: TextStyle(

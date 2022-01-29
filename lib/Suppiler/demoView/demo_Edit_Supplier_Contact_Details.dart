@@ -48,6 +48,8 @@ class _demo_Edit_Supplier_Contact_DetailsState extends State<demo_Edit_Supplier_
             padding: const EdgeInsets.all(40),
             children: <Widget>[
               Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   TextButton(
                     onPressed: (){
@@ -63,7 +65,7 @@ class _demo_Edit_Supplier_Contact_DetailsState extends State<demo_Edit_Supplier_
                       ),
                     ),
                   ),
-                  SizedBox(width: 200,),
+                  SizedBox(width: 300,),
                   TextButton(
                     onPressed: (){
                       Navigator.push(context,
@@ -78,7 +80,7 @@ class _demo_Edit_Supplier_Contact_DetailsState extends State<demo_Edit_Supplier_
                       ),
                     ),
                   ),
-                  SizedBox(width: 200,),
+                  SizedBox(width: 300,),
                   TextButton(
                     onPressed: (){
                       Navigator.push(context,
@@ -93,7 +95,7 @@ class _demo_Edit_Supplier_Contact_DetailsState extends State<demo_Edit_Supplier_
                       ),
                     ),
                   ),
-                  SizedBox(width: 200,),
+                  SizedBox(width: 300,),
                   TextButton(
                     onPressed: (){
                       Navigator.push(context,

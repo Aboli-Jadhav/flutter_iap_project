@@ -16,6 +16,7 @@ import 'package:flutter_iap_project/Admin_Edit_Profile.dart';
 import 'package:flutter_iap_project/Admin/Calibrate%20Guages/calibrate_gauge.dart';
 import 'package:flutter_iap_project/LoginOptionScrn.dart';
 import 'master_admin/Manage_scrap/Manage_Scrap.dart';
+import 'master_admin/Manage_scrap/NewView/ViewScrap_ui.dart';
 import 'master_admin/Search/MasterAdmin_Edit_Profile.dart';
 import 'master_admin/add_admin/Master_Add_Admins.dart';
 import 'master_admin/Search/MasteradminHome_Profile.dart';
@@ -72,6 +73,9 @@ void main() {
       '/view_master_gau' : (context) => view_master_gau(selected_option: '',selectedValue: ''),
       '/viewAdminList' : (context) => View_AdminList_DropDown(gauge_location: [],),
       '/master_adminHome': (context) => master_adminHome_Page(),
+      '/viewScrapdt': (context) => viewScrapByDate_UI(),
+
+
      // '/demo_edit_supplier': (context) => demoEditSupplier(supplierModel: View_supplier_data_model('','','','','','','','','','','',[],[],[],[]), scopedatamodel: []),
     },
     home:LoginOptionScrn(),

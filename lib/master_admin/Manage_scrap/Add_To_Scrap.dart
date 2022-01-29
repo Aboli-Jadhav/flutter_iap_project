@@ -5,6 +5,7 @@ import 'package:flutter_iap_project/Admin/view_gauge_model.dart';
 import 'package:flutter_iap_project/date_picker2.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter_iap_project/datepicker3.dart';
 
 class AddToScrap extends StatefulWidget {
 
@@ -24,6 +25,8 @@ class _AddToScrapState extends State<AddToScrap> {
   Color backred=Color(0xffDF3F3F);
   Color lred=Color(0xffFBEBEB);
 
+   var datewidget=TestPickerWidget3("", 0, "");
+
   var manufacturer_serial_number=TextEditingController();
   var identification_number = TextEditingController();
   var gauge_type = TextEditingController();
@@ -31,7 +34,7 @@ class _AddToScrapState extends State<AddToScrap> {
   var reason = TextEditingController();
   var responsible_person = TextEditingController();
   var scrap_note_id_no = TextEditingController();
-  DateTime scrap_date = DateTime.now();
+  var scrap_date ;
 
   void add_toScrap()
   {
@@ -42,7 +45,8 @@ class _AddToScrapState extends State<AddToScrap> {
     var res=reason.text.toString();
     var resp_person=responsible_person.text.toString();
     var not_id_no=scrap_note_id_no.text.toString();
-    var scrp_date="${selectedDate.toLocal()}".split(' ')[0];
+    //var scrp_date="${selectedDate.toLocal()}".split(' ')[0];
+    var scrp_date=datewidget.selectedDate.toString();
 
     print(serial_no+"\n"+wppl_id_no+"\n"+guage_typ+"\n"+nom_size+"\n"+res+"\n"+resp_person+"\n"+not_id_no+"\n"+scrp_date);
   }
@@ -68,6 +72,7 @@ class _AddToScrapState extends State<AddToScrap> {
           });
 
   }
+
 
 
     Future<void> _showMyDialog() async {
@@ -127,7 +132,7 @@ class _AddToScrapState extends State<AddToScrap> {
                   {
                           'reason': reason.text.toString(),
                           'responsible_person': responsible_person.text.toString(),
-                          'scrap_date': "${selectedDate.toLocal()}".split(' ')[0],
+                          'scrap_date': datewidget.selectedDate.toString(),
                           'scrap_note_id_no': scrap_note_id_no.text.toString()
                   });
               await FirebaseFirestore.instance.collection("Chakan").doc("Scrap")
@@ -481,7 +486,7 @@ class _AddToScrapState extends State<AddToScrap> {
                             textAlign: TextAlign.center,
                           ),
                         ),
-                        TestPickerWidget2(""),
+                        datewidget,
                       ],
                     ),
                     ]
@@ -509,8 +514,33 @@ class _AddToScrapState extends State<AddToScrap> {
                                 ),
                                 onPressed: ()
                                 {
-                                    handleDelete();
-                                    add_toScrap();
+
+
+
+                                  if(datewidget.selectedDate.isNotEmpty)
+                                    {
+                                      handleDelete();
+                                      add_toScrap();
+
+                                    }
+                                  else
+                                    {
+                                      _showDialog("Empty Fields",
+                                              "Please enter all details !!!");
+                                    }
+                                  // if(datewidget.selectedDate.isEmpty ||
+                                  //     manufacturer_serial_number.text.toString().isEmpty ||
+                                  //     identification_number.text.toString().isEmpty  ||
+                                  //     gauge_type.text.toString().isEmpty  ||
+                                  //     nominal_size.text.toString().isEmpty  ||
+                                  //     reason.text.toString().isEmpty ||
+                                  //     responsible_person.text.toString().isEmpty  ||
+                                  //     scrap_note_id_no.text.toString().isEmpty ){
+                                  //   _showDialog("Empty Fields",
+                                  //       "Please enter all details !!!");
+                                  // }
+
+
                                 },
                                 label: Text("Add To Scrap",
                                   style: TextStyle(
@@ -541,7 +571,15 @@ class _AddToScrapState extends State<AddToScrap> {
                                         side: BorderSide(color: backred)
                                     ),),
                                 ),
-                                onPressed: (){},
+                                onPressed: (){
+                                  manufacturer_serial_number.clear();
+                                      identification_number.clear();
+                                      gauge_type.clear();
+                                      nominal_size.clear();
+                                      reason.clear();
+                                      responsible_person.clear();
+                                      scrap_note_id_no.clear();
+                                },
                                 child: Text("Reset",
                                   style: TextStyle(
                                     color: Colors.white,

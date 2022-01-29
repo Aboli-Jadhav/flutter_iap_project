@@ -400,7 +400,7 @@ class _EditSupplierWithoutColState extends State<EditSupplierWithoutCol>
                                 width: 300,
                                 height:57.0,
                                 child: TextField(
-                                  enabled: true,
+                                  enabled: false,
                                   controller: sup_nm,
                                   decoration: InputDecoration(
                                     fillColor: Colors.white,
@@ -421,7 +421,10 @@ class _EditSupplierWithoutColState extends State<EditSupplierWithoutCol>
                                     borderRadius: BorderRadius.all(Radius.circular(5))
                                 ),
 
-                                child: DropdownButtonHideUnderline(
+                                child:
+                                IgnorePointer(
+                                  ignoring:  true,
+                                  child: DropdownButtonHideUnderline(
                                   child: DropdownButton<String>(
                                     value: _chosenValue,
                                     //elevation: 5,
@@ -440,7 +443,7 @@ class _EditSupplierWithoutColState extends State<EditSupplierWithoutCol>
 
                                     onChanged:handleDropChange,
                                   ),
-                                ),
+                                ),),
                               ),
                               SizedBox(width: 100,),
                               Container(
