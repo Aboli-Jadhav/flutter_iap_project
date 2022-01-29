@@ -79,6 +79,7 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
   String selectedValue='';
 
   var t1 = TestPickerWidget3("", 0, "");
+  var t2 = TestPickerWidget3("", 0, "");
 
 
 
@@ -135,7 +136,8 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                   _selected_freq = '30';
                 print(calibration_date);
               });
-              t1 = TestPickerWidget3(calibration_date, int.parse(_selected_freq), calibration_due_date);
+              t1 = TestPickerWidget3("GAUGE STORE", int.parse(_selected_freq), calibration_due_date);
+              t2 = TestPickerWidget3(calibration_date,0,"");
               if(Calibration_Cost.text.isEmpty){
                 Fluttertoast.showToast(
                     msg: "Gauge is issued",
@@ -377,8 +379,8 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                             children: const [
                               Text("Calibration Agency Name",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
                               SizedBox(width: 200,),
-                              Text("Calibration Date (DD.MM.YYYY)",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
-                              SizedBox(width: 150,),
+                              Text("Issue Date (DD.MM.YYYY)",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
+                              SizedBox(width: 250,),
                               Text("Calibration Frequency (In Days)",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
 
                             ],
@@ -644,11 +646,13 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                               mainAxisAlignment: MainAxisAlignment.start,
                               children:const  [
                                 Text("nabl accredation status",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
-                                SizedBox(width: 200,),
+                                SizedBox(width: 210,),
                                 // Text("process owner",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
                                 // SizedBox(width: 290,),
                                 // Text("process owner mail id",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
                                 Text("plant",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
+                                SizedBox(width: 360,),
+                                Text("Calibration Date (DD.MM.YYYY)",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
                               ]
                           ),
                           const  SizedBox(height: 10,),
@@ -713,19 +717,7 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                               ),
 
                               const SizedBox(width: 100,),
-                              Container(
-                                width: 300,
-                                height:37.0,
-                                child: TextField(
-                                  controller: plant,
-                                  decoration:const  InputDecoration(
-                                    fillColor: Colors.white,
-                                    filled: true,
-                                    //labelText: "plant",
-                                    border: OutlineInputBorder(),
-
-                                  ),),
-                              ),
+                                t2,
                             ],
                           ),
                           // const SizedBox(height: 20,),
@@ -824,7 +816,7 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
       "calibration_cost":Calibration_Cost.text,
       "remark":Remark.text,
       "gauge_location": Gauge_location.text,
-      "calibration_date":t1.selectedDate,
+      "calibration_date":t2.selectedDate,
       "calibration_due_date":calibration_due_date,
       "item_code": item_code,
       'gauge_make':gauge_make,
@@ -872,7 +864,7 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
       "calibration_cost":Calibration_Cost.text,
       "remark":Remark.text,
       "gauge_location": Gauge_location.text,
-      "calibration_date":t1.selectedDate,
+      "calibration_date":t2.selectedDate,
       "calibration_due_date":calibration_due_date,
       "item_code": item_code,
       'gauge_make':gauge_make,
