@@ -772,7 +772,7 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                     onPressed: () {
                       // addData();
                       addCalibratedDataToHistory();
-                      //addCalibratedData();
+                      addCalibratedData();
                     },
                     style: ElevatedButton.styleFrom(
                         primary: Colors.red,

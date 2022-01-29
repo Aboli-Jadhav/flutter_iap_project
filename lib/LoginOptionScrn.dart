@@ -17,14 +17,14 @@ class _LoginOptionScrnState extends State<LoginOptionScrn> {
   // {
   //   var count=0;
   //   FirebaseFirestore.instance.collection("Chakan")
-  //       .doc("Gauge wppl next no")
-  //       .collection("all numbers")
+  //       .doc("Supplier")
+  //       .collection("all_")
   //       .get()
   //       .then((value)
   //   {
   //     value.docs.forEach((element)
   //     {
-  //       if(element.data()["model_sf"]=="")
+  //       if(element.data()["agencyName"]=="Tekpro Systems")
   //       {
   //         print("\nPaddle := \t"+element.id+"\t"+element.data().toString());
   //
@@ -35,7 +35,7 @@ class _LoginOptionScrnState extends State<LoginOptionScrn> {
   //   });
   //
   // }
-
+  //
   // @override
   // void initState() {
   //   // TODO: implement initState
