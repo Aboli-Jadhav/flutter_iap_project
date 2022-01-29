@@ -72,12 +72,12 @@ class _TestPickerWidget2State extends State<TestPickerWidget2> {
         widget.temp = picked;
         String  jj = "${widget.temp.toLocal()}".split(' ')[0];
         widget.selectedDate = "";
-        widget.selectedDate += jj[8];
-        widget.selectedDate += jj[9];
-        widget.selectedDate += jj[7];
         widget.selectedDate += jj[5];
         widget.selectedDate += jj[6];
-        widget.selectedDate += jj[4];
+        widget.selectedDate += '/';
+        widget.selectedDate += jj[8];
+        widget.selectedDate += jj[9];
+        widget.selectedDate += '/';
         widget.selectedDate += jj[0];
         widget.selectedDate += jj[1];
         widget.selectedDate += jj[2];

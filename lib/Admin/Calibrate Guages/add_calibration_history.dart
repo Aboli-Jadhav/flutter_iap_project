@@ -218,148 +218,152 @@ class _AddCalibrationHistoryState extends State<AddCalibrationHistory> {
         title: Text("Add Calibration History"),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          children: [
-            SizedBox(height: 30,),
-            Row(
+      body: ListView(
+        children:<Widget> [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
               children: [
-                Expanded(
-                    child: ShowGauge_Widget_MasterAdmin(heading: 'WPPL Gauge Id Number',data: wppl_gauge_id_number)
+                SizedBox(height: 30,),
+                Row(
+                  children: [
+                    Expanded(
+                        child: ShowGauge_Widget_MasterAdmin(heading: 'WPPL Gauge Id Number',data: wppl_gauge_id_number)
+                    ),
+                    Expanded(
+                        child: ShowGauge_Widget_MasterAdmin(heading: 'Calibration Agency Name',data: calibration_agency_name)
+                    ),
+                    Expanded(
+                        child: ShowGauge_Widget_MasterAdmin(heading: 'Calibration Cost (INR)',data: calibration_cost)
+                    ),
+                    Expanded(
+                        child: ShowGauge_Widget_MasterAdmin(heading: 'Calibration Date (MM.DD.YYYY)',data: calibration_date)
+                    ),
+                  ],
                 ),
-                Expanded(
-                    child: ShowGauge_Widget_MasterAdmin(heading: 'Calibration Agency Name',data: calibration_agency_name)
+                SizedBox(height: 20,),
+                Row(
+                  children: [
+                    Expanded(
+                        child: ShowGauge_Widget_MasterAdmin(heading: 'Calibration Due Date (MM.DD.YYYY)',data: calibration_due_date)
+                    ),
+                    Expanded(
+                        child: ShowGauge_Widget_MasterAdmin(heading: 'Calibration Frequency (In Days)',data: calibration_frequency)
+                    ),
+                    Expanded(
+                        child: ShowGauge_Widget_MasterAdmin(heading: 'Certificate Number',data: certificate_number)
+                    ),
+                    Expanded(
+                        child: ShowGauge_Widget_MasterAdmin(heading: 'Gauge Manufacturing Cost (INR)',data: gauge_cost)
+                    ),
+                  ],
                 ),
-                Expanded(
-                    child: ShowGauge_Widget_MasterAdmin(heading: 'Calibration Cost (INR)',data: calibration_cost)
+                SizedBox(height: 20,),
+                Row(
+                  children: [
+                    Expanded(
+                        child: ShowGauge_Widget_MasterAdmin(heading: 'Gauge Life (In Months)',data: gauge_life)
+                    ),
+                    Expanded(
+                        child: ShowGauge_Widget_MasterAdmin(heading: 'Gauge Make',data: gauge_make)
+                    ),
+                    Expanded(
+                        child: ShowGauge_Widget_MasterAdmin(heading: 'Gauge Manufacturer Id',data: gauge_manufacturer_id_number)
+                    ),
+                    Expanded(
+                        child: ShowGauge_Widget_MasterAdmin(heading: 'Unit',data: unit)
+                    ),
+                  ],
                 ),
-                Expanded(
-                    child: ShowGauge_Widget_MasterAdmin(heading: 'Calibration Date (DD.MM.YYYY)',data: calibration_date)
+                SizedBox(height: 20,),
+                Row(
+                  children: [
+                    Expanded(
+                        child: ShowGauge_Widget_MasterAdmin(heading: 'Maximum',data: maximum)
+                    ),
+                    Expanded(
+                        child: ShowGauge_Widget_MasterAdmin(heading: 'Minimum',data: minimum)
+                    ),
+                    Expanded(
+                        child: ShowGauge_Widget_MasterAdmin(heading: 'NABL Accrediation Status',data: nabl_accrediation_status)
+                    ),
+                    Expanded(
+                        child: ShowGauge_Widget_MasterAdmin(heading: 'Nominal Size',data: nominal_size)
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            SizedBox(height: 20,),
-            Row(
-              children: [
-                Expanded(
-                    child: ShowGauge_Widget_MasterAdmin(heading: 'Calibration Due Date (DD.MM.YYYY)',data: calibration_due_date)
+                SizedBox(height: 20,),
+                Row(
+                  children: [
+                    Expanded(
+                        child: ShowGauge_Widget_MasterAdmin(heading: 'Location',data: physical_location)
+                    ),
+                    Expanded(
+                        child: ShowGauge_Widget_MasterAdmin(heading: 'Remark',data: remark)
+                    ),
+                    Expanded(
+                        child: ShowGauge_Widget_MasterAdmin(heading: 'Process Owner',data: process_owner)
+                    ),
+                    Expanded(
+                        child: ShowGauge_Widget_MasterAdmin(heading: 'Process Owner Mail Id',data: process_owner_mail_id)
+                    ),
+                  ],
                 ),
-                Expanded(
-                    child: ShowGauge_Widget_MasterAdmin(heading: 'Calibration Frequency (In Days)',data: calibration_frequency)
+                SizedBox(height: 20,),
+                Row(
+                  children: [
+                    Expanded(
+                        child: ShowGauge_Widget_MasterAdmin(heading: 'Plant',data: plant)
+                    ),
+                    Expanded(
+                        child: ShowGauge_Widget_MasterAdmin(heading: 'Item Code',data: item_code)
+                    ),
+                    Expanded(
+                        child: ShowGauge_Widget_MasterAdmin(heading: 'Invoice Date',data: invoice_date,)
+                    ),
+                    Expanded(
+                        child: ShowGauge_Widget_MasterAdmin(heading: 'Invoice Number',data: invoice_number,)
+                    ),
+                  ],
                 ),
-                Expanded(
-                    child: ShowGauge_Widget_MasterAdmin(heading: 'Certificate Number',data: certificate_number)
+                SizedBox(height: 20,),
+                Row(
+                  children: [
+                    Expanded(
+                        child: ShowGauge_Widget_MasterAdmin(heading: 'Gauge type',data: gauge_type)
+                    ),
+                    Expanded(
+                        child: ShowGauge_Widget_MasterAdmin(heading: 'Acceptance Criteria',data: acceptance_criteria)
+                    ),
+                    Expanded(
+                      child: ShowGauge_WidgetEmpty(),
+                    ),
+                    Expanded(
+                        child: ShowGauge_WidgetEmpty()
+                    ),
+                  ],
                 ),
-                Expanded(
-                    child: ShowGauge_Widget_MasterAdmin(heading: 'Gauge Manufacturing Cost (INR)',data: gauge_cost)
-                ),
-              ],
-            ),
-            SizedBox(height: 20,),
-            Row(
-              children: [
-                Expanded(
-                    child: ShowGauge_Widget_MasterAdmin(heading: 'Gauge Life (In Months)',data: gauge_life)
-                ),
-                Expanded(
-                    child: ShowGauge_Widget_MasterAdmin(heading: 'Gauge Make',data: gauge_make)
-                ),
-                Expanded(
-                    child: ShowGauge_Widget_MasterAdmin(heading: 'Gauge Manufacturer Id',data: gauge_manufacturer_id_number)
-                ),
-                Expanded(
-                    child: ShowGauge_Widget_MasterAdmin(heading: 'Unit',data: unit)
-                ),
-              ],
-            ),
-            SizedBox(height: 20,),
-            Row(
-              children: [
-                Expanded(
-                    child: ShowGauge_Widget_MasterAdmin(heading: 'Maximum',data: maximum)
-                ),
-                Expanded(
-                    child: ShowGauge_Widget_MasterAdmin(heading: 'Minimum',data: minimum)
-                ),
-                Expanded(
-                    child: ShowGauge_Widget_MasterAdmin(heading: 'NABL Accrediation Status',data: nabl_accrediation_status)
-                ),
-                Expanded(
-                    child: ShowGauge_Widget_MasterAdmin(heading: 'Nominal Size',data: nominal_size)
-                ),
-              ],
-            ),
-            SizedBox(height: 20,),
-            Row(
-              children: [
-                Expanded(
-                    child: ShowGauge_Widget_MasterAdmin(heading: 'Location',data: physical_location)
-                ),
-                Expanded(
-                    child: ShowGauge_Widget_MasterAdmin(heading: 'Remark',data: remark)
-                ),
-                Expanded(
-                    child: ShowGauge_Widget_MasterAdmin(heading: 'Process Owner',data: process_owner)
-                ),
-                Expanded(
-                    child: ShowGauge_Widget_MasterAdmin(heading: 'Process Owner Mail Id',data: process_owner_mail_id)
-                ),
-              ],
-            ),
-            SizedBox(height: 20,),
-            Row(
-              children: [
-                Expanded(
-                    child: ShowGauge_Widget_MasterAdmin(heading: 'Plant',data: plant)
-                ),
-                Expanded(
-                    child: ShowGauge_Widget_MasterAdmin(heading: 'Item Code',data: item_code)
-                ),
-                Expanded(
-                    child: ShowGauge_Widget_MasterAdmin(heading: 'Invoice Date',data: invoice_date,)
-                ),
-                Expanded(
-                    child: ShowGauge_Widget_MasterAdmin(heading: 'Invoice Number',data: invoice_number,)
-                ),
-              ],
-            ),
-            SizedBox(height: 20,),
-            Row(
-              children: [
-                Expanded(
-                    child: ShowGauge_Widget_MasterAdmin(heading: 'Gauge type',data: gauge_type)
-                ),
-                Expanded(
-                    child: ShowGauge_Widget_MasterAdmin(heading: 'Acceptance Criteria',data: acceptance_criteria)
-                ),
-                Expanded(
-                  child: ShowGauge_WidgetEmpty(),
-                ),
-                Expanded(
-                    child: ShowGauge_WidgetEmpty()
-                ),
-              ],
-            ),
-            SizedBox(height: 30,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  child: Text("Add Calibration History"),
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.red,
-                  ),
-                  onPressed: () {
-                    //Navigator.push(context,MaterialPageRoute(builder: (context) => A),);
-                    print('Calibration History added');
+                SizedBox(height: 30,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      child: Text("Add Calibration History"),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.red,
+                      ),
+                      onPressed: () {
+                        //Navigator.push(context,MaterialPageRoute(builder: (context) => A),);
+                        print('Calibration History added');
 
-                  },
-                ),
+                      },
+                    ),
+                  ],
+                )
               ],
-            )
-          ],
-        ),
+            ),
+          ),
+        ],
       ),
     );
   }

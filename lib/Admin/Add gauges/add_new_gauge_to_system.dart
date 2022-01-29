@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../../date_picker.dart';
 import 'custom_dialog_box.dart';
+import 'package:flutter_iap_project/date_picker2.dart';
 
 class AddNewGaugeToSystem extends StatefulWidget {
   final List<String> gauge_location;
@@ -356,7 +357,7 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
                               textAlign: TextAlign.start,
                             ),
                             SizedBox(
-                              width: 210,
+                              width: 270,
                             ),
                             Text(
                               "Process Owner Mail id",
@@ -460,7 +461,7 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
                                 width: 270,
                               ),
                               Text(
-                                "Invoice Date (DD.MM.YYYY)",
+                                "Invoice Date (MM.DD.YYYY)",
                                 style: const TextStyle(
                                     color: Colors.black, fontSize: 18),
                                 textAlign: TextAlign.start,
@@ -504,7 +505,7 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
                             const SizedBox(
                               width: 100,
                             ),
-                            TestPickerWidget(selectedDate1),
+                            TestPickerWidget2(""),
                           ],
                         ),
                         const SizedBox(
@@ -520,7 +521,7 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
                                 textAlign: TextAlign.start,
                               ),
                               SizedBox(
-                                width: 120,
+                                width: 110,
                               ),
                               Text(
                                 "Gauge Short form",
@@ -529,7 +530,7 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
                                 textAlign: TextAlign.start,
                               ),
                               SizedBox(
-                                width: 270,
+                                width: 260,
                               ),
                               Text(
                                 "Last number",
@@ -625,7 +626,7 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
                                 textAlign: TextAlign.start,
                               ),
                               SizedBox(
-                                width: 250,
+                                width: 260,
                               ),
                               Text(
                                 "Plant",
@@ -721,7 +722,7 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
                                 textAlign: TextAlign.start,
                               ),
                               SizedBox(
-                                width: 260,
+                                width: 210,
                               ),
                               Text(
                                 "Gauge Manufacturing Cost (INR)",
@@ -730,7 +731,7 @@ class _AddNewGaugeToSystemState extends State<AddNewGaugeToSystem> {
                                 textAlign: TextAlign.start,
                               ),
                               SizedBox(
-                                width: 260,
+                                width: 150,
                               ),
                               Text(
                                 "Unit",

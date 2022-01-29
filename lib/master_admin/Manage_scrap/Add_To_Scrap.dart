@@ -2,7 +2,7 @@ import 'package:autocomplete_textfield_ns/autocomplete_textfield_ns.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iap_project/Admin/view_gauge_model.dart';
-import 'package:flutter_iap_project/date_picker.dart';
+import 'package:flutter_iap_project/date_picker2.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -476,12 +476,12 @@ class _AddToScrapState extends State<AddToScrap> {
                           height:40.0,
 
 
-                          child : Text("Scrap Date (DD.MM.YYYY)",
+                          child : Text("Scrap Date (MM.DD.YYYY)",
                             style: TextStyle(color: Colors.black,fontSize: 23),
                             textAlign: TextAlign.center,
                           ),
                         ),
-                        TestPickerWidget(selectedDate),
+                        TestPickerWidget2(""),
                       ],
                     ),
                     ]

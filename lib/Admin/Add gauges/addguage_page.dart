@@ -7,6 +7,7 @@ import '../../date_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'custom_dialog_box.dart';
+import 'package:flutter_iap_project/date_picker2.dart';
 
 class add_Gauge extends StatefulWidget {
   final List<String> gauge_location;
@@ -580,7 +581,7 @@ class _add_GaugeState extends State<add_Gauge> {
                                 textAlign: TextAlign.start,
                               ),
                                SizedBox(
-                                width: 210,
+                                width: 270,
                               ),
                                Text(
                                  "Process Owner Mail id",
@@ -683,7 +684,7 @@ class _add_GaugeState extends State<add_Gauge> {
                                   width: 270,
                                 ),
                                  Text(
-                                  "Invoice Date (DD.MM.YYYY)",
+                                  "Invoice Date (MM.DD.YYYY)",
                                   style: const TextStyle(
                                       color: Colors.black, fontSize: 18),
                                   textAlign: TextAlign.start,
@@ -727,7 +728,7 @@ class _add_GaugeState extends State<add_Gauge> {
                               const SizedBox(
                                 width: 100,
                               ),
-                              TestPickerWidget(selectedDate1),
+                              TestPickerWidget2(""),
                             ],
                           ),
                           const SizedBox(
@@ -743,7 +744,7 @@ class _add_GaugeState extends State<add_Gauge> {
                                   textAlign: TextAlign.start,
                                 ),
                                  SizedBox(
-                                  width: 230,
+                                  width: 120,
                                 ),
                                 Text(
                                   "Plant",
@@ -752,7 +753,7 @@ class _add_GaugeState extends State<add_Gauge> {
                                   textAlign: TextAlign.start,
                                 ),
                                 SizedBox(
-                                  width: 230,
+                                  width: 350,
                                 ),
                                 Text(
                                   "Unit",

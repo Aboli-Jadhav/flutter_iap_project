@@ -379,7 +379,7 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                             children: const [
                               Text("Calibration Agency Name",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
                               SizedBox(width: 200,),
-                              Text("Issue Date (DD.MM.YYYY)",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
+                              Text("Issue Date (MM.DD.YYYY)",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
                               SizedBox(width: 250,),
                               Text("Calibration Frequency (In Days)",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
 
@@ -504,7 +504,7 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                           Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children:const [
-                                Text("Calibration Due Date (DD.MM.YYYY)",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
+                                Text("Calibration Due Date (MM.DD.YYYY)",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
                                 SizedBox(width: 120,),
                                 Text("Calibration Cost (INR)",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
                                 SizedBox(width: 230,),
@@ -652,7 +652,7 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                                 // Text("process owner mail id",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
                                 Text("plant",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
                                 SizedBox(width: 360,),
-                                Text("Calibration Date (DD.MM.YYYY)",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
+                                Text("Calibration Date (MM.DD.YYYY)",style: TextStyle(color: Colors.black,fontSize: 18),textAlign: TextAlign.start,),
                               ]
                           ),
                           const  SizedBox(height: 10,),

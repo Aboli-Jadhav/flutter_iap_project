@@ -131,7 +131,7 @@ class _ShowGaugeState extends State<ShowGauge_MasterAdmin> {
                       child: ShowGauge_Widget_MasterAdmin(heading: 'Calibration Cost (INR)',data: calibration_cost)
                   ),
                   Expanded(
-                      child: ShowGauge_Widget_MasterAdmin(heading: 'Calibration Date (DD.MM.YYYY)',data: calibration_date)
+                      child: ShowGauge_Widget_MasterAdmin(heading: 'Calibration Date (MM.DD.YYYY)',data: calibration_date)
                   ),
                 ],
               ),
@@ -139,7 +139,7 @@ class _ShowGaugeState extends State<ShowGauge_MasterAdmin> {
               Row(
                 children: [
                   Expanded(
-                      child: ShowGauge_Widget_MasterAdmin(heading: 'Calibration Due Date (DD.MM.YYYY)',data: calibration_due_date)
+                      child: ShowGauge_Widget_MasterAdmin(heading: 'Calibration Due Date (MM.DD.YYYY)',data: calibration_due_date)
                   ),
                   Expanded(
                       child: ShowGauge_Widget_MasterAdmin(heading: 'Calibration Frequency (In Days)',data: calibration_frequency)
