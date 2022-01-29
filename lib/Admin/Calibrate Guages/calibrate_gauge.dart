@@ -711,6 +711,21 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
 
                                   ),),
                               ),
+
+                              const SizedBox(width: 100,),
+                              Container(
+                                width: 300,
+                                height:37.0,
+                                child: TextField(
+                                  controller: plant,
+                                  decoration:const  InputDecoration(
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    //labelText: "plant",
+                                    border: OutlineInputBorder(),
+
+                                  ),),
+                              ),
                             ],
                           ),
                           // const SizedBox(height: 20,),

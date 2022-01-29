@@ -83,7 +83,7 @@ class _tab_headState extends State<tab_head> {
                   Tab(
                     child: Align(
                       alignment: Alignment.center,
-                      child: Text("Search"),
+                      child: Text("Logout"),
                     ),
                   ),
                 ]
