@@ -57,10 +57,11 @@ class _view_Scrap_by_type_LISTState extends State<view_Scrap_by_type_LIST> {
   }
 
   int show=1;
-  List<String> Type_specific_IDs=[];
 
   void getIDOfType()
   {
+    //List<String> Type_specific_IDs=[];
+
     var fstore=FirebaseFirestore.instance;
     fstore.collection("Chakan").doc("Scrap")
         .collection("all_scrap").get()
@@ -70,11 +71,12 @@ class _view_Scrap_by_type_LISTState extends State<view_Scrap_by_type_LIST> {
       {
         value.docs.forEach((doc)
         {
-          print(doc.id.toString());
-          if(doc.data()['gauge_type'].toString() == widget.guage_type)
-            {
-              Type_specific_IDs.add(doc.id);
-            }
+          print(doc.data()['gauge_type'].toString() +"\t"+widget.guage_type.toString());
+          if(doc.data()['gauge_type'].toString().trim() == widget.guage_type.toString().trim())
+          {
+            Type_specific_IDs.add(doc.id);
+            print(doc.id);
+          }
         });
         //print("Fetched list: ${fetchedlist[0].identification_number}");
       }
@@ -85,13 +87,17 @@ class _view_Scrap_by_type_LISTState extends State<view_Scrap_by_type_LIST> {
         // });
         print("view_supplier_datage 84 : OOPS file doesn't exists");
       }
+
     }).then((value) => fetchAll());
   }
 
+  List<String> Type_specific_IDs=[];
   void fetchAll()
   {
+    //List<String> Type_specific_IDs=getIDOfType();
     var fstore=FirebaseFirestore.instance;
 
+    print("List="+Type_specific_IDs.length.toString());
       if(Type_specific_IDs.isEmpty)
       {
           _showMyDialog("Problem", "No Data Available");
@@ -108,7 +114,7 @@ class _view_Scrap_by_type_LISTState extends State<view_Scrap_by_type_LIST> {
               value.docs.forEach((doc)
               {
                 print(doc.id.toString());
-                if(doc.data()['gauge_type'].toString() == widget.guage_type)
+                if(doc.data()['gauge_type'].toString().trim() == widget.guage_type.toString().trim())
                 {
                   ScrapDataModel model=ScrapDataModel(
                       doc['item_code'],
@@ -169,8 +175,9 @@ class _view_Scrap_by_type_LISTState extends State<view_Scrap_by_type_LIST> {
   void initState() {
     // TODO: implement initState
     show = 1;
-    //getIDOfType();
     getIDOfType();
+    //fetchAll(getIDOfType());
+    //fetchAll();
     Fluttertoast.showToast(
         msg: "View Scrap",
         toastLength: Toast.LENGTH_SHORT,

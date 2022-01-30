@@ -65,7 +65,7 @@ class _demo_Edit_Supplier_Contact_DetailsState extends State<demo_Edit_Supplier_
                       ),
                     ),
                   ),
-                  SizedBox(width: 300,),
+                  SizedBox(height: 70,),
                   TextButton(
                     onPressed: (){
                       Navigator.push(context,
@@ -80,7 +80,7 @@ class _demo_Edit_Supplier_Contact_DetailsState extends State<demo_Edit_Supplier_
                       ),
                     ),
                   ),
-                  SizedBox(width: 300,),
+                  SizedBox(height: 70,),
                   TextButton(
                     onPressed: (){
                       Navigator.push(context,
@@ -95,7 +95,7 @@ class _demo_Edit_Supplier_Contact_DetailsState extends State<demo_Edit_Supplier_
                       ),
                     ),
                   ),
-                  SizedBox(width: 300,),
+                  SizedBox(height: 70,),
                   TextButton(
                     onPressed: (){
                       Navigator.push(context,

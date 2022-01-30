@@ -515,20 +515,35 @@ class _AddToScrapState extends State<AddToScrap> {
                                 onPressed: ()
                                 {
 
-
-
-                                  if(datewidget.selectedDate.isNotEmpty)
-                                    {
+                                if((manufacturer_serial_number.text.isNotEmpty &&
+                                identification_number.text.isNotEmpty &&
+                                nominal_size.text.isNotEmpty &&
+                                reason.text.isNotEmpty &&
+                                responsible_person.text.isNotEmpty &&
+                                scrap_note_id_no.text.isNotEmpty &&
+                                datewidget.selectedDate.isNotEmpty)){
                                       handleDelete();
                                       add_toScrap();
+                                }
+                                else{
+                                      _showDialog("Empty Fields","Please enter all details !!!");
+                                }
+                                setState(() {
 
-                                    }
-                                  else
-                                    {
-                                      _showDialog("Empty Fields",
-                                              "Please enter all details !!!");
-                                    }
-                                  // if(datewidget.selectedDate.isEmpty ||
+                                });
+
+                                  // if(datewidget.selectedDate.isNotEmpty)
+                                  //   {
+                                  //     handleDelete();
+                                  //     add_toScrap();
+                                  //
+                                  //   }
+                                  // else
+                                  //   {
+                                  //     _showDialog("Empty Fields",
+                                  //             "Please enter all details !!!");
+                                  //   }
+                                  // // if(datewidget.selectedDate.isEmpty ||
                                   //     manufacturer_serial_number.text.toString().isEmpty ||
                                   //     identification_number.text.toString().isEmpty  ||
                                   //     gauge_type.text.toString().isEmpty  ||
