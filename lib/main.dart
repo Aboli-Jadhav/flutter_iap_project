@@ -70,7 +70,7 @@ void main() {
       '/edit_owner' : (context) => edit_owner(),
       '/edit_range' : (context) => edit_range(),
       '/edit_type' : (context) => edit_type(),
-      '/view_master_gau' : (context) => view_master_gau(selected_option: '',selectedValue: ''),
+      '/view_master_gau' : (context) => view_master_gau(selected_option: '',selectedValue: '',gauge_location: [],),
       '/viewAdminList' : (context) => View_AdminList_DropDown(gauge_location: [],),
       '/master_adminHome': (context) => master_adminHome_Page(),
       '/viewScrapdt': (context) => viewScrapByDate_UI(),
