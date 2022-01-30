@@ -17,7 +17,6 @@ import 'package:universal_html/html.dart' show AnchorElement;
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'dart:convert';
 
-import '../viewScope.dart';
 
 class view_All_Supplier_Data extends StatefulWidget {
 

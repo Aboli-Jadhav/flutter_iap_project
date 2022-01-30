@@ -3,14 +3,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_iap_project/Suppiler/Edit_Supplier_Contact_Details.dart';
 import 'package:flutter_iap_project/Suppiler/ViewData/View_Supplier_data_Model.dart';
 import 'package:flutter_iap_project/Suppiler/ViewData/view_supplier_data.dart';
-import 'package:flutter_iap_project/Suppiler/demoView/demoViewScope.dart';
-import 'package:flutter_iap_project/Suppiler/demoView/demo_Edit_Supplier_Contact_Details.dart';
 import 'package:sn_progress_dialog/sn_progress_dialog.dart';
 import '../../date_picker2.dart';
-import '../SupplierDataModel.dart';
 
 class EditSupplierWithoutCol extends StatefulWidget {
   final View_supplier_data_model supplierModel;

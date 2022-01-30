@@ -18,7 +18,6 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'dart:convert';
 import 'dart:js' as js;
 
-import '../viewScope.dart';
 
 class view_supplier_data extends StatefulWidget {
   final String selectedValue;

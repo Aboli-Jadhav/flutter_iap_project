@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_iap_project/Suppiler/Edit_Supplier_Contact_Details.dart';
 import 'package:flutter_iap_project/Suppiler/ViewData/View_Supplier_data_Model.dart';
 import 'package:flutter_iap_project/Suppiler/ViewData/view_supplier_data.dart';
 import 'package:flutter_iap_project/Suppiler/demoView/demoViewScope.dart';

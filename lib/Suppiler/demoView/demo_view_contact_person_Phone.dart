@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_iap_project/Suppiler/Edit_Contact_Person_Emails.dart';
-import 'package:flutter_iap_project/Suppiler/Edit_Contact_Person_Phone.dart';
 import 'package:flutter_iap_project/Suppiler/demoView/demo_Edit_Contact_Person_Phone.dart';
 
 

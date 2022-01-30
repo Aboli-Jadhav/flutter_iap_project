@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_iap_project/Suppiler/Edit_Contact_Person_Emails.dart';
-import 'package:flutter_iap_project/Suppiler/ViewContactPersonName.dart';
-import 'package:flutter_iap_project/Suppiler/View_Contact_Person_Phones.dart';
 import 'package:flutter_iap_project/Suppiler/demoView/demoViewScope.dart';
 import 'package:flutter_iap_project/Suppiler/demoView/demo_view_contact_person_Name.dart';
 import 'package:flutter_iap_project/Suppiler/demoView/demo_view_contact_person_Phone.dart';
