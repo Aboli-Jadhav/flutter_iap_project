@@ -334,7 +334,7 @@ class _front_view_gaugeState extends State<front_view_gauge_masteradmin> {
                   else{
                     Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => view_master_gauge_masteradmin(selectedValue:final_selectedValue, selected_option:selected_option)),
+                    MaterialPageRoute(builder: (context) => view_master_gauge_masteradmin(selectedValue:final_selectedValue, selected_option:selected_option,gauge_location:widget.gauge_location)),
                     );
                   }
                 },

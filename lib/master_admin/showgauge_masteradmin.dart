@@ -17,7 +17,8 @@ class ShowGauge_MasterAdmin extends StatefulWidget {
   // final String gauge_type;
   //const ShowGauge({Key? key, required this.wppl_number,required this.manufacturer_number,required this.gauge_type}) : super(key: key);
   final ViewGaugeModel2 model;
-  const ShowGauge_MasterAdmin({Key? key,required this.model}) : super(key: key);
+  final List<String> gauge_location;
+  const ShowGauge_MasterAdmin({Key? key,required this.model, required this.gauge_location}) : super(key: key);
 
 
 
@@ -247,7 +248,7 @@ class _ShowGaugeState extends State<ShowGauge_MasterAdmin> {
                       primary: Colors.red,
                     ),
                     onPressed: () {
-                      Navigator.push(context,MaterialPageRoute(builder: (context) => Calibrate_Gauge(wppl_number: widget.model.identification_number)),);
+                      Navigator.push(context,MaterialPageRoute(builder: (context) => Calibrate_Gauge(wppl_number: widget.model.identification_number,gauge_location: widget.gauge_location,)),);
                     },
                   ),
                   const SizedBox(width: 50,),

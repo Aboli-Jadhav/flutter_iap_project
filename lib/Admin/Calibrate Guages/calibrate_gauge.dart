@@ -1,3 +1,4 @@
+import 'package:autocomplete_textfield_ns/autocomplete_textfield_ns.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iap_project/Drop_Down.dart';
@@ -12,7 +13,8 @@ import '../../date_picker2.dart';
 import 'package:flutter_iap_project/datepicker3.dart';
 class Calibrate_Gauge extends StatefulWidget{
   final String wppl_number;
-  const Calibrate_Gauge({Key? key,required this.wppl_number}) : super(key: key);
+  final List<String> gauge_location;
+  const Calibrate_Gauge({Key? key,required this.wppl_number, required this.gauge_location}) : super(key: key);
 
   _calibrate_gauge createState()=> _calibrate_gauge();
 }
@@ -26,6 +28,9 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
   DateTime selectedDate3 = DateTime.now();
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
+  GlobalKey<AutoCompleteTextFieldState<String>> key = GlobalKey();
+  List<String> added = [];
+  String currentText = "";
 
   late final String wppl_number;
   late final String gauge_type;
@@ -597,18 +602,46 @@ class _calibrate_gauge extends State<Calibrate_Gauge>{
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
+                              // Container(
+                              //   width: 300,
+                              //   height:37.0,
+                              //   child: TextField(
+                              //     controller: Gauge_location,
+                              //     decoration:const  InputDecoration(
+                              //       fillColor: Colors.white,
+                              //       filled: true,
+                              //      // labelText: "Gauge Location",
+                              //       border: OutlineInputBorder(),
+                              //
+                              //     ),),
+                              // ),
                               Container(
-                                width: 300,
-                                height:37.0,
-                                child: TextField(
+                                height: 37,
+                                color: Colors.white,
+                               // width: 0.3 * MediaQuery.of(context).size.width,
+                                width:300,
+                                child: SimpleAutoCompleteTextField(
+                                  key: key,
                                   controller: Gauge_location,
-                                  decoration:const  InputDecoration(
-                                    fillColor: Colors.white,
-                                    filled: true,
-                                   // labelText: "Gauge Location",
-                                    border: OutlineInputBorder(),
+                                  clearOnSubmit: false,
+                                  //suggestions: gauge_type,
+                                  suggestions: widget.gauge_location,
+                                  style: const TextStyle(color: Colors.black, fontSize: 16.0),
+                                  decoration: InputDecoration(
+                                     // hintText: "Enter Location",
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(5.0),
+                                      )),
+                                  textChanged: (text) {
+                                    currentText = text;
 
-                                  ),),
+                                  },
+                                  textSubmitted: (text) => setState(() {
+                                    if (text != "") {
+                                      added.add(text);
+                                    }
+                                  }),
+                                ),
                               ),
                               SizedBox(width: 100,),
                               Container(

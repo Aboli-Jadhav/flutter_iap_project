@@ -103,7 +103,7 @@ class _admin_tab_headState extends State<admin_tab_head>{
           AddViewer(gauge_location: widget.gauge_location),
           front_view_gauge(gauge_name: widget.gauge_name,gauge_location: widget.gauge_location,),
           front_add_gauge(gauge_name:widget.gauge_name,gauge_location:widget.gauge_location,gauge_location_owner: widget.gauge_location_owner,),
-          gauge_calibrate_search(gauge_name:widget.gauge_name),
+          gauge_calibrate_search(gauge_name:widget.gauge_name,gauge_location: widget.gauge_location ),
           //search_gauge(),
           Manage_Scrap(gauge_name: widget.gauge_name,),
           SupplierTab(),

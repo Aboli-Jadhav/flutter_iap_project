@@ -334,7 +334,7 @@ class _front_view_gaugeState extends State<front_view_gauge> {
                   }else{
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => view_master_gau(selectedValue:final_selectedValue, selected_option:selected_option)),
+                      MaterialPageRoute(builder: (context) => view_master_gau(selectedValue:final_selectedValue, selected_option:selected_option,gauge_location:widget.gauge_location)),
                     );
                   }
 

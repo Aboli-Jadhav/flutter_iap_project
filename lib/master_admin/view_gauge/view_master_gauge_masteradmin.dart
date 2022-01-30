@@ -19,9 +19,10 @@ import '../showgauge_masteradmin.dart';
 class view_master_gauge_masteradmin extends StatefulWidget {
   final String selectedValue;
   final String selected_option;
+  final List<String> gauge_location;
 
   const view_master_gauge_masteradmin(
-      {Key? key, required this.selectedValue, required this.selected_option})
+      {Key? key, required this.selectedValue, required this.selected_option,required this.gauge_location})
       : super(key: key);
 
   @override
@@ -195,6 +196,7 @@ class _view_master_gauState extends State<view_master_gauge_masteradmin> {
                         //     fetched_list[index].calibration_due_date,
                         // five: fetched_list[index].gauge_location
                         model: fetched_list[index],
+                        gauge_location:widget.gauge_location,
                       );
                     },
                   ),
@@ -379,6 +381,7 @@ class ExcelRow extends StatelessWidget {
   // final String four;
   // final String five;
   final ViewGaugeModel2 model;
+  final List<String> gauge_location;
 
   const ExcelRow(
       {Key? key,
@@ -387,7 +390,8 @@ class ExcelRow extends StatelessWidget {
         // required this.three,
         // required this.four,
         // required this.five
-        required this.model
+        required this.model,
+        required this.gauge_location,
       })
       : super(key: key);
 
@@ -403,7 +407,7 @@ class ExcelRow extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ShowGauge_MasterAdmin(model: model)),
+                  MaterialPageRoute(builder: (context) => ShowGauge_MasterAdmin(model: model,gauge_location: gauge_location,)),
                 );
               },
               child: Row(

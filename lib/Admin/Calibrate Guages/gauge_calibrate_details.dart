@@ -18,8 +18,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class gauge_calibrate_search extends StatefulWidget {
   List<String> gauge_name;
+  List<String> gauge_location;
 
-  gauge_calibrate_search({Key? key, required this.gauge_name})
+  gauge_calibrate_search({Key? key, required this.gauge_name, required this.gauge_location})
       : super(key: key);
 
   _gauge_search_calibrate createState() => _gauge_search_calibrate();
@@ -263,6 +264,7 @@ class _gauge_search_calibrate extends State<gauge_calibrate_search> {
                   MaterialPageRoute(
                       builder: (context) => Calibrate_Gauge(
                             wppl_number: a.text,
+                        gauge_location: widget.gauge_location
                           )),
                 );
                 //shareperferences();
