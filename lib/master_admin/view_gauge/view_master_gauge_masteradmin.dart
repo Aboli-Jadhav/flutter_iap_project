@@ -224,7 +224,7 @@ class _view_master_gauState extends State<view_master_gauge_masteradmin> {
     sheet.getRangeByName('A1').setText('Gauge ID No.');
     sheet.getRangeByName('B1').setText('Gauge Type');
     sheet.getRangeByName('C1').setText('Gauge Size');
-    sheet.getRangeByName('D1').setText('Due Date');
+    sheet.getRangeByName('D1').setText('Calibration Due Date');
     sheet.getRangeByName('E1').setText('Location');
     sheet.getRangeByName('F1').setText('Calibration Agency Name');
     sheet.getRangeByName('G1').setText('Calibration Cost');
