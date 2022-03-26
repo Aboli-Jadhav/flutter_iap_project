@@ -13,7 +13,6 @@ import 'package:open_file/open_file.dart';
 import 'package:universal_html/html.dart' show AnchorElement;
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'dart:convert';
-
 import '../showgauge_masteradmin.dart';
 
 class view_master_gauge_masteradmin extends StatefulWidget {
@@ -221,61 +220,63 @@ class _view_master_gauState extends State<view_master_gauge_masteradmin> {
   Future<void> createExcel() async {
     final Workbook workbook = Workbook();
     final Worksheet sheet = workbook.worksheets[0];
-    sheet.getRangeByName('A1').setText('Gauge ID No.');
-    sheet.getRangeByName('B1').setText('Gauge Type');
-    sheet.getRangeByName('C1').setText('Gauge Size');
-    sheet.getRangeByName('D1').setText('Calibration Due Date');
+    sheet.getRangeByName('A1').setText('Gauge Type');
+    sheet.getRangeByName('B1').setText('Gauge ID No.');
+    sheet.getRangeByName('C1').setText('Gauge Make');
+    sheet.getRangeByName('D1').setText('Manufacturer Serial Number');
     sheet.getRangeByName('E1').setText('Location');
-    sheet.getRangeByName('F1').setText('Calibration Agency Name');
-    sheet.getRangeByName('G1').setText('Calibration Cost');
-    sheet.getRangeByName('H1').setText('Calibration Date');
-    sheet.getRangeByName('I1').setText('Calibration Frequency');
-    sheet.getRangeByName('J1').setText('Gauge Cost');
-    sheet.getRangeByName('K1').setText('Gauge Life');
-    sheet.getRangeByName('L1').setText('Gauge Make');
-    sheet.getRangeByName('M1').setText('Invoice Date');
-    sheet.getRangeByName('N1').setText('Invoice Number');
-    sheet.getRangeByName('O1').setText('Item Code');
-    sheet.getRangeByName('P1').setText('Manufacturer Serial Number');
-    sheet.getRangeByName('Q1').setText('Maximum');
-    sheet.getRangeByName('R1').setText('Minimum');
-    sheet.getRangeByName('S1').setText('Remark');
-    sheet.getRangeByName('T1').setText('Plant');
-    sheet.getRangeByName('U1').setText('Certificate Number');
-    sheet.getRangeByName('V1').setText('NABL Accrediation Status');
+    sheet.getRangeByName('F1').setText('Gauge Size');
+    sheet.getRangeByName('G1').setText('Unit');
+    sheet.getRangeByName('H1').setText('Acceptance Criteria');
+    sheet.getRangeByName('I1').setText('Calibration Agency Name');
+    sheet.getRangeByName('J1').setText('NABL Accrediation Status');
+    sheet.getRangeByName('K1').setText('Certificate Number');
+    sheet.getRangeByName('L1').setText('Calibration Frequency');
+    sheet.getRangeByName('M1').setText('Calibration Date');
+    sheet.getRangeByName('N1').setText('Calibration Due Date');
+    sheet.getRangeByName('O1').setText('Remark');
+    sheet.getRangeByName('P1').setText('Plant');
+    sheet.getRangeByName('Q1').setText('Item Code');
+    sheet.getRangeByName('R1').setText('Calibration Cost');
+    sheet.getRangeByName('S1').setText('Gauge Cost');
+    sheet.getRangeByName('T1').setText('Gauge Life');
+    sheet.getRangeByName('U1').setText('Invoice Date');
+    sheet.getRangeByName('V1').setText('Invoice Number');
     sheet.getRangeByName('W1').setText('Process Owner');
     sheet.getRangeByName('X1').setText('Process Owner Mail Id');
-    sheet.getRangeByName('Y1').setText('Unit');
-    sheet.getRangeByName('Z1').setText('Acceptance Criteria');
+    sheet.getRangeByName('Y1').setText('Minimum');
+    sheet.getRangeByName('Z1').setText('Maximum');
+
+
 
 
     for(int i=0;i<_view_master_gauState.fetched_list.length;i++){
-      sheet.getRangeByName("A"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].identification_number);
-      sheet.getRangeByName("B"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].gauge_type);
-      sheet.getRangeByName("C"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].nominal_size);
-      sheet.getRangeByName("D"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].calibration_due_date);
+      sheet.getRangeByName("B"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].identification_number);
+      sheet.getRangeByName("A"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].gauge_type);
+      sheet.getRangeByName("F"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].nominal_size);
+      sheet.getRangeByName("N"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].calibration_due_date);
       sheet.getRangeByName("E"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].gauge_location);
-      sheet.getRangeByName("F"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].calibration_agency_name);
-      sheet.getRangeByName("G"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].calibration_cost);
-      sheet.getRangeByName("H"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].calibration_date);
-      sheet.getRangeByName("I"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].calibration_frequency);
-      sheet.getRangeByName("J"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].gauge_cost);
-      sheet.getRangeByName("K"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].gauge_life);
-      sheet.getRangeByName("L"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].gauge_make);
-      sheet.getRangeByName("M"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].invoice_date);
-      sheet.getRangeByName("N"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].invoice_number);
-      sheet.getRangeByName("O"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].item_code);
-      sheet.getRangeByName("P"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].manufacturer_serial_number);
-      sheet.getRangeByName("Q"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].maximum);
-      sheet.getRangeByName("R"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].minimum);
-      sheet.getRangeByName("S"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].remark);
-      sheet.getRangeByName("T"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].plant);
-      sheet.getRangeByName("U"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].certificate_number);
-      sheet.getRangeByName("V"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].nabl_accrediation_status);
+      sheet.getRangeByName("I"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].calibration_agency_name);
+      sheet.getRangeByName("R"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].calibration_cost);
+      sheet.getRangeByName("M"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].calibration_date);
+      sheet.getRangeByName("L"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].calibration_frequency);
+      sheet.getRangeByName("S"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].gauge_cost);
+      sheet.getRangeByName("T"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].gauge_life);
+      sheet.getRangeByName("C"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].gauge_make);
+      sheet.getRangeByName("U"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].invoice_date);
+      sheet.getRangeByName("V"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].invoice_number);
+      sheet.getRangeByName("Q"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].item_code);
+      sheet.getRangeByName("D"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].manufacturer_serial_number);
+      sheet.getRangeByName("Z"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].maximum);
+      sheet.getRangeByName("Y"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].minimum);
+      sheet.getRangeByName("O"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].remark);
+      sheet.getRangeByName("P"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].plant);
+      sheet.getRangeByName("K"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].certificate_number);
+      sheet.getRangeByName("J"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].nabl_accrediation_status);
       sheet.getRangeByName("W"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].process_owner);
       sheet.getRangeByName("X"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].process_owner_mail_id);
-      sheet.getRangeByName("Y"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].unit);
-      sheet.getRangeByName("Z"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].acceptance_criteria);
+      sheet.getRangeByName("G"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].unit);
+      sheet.getRangeByName("H"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].acceptance_criteria);
     }
 
     final List<int> bytes = workbook.saveAsStream();
