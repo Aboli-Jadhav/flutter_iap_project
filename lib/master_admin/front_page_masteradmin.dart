@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_iap_project/Admin/Add gauges/addguage_page.dart';
+import 'package:flutter_iap_project/master_admin/view_gauge/view_All_Gauges_Without_Filter.dart';
 import 'package:flutter_iap_project/master_admin/view_gauge/view_master_gauge_masteradmin.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:autocomplete_textfield_ns/autocomplete_textfield_ns.dart';
@@ -308,7 +309,7 @@ class _front_view_gaugeState extends State<front_view_gauge_masteradmin> {
 
                   if(selected_option==null||selected_option==""||_selected_gauges==null||_selected_gauges==""){
                     //TODO: Add dialog box instead of toast
-                    Widget okButton = TextButton(
+                    /*Widget okButton = TextButton(
                       child: Text("OK"),
                       onPressed: () { Navigator.pop(context);},
                     );
@@ -329,7 +330,11 @@ class _front_view_gaugeState extends State<front_view_gauge_masteradmin> {
                         return alert;
                       },
                     );
-
+                    */
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => view_master_gauge_masteradmin_All(gauge_location:widget.gauge_location)),
+                    );
                   }
                   else{
                     Navigator.push(
