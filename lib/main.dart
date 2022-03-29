@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iap_project/Admin/Add%20gauges/addguage_page.dart';
 import 'package:flutter_iap_project/Admin/showgauge.dart';
 import 'package:flutter_iap_project/Admin/view_gauge_model.dart';
+import 'package:flutter_iap_project/Issurdate.dart';
 import 'package:flutter_iap_project/Suppiler/ViewData/View_Supplier_data_Model.dart';
 import 'package:flutter_iap_project/Suppiler/demoView/demoEditSupplier.dart';
 import 'package:flutter_iap_project/master_admin/MasteradminHome_Page.dart';
@@ -39,7 +40,6 @@ import 'package:flutter_iap_project/Authentication/locator.dart';
 
 void main() {
   setupLocator();
-
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     //initialRoute: '/opt',

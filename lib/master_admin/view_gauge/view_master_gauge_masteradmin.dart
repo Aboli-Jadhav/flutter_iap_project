@@ -13,6 +13,8 @@ import 'package:open_file/open_file.dart';
 import 'package:universal_html/html.dart' show AnchorElement;
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'dart:convert';
+import '../../IssueDateModel.dart';
+import '../../datepicker3.dart';
 import '../showgauge_masteradmin.dart';
 
 class view_master_gauge_masteradmin extends StatefulWidget {
@@ -33,6 +35,7 @@ class _view_master_gauState extends State<view_master_gauge_masteradmin> {
   Color lred = Color(0xffFBEBEB);
   String final_selectedValue = '';
   static List<ViewGaugeModel2> fetched_list = [];
+   List<IssueDateModel> issuedateList=[];
 
   // List<ExcelRow> itemList = [
   //   const ExcelRow(one: "1", two: "1", three: "1", four: "1", five: "1"),
@@ -47,7 +50,59 @@ class _view_master_gauState extends State<view_master_gauge_masteradmin> {
 
   int show = 0;
 
+  String returnOldestdate(List<String> dates){
+    var oldest=TestPickerWidget3("",0,"");
+    int c=0;
+    var olddt;
+    var t3=TestPickerWidget3("",0,"");
+    dates.forEach((element) {
+      List<String> dt=element.split("/");
+      String str=dt[2]+dt[0]+dt[1];
+      t3.temp = DateTime.parse(str);
+      if(c==0){
+        oldest.temp = t3.temp;
+        oldest=t3;
+        c++;
+        print("AA2"+oldest.temp.toString());
+      }
+      else if(t3.temp.isBefore(oldest.temp)||t3.temp.isAtSameMomentAs(oldest.temp)){
+        oldest.temp = t3.temp;
+        olddt=element;
+        print("AA3");
+      }
+    });
+
+    return olddt;
+  }
+
+  void getIssueDates(){
+      print("Called");
+      for(int i=0;i<issuedateList.length;i++){
+        if(fetched_list[issuedateList[i].index].gauge_location.toString()!="Store Stock" || fetched_list[issuedateList[i].index].calibration_date.toString()=="NA"){
+          FirebaseFirestore.instance.collection("Chakan").doc("Gauges")
+              .collection("All gauges").doc(issuedateList[i].doc_ID).collection("History").get()
+              .then((value) {
+                    List<String> datelist=[];
+                    if (value.docs.isNotEmpty) {
+                      value.docs.forEach((doc) {
+                        datelist.add(doc['calibration_date']);
+                      });
+                      issuedateList[i].issuedate = returnOldestdate(datelist).toString();
+                    }
+                    else if(value.docs.isEmpty){
+                      issuedateList[i].issuedate= fetched_list[issuedateList[i].index].calibration_date.toString();
+                    }
+              });
+
+        }else{
+          issuedateList[i].issuedate=fetched_list[issuedateList[i].index].gauge_location.toString();
+        }
+
+      }
+  }
+
   void fetchData() {
+    int c=0;
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     firestore
         .collection("Chakan")
@@ -116,6 +171,8 @@ class _view_master_gauState extends State<view_master_gauge_masteradmin> {
               acceptance_criteria: doc['acceptance_criteria']
           );
           fetched_list.add(newmodel);
+          issuedateList.add(IssueDateModel(c,"",doc.id));
+          c++;
         });
         setState(() {
           show = 1;
@@ -127,7 +184,12 @@ class _view_master_gauState extends State<view_master_gauge_masteradmin> {
         });
         print("view_master_gauge 86 : OOPS file doesn't exists");
       }
-    });
+    }).whenComplete(() => getIssueDates());
+  }
+
+  void demo(){
+    fetchData();
+    getIssueDates();
   }
 
   @override
@@ -247,8 +309,9 @@ class _view_master_gauState extends State<view_master_gauge_masteradmin> {
     sheet.getRangeByName('Y1').setText('Minimum');
     sheet.getRangeByName('Z1').setText('Maximum');
 
-
-
+    issuedateList.forEach((element) {
+        print(element.doc_ID+"\t"+element.issuedate+"\t");
+    });
 
     for(int i=0;i<_view_master_gauState.fetched_list.length;i++){
       sheet.getRangeByName("B"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].identification_number);
