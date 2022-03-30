@@ -105,6 +105,7 @@ class _view_master_gauState extends State<view_master_gau> {
   }
 
   void fetchData() {
+    int c=0;
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     firestore
         .collection("Chakan")
@@ -177,6 +178,8 @@ class _view_master_gauState extends State<view_master_gau> {
           //ViewGaugeModel model1 = ViewGaugeModel();
 
           fetched_list.add(newmodel);
+          issuedateList.add(IssueDateModel(c,"",doc.id));
+          c++;
         });
         setState(() {
           show = 1;
