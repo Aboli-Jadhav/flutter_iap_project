@@ -308,6 +308,8 @@ class _view_master_gauState extends State<view_master_gauge_masteradmin> {
     sheet.getRangeByName('X1').setText('Process Owner Mail Id');
     sheet.getRangeByName('Y1').setText('Minimum');
     sheet.getRangeByName('Z1').setText('Maximum');
+    sheet.getRangeByName('AA1').setText('Issue Date');
+
 
     issuedateList.forEach((element) {
         print(element.doc_ID+"\t"+element.issuedate+"\t");
@@ -340,6 +342,8 @@ class _view_master_gauState extends State<view_master_gauge_masteradmin> {
       sheet.getRangeByName("X"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].process_owner_mail_id);
       sheet.getRangeByName("G"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].unit);
       sheet.getRangeByName("H"+(i+2).toString()).setText(_view_master_gauState.fetched_list[i].acceptance_criteria);
+      sheet.getRangeByName("AA"+(i+2).toString()).setText(issuedateList[i].issuedate.toString());
+
     }
 
     final List<int> bytes = workbook.saveAsStream();
