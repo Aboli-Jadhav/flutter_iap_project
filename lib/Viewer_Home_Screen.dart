@@ -25,11 +25,11 @@ class _VIEWERHOME extends State<VIEWERHOME>{
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
-              title: Text('Home'),
+              label: 'Home',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
-              title: Text('Search'),
+              label: 'Search',
             ),
           ],
           type: BottomNavigationBarType.fixed,

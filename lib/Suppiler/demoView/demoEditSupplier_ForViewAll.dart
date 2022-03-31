@@ -292,7 +292,6 @@ class _Edit_For_ViewAllState extends State<Edit_For_ViewAll>
     await FirebaseFirestore.instance.collection("Chakan").doc("Supplier").collection("all_").doc(id).update(
         {
           'agencyName':sup_nm.text.toString().trim(),
-          //'agencytype':_chosenValue.toString().trim().toUpperCase(),
           'agencyAddress':sup_address.text.toString().trim(),
           'NABL_certificate_No':sup_nabl_no.text.toString().trim(),
           'NABL_Cert_Date':nabl_date.toString(),
