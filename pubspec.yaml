@@ -73,7 +73,8 @@ dev_dependencies:
   sn_progress_dialog: ^1.0.0-nullsafety.0
   http:
 
-
+dependency_overrides:
+  platform: ^3.1.0
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
