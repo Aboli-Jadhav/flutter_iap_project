@@ -105,6 +105,7 @@ class _view_master_gauState extends State<view_master_gau> {
   }
 
   void fetchData() {
+    print(widget.selectedValue+" "+widget.selected_option);
     int c=0;
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     firestore
@@ -213,7 +214,7 @@ class _view_master_gauState extends State<view_master_gau> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    /*return Container(
       child: Scaffold(
           appBar: AppBar(
             toolbarHeight: 50,
@@ -234,6 +235,7 @@ class _view_master_gauState extends State<view_master_gau> {
                 .size
                 .width,
             //color: Colors.red,
+            //height: 480,
             child: ListView(
               children: <Widget>[
                 Column(
@@ -249,7 +251,7 @@ class _view_master_gauState extends State<view_master_gau> {
                     ),
                     Expanded(
                       child: Container(
-                        //height: 480,
+                        height: 480,
                         width: MediaQuery
                             .of(context)
                             .size
@@ -296,7 +298,67 @@ class _view_master_gauState extends State<view_master_gau> {
               ],
             ),
           )),
+    );*/
+    return Container(
+      child: Scaffold(
+          appBar: AppBar(
+            toolbarHeight: 50,
+            backgroundColor: backred,
+            title: Text(
+              "View Gauge",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 30.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            centerTitle: true,
+          ),
+          body: ListView(
+            children: <Widget>[
+              Column(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(50.0, 30, 50, 15),
+                    child: ExcelRowHeading(
+                        one: "Gauge ID No.",
+                        two: "Gauge Type",
+                        three: "Gauge Size",
+                        four: "Due Date",
+                        five: "Location"),
+                  ),
+                  Container(
+                    height: 480,
+                    //color: Colors.blueGrey,
+                    child: show == 1
+                        ? Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 50.0, vertical: 30.0),
+                      child: ListView.builder(
+                        //shrinkWrap: true,
+                        itemCount: fetched_list.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return ExcelRow(
+                            model: fetched_list[index],
+                            gauge_location:widget.gauge_location,
+                          );
+                        },
+                      ),
+                    ): show==2 ? Center(child: Text("No such data"),): Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  ),
+                  SizedBox(height: 20,),
+                  Center(
+                    child:
+                    ElevatedButton(child: Text('Export To Excel'), onPressed: show==2? null: createExcel, style: ElevatedButton.styleFrom(primary: Colors.red),),
+                  ),
+                ],
+              ),
+            ],
+          )),
     );
+
   }
 
   doNotExport() {
