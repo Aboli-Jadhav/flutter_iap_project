@@ -234,61 +234,65 @@ class _view_master_gauState extends State<view_master_gau> {
                 .size
                 .width,
             //color: Colors.red,
-            child: Column(
-              children: [
-                const Padding(
-                  padding: EdgeInsets.fromLTRB(50.0, 30, 50, 15),
-                  child: ExcelRowHeading(
-                      one: "Gauge ID No.",
-                      two: "Gauge Type",
-                      three: "Gauge Size",
-                      four: "Due Date",
-                      five: "Location"),
-                ),
-                Expanded(
-                  child: Container(
-                    //height: 480,
-                    width: MediaQuery
-                        .of(context)
-                        .size
-                        .width,
-                    //color: Colors.blueGrey,
-                    child: show == 1
-                        ? Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 50.0, vertical: 30.0),
-                      child: ListView.builder(
-                        //shrinkWrap: true,
-                        itemCount: fetched_list.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return ExcelRow(
-                            // one:
-                            //     fetched_list[index].identification_number,
-                            // two: fetched_list[index].gauge_type,
-                            // three: fetched_list[index].nominal_size,
-                            // four:
-                            //     fetched_list[index].calibration_due_date,
-                            // five: fetched_list[index].gauge_location
-                            model: fetched_list[index],
-                            gauge_location: widget.gauge_location,
-                          );
-                        },
-                      ),
-                    ) : show == 2
-                        ? Center(child: Text("No such data"),)
-                        : Center(
-                      child: CircularProgressIndicator(),
+            child: ListView(
+              children: <Widget>[
+                Column(
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.fromLTRB(50.0, 30, 50, 15),
+                      child: ExcelRowHeading(
+                          one: "Gauge ID No.",
+                          two: "Gauge Type",
+                          three: "Gauge Size",
+                          four: "Due Date",
+                          five: "Location"),
                     ),
-                  ),
+                    Expanded(
+                      child: Container(
+                        //height: 480,
+                        width: MediaQuery
+                            .of(context)
+                            .size
+                            .width,
+                        //color: Colors.blueGrey,
+                        child: show == 1
+                            ? Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 50.0, vertical: 30.0),
+                          child: ListView.builder(
+                            //shrinkWrap: true,
+                            itemCount: fetched_list.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return ExcelRow(
+                                // one:
+                                //     fetched_list[index].identification_number,
+                                // two: fetched_list[index].gauge_type,
+                                // three: fetched_list[index].nominal_size,
+                                // four:
+                                //     fetched_list[index].calibration_due_date,
+                                // five: fetched_list[index].gauge_location
+                                model: fetched_list[index],
+                                gauge_location: widget.gauge_location,
+                              );
+                            },
+                          ),
+                        ) : show == 2
+                            ? Center(child: Text("No such data"),)
+                            : Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 20,),
+                    Center(
+                      child:
+                      ElevatedButton(child: Text('Export To Excel'),
+                        onPressed: show == 2 ? null : createExcel,
+                        style: ElevatedButton.styleFrom(primary: Colors.red),),
+                    ),
+                    SizedBox(height: 30,),
+                  ],
                 ),
-                SizedBox(height: 20,),
-                Center(
-                  child:
-                  ElevatedButton(child: Text('Export To Excel'),
-                    onPressed: show == 2 ? null : createExcel,
-                    style: ElevatedButton.styleFrom(primary: Colors.red),),
-                ),
-                SizedBox(height: 30,),
               ],
             ),
           )),
