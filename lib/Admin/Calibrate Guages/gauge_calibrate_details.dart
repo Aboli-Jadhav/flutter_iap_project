@@ -223,12 +223,12 @@ class _gauge_search_calibrate extends State<gauge_calibrate_search> {
             height: 30,
           ),
 
-          ElevatedButton(
+           ElevatedButton(
             child: Text("Calibrate Gauge"),
             style: ElevatedButton.styleFrom(
               primary: Colors.red,
             ),
-            onPressed: () {
+             onPressed: () {
               if (a.text.isEmpty) {
                 //TODO: Add dialog box here
                 Widget okButton = TextButton(
@@ -351,11 +351,11 @@ class _gauge_search_calibrate extends State<gauge_calibrate_search> {
                 );
                 return;
               } else {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
+                 Navigator.push(
+                   context,
+                   MaterialPageRoute(
                     builder: (context) => AddCalibrationHistory(wppl_number:a.text.toString())
-                  ),
+                   ),
                 );
                 //shareperferences();
               }
